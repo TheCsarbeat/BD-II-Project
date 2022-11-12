@@ -15,16 +15,24 @@ namespace indioSupermercado
             {
                 if (Session["role"].Equals(""))
                 {
-                    userLoginLink.Visible = true; 
-                    userSignupLink.Visible = true;
-                    LinkButton3.Visible = false;
+                    userLoginLink.Visible = true;     //Boton Login
+                    userSignupLink.Visible = true;      //Boton SignUp
+                    LinkButton3.Visible = false;        //Buton Logout
+
+                    LinkButton11.Visible = false;       //Boton Inventario
+                    LinkButton12.Visible = false;       //Boton Reportes
+                        
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
                     userLoginLink.Visible = false;
                     userSignupLink.Visible = false;
                     LinkButton3.Visible = true;
+
+                    LinkButton11.Visible = true;       //Boton Inventario
+                    LinkButton12.Visible = true;       //Boton Reportes
                 }
+                
 
             }
             catch (Exception ex)    

@@ -41,7 +41,6 @@ namespace indioSupermercado
                 else
                 {
                     Response.Write("<script LANGUAGE='JavaScript' >alert('Invalid Credentials!');</script>");
-                    
                 }
             }
             catch (Exception ex)
@@ -49,9 +48,6 @@ namespace indioSupermercado
                 Response.Write("<script>alert('"+ex.Message+"');</script.");
             }
             
-            
-            
-            // Response.Write("<script>alert('Button Click');</script.");
         }   
     }
 }
