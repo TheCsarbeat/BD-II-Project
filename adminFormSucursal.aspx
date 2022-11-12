@@ -28,7 +28,7 @@
                   </div>
                    <div class="row">
                      <div class="col">
-                        <asp:FileUpload class="form-control" ID="FileSucursal runat="server" />
+                        <asp:FileUpload class="form-control" ID="FileSucursal" runat="server" />
                      </div>
                   </div>
                   <div class="row">
@@ -87,7 +87,7 @@
                  
                   <div class="row">
                       <div class="col-md-4">
-                        <asp:Button ID="ButtonAgregarSucursal" class="btn btn-lg btn-block btn-success" runat="server" Text="Insertar" />
+                        <asp:Button ID="ButtonAgregarSucursal" class="btn btn-lg btn-block btn-success" runat="server" Text="Insertar" OnClick="ButtonAgregarSucursal_Click" />
                      </div>
                       <div class="col-4">
                         <asp:Button ID="ButtonActualizarSucursal" class="btn btn-lg btn-block btn-warning" runat="server" Text="Actualizar" />
