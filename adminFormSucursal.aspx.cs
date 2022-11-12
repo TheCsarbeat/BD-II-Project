@@ -58,14 +58,7 @@ namespace indioSupermercado
 
                         SqlDataReader reader = cmd.ExecuteReader();
 
-                        while (reader.Read())
-                        {
-                            valueResult = Convert.ToInt32(reader[0].ToString());
-                            msgResult = reader[1].ToString();
-                        }
-
-                        connection.Close();
-                        reader.Close();
+                        
 
                         if (valueResult == 0)
                         {

@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace indioSupermercado
 {
     public partial class userLogin : System.Web.UI.Page
     {
-        //string stringConnection = ConfigurationManager.ConnectionStrings["connectionAdmin"].ConnectionString;
+        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,33 +24,33 @@ namespace indioSupermercado
         {
             string user = user_txt.Text.Trim();
             string pass = pass_txt.Text.Trim();
-            int valueResult = 0;
+            int valueResult = -1;
             string msgResult = "";
 
             try
             {
-                //SqlConnection conObj = new SqlConnection(stringConnection);
-                //if (conObj.State == ConnectionState.Closed)
-                //{
-                //  conObj.Open(); 
-                //}
-                //SqlCommand cmd = new SqlCommand("spLoginCostumer", stringConnection);
-                //cmd.CommandType = CommandType.StoredProcedure;
+                SqlConnection conObj = new SqlConnection(stringConnection);
+                if (conObj.State == ConnectionState.Closed)
+                {
+                    conObj.Open();
+                }
+                SqlCommand cmd = new SqlCommand("spLoginCostumer", conObj);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                //cmd.Parameters.Add("@nombrUsuario", SqlDbType.VarChar).Value = user;
-                //cmd.Parameters.Add("@contrasena", SqlDbType.VarChar).Value = pass;
+                cmd.Parameters.Add("@nombrUsuario", SqlDbType.VarChar).Value = user;
+                cmd.Parameters.Add("@contrasena", SqlDbType.VarChar).Value = pass;
 
-                //SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
 
-                //while (reader.Read())
-                //{
-                //    valueResult = Convert.ToInt32(reader[0].ToString());
-                //    msgResult = reader[1].ToString();
-                //}
+                while (reader.Read())
+                {
+                    valueResult = Convert.ToInt32(reader[0].ToString());
+                    msgResult = reader[1].ToString();
+                }
 
-                ////stringConnection.Close();
-                //reader.Close();
-
+                //stringConnection.Close();
+                reader.Close();
+                conObj.Close();
                 if (valueResult == 0)
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
