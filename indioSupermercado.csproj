@@ -2169,11 +2169,14 @@
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
     <Content Include="pruebamasterfenana.aspx" />
+    <Content Include="js\scripts.js" />
+    <Content Include="productImgs\yuca.jpg" />
     <Content Include="userLogin.aspx" />
     <Content Include="userSignup.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="adminLogin.aspx" />
+    <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
@@ -2233,6 +2236,12 @@
     </Compile>
     <Compile Include="adminLogin.aspx.designer.cs">
       <DependentUpon>adminLogin.aspx</DependentUpon>
+    <Compile Include="productList.aspx.cs">
+      <DependentUpon>productList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productList.aspx.designer.cs">
+      <DependentUpon>productList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
