@@ -12,7 +12,7 @@ namespace indioSupermercado
 {
     public partial class userLogin : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionAdmin"].ConnectionString;
+        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
         
 
         protected void Page_Load(object sender, EventArgs e)
