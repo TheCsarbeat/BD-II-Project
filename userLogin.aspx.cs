@@ -60,7 +60,7 @@ namespace indioSupermercado
                     Session["role"] = "user";
                     Session["status"] = "user";
 
-                    //Response.Redirect("homepage.aspx");
+                    Response.Redirect("homepage.aspx");
                 }
                 else
                 {
