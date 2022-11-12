@@ -13,7 +13,7 @@
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
     <link href="bootstrap/css/sweetalert2.min.css" rel="stylesheet" />
-        <%--our custom css--%>
+    <%--our custom css--%>
     <link href="css/main.css" rel="stylesheet" />
 
 
@@ -98,9 +98,9 @@
                             <asp:LinkButton class="footerlinks" ID="adminloginLink" runat="server" OnClick="LinkButton6_Click">Admin Login</asp:LinkButton>
                             &nbsp;
                             
-                            <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server">Inventario</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="inventarioLinkButton" runat="server">Inventario</asp:LinkButton>
                             &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="LinkButton12" runat="server">Reportes</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server">Reportes</asp:LinkButton>
 
                         </p>
 

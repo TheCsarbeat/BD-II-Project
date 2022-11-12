@@ -37,8 +37,8 @@ namespace indioSupermercado
                     Session["adminUser"] = "Administrador";
                     Session["role"] = "ActiveAdmin";
 
-                    Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
-                   
+                    //Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
+                    Response.Redirect("homePage.aspx");
 
                 }
                 else

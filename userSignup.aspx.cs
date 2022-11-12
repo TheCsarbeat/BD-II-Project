@@ -90,6 +90,7 @@ namespace indioSupermercado
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                "Swal.fire('Error','" + ex.Message + "','error')", true);
                     }
+                    /// Titulo, mensaje, tipo
                 }
                 else
                 {
