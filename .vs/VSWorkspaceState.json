@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\datatables\\css"
   ],
+  "SelectedNode": "\\Web.config",
   "PreviewInSolutionExplorer": false
 }

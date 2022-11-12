@@ -13,7 +13,7 @@
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
-        <%--our custom css--%>
+    <%--our custom css--%>
     <link href="css/main.css" rel="stylesheet" />
 
     <%--jquery--%>
