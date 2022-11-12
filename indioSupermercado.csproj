@@ -71,6 +71,8 @@
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
+    <Content Include="bootstrap\css\sweetalert2.min.css" />
+    <Content Include="bootstrap\js\sweetalert2.all.min.js" />
     <Content Include="css\main.css" />
     <Content Include="datatables\css\jquery.dataTables.min.css" />
     <Content Include="datatables\js\jquery.dataTables.min.js" />
@@ -2165,6 +2167,7 @@
     <Content Include="img\Transparent Panel 3.png" />
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
+    <Content Include="pruebamasterfenana.aspx" />
     <Content Include="userLogin.aspx" />
     <Content Include="userSignup.aspx" />
     <Content Include="Web.config" />
@@ -2179,6 +2182,13 @@
       <DependentUpon>homePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="pruebamasterfenana.aspx.cs">
+      <DependentUpon>pruebamasterfenana.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pruebamasterfenana.aspx.designer.cs">
+      <DependentUpon>pruebamasterfenana.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

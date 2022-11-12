@@ -39,7 +39,12 @@
                      </div>
                   </div>
                     <%--Esta es la parte de los campos--%>
-
+                    <div  class="row" >
+                        <div class="col-md-6 mx-auto campo">
+                                                
+                            <asp:TextBox id="idCostumer_txt" type="text" placeholder="ID Costumer" runat="server"></asp:TextBox>
+                        </div>
+                     </div>
                     <div  class="row " >
                        
                         <div class="col campo form-group">       
