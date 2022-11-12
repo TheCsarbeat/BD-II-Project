@@ -37,13 +37,19 @@ namespace indioSupermercado
                     Session["adminUser"] = "Administrador";
                     Session["role"] = "ActiveAdmin";
 
-                    //Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
+                    
+
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                "Swal.fire('Perfect','Login Sucessful!','success')", true);
+
                     Response.Redirect("homePage.aspx");
 
                 }
                 else
                 {
-                    Response.Write("<script LANGUAGE='JavaScript' >alert('Invalid Credentials!');</script>");
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                "Swal.fire('Error','Invalid Credentials!','error')", true);
+
                 }
             }
             catch (Exception ex)
