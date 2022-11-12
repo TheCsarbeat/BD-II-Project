@@ -13,5 +13,16 @@ namespace indioSupermercado
         {
 
         }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            string user = user_txt.Text.Trim();
+            string pass = pass_txt.Text.Trim();
+            Session["username"] = user;
+            Session["role"] = "user";
+            Session["status"] = "user";
+
+            Response.Redirect("homepage.aspx");
+        }
     }
 }

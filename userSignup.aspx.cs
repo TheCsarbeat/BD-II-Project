@@ -19,31 +19,7 @@ namespace indioSupermercado
         {
 
         }
-        protected bool validateFloat(string num)
-        {
-            try
-            {
-                float asd = (float)Convert.ToDouble(num);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
-
-        protected bool validateInt(string num)
-        {
-            try
-            {
-                int asd = (int)Convert.ToInt64(num);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
+        
         // sign up button click event
         protected void signupBtn_Click(object sender, EventArgs e)
         {
@@ -58,7 +34,7 @@ namespace indioSupermercado
             int valueResult = 0;
             string msgResult = "";
 
-            if (validateFloat(xlocation) == true || validateFloat(ylocation) == true ){
+            if (usefull.validateFloat(xlocation) == true || usefull.validateFloat(ylocation) == true ){
 
                 if (idCostumer != "" && nombre != "" && apellidos != "" && xlocation != "" && ylocation != "" && user != "" &&  password != "" )
                 {

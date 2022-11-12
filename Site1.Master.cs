@@ -13,19 +13,58 @@ namespace indioSupermercado
         {
             try
             {
-                if (Session["role"].Equals(""))
+                if (Session["role"] == null || Session["role"].Equals(""))
                 {
-                    userLoginLink.Visible = true; 
-                    userSignupLink.Visible = true;
-                    LinkButton3.Visible = false;
+                    
+                    userLoginLink.Visible = true; // user login link button
+                    userSignupLink.Visible = true; // sign up link button
+
+                    loginOut.Visible = false; // logout link button
+                    helloUser.Visible = false; // hello user link button
+
+
+                    adminloginLink.Visible = true; // admin login link button
+
+                    //LinkButton11.Visible = false; // author management link button
+                    //LinkButton12.Visible = false; // publisher management link button
+                    
+
+                }
+                else if (Session["role"].Equals("user"))
+                {
+                    Response.Write("<script>alert('estoy en usuario');</script.");
+                    userLoginLink.Visible = false; // user login link button
+                    userSignupLink.Visible = false; // sign up link button
+
+                    loginOut.Visible = true; // logout link button
+                    helloUser.Visible = true; // hello user link button
+                    helloUser.Text = "Hello " + Session["username"].ToString();
+
+
+                    adminloginLink.Visible = true; // admin login link button
+                    //LinkButton11.Visible = false; // author management link button
+                    //LinkButton12.Visible = false; // publisher management link button
+
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
-                    userLoginLink.Visible = false;
-                    userSignupLink.Visible = false;
-                    LinkButton3.Visible = true;
-                }
+                    Response.Write("<script>alert('estoy en admin');</script.");
+                    userLoginLink.Visible = false; // user login link button
+                    userSignupLink.Visible = false; // sign up link button
 
+                    loginOut.Visible = true; // logout link button
+                    helloUser.Visible = true; // hello user link button
+                    helloUser.Text = "Hello Admin";
+
+
+                    adminloginLink.Visible = false; // admin login link button
+                    //LinkButton11.Visible = true; // author management link button
+
+                }
+                else
+                {
+                    Response.Write("<script>alert('estoy en ninguno');</script.");
+                }
             }
             catch (Exception ex)    
             {
@@ -52,7 +91,7 @@ namespace indioSupermercado
         {
             Response.Redirect("adminLogin.aspx");
         }
-
+        //loginout
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
             Session["role"] = "";

@@ -33,9 +33,12 @@ namespace indioSupermercado
                 if (user_txt.Text.Trim() == "Management" && pass_txt.Text.Trim() == "asdfasdf")
                 {
 
-                    Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
+                    
                     Session["adminUser"] = "Administrador";
                     Session["role"] = "ActiveAdmin";
+
+                    Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
+                   
 
                 }
                 else
