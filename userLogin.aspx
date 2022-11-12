@@ -64,6 +64,12 @@
                         </div>
                      </div>
 
+                     <div  class="row">
+                     <div class="col-md-6 mx-auto form-group btn_sing_up">
+                          <center> 
+                            <a href="userSignup.aspx"><input id="Button2" type="button" value="Sign Up" /></a>  
+                         </center>  
+                      </div>
                     </div>
                     </div>
                     
