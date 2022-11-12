@@ -1,5 +1,5 @@
 DELIMITER  //
-CREATE PROCEDURE crudImpuesto (IN opcion int, IN nombre varchar(20),IN porcentaje float,IN pais int,IN impId int)
+CREATE PROCEDURE crudImpuesto (IN opcion int, IN nombre varchar(20),IN porcentaje float,IN impId int)
 BEGIN
     If opcion = 1 THEN
 
@@ -7,13 +7,12 @@ BEGIN
 
             if (porcentaje is not null and pais is not null) then
             
-                if EXISTS(Select 1 from Pais where idPais = pais) THEN
-                    Insert into Impuesto (nombreImpuesto,porcentajeImpuesto,idPais)
+                
+                    Insert into Impuesto (nombreImpuesto,porcentajeImpuesto)
                     values (nombre,porcentaje,pais);
-                ELSE      
-					Select 'IdPais no existe';
+
                     
-				end if;
+				
             ELSE   
 				select 'Datos incorrectos';
             end if;

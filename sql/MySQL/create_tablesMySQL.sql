@@ -22,7 +22,7 @@ CREATE TABLE Producto(
     idCategoria int,
 	nombreImg varchar(250),
 	imgPath varchar(2000),
-    estado int DEFAULT 1
+    estado int DEFAULT 1,
     FOREIGN KEY (idCategoria) REFERENCES CategoriaProducto(idCategoria)
 );
 
@@ -47,8 +47,9 @@ CREATE TABLE Proveedor(
     idProveedor int PRIMARY Key not null AUTO_INCREMENT,
     nombreProveedor varchar(20),
     contacto varchar(20),
-    idPais int, FOREIGN KEY(idPais) REFERENCES Pais(idPais),
-    estado int DEFAULT 1
+    idPais int, 
+    estado int DEFAULT 1,
+    FOREIGN KEY(idPais) REFERENCES Pais(idPais)
 );
 
 

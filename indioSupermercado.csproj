@@ -2236,6 +2236,7 @@
     </Compile>
     <Compile Include="adminLogin.aspx.designer.cs">
       <DependentUpon>adminLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="productList.aspx.cs">
       <DependentUpon>productList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

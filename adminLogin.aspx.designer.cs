@@ -11,7 +11,7 @@ namespace indioSupermercado
 {
 
 
-    public partial class WebForm2
+    public partial class adminLogin
     {
 
         /// <summary>

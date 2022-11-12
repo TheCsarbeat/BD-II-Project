@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace indioSupermercado
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class adminLogin : System.Web.UI.Page
     {
 
         //string stringConnection = ConfigurationManager.ConnectionStrings["connectionAdmin"].ConnectionString;

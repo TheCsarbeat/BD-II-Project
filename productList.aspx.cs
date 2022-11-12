@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace indioSupermercado
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class productList : System.Web.UI.Page
     {
         string strcon = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
