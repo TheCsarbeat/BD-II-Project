@@ -98,6 +98,10 @@
                             <asp:LinkButton class="footerlinks" ID="adminloginLink" runat="server" OnClick="LinkButton6_Click">Admin Login</asp:LinkButton>
                             &nbsp;
                             
+                            <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server">Inventario</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="LinkButton12" runat="server">Reportes</asp:LinkButton>
+
                         </p>
 
                     </div>
