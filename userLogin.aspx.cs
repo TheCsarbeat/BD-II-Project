@@ -8,12 +8,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 
+
 namespace indioSupermercado
 {
     public partial class userLogin : System.Web.UI.Page
     {
         private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
-        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,7 +60,7 @@ namespace indioSupermercado
                     Session["role"] = "user";
                     Session["status"] = "user";
 
-                    Response.Redirect("homepage.aspx");
+                    Response.Redirect("productList.aspx");
                 }
                 else
                 {

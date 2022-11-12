@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace indioSupermercado
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class adminLogin : System.Web.UI.Page
     {
 
         //string stringConnection = ConfigurationManager.ConnectionStrings["connectionAdmin"].ConnectionString;
@@ -37,19 +37,13 @@ namespace indioSupermercado
                     Session["adminUser"] = "Administrador";
                     Session["role"] = "ActiveAdmin";
 
-                    
-
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                                "Swal.fire('Perfect','Login Sucessful!','success')", true);
-
+                    //Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
                     Response.Redirect("homePage.aspx");
 
                 }
                 else
                 {
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                                "Swal.fire('Error','Invalid Credentials!','error')", true);
-
+                    Response.Write("<script LANGUAGE='JavaScript' >alert('Invalid Credentials!');</script>");
                 }
             }
             catch (Exception ex)

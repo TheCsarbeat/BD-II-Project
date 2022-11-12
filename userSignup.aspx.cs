@@ -13,7 +13,7 @@ namespace indioSupermercado
 {
     public partial class userSignup : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
+        string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +31,7 @@ namespace indioSupermercado
             string user = user_txt.Text;
             string password = pass_txt.Text;
 
-            int valueResult = 0;
+            int valueResult = -1;
             string msgResult = "";
 
             if (usefull.validateFloat(xlocation) == true || usefull.validateFloat(ylocation) == true ){
@@ -74,6 +74,12 @@ namespace indioSupermercado
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                 "Swal.fire('Perfect','"+ msgResult + "','success')", true);
                         }
+                        else if (valueResult == -1)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                               "Swal.fire('Error','SAber que pasa','error')", true);
+                        }
+
                         else
                         {
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
