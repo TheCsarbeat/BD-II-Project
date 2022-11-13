@@ -32,23 +32,28 @@ namespace indioSupermercado
                 //}
                 if (user_txt.Text.Trim() == "Management" && pass_txt.Text.Trim() == "asdfasdf")
                 {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Perfect','Login Success ','success').then(function() {window.location = 'homePage.aspx';})", true);
 
-                    
+
                     Session["adminUser"] = "Administrador";
                     Session["role"] = "ActiveAdmin";
 
                     //Response.Write("<script LANGUAGE='JavaScript' >alert('Login Sucessful!');window.location='homePage.aspx';</script>");
-                    Response.Redirect("homePage.aspx");
+                   // Response.Redirect("homePage.aspx");
 
                 }
                 else
                 {
-                    Response.Write("<script LANGUAGE='JavaScript' >alert('Invalid Credentials!');</script>");
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                              "Swal.fire('Error','Invalid Credentials','error')", true);
+                    
                 }
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('"+ex.Message+"');</script.");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                               "Swal.fire('Error','" + ex.Message + "','error')", true);
             }
             
         }   

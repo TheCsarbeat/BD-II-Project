@@ -2168,6 +2168,11 @@
     <Content Include="img\Transparent Panel 3.png" />
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
+    <Content Include="payOrder.aspx" />
+    <Content Include="productImgs\carrot.jpg" />
+    <Content Include="productImgs\onion.jpg" />
+    <Content Include="productImgs\potato.jpg" />
+    <Content Include="productImgs\raddish.jpg" />
     <Content Include="pruebamasterfenana.aspx" />
     <Content Include="js\scripts.js" />
     <Content Include="productImgs\yuca.jpg" />
@@ -2193,6 +2198,13 @@
     </Compile>
     <Compile Include="homePage.aspx.designer.cs">
       <DependentUpon>homePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="payOrder.aspx.cs">
+      <DependentUpon>payOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="payOrder.aspx.designer.cs">
+      <DependentUpon>payOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pruebamasterfenana.aspx.cs">

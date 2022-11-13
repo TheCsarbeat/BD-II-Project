@@ -38,22 +38,27 @@ namespace indioSupermercado
                 {
                     try
                     {
+                        string idSucursal = TextBoxIDSucursal.Text;
+                        string nombreSurcursal = TextBoxNombreSucursal.Text;
+                        string idLugar = TextBoxIDLugar.Text;
+                        string idMonedaXPais = TextBoxIdMonedaXP.Text;
+                        string estado = DropDownListEstado.SelectedValue;
+
                         SqlConnection connection = new SqlConnection(stringConnection);
                         if (connection.State == ConnectionState.Closed)
                         {
-                            connection.Open();
-                            
+                            connection.Open();                            
 
                         }
+
                         SqlCommand cmd = new SqlCommand("crudSucursal", connection);
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = Convert.ToInt64(TextBoxIDSucursal.Text);
-                        cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = nombreSursal;
-                        cmd.Parameters.Add("@idLugar", SqlDbType.Int).Value = Convert.ToInt64(TextBoxIDLugar.Text);
-                        cmd.Parameters.Add("@idMonedaxPais", SqlDbType.Int).Value = Convert.ToInt64(TextBoxIdMonedaXP.Text); 
-                        cmd.Parameters.Add("@idEmpleadoAdministrador", SqlDbType.Int).Value = Convert.ToInt64(TextBoxEmpAdmin.Text);
 
+                        cmd.Parameters.AddWithValue("@opcion", 1);
+                        cmd.Parameters.AddWithValue("@nombre", nombreSurcursal);
+                        cmd.Parameters.AddWithValue("@idLugar", Convert.ToInt32(idLugar));
+                        cmd.Parameters.AddWithValue("@idMonedaxPais", Convert.ToInt32(idMonedaXPais));
 
 
                         SqlDataReader reader = cmd.ExecuteReader();

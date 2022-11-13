@@ -70,9 +70,9 @@ namespace indioSupermercado
                         reader.Close();
 
                         if (valueResult == 0)
-                        {                            
+                        {
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                                "Swal.fire('Perfect','"+ msgResult + "','success')", true);
+                        "Swal.fire('Perfect','" + msgResult + "','success').then(function() {window.location = 'userLogin.aspx';})", true);
                         }
                         else if (valueResult == -1)
                         {

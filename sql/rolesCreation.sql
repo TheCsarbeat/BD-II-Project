@@ -9,6 +9,12 @@ ON object::dbo.spLoginCostumer
 to db_customer
 
 
+grant execute 
+ON object::dbo.spGetCortumerIdByUserName
+to db_customer
+
+
+
 -- Se le asigna el permiso de ejecutar cualquier procedimiento en la base de datos, (SOLO EJECUTARLO)
 create role db_management
 grant execute to db_management

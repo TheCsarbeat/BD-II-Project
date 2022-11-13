@@ -4,7 +4,31 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <asp:Repeater ID="d1" runat="server">
+    
+    
+    
+    
+    
+    
+    <asp:Button ID="Button1" runat="server" Text="Button" />
+    
+    
+    
+    
+    
+    
+    
+    <asp:Repeater ID="Repeater1" runat="server">
+
+    </asp:Repeater>
+    
+    
+    
+    
+    
+    
+    
+    <asp:Repeater ID="d1" runat="server" OnItemCommand="d1_ItemCommand">
         <HeaderTemplate>
         <div class="wrapper">
         <div class="container">
@@ -26,12 +50,13 @@
                     <div class="product-details">
 
 
-                         <span class="font-weight-bold d-block">$ 7.00</span>
+                         <span class="font-weight-bold d-block"></span>
                          <span><%#Eval("nombreProducto")%></span>
 
 
                          <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
+                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <asp:button id="<%#Eval("nombreProducto")%>" class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart >
+                             
                         </div>
 
                          <div class="weight">
