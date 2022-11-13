@@ -1,0 +1,364 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace indioSupermercado
+{
+    public partial class adminEmpleados : System.Web.UI.Page
+    {
+        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionSebas"].ConnectionString;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
+        {
+
+            string nombre = TextBoxNombreEmpleado.Text;
+            string apellido = TextBoxApellidoEmpleado.Text;
+            string fecha = TextBoxFecha.Text;
+            string puesto = TextBoxPuesto.Text;
+            string sucursal = TextBoxSucursal.Text;
+            string foto = "Ruta" + FileEmpleado.FileName;
+
+            int valueResult = -1;
+            string msgResult = "";
+
+            int valuePS = -1;
+            string msgPS = "";
+
+
+            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(TextBoxSucursal.Text)) 
+                ||!string.IsNullOrEmpty(TextBoxNombreEmpleado.Text) || (!string.IsNullOrEmpty(TextBoxApellidoEmpleado.Text)) || (!string.IsNullOrEmpty(TextBoxFecha.Text))
+                                    || (!string.IsNullOrEmpty(FileEmpleado.FileName)))
+            {
+                try
+                {
+                    SqlConnection conObj = new SqlConnection(stringConnection);
+                    if (conObj.State == ConnectionState.Closed)
+                    {
+                        conObj.Open();
+                    }
+
+                    SqlCommand cmd3 = new SqlCommand("spValidPuestoSucursal", conObj);
+                    cmd3.CommandType = CommandType.StoredProcedure;
+
+                    cmd3.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
+                    cmd3.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
+
+                    SqlDataReader reader3 = cmd3.ExecuteReader();
+
+                    while (reader3.Read())
+                    {
+                        valuePS = Convert.ToInt32(reader3[0].ToString());
+                        msgPS = reader3[1].ToString();
+                    }
+
+
+                    reader3.Close();
+
+                    if(valuePS == 0)
+                    {
+                        SqlCommand cmd = new SqlCommand("spInsertarEmpleado", conObj);
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar).Value = nombre;
+                        cmd.Parameters.Add("@apellido", SqlDbType.VarChar).Value = apellido;
+                        cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
+                        cmd.Parameters.Add("@foto", SqlDbType.VarChar).Value = foto;
+                        cmd.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
+                        cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            valueResult = Convert.ToInt32(reader[0].ToString());
+                            msgResult = reader[1].ToString();
+                        }
+
+                        reader.Close();
+
+                        if(valueResult == 0)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                        }
+                        else
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                        }
+
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgPS + "','error')", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script.");
+
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','Missing Credentials','error')", true);
+            }
+
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            string idInput = TextBoxIDEmpleado.Text;
+            string nombre = TextBoxNombreEmpleado.Text;
+            string apellido = TextBoxApellidoEmpleado.Text;
+            string fecha = TextBoxFecha.Text;
+            string puesto = TextBoxPuesto.Text;
+            string sucursal = TextBoxSucursal.Text;
+            string foto = "Ruta" + FileEmpleado.FileName;
+
+            int valueResult = -1;
+            string msgResult = "";
+
+            int valueUpdate = -1;
+            string msgUpdate = "";
+
+            int valuePS = -1;
+            string msgPS= "";
+
+
+            if (!string.IsNullOrWhiteSpace(TextBoxIDEmpleado.Text))
+            {   
+
+                try
+                {   
+
+                    if(!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(TextBoxSucursal.Text)))
+                    {
+                        SqlConnection conObj = new SqlConnection(stringConnection);
+                        if (conObj.State == ConnectionState.Closed)
+                        {
+                            conObj.Open();
+                        }
+
+                        SqlCommand cmd3 = new SqlCommand("spValidPuestoSucursal", conObj);
+                        cmd3.CommandType = CommandType.StoredProcedure;
+
+                        cmd3.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
+                        cmd3.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
+
+                        SqlDataReader reader3 = cmd3.ExecuteReader();
+
+                        while (reader3.Read())
+                        {
+                            valuePS = Convert.ToInt32(reader3[0].ToString());
+                            msgPS = reader3[1].ToString();
+                        }
+
+
+                        reader3.Close();
+
+
+                        if (valuePS == 0)
+                        {
+
+                            SqlCommand cmd = new SqlCommand("spValidarEmpleado", conObj);
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            cmd.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
+
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                valueResult = Convert.ToInt32(reader[0].ToString());
+                                msgResult = reader[1].ToString();
+                            }
+
+
+                            reader.Close();
+
+                            if (valueResult == 0)
+                            {
+                                if (!string.IsNullOrEmpty(TextBoxNombreEmpleado.Text) || (!string.IsNullOrEmpty(TextBoxApellidoEmpleado.Text)) || (!string.IsNullOrEmpty(TextBoxFecha.Text))
+                                    || (!string.IsNullOrEmpty(FileEmpleado.FileName)))
+                                {
+
+
+                                    ////Codigo para ejecutar el update empleado
+                                    ///IMPORTANTE SE AGREGO UN NUEVO PROCEDURE
+
+                                    SqlCommand cmd2 = new SqlCommand("spActualizarEmpleado", conObj);
+                                    cmd2.CommandType = CommandType.StoredProcedure;
+
+                                    cmd2.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
+                                    cmd2.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar).Value = nombre;
+                                    cmd2.Parameters.Add("@apellido", SqlDbType.VarChar).Value = apellido;
+                                    cmd2.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
+                                    cmd2.Parameters.Add("@foto", SqlDbType.VarChar).Value = foto;
+                                    cmd2.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
+                                    cmd2.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
+
+                                    SqlDataReader reader2 = cmd2.ExecuteReader();
+
+                                    while (reader2.Read())
+                                    {
+                                        valueUpdate = Convert.ToInt32(reader2[0].ToString());
+                                        msgUpdate = reader2[1].ToString();
+                                    }
+
+                                    reader2.Close();
+
+                                    if (valueUpdate == 0)
+                                    {
+                                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                        "Swal.fire('Perfect','" + msgUpdate + "','success')", true);
+                                    }
+                                    else
+                                    {
+                                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                        "Swal.fire('Error','" + msgUpdate + "','error')", true);
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','Missing Credentials','error')", true);
+                                }
+
+
+                            }
+                            else
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                            }
+                        }
+                        else
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgPS + "','error')", true);
+                        }
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','Missing Credentials','error')", true);
+                    }
+
+                   
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script.");
+
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Error','Missing ID','error')", true);
+            }
+            
+        }
+
+        protected void ButtonBorrarSucursal_Click(object sender, EventArgs e)
+        {
+            string idInput = TextBoxIDEmpleado.Text;
+
+            int valueResult = -1;
+            string msgResult = "";
+
+            int valueDelete = -1;
+            string msgDelete = "";
+
+            if (!string.IsNullOrWhiteSpace(TextBoxIDEmpleado.Text))
+            {
+                try
+                {
+                    SqlConnection conObj = new SqlConnection(stringConnection);
+                    if (conObj.State == ConnectionState.Closed)
+                    {
+                        conObj.Open();
+                    }
+
+                    SqlCommand cmd = new SqlCommand("spValidarEmpleado", conObj);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        valueResult = Convert.ToInt32(reader[0].ToString());
+                        msgResult = reader[1].ToString();
+                    }
+
+                    reader.Close();
+
+                    if (valueResult == 0)
+                    {
+                        SqlCommand cmd2 = new SqlCommand("spEliminarEmpleado", conObj);
+                        cmd2.CommandType = CommandType.StoredProcedure;
+
+                        cmd2.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
+
+                        SqlDataReader reader2 = cmd2.ExecuteReader();
+
+                        while (reader2.Read())
+                        {
+                            valueDelete = Convert.ToInt32(reader2[0].ToString());
+                            msgDelete = reader2[1].ToString();
+                        }
+
+                        reader2.Close();
+
+                        if (valueDelete == 0)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                        "Swal.fire('Perfect','" + msgDelete + "','success')", true);
+                        }
+                        else
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgDelete + "','error')", true);
+                        }
+
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script.");
+
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Error','Missing ID','error')", true);
+            }
+        }
+    }
+}
