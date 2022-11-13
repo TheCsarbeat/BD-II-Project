@@ -74,6 +74,7 @@
     <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\css\sweetalert2.min.css" />
     <Content Include="bootstrap\js\sweetalert2.all.min.js" />
+    <Content Include="branchSelector.aspx" />
     <Content Include="css\main.css" />
     <Content Include="datatables\css\jquery.dataTables.min.css" />
     <Content Include="datatables\js\jquery.dataTables.min.js" />
@@ -2139,6 +2140,8 @@
     <Content Include="books\b3.jpg" />
     <Content Include="books\b4.jpg" />
     <Content Include="books\b5.jpg" />
+    <Content Include="img\branch.png" />
+    <Content Include="img\branchSelectorBackground.jpg" />
     <Content Include="img\cropped-1366-768-320144.jpg" />
     <Content Include="img\cropped-1366-768-329050.jpg" />
     <Content Include="img\defaulters-list.png" />
@@ -2162,12 +2165,17 @@
     <Content Include="img\rol-de-la-tecnología.jpg" />
     <Content Include="img\search-online.png" />
     <Content Include="img\sign-up.png" />
+    <Content Include="img\supermarkets.png" />
     <Content Include="img\tile-wide.png" />
     <Content Include="img\tile.png" />
     <Content Include="img\Transparent Panel 2.png" />
     <Content Include="img\Transparent Panel 3.png" />
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
+    <Content Include="productImgs\carrot.jpg" />
+    <Content Include="productImgs\onion.jpg" />
+    <Content Include="productImgs\potato.jpg" />
+    <Content Include="productImgs\raddish.jpg" />
     <Content Include="pruebamasterfenana.aspx" />
     <Content Include="js\scripts.js" />
     <Content Include="productImgs\yuca.jpg" />
@@ -2179,6 +2187,13 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="branchSelector.aspx.cs">
+      <DependentUpon>branchSelector.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="branchSelector.aspx.designer.cs">
+      <DependentUpon>branchSelector.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="adminFormSucursal.aspx.cs">
       <DependentUpon>adminFormSucursal.aspx</DependentUpon>

@@ -2,7 +2,7 @@
 -- =============================================
 --             script to drop Foreign Keys
 -- =============================================
-USE BD_PROYECTO    ;
+USE FERMEZA;
 GO
 SET NOCOUNT ON;
 DECLARE @sql nvarchar(max) = N'';
@@ -36,7 +36,7 @@ SELECT @sql;
 -- =============================================
 --             script to drop user tables
 -- =============================================
-USE BD_PROYECTO    ;
+USE FERMEZA    ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 
@@ -64,7 +64,7 @@ SELECT @sql;
 --             script to drop store procedures
 -- =============================================
 -- script to drop procedures
-USE BD_PROYECTO    ;
+USE FERMEZA    ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 
@@ -197,3 +197,6 @@ END;
 CLOSE PKcursor;
 DEALLOCATE PKcursor;
 
+
+
+BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[crudSucursal];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[crudSucursal] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[crudEmpleado];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[crudEmpleado] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[crudPerformance];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[crudPerformance] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[crudBono];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[crudBono] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[crudHorario];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[crudHorario] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[crudMonedaXPais];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[crudMonedaXPais] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertMoneda];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertMoneda] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertPais];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertPais] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertMonedaXPais];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertMonedaXPais] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertLugar];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertLugar] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertPuesto];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertPuesto] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertEmpleado];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertEmpleado] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertInventario];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertInventario] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertHorario];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertHorario] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[insertSucursal];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[insertSucursal] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[spSignUpCostumer];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[spSignUpCostumer] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[spUser];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[spUser] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[spCliente];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[spCliente] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[spLoginCostumer];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[spLoginCostumer] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[spCrudCategoriaProducto];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[spCrudCategoriaProducto] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP PROCEDURE [dbo].[spCrudProducto];';  END TRY  BEGIN CATCH    SELECT N'Procedure [dbo].[spCrudProducto] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  

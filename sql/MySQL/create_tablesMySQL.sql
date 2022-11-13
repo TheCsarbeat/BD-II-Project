@@ -1,4 +1,5 @@
-#create database BD_PROYECTO;
+#    create database BD_PROYECTO;
+#    drop database BD_PROYECTO;
 use BD_PROYECTO;
 
 CREATE TABLE Impuesto(
@@ -32,7 +33,13 @@ CREATE TABLE CategoriaXImpuesto(
     idImpuesto int, FOREIGN KEY(idImpuesto) REFERENCES Impuesto(idImpuesto),
     estado int DEFAULT 1
 );
-
+CREATE TABLE Proveedor(
+    idProveedor int PRIMARY Key not null AUTO_INCREMENT,
+    nombreProveedor varchar(20),
+    contacto varchar(20),
+    idPais int, 
+    estado int DEFAULT 1
+);
 
 
 CREATE TABLE Lote(
@@ -40,17 +47,14 @@ CREATE TABLE Lote(
     fechaProduccion DATE,
     fechaExpiracion Date,
     idProducto int, FOREIGN KEY(idProducto) REFERENCES Producto(idProducto),
+    idProveedor int, FOREIGN KEY(idProveedor) REFERENCES Proveedor(idProveedor),
+    cantidadExistencias int,
+    costoUnidad float,
+    porcentajeVenta float,
     estado int DEFAULT 1
 );
 
-CREATE TABLE Proveedor(
-    idProveedor int PRIMARY Key not null AUTO_INCREMENT,
-    nombreProveedor varchar(20),
-    contacto varchar(20),
-    idPais int, 
-    estado int DEFAULT 1,
-    FOREIGN KEY(idPais) REFERENCES Pais(idPais)
-);
+
 
 
 CREATE TABLE ProductoXProveedor(
@@ -62,11 +66,22 @@ CREATE TABLE ProductoXProveedor(
     estado int DEFAULT 1
 );
 
-
 CREATE TABLE Pedido(
     idPedido int PRIMARY Key not null AUTO_INCREMENT,
     cantidadPedido int,
-    idProductoXProveedor int, FOREIGN KEY(idProductoXProveedor) REFERENCES ProductoXProveedor(idProductoXProveedor),
+    idProductoXProveedor int,
     fechaPedido Date,
-    estado int DEFAULT 1
+    
+    estado int DEFAULT 1,
+    FOREIGN KEY(idProductoXProveedor) REFERENCES ProductoXProveedor(idProductoXProveedor)
+);
+
+CREATE TABLE Limite(
+    idLimite int PRIMARY Key not null AUTO_INCREMENT,
+    max int,
+    min int,
+    idProducto int,
+    estado int DEFAULT 1,
+    FOREIGN KEY(idProducto) REFERENCES Producto(idProducto)
+    
 );

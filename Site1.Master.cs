@@ -11,6 +11,7 @@ namespace indioSupermercado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             try
             {
                 if (Session["role"] == null || Session["role"].Equals(""))
@@ -68,6 +69,7 @@ namespace indioSupermercado
             {
                 Response.Write("<script>alert('" + ex.Message + "');</script.");
             }   
+            
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)

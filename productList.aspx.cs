@@ -13,9 +13,11 @@ namespace indioSupermercado
     public partial class productList : System.Web.UI.Page
     {
         string strcon = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
             try {
+                id = Convert.ToInt32(Request.QueryString["id"].ToString());
                 SqlConnection con = new SqlConnection(strcon);
                 if(con.State == ConnectionState.Closed)
                 {
@@ -23,7 +25,7 @@ namespace indioSupermercado
                 }
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from Producto";
+                cmd.CommandText = "EXEC spCrudProducto null, null, null, null, null,null, 3";
                 cmd.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);

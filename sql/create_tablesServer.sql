@@ -46,7 +46,6 @@ CREATE TABLE Sucursal(
     nombreSucursal nvarchar(20),
     idLugar int FOREIGN KEY REFERENCES Lugar(idLugar),
     idMonedaXPais int FOREIGN KEY REFERENCES MonedaXPais(idMonedaXPais),
-    idEmpleadoAdministrador int,
     estado int DEFAULT 1
 );
 
@@ -57,12 +56,15 @@ CREATE TABLE Empleado(
     fechaContratacion date,
     fotoEmpleado nvarchar(MAX),
     idPuesto int FOREIGN KEY REFERENCES Puesto(idPuesto),
-	idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),
+    idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),
     estado int DEFAULT 1
 );
 
-ALTER TABLE Sucursal
-ADD FOREIGN KEY (idEmpleadoAdministrador) REFERENCES Empleado(idEmpleado);
+CREATE TABLE SucursalManager(
+    idSucursalManager INT PRIMARY Key not null IDENTITY(1,1),
+    idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),
+    idEmpleado int FOREIGN KEY REFERENCES Empleado(idEmpleado)
+);
 
 CREATE TABLE Inventario(
     idInventario INT PRIMARY Key not null IDENTITY(1,1),
