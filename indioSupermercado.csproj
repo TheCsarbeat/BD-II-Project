@@ -2141,6 +2141,7 @@
     <Content Include="books\b3.jpg" />
     <Content Include="books\b4.jpg" />
     <Content Include="books\b5.jpg" />
+    <Content Include="img\branchSelectorBackground.jpg" />
     <Content Include="img\cropped-1366-768-320144.jpg" />
     <Content Include="img\cropped-1366-768-329050.jpg" />
     <Content Include="img\defaulters-list.png" />

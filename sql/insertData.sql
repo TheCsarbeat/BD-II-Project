@@ -14,7 +14,7 @@ EXEC spCrudProducto null, 'Cebolla', 'una cebolla', 1, 'onion.jpg','productImgs/
 EXEC spCrudProducto null, 'Rabano', 'pequenno', 1, 'raddish.jpg','productImgs/raddish.jpg', 0
 EXEC spCrudProducto null, 'Papa', 'a potato', 1, 'potato.jpg','productImgs/potato.jpg', 0
 
---EXEC spCrudProducto null, 'Papa', 'a potato', 1, 'potato.jpg','productImgs/potato.jpg', 3
+-- EXEC spCrudProducto 15, 'FEkrs', 'a potato', 1, 'ferks.jpg','productImgs/ferks.jpg', 3
 
 EXEC spCrudImpuesto null, 'IVA', 0.13, 1,0
 EXEC spCrudImpuesto null, 'ImpuestoPanama',0.1,2,0
@@ -76,7 +76,9 @@ EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 
 
-SELECT Producto.idProducto,Producto.imgPath, Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.precioVenta FROM MYSQLSERVER...Producto as Producto
+
+SELECT Producto.idProducto,Producto.imgPath, Producto.nombreProducto, Producto.imgPath, Lote.idLote, 
+Inventario.precioVenta FROM MYSQLSERVER...Producto as Producto
 INNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto
 INNER JOIN Inventario ON Inventario.idLote = Lote.idLote
 INNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal

@@ -103,6 +103,7 @@ declare @identityValue int = -1
 								INSERT INTO MYSQLSERVER...Producto (nombreProducto,descripcionProducto,idCategoria,nombreImg ,imgPath)
 								values (@nombreProducto,@descripcionProducto,@idCategoria,@nombreImg, @imgPath);
 								
+								set @errorMsg = 'Se ha insertado correctamente'
 	
 						END TRY
 						BEGIN CATCH
@@ -161,11 +162,13 @@ declare @identityValue int = -1
 	if @operationFlag = 2	begin
 		select * from MYSQLSERVER...Producto 
 		where idProducto = @idProducto and estado =1;
+		set @errorInt =-1;
 	end
 
 	IF @operationFlag = 3	BEGIN
 		select * from MYSQLSERVER...Producto 	
 		where estado = 1;
+		set @errorInt =-1;
 	END
 
 	IF @operationFlag = 4	BEGIN
@@ -180,6 +183,8 @@ declare @identityValue int = -1
 	END
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
+	IF @errorInt = 0
+		select 0 as Result, @errorMsg as msg
 end
 
 GO
@@ -912,7 +917,7 @@ as
 begin
 declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
-	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion Categoria.nombreCategoria as Categoria from MYSQLSERVER...Producto  as Producto	
+	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion, Categoria.nombreCategoria as Categoria from MYSQLSERVER...Producto  as Producto	
 	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
 	where Producto.estado = 1;
 end

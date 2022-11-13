@@ -20,7 +20,7 @@
           <ItemTemplate>
               <div class="col-md-3">
 
-                <div class="card p-3">
+                <div class="card p-3 card-product">
 
                     <div class="text-center">
 

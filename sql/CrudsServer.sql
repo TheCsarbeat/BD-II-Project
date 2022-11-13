@@ -945,7 +945,7 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	ELSE 
+	END ELSE IF @errorInt = 0 
 		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
 END
 

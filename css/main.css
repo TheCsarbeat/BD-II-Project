@@ -270,16 +270,16 @@ body {
 
 
 
-.card:hover .buttons {
+.card-product:hover .buttons {
     opacity: 1;
 }
 
 
-.card:hover .weight {
+.card-product:hover .weight {
     margin-top: 10px;
 }
 
-.card:hover {
+.card-product:hover {
     transform: scale(1.04);
     z-index: 2;
     overflow: hidden;

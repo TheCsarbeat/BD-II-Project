@@ -25,7 +25,7 @@
                   <div class="row">
                      <div class="col">
                         <hr>
-                         <INPUT lass="form-control" id="oFile" type="file" runat="server" NAME="oFile">
+                         
                          <asp:FileUpload class="form-control" ID="FileUpload1" runat="server" />
                      </div>
                   </div>
@@ -43,14 +43,17 @@
                      <div class="col-md-8">
                         <label>Nombre Producto</label>
                         <div class="form-group">
-                           <asp:TextBox CssClass="form-control" ID="nombreProductotxt" runat="server" placeholder="Nombre Producto" ></asp:TextBox>
+                           <asp:TextBox CssClass="form-control" ID="asdf" runat="server" placeholder="Nombre Producto" ></asp:TextBox>
+                            <asp:TextBox Class="form-control" ID="nombreProductotxt"  placeholder="Nombre Producto" runat="server"></asp:TextBox>
                         </div>
                      </div>
                      
                   </div>
                   <div class="row">
                      <div class="col-md-6">
-                        <label>Estado</label>
+                        <label>
+                         
+                         Estado</label>
                         <div class="form-group">
                             <asp:DropDownList class="form-control" ID="DropDownListEstado" runat="server">
                               <asp:ListItem Text="Activo" Value=0 />

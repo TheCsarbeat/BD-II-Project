@@ -16,7 +16,15 @@ namespace indioSupermercado
     public partial class adminFormReporte : System.Web.UI.Page
     {
         string stringConnection = ConfigurationManager.ConnectionStrings["connectionAdmin"].ConnectionString;
+        public void clearForm()
+        {
+            idProductotxt.Text = "";
+            nombreProductotxt.Text = "";
+            DropDownListEstado.SelectedIndex = -1;
+            categoriaDropDownList.SelectedIndex = -1;
+            descripcionProductotxt.Text = "";
 
+        }
         public void bindGridProducts()
         {
             try
@@ -63,8 +71,7 @@ namespace indioSupermercado
                 }
 
                 SqlCommand cmd = new SqlCommand("spCrudCategoriaProducto null, null, null,3", con);
-                SqlDataReader reader = cmd.ExecuteReader();
-                
+                SqlDataReader reader = cmd.ExecuteReader();                
 
                 while(reader.Read())
                 {
@@ -93,6 +100,7 @@ namespace indioSupermercado
         {
             bindGridProducts();
             loadCateogory();
+            //clearForm();
         }
 
         protected void botonIDP_Click(object sender, EventArgs e)
@@ -103,15 +111,16 @@ namespace indioSupermercado
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
         {
             string nombreProducto = nombreProductotxt.Text;
-            int idProducto = Convert.ToInt32(idProductotxt.Text);
             string descripcionProducto = descripcionProductotxt.Text;
-            string categoria = categoriaDropDownList.SelectedIndex.ToString();
+            string categoria = categoriaDropDownList.SelectedValue.ToString();
 
+            string msgResult = "";
+            int valueResult = -1;
             
             string strFileName;
             string strFilePath = "";
             string strFolder;
-            strFolder = Server.MapPath("./productImgs");
+            strFolder = Server.MapPath("./productImgs/");
             // Retrieve the name of the file that is posted.
             strFileName = FileUpload1.PostedFile.FileName;
             strFileName = Path.GetFileName(strFileName);
@@ -149,6 +158,26 @@ namespace indioSupermercado
             SqlCommand cmd = new SqlCommand("spCrudProducto null, '"+nombreProducto+"', '"+descripcionProducto+"'," +
                 " "+ categoria + ", '"+strFileName+"','"+ strFilePath + "', 0", con);
             SqlDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+            valueResult= Convert.ToInt32( reader[0].ToString());
+            msgResult = (reader[1].ToString());
+
+            reader.Close();
+            con.Close();
+            if (valueResult == 0)
+            {
+                bindGridProducts();
+                loadCateogory();
+                clearForm();
+
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                    "Swal.fire('Error','" + msgResult + "','error')", true);
+            }
+
         }
 
 

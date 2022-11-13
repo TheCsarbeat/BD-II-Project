@@ -29,7 +29,10 @@ namespace indioSupermercado
                 }
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT Producto.idProducto,Producto.imgPath, Producto.nombreProducto, Producto.imgPath, Lote.idLote, \r\nInventario.precioVenta FROM MYSQLSERVER...Producto as Producto\r\nINNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto\r\nINNER JOIN Inventario ON Inventario.idLote = Lote.idLote\r\nINNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal";
+                cmd.CommandText = "SELECT Producto.idProducto, Producto.nombreProducto, Producto.imgPath, Lote.idLote, " +
+                    "Inventario.precioVenta FROM MYSQLSERVER...Producto as Producto\r\nINNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto" +
+                    " INNER JOIN Inventario ON Inventario.idLote = Lote.idLote\r\nINNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal" +
+                    "where Sucursal.idSucursal = 6";
                 cmd.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
