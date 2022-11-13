@@ -7,10 +7,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Runtime.Remoting.Messaging;
 
 namespace indioSupermercado
 {
-    public partial class adminFormSucursal : System.Web.UI.Page
+    public partial class adminFormReporte : System.Web.UI.Page
     {
         private string stringConnection = ConfigurationManager.ConnectionStrings["connectionFernanda"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
@@ -18,18 +19,22 @@ namespace indioSupermercado
 
         }
 
-        protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
+        protected void botonIDP_Click(object sender, EventArgs e)
         {
 
-            string idSucursal = TextBoxIDSucursal.Text;
-            string nombreSucursal = TextBoxNombreSucursal.Text;
-            string idLugar = TextBoxIDLugar.Text;
-            string idMonedaXPais = TextBoxIdMonedaXP.Text;
-            string estado = DropDownListEstado.SelectedValue;
-            int valueResult = 0;
-            string msgResult = "";
+        }
 
-            if (nombreSucursal != "" && idLugar != "" && idMonedaXPais != "")
+        protected void ButtonAgregarProducto_Click(object sender, EventArgs e)
+        {
+            string idProducto = idProductotxt.Text;
+            string nombreProducto = nombreProductotxt.Text;
+            string descripcion = descripcionProductotxt.Text;
+            string idCategoria = categoriaProductotxt.Text;
+            string img = "ruta" + fotoProducto.FileName;
+            int valueResult = -1;
+            string msgResult = "";
+            
+            if (nombreProducto != "" && descripcion != "" && idCategoria != "" && img != "")
             {
                 try
                 {
@@ -40,17 +45,22 @@ namespace indioSupermercado
 
 
                     }
-                    SqlCommand cmd = new SqlCommand("crudSucursal", connectionFernanda);
+                    SqlCommand cmd = new SqlCommand("spCrudProducto", connectionFernanda);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@opcion", 1);
-                    cmd.Parameters.AddWithValue("@nombre", SqlDbType.Int).Value = nombreSucursal;
-                    cmd.Parameters.AddWithValue("@idLugar", SqlDbType.Int).Value = Convert.ToInt32(idLugar);
-                    cmd.Parameters.AddWithValue("@idMonedaxPais", SqlDbType.Int).Value = Convert.ToInt32(idMonedaXPais);
-
+                    cmd.Parameters.AddWithValue("@operationFlag", 0);
+                    cmd.Parameters.AddWithValue("@nombreProducto", SqlDbType.Int).Value = nombreProducto;
+                    cmd.Parameters.AddWithValue("@descripcionProducto", SqlDbType.Int).Value = descripcion;
+                    cmd.Parameters.AddWithValue("@idCategoria", SqlDbType.Int).Value = Convert.ToInt32(idCategoria);
+                    cmd.Parameters.AddWithValue("@imgPath", SqlDbType.VarChar).Value = img;
 
                     SqlDataReader reader = cmd.ExecuteReader();
-       
+
+                    while (reader.Read())
+                    {
+                        valueResult = Convert.ToInt32(reader[0].ToString());
+                        msgResult = reader[1].ToString();
+                    }
 
                     connectionFernanda.Close();
                     reader.Close();
@@ -83,13 +93,6 @@ namespace indioSupermercado
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                            "Swal.fire('Error','Some files are empty','error')", true);
             }
-
-        
-        }
-
-        protected void ButtonActualizarSucursal_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

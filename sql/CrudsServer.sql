@@ -4,129 +4,101 @@
 -- Sucursal
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
 go
-create or alter procedure crudSucursal @opcion int, @idSucursal int, @nombre varchar(20), @idLugar int, @idMonedaXPais int, @idEmpleadoAdministrador int 
+create or alter procedure crudSucursal @opcion int, @idSucursal int, @nombre varchar(20), @idLugar int, @idMonedaXPais int
 as
-begin
+BEGIN
 	declare @error int, @errorMsg varchar(20)
 
 	if @opcion = 1
-		begin
-		if (select count(*) from Sucursal where idSucursal = @idSucursal)=0
-			begin
-			if @nombre is not null
-				begin
-				if (select count(*) from Lugar where idLugar = @idLugar)!=0  
-					begin
-					if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 
-						begin
-						if (select count(*) from Empleado where idEmpleado= @idEmpleadoAdministrador)!=0
-							begin 
-							begin transaction
-
-							insert into Sucursal(idSucursal, nombreSucursal, idLugar, idMonedaXpais, idEmpleadoAdministrador) 
-							values(@idSucursal, @nombre, @idLugar, @idMonedaXpais, @idEmpleadoAdministrador)
+		BEGIN
+		if (select count(*) from Sucursal where idSucursal = @idSucursal)=0	BEGIN
+			if @nombre is not null	BEGIN
+				if (select count(*) from Lugar where idLugar = @idLugar)!=0	BEGIN
+					if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 BEGIN
+						
+						BEGIN TRY
+							BEGIN transaction
+								insert into Sucursal( nombreSucursal, idLugar, idMonedaXpais) 
+								values(@nombre, @idLugar, @idMonedaXpais)
 					
 							commit transaction
-
-							end
-						else
-						begin
+						END TRY
+						BEGIN CATCH
+							set @error=1
+							set @errorMsg = 'Error al actualizar a la base de datos'
+						END CATCH
+					END ELSE BEGIN 
 						set @error = 1
-						set @errorMsg = 'El idEmpleado no existe'
-						end
-
-						end
-					else
-					begin
-					set @error = 2
-					set @errorMsg = 'La idMonedaXPais no existe'
-					end
-
-					end
-				else
-				begin
-				set @error = 3
-				set @errorMsg = 'El idLugar no existe'
-				end
-
-				end
-			else
-			begin
-			set @error = 4
-			set @errorMsg = 'nombre nulo'
-			end
-			end		
-		else
-		begin
-		set @error = 5
-		set @errorMsg = 'idSucursal ya existe'
-		end
-		end
+						set @errorMsg = 'La idMonedaXPais no existe'
+					END
+				END ELSE BEGIN
+					set @error = 3
+					set @errorMsg = 'El idLugar no existe'
+				END
+			END ELSE BEGIN
+				set @error = 4
+				set @errorMsg = 'nombre nulo'
+			END
+		END ELSE BEGIN
+			set @error = 5
+			set @errorMsg = 'idSucursal ya existe'
+		END
+	END
 
 
 	if @opcion = 2
-		begin
-		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 
-			begin
-			begin transaction
-
-			update Sucursal
-			set nombreSucursal = ISNULL(@nombre, nombreSucursal), idLugar = ISNULL(@idLugar, idLugar), idMonedaXPais = ISNULL(@idMonedaXPais, idMonedaXPais),
-			idEmpleadoAdministrador = ISNULL(@idEmpleadoAdministrador, idEmpleadoAdministrador) where idSucursal = @idSucursal
-			
+		BEGIN
+		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
+			BEGIN transaction
+				update Sucursal
+				set nombreSucursal = ISNULL(@nombre, nombreSucursal), idLugar = ISNULL(@idLugar, idLugar), idMonedaXPais = ISNULL(@idMonedaXPais, idMonedaXPais)
+				where idSucursal = @idSucursal			
 			commit transaction 
 
-			end
-			
-		else
-		begin 
-		set @error = 1
-		set @errorMsg = 'El idSucursal no existe'
-		end
+			END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'El idSucursal no existe'
+			END
 		
-		end
+		END
 
 	if @opcion = 3
-		begin
-		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0
-			begin
-			begin transaction
+		BEGIN
+		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0	BEGIN
+			BEGIN transaction
 
 			select * from Sucursal where idSucursal = @idSucursal
 
 			commit transaction
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idSucursal no existe'
-		end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idSucursal no existe'
+		END
 		
-		end
+		END
 
 	if @opcion = 4
-		begin
-		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0
-			begin
-			begin transaction
+		BEGIN
+		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
+			BEGIN transaction
 
 			update Sucursal
 			set estado = 0 where idSucursal = @idSucursal
 
 			commit transaction
 
-			end
+			END
 			else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idSucursal no existe'
+		BEGIN
+			set @error = 1
+			set @errorMsg = 'El idSucursal no existe'
 		
-		end
-		end
+		END
+	END
 		select @error as error, @errorMsg as mensaje
 	
-	end
+END
 
 -- ****************************************************************************************************************
 
@@ -136,123 +108,171 @@ go
 create or alter procedure crudEmpleado @opcion int,@idEmpleado int, @nombre varchar(20), @apellido varchar(20), @fechaContratacion date,
 @foto varchar(100), @idPuesto int, @idSucursal int
 as
-begin
+BEGIN
 	declare @error int, @errorMsg varchar(20)
 
 	if @opcion = 1
-		begin
-		if (select count(*) from Empleado where idEmpleado = @idEmpleado)=0
-			begin
-			if @nombre is not null and @apellido is not null and @fechaContratacion is not null and @foto is not null
-				begin
-				if (select count(*) from Puesto where idPuesto = @idPuesto)!=0
-					begin
-					if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0
-						begin
+		BEGIN
+		if (select count(*) from Empleado where idEmpleado = @idEmpleado)= 0 BEGIN
+			if @nombre is not null and @apellido is not null and @fechaContratacion is not null and @foto is not null BEGIN
+				if (select count(*) from Puesto where idPuesto = @idPuesto)!=0 BEGIN
+					if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
 						
-						begin transaction
+						BEGIN transaction
 
-						insert into Empleado(idEmpleado,nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) 
-						values(@idEmpleado,@nombre,@apellido,@fechaContratacion,@foto,@idPuesto,@idSucursal)
+							insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) 
+							values(@nombre,@apellido,@fechaContratacion,@foto,@idPuesto,@idSucursal)
 
 						commit transaction
 
-						end
-								
-					else
-					begin
-					set @error = 1
-					set @errorMsg = 'idSucursal no existe'
-					end
+					END ELSE BEGIN 
+						set @error = 1
+						set @errorMsg = 'idSucursal no existe'
+					END
+				END ELSE BEGIN 
+					set @error = 2
+					set @errorMsg = 'idPuesto no existe'
+				END
+			END ELSE BEGIN 
+				set @error = 3
+				set @errorMsg = 'No pueden ir valores nulos'
+			END
+		END ELSE BEGIN 
+			set @error = 4
+			set @errorMsg = 'idEmpleado ya existe'
+		END
 
-					end
-				else
-				begin
-				set @error = 2
-				set @errorMsg = 'idPuesto no existe'
-				end
-
-				end
-			else
-			begin
-			set @error = 3
-			set @errorMsg = 'No pueden ir valores nulos'
-			end
-
-			end
-		else
-		begin
-		set @error = 4
-		set @errorMsg = 'idEmpleado ya existe'
-		end
-
-		end
+	END
 	
 
-	if @opcion = 2
-		begin
-		if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 
-			begin
-			begin transaction
-
-			update Empleado
-			set nombreEmpleado = ISNULL(@nombre, nombreEmpleado), apellidoEmpleado = ISNULL(@apellido, apellidoEmpleado), 
-			fechaContratacion = ISNULL(@fechaContratacion, fechaContratacion), fotoEmpleado = ISNULL(@foto, fotoEmpleado), idPuesto = ISNULL(@idPuesto, idPuesto),
-			idSucursal = ISNULL(@idSucursal, idSucursal) where idEmpleado = @idEmpleado
-
+	if @opcion = 2 BEGIN
+		if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
+			BEGIN transaction
+				update Empleado
+				set nombreEmpleado = ISNULL(@nombre, nombreEmpleado), apellidoEmpleado = ISNULL(@apellido, apellidoEmpleado), 
+				fechaContratacion = ISNULL(@fechaContratacion, fechaContratacion), fotoEmpleado = ISNULL(@foto, fotoEmpleado), idPuesto = ISNULL(@idPuesto, idPuesto),
+				idSucursal = ISNULL(@idSucursal, idSucursal) where idEmpleado = @idEmpleado
 			commit transaction 
 
-			end
-			
-		else
-		begin 
-		set @error = 1
-		set @errorMsg = 'El idEmpleado no existe'
-		end
-		end
+			END
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idEmpleado no existe'
+		END
+	END
 
 	if @opcion = 3
-		begin
-		if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0
-			begin
-			begin transaction
+		BEGIN
+		if (select count(*) from Empleado where idEmpleado = @idEmpleado)!= 0 BEGIN
+			BEGIN transaction
 
 			select * from Empleado where idEmpleado = @idEmpleado
 
 			commit transaction
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idEmpleado no existe'
-		end
-		end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idEmpleado no existe'
+		END
+	END
 
-	if @opcion = 4
-		begin
-		if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 
-			begin
-			begin transaction
+	if @opcion = 4		BEGIN
+		if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
+			BEGIN transaction
+				update Empleado
+				set estado = 0 where idEmpleado = @idEmpleado
+			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idEmpleado no existe'
+	END
+	select @error as error, @errorMsg as mensaje
+END
 
-			update Empleado
-			set estado = 0 where idEmpleado = @idEmpleado
+-- ****************************************************************************************************************
 
+-- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
+
+go
+create or alter procedure crudSucursalManager @opcion int,@idSucursalManger int, @idSucursal int , @idEmpleado int
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+
+	if @opcion = 1
+		BEGIN
+		if (select count(*) from SucursalManager where idSucursalManager = @idSucursalManger) = 0 BEGIN
+			if @idSucursal is not null and @idEmpleado is not null BEGIN
+				if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
+					if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
+						
+						BEGIN transaction
+							insert into SucursalManager
+							values(@idSucursal,@idEmpleado)
+						commit transaction
+
+					END ELSE BEGIN 
+						set @error = 1
+						set @errorMsg = 'idSucursal no existe'
+					END
+				END ELSE BEGIN 
+					set @error = 2
+					set @errorMsg = 'idEmpleado no existe'
+				END
+			END ELSE BEGIN 
+				set @error = 3
+				set @errorMsg = 'No pueden ir valores nulos'
+			END
+		END ELSE BEGIN 
+			set @error = 4
+			set @errorMsg = 'Ya existe esa relacion SucursalMaganer'
+		END
+
+	END
+
+	if @opcion = 2 BEGIN
+		if (select count(*) from SucursalManager where idSucursalManager = @idSucursalManger)!=0 BEGIN
+			if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
+				if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
+					BEGIN transaction
+						update SucursalManager
+						set idEmpleado = ISNULL(@idEmpleado, idEmpleado), idSucursal = ISNULL(@idSucursal, idSucursal)
+						where idSucursalManager = @idSucursalManger
+					commit transaction 
+				END ELSE BEGIN 
+						set @error = 1
+						set @errorMsg = 'idSucursal no existe'
+					END
+			END ELSE BEGIN 
+				set @error = 2
+				set @errorMsg = 'idEmpleado no existe'
+			END			
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idEmpleado no existe'
+		END
+	END
+
+	if @opcion = 3
+		BEGIN
+		if (select count(*) from SucursalManager where idSucursalManager = @idSucursalManger)!= 0 BEGIN
+			BEGIN transaction
+			select * from SucursalManager where idSucursalManager = ISNULL(@idSucursalManger,idSucursalManager)
 			commit transaction
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idEmpleado no existe'
-		end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idEmpleado no existe'
+		END
+	END
 
-		end
+	
+	select @error as error, @errorMsg as mensaje
+END
 
-		select @error as error, @errorMsg as mensaje
+
+
 		
-	end
-
 -- ****************************************************************************************************************
 
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
@@ -260,226 +280,162 @@ begin
 go
 create or alter procedure crudPerformance @opcion int,@idPerformance int, @calificacion int, @descripcion varchar(50), @fecha date, @idEmpleado int with encryption
 as
-begin
+BEGIN
 	declare @error int, @errorMsg varchar(20)
 
 	if @opcion = 1
-		begin
-		if (select count(*) from Performance where idPerformance = @idPerformance)=0
-			begin
-			if @calificacion is not null and @descripcion is not null and @fecha is not null
-				begin
-				if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 
-					begin
-					begin transaction
-
-					insert into Performance(idPerformance,calificacion, descripcionPerformance, fecha, idEmpleado)
-					values(@idPerformance,@calificacion, @descripcion, @fecha,@idEmpleado)
-
+		BEGIN
+		if (select count(*) from Performance where idPerformance = @idPerformance)= 0 BEGIN
+			if @calificacion is not null and @descripcion is not null and @fecha is not null BEGIN
+				if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
+					BEGIN transaction
+						insert into Performance(idPerformance,calificacion, descripcionPerformance, fecha, idEmpleado)
+						values(@idPerformance,@calificacion, @descripcion, @fecha,@idEmpleado)
 					commit transaction
 
-					end
-				else
-				begin
-				set @error = 1
-				set @errorMsg = 'idEmpleado no existe'
-				end
-
-				end
-			else
-			begin
-			set @error = 2
-			set @errorMsg = 'No pueden ir nulos'
-			end
-
-			end
-		else
-		begin
-		set @error = 3
-		set @errorMsg = 'idPerformance ya existe'
-		end
-
-		end
+				END ELSE BEGIN 
+					set @error = 1
+					set @errorMsg = 'idEmpleado no existe'
+				END
+			END ELSE BEGIN 
+				set @error = 2
+				set @errorMsg = 'No pueden ir nulos'
+			END
+		END ELSE BEGIN 
+			set @error = 3
+			set @errorMsg = 'idPerformance ya existe'
+		END
+	END
 	
 
-	if @opcion = 2
-		begin
-		if (select count(*) from Performance where idPerformance = @idPerformance)!=0 
-			begin
-			begin transaction
-
-			update Performance
-			set calificacion = ISNULL(@calificacion, calificacion), descripcionPerformance = ISNULL(@descripcion, descripcionPerformance), 
-			fecha = ISNULL(@fecha, fecha), idEmpleado = ISNULL(@idEmpleado, idEmpleado) where idPerformance = @idPerformance
-
+	if @opcion = 2		BEGIN
+		if (select count(*) from Performance where idPerformance = @idPerformance)!=0 			BEGIN
+			BEGIN transaction
+				update Performance
+				set calificacion = ISNULL(@calificacion, calificacion), descripcionPerformance = ISNULL(@descripcion, descripcionPerformance), 
+				fecha = ISNULL(@fecha, fecha), idEmpleado = ISNULL(@idEmpleado, idEmpleado) where idPerformance = @idPerformance
 			commit transaction 
 
-			end
-			
-		else
-		begin 
-		set @error = 1
-		set @errorMsg = 'El idPerformance no existe'
-		end
-		end
-	if @opcion = 3
-		begin
-		if (select count(*) from Performance where idPerformance = @idPerformance)!=0 
-			begin
-			begin transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPerformance no existe'
+		END
+	END
 
-			select * from Performance where idPerformance = @idPerformance
-
+	if @opcion = 3		BEGIN
+		if (select count(*) from Performance where idPerformance = @idPerformance)!=0 			BEGIN
+			BEGIN transaction
+				select * from Performance where idPerformance = @idPerformance
 			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPerformance no existe'
+		END
+	END
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idPerformance no existe'
-		end
-		end
-
-	if @opcion = 4
-		begin
-		if (select count(*) from Performance where idPerformance = @idPerformance)!=0 
-			begin
-			begin transaction
-
-			update Performance
-			set estado = 0 where idPerformance = @idPerformance
-
+	if @opcion = 4		BEGIN
+		if (select count(*) from Performance where idPerformance = @idPerformance)!=0 	BEGIN
+			BEGIN transaction
+				update Performance
+				set estado = 0 where idPerformance = @idPerformance
 			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPerformance no existe'
+		END
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idPerformance no existe'
-		end
-
-		end
+	END
 
 		select @error as error, @errorMsg as mensaje
 		
-	end
+END
 
 -- ****************************************************************************************************************
 
 go
 create or alter procedure crudBono @opcion int,@idBono int, @fecha date, @cantidadBono money, @idTipoBono int, @idEmpleado int with encryption
 as
-begin
+BEGIN
 	declare @error int, @errorMsg varchar(20)
 
 	if @opcion = 1
-		begin
-		if (select count(*) from Bono where idBono = @idBono)=0
-			begin
-			if @fecha is not null and @cantidadBono is not null
-				begin
-				if (select count(*) from TipoBono where idTipoBono = @idTipoBono)!=0 
-					begin
-					if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0
-						begin
-						begin transaction
+		BEGIN
+		if (select count(*) from Bono where idBono = @idBono)= 0 BEGIN
+			if @fecha is not null and @cantidadBono is not null BEGIN
+				if (select count(*) from TipoBono where idTipoBono = @idTipoBono)!=0 BEGIN
+					if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
+						BEGIN transaction
 
 						insert into Bono(idBono,fecha,cantidadBono, idTipoBono, idEmpleado)
 						values(@idBono,@fecha,@cantidadBono, @idTipoBono, @idEmpleado)
 
 						commit transaction
-
-						end
-					else
-					begin
+					END ELSE BEGIN 
+						set @error = 1
+						set @errorMsg = 'idEmpleado no existe'
+					END
+				END ELSE BEGIN 
 					set @error = 1
-					set @errorMsg = 'idEmpleado no existe'
-					end
-
-				end
-				else
-				begin
-				set @error = 1
-				set @errorMsg = 'idTipoBono no existe'
-				end
-
-				end
-			else
-			begin
-			set @error = 2
-			set @errorMsg = 'No pueden ir nulos'
-			end
-
-			end
-		else
-		begin
-		set @error = 3
-		set @errorMsg = 'idBono ya existe'
-		end
-
-		end
+					set @errorMsg = 'idTipoBono no existe'
+				END
+			END ELSE BEGIN 
+				set @error = 2
+				set @errorMsg = 'No pueden ir nulos'
+			END
+		END ELSE BEGIN 
+			set @error = 3
+			set @errorMsg = 'idBono ya existe'
+		END
+	END
 	
 
 	if @opcion = 2
-		begin
+		BEGIN
 		if (select count(*) from Bono where idBono = @idBono)!=0 
-			begin
-			begin transaction
-
+			BEGIN
+			BEGIN transaction
 			update Bono
-			set fecha = ISNULL(@fecha, fecha), cantidadBono = ISNULL(@cantidadBono, cantidadBono), 
-			idTipoBono = ISNULL(@idTipoBono, idTipoBono), idEmpleado = ISNULL(@idEmpleado, idEmpleado) where idBono = @idBono
+				set fecha = ISNULL(@fecha, fecha), cantidadBono = ISNULL(@cantidadBono, cantidadBono), 
+				idTipoBono = ISNULL(@idTipoBono, idTipoBono), idEmpleado = ISNULL(@idEmpleado, idEmpleado) where idBono = @idBono
 			commit transaction 
-
-			end
-			
-		else
-		begin 
-		set @error = 1
-		set @errorMsg = 'El idBono no existe'
-		end
-		end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idBono no existe'
+		END
+	END
 	if @opcion = 3
-		begin
+		BEGIN
 		if (select count(*) from Bono where idBono = @idBono)!=0 
-			begin
-			begin transaction
-
+			BEGIN
+			BEGIN transaction
 			select * from Bono where idBono = @idBono
-
 			commit transaction
 
-			end
-		else
-		begin
+		END ELSE BEGIN 
 		set @error = 1
 		set @errorMsg = 'El idBono no existe'
-		end
-		end
+		END
+	END
 
 	if @opcion = 4
-		begin
+		BEGIN
 		if (select count(*) from Bono where idBono = @idBono)!=0 
-			begin
-			begin transaction
-
+			BEGIN
+			BEGIN transaction
 			update Bono
 			set estado = 0 where  idBono = @idBono
-
 			commit transaction
 
-			end
-		else
-		begin
+		END ELSE BEGIN 
 		set @error = 1
 		set @errorMsg = 'El idBono no existe'
-		end
+		END
 
-		end
+	END
 
 		select @error as error, @errorMsg as mensaje
 		
-	end
+END
 
 -- ****************************************************************************************************************
 
@@ -488,108 +444,78 @@ begin
 go
 create or alter procedure crudHorario @opcion int,@idHorario int, @horaInicial time, @horaFinal time, @dia varchar(15), @idSucursal int
 as
-begin
+BEGIN
 	declare @error int, @errorMsg varchar(20)
 
 	if @opcion = 1
-		begin
-		if (select count(*) from Horario where idHorario = @idHorario)=0
-			begin
+		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)= 0 BEGIN
 			if @horaInicial is not null and @horaFinal is not null and @dia is not null
-				begin
+				BEGIN
 				if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 
-					begin
-					begin transaction
-
+					BEGIN
+					BEGIN transaction
 					insert into Horario(idHorario, horarioInicial, horarioFinal, dia, idSucursal) 
 					values(@idHorario, @horaInicial, @horaFinal, @dia, @idSucursal)
-
 					commit transaction
 
-					end
-				else
-				begin
+				END ELSE BEGIN 
 				set @error = 1
 				set @errorMsg = 'idSucursal no existe'
-				end
+				END
 
-				end
-			else
-			begin
+			END ELSE BEGIN 
 			set @error = 2
 			set @errorMsg = 'No pueden ir valores nulos' 
-			end
+			END
 
-			end
-		else
-		begin
+		END ELSE BEGIN 
 		set @error = 3
 		set @errorMsg = 'idHorario ya existe'
-		end
+		END
 
-		end
+	END
 	
 
 	if @opcion = 2
-		begin
-		if (select count(*) from Horario where idHorario = @idHorario)!=0 
-			begin
-			begin transaction
-
-			update Horario
-			set horarioInicial = ISNULL(@horaInicial, horarioInicial),horarioFinal = ISNULL(@horaFinal, horarioFinal), dia = ISNULL(@dia, dia),
-			idSucursal = ISNULL(@idSucursal, idSucursal) where idHorario = @idHorario
-
+		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)!=0 			BEGIN
+			BEGIN transaction
+				update Horario
+				set horarioInicial = ISNULL(@horaInicial, horarioInicial),horarioFinal = ISNULL(@horaFinal, horarioFinal), dia = ISNULL(@dia, dia),
+				idSucursal = ISNULL(@idSucursal, idSucursal) where idHorario = @idHorario
 			commit transaction 
 
-			end
-			
-		else
-		begin 
-		set @error = 1
-		set @errorMsg = 'El idHorario no existe'
-		end
-		end
-if @opcion = 3
-		begin
-		if (select count(*) from Horario where idHorario = @idHorario)!=0
-			begin
-			begin transaction
-
-			select * from Horario where idHorario = @idHorario
-
+		END ELSE BEGIN  
+			set @error = 1
+			set @errorMsg = 'El idHorario no existe'
+		END
+	END
+	if @opcion = 3		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)!= 0 BEGIN
+			BEGIN transaction
+				select * from Horario where idHorario = @idHorario
 			commit transaction
-
-			end
-		else
-		begin
+		END ELSE BEGIN 
 		set @error = 1
 		set @errorMsg = 'El idHorario no existe'
-		end
-		end
+		END
+	END
 
 	if @opcion = 4
-		begin
-		if (select count(*) from Horario where idHorario = @idHorario)!=0 
-			begin
-			begin transaction
-
-			delete from Horario where idHorario = @idHorario
-
+		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)!=0 			BEGIN
+			BEGIN transaction
+				delete from Horario where idHorario = @idHorario
 			commit transaction
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idHorario no existe'
-		end
-
-		end
-
-		select @error as error, @errorMsg as mensaje
-		
-	end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idHorario no existe'
+		END
+	END
+		select @error as error, @errorMsg as mensaje		
+	END
 
 -- ****************************************************************************************************************
 
@@ -598,118 +524,82 @@ if @opcion = 3
 go
 create or alter procedure crudMonedaXPais @opcion int,@idMonedaXPais int, @idPais int, @cambioPorcentaje float,  @idMoneda int
 as
-begin
+BEGIN
 	declare @error int, @errorMsg varchar(20)
 
-	if @opcion = 1
-		begin
-		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)=0
-			begin
-			if (select count(*) from Pais where idPais = @idPais)!=0  
-				begin
-				if @cambioPorcentaje is not null
-					begin
-					if (select count(*) from Moneda where idMoneda = @idMoneda)!=0 
-						begin
-						begin transaction
-
-						insert into MonedaXPais(idMonedaXPais, idPais,cambioPorcentaje,idMoneda) 
-						values(@idMonedaXPais, @idPais,@cambioPorcentaje,@idMoneda)
-
+	if @opcion = 1		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)= 0 BEGIN
+			if (select count(*) from Pais where idPais = @idPais)!=0 BEGIN
+				if @cambioPorcentaje is not null BEGIN
+					if (select count(*) from Moneda where idMoneda = @idMoneda)!=0 BEGIN
+						BEGIN transaction
+							insert into MonedaXPais( idPais,cambioPorcentaje,idMoneda) 
+							values(@idPais,@cambioPorcentaje,@idMoneda)
 						commit transaction
 
-						end
-					else
-					begin
-					set @error = 1
-					set @errorMsg = 'idMoneda no existe'
-					end
+					END ELSE BEGIN 
+						set @error = 1
+						set @errorMsg = 'idMoneda no existe'
+					END
+				END ELSE BEGIN 
+					set @error = 2
+					set @errorMsg = 'No pueden ir valores nulos' 
+				END
 
-					end
-				else
-				begin
-				set @error = 2
-				set @errorMsg = 'No pueden ir valores nulos' 
-				end
+			END ELSE BEGIN 
+				set @error = 3
+				set @errorMsg = 'idPais no existe' 
+			END
+		END ELSE BEGIN 
+			set @error = 4
+			set @errorMsg = 'idMonedaXPais ya existe'
+		END
 
-				end
-			else
-			begin
-			set @error = 3
-			set @errorMsg = 'idPais no existe' 
-			end
-
-			end
-		else
-		begin
-		set @error = 4
-		set @errorMsg = 'idMonedaXPais ya existe'
-		end
-
-		end
-	
+		END
 
 	if @opcion = 2
-		begin
-		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 
-			begin
-			begin transaction
-
-			update MonedaXPais
-			set idPais = ISNULL(@idPais, idPais), cambioPorcentaje = ISNULL(@cambioPorcentaje, cambioPorcentaje), idMoneda = ISNULL(@idMoneda, idMoneda)
-			where idMonedaXPais = @idMonedaXPais
-
+		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 			BEGIN
+			BEGIN transaction
+				update MonedaXPais
+				set idPais = ISNULL(@idPais, idPais), cambioPorcentaje = ISNULL(@cambioPorcentaje, cambioPorcentaje), idMoneda = ISNULL(@idMoneda, idMoneda)
+				where idMonedaXPais = @idMonedaXPais
 			commit transaction 
 
-			end
-			
-		else
-		begin 
-		set @error = 1
-		set @errorMsg = 'El idMonedaXPais no existe'
-		end
-		end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMonedaXPais no existe'
+		END
+		END
 
 if @opcion = 3
-		begin
-		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0
-			begin
-			begin transaction
-
-			select * from MonedaXPais where idMonedaXPais = @idMonedaXPais
-
+		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!= 0 BEGIN
+			BEGIN transaction
+				select * from MonedaXPais where idMonedaXPais = @idMonedaXPais
 			commit transaction
 
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idMonedaXPais no existe'
-		end
-		end
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMonedaXPais no existe'
+		END
+		END
 
 	if @opcion = 4
-		begin
+		BEGIN
 		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 
-			begin
-			begin transaction
-
-			delete from MonedaXPais where idMonedaXPais = @idMonedaXPais
-
+			BEGIN
+			BEGIN transaction
+				delete from MonedaXPais where idMonedaXPais = @idMonedaXPais
 			commit transaction
-
-			end
-		else
-		begin
-		set @error = 1
-		set @errorMsg = 'El idMonedaXPais no existe'
-		end
-
-		end
-
-		select @error as error, @errorMsg as mensaje
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMonedaXPais no existe'
+		END
+	END
+	select @error as error, @errorMsg as mensaje
 		
-	end
+END
 
 go
 CREATE OR ALTER PROCEDURE insertMoneda @nombre varchar(20)
@@ -719,9 +609,7 @@ BEGIN
     BEGIN
         Insert into Moneda(nombreMoneda)
         VALUES (@nombre)
-    End
-    ELSE
-    BEGIN
+    END ELSE BEGIN 
         Select 0
     END
 END
@@ -735,9 +623,7 @@ BEGIN
     BEGIN
         Insert into Pais(nombrePais)
         VALUES (@nombre)
-    End
-    ELSE
-    BEGIN
+    END ELSE BEGIN 
         Select 0
     END
 END
@@ -752,12 +638,10 @@ BEGIN
         BEGIN
             insert into MonedaXPais(idPais,cambioPorcentaje,idMoneda)
             Values (@idP,@cambio,@idM)  
-        END
-        else
-        BEGIN
+        END ELSE BEGIN 
             Select 0
-        ENd
-    End
+        END
+    END
     ELSE
     BEGIN
         Select 0
@@ -772,12 +656,10 @@ BEGIN
     BEGIN
         Insert into Lugar(nombreLugar,idPais,ubicacion)
         Values (@nombre,@idP,@ubi)
-    End
-    Else
-    BEGIN
+    END ELSE BEGIN 
         Select 0
-    End
-End
+    END
+END
 GO
 
 CREATE OR ALTER PROCEDURE insertPuesto @nombre VARCHAR(20), @salario money
@@ -787,12 +669,10 @@ BEGIN
     BEGIN
         Insert into Puesto (nombrePuesto,salario)
         Values (@nombre,@salario)
-    END
-    Else
-    BEGIN
+    END ELSE BEGIN 
         Select 0
     END
-End
+END
 Go
 
 Create OR ALTER PROCEDURE insertEmpleado @nombre VARCHAR(20), @apellido varchar(20), @fecha date, @foto NVARCHAR(MAX), @idPuesto int
@@ -802,29 +682,12 @@ BEGIN
     BEGIN
         insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto)
         values (@nombre,@apellido,@fecha,@foto,@idPuesto)
-    ENd
-    ELSE
-    BEGIN
-        Select 0
-    End
-ENd
-Go
-
-CREATE OR ALTER PROCEDURE insertInventario @max int,@min int,@cantidad int, @idProd INT
-AS
-BEGIN
-    If EXISTS (SELECT 1 from Producto where idProducto = @idProd)
-    BEGIN
-        Insert into Inventario(minimo,maximo,cantidadInventario,idProducto)
-        VALUES (@max,@min,@cantidad,@idProd)
-    END
-    ELSE
-    BEGIN
+    END ELSE BEGIN 
         Select 0
     END
 END
-GO
 
+GO
 CREATE OR ALTER PROCEDURE insertHorario @inicial time,@final time,@dia date,@idSuc INT
 AS
 BEGIN
@@ -832,29 +695,10 @@ BEGIN
     BEGIN
         insert into Horario(horarioInicial,horarioFinal,dia,idSucursal)
         Values (@inicial,@final,@dia,@idSuc)
-    End
-    Else
-    BEGIN
+    END ELSE BEGIN 
         SELECT 0
-    End
-End
-GO
-
-CREATE OR ALTER PROCEDURE insertSucursal @nombre VARCHAR(20),@idL int,@idMXP int, @idEmp int,@idI INT
-AS
-BEGIN
-    IF EXISTS(SELECT 1 from Lugar WHERE idLugar = @idL) and EXISTS(Select 1 From MonedaXPais where idMonedaXPais = @idMXP) AND EXISTS(SELECT 1 from Empleado where idEmpleado = @idEmp)
-    AND EXISTS(SELECT 1 from Inventario where idInventario = @idI)
-    BEGIN
-        Insert into Sucursal(nombreSucursal,idLugar,idMonedaXPais,idEmpleadoAdministrador)
-        Values (@nombre,@idL,@idMXP,@idEmp)
     END
-    Else
-    BEGIN
-        Select 0
-    END
-End
-
+END
 GO
 
 --===========================================================
@@ -864,7 +708,7 @@ GO
 
 GO
 --====================================================
---						Tipo de Artista
+--						Tipo de SignUpCostumer
 --===================================================
 CREATE OR ALTER PROCEDURE dbo.spSignUpCostumer
 	@nombrUsuario varchar(20) ,
@@ -876,14 +720,14 @@ CREATE OR ALTER PROCEDURE dbo.spSignUpCostumer
 	@yPosition float
 	with encryption
 as
-begin
+BEGIN
 declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 
 --INSERT OPERATION
 	IF @nombrUsuario is not null and @contrasena is not null  and @idCliente is not null and @nombre is not null and @apellidos is not null and 
 	@xPosition is not null  and @yPosition is not null BEGIN
-		IF (select count(*) from Usuario where @nombrUsuario = nombreUsuario) = 0 BEGIN
+		IF (select count(*) from Usuario where nombreUsuario = @nombrUsuario ) = 0 BEGIN
 			IF (select count(*) from Cliente where idCliente = @idCliente) = 0 BEGIN	
 				BEGIN TRY
 					BEGIN TRANSACTION
@@ -918,7 +762,7 @@ declare @identityValue int = -1
 		select @errorInt as Error, @ErrorMsg as MensajeError
 	else
 		select 0 as correct, 'The user has sign up succesfuly' as REsult
-end
+END
 
 --====================================================
 --						USUARIO
@@ -931,12 +775,12 @@ CREATE OR ALTER PROCEDURE dbo.spUser
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
-begin
+BEGIN
 declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 
 	if @operationFlag = 0 BEGIN
-		IF @userName is not null  and @password is not null begin			
+		IF @userName is not null  and @password is not null BEGIN			
 			IF (select count(*) from Usuario where @UserName = nombreUsuario) = 0 BEGIN
 							
 				BEGIN TRY
@@ -962,7 +806,7 @@ declare @identityValue int = -1
 	END
 	
 	if @operationFlag = 1 BEGIN
-		IF @userName is not null and @password is not null begin			
+		IF @userName is not null and @password is not null BEGIN			
 			IF (select count(*) from Usuario where @UserName = nombreUsuario) = 0BEGIN				
 					BEGIN TRY
 						BEGIN TRANSACTION
@@ -1006,7 +850,7 @@ declare @identityValue int = -1
 		select @errorInt as Error, @ErrorMsg as MensajeError
 	ELSE
 		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
-end
+END
 
 --====================================================
 --						CLIENTE
@@ -1022,11 +866,11 @@ CREATE OR ALTER PROCEDURE spCliente
 	@operationFlag int	-- Insert 0, update 1, select 2
 	with encryption
 as
-begin
+BEGIN
 declare @errorInt int = 0, @errorMsg varchar(60)
 
 	if @operationFlag = 0 BEGIN
-		if @nombre is not null  and @apellidos is not null and @xPosition is not null and @yPosition is not null begin
+		if @nombre is not null  and @apellidos is not null and @xPosition is not null and @yPosition is not null BEGIN
 			IF (select count(*) from Cliente where idCliente = @idCliente) = 0 BEGIN
 						
 
@@ -1054,7 +898,7 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 	END
 	
 	if @operationFlag = 1 BEGIN
-	if @idCliente is not null and @nombre is not null  and @apellidos is not null and @xPosition is not null and @yPosition is not null begin
+	if @idCliente is not null and @nombre is not null  and @apellidos is not null and @xPosition is not null and @yPosition is not null BEGIN
 			IF (select count(*) from Cliente where idCliente = @idCliente) = 1 BEGIN
 
 					BEGIN TRY
@@ -1081,10 +925,10 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 	END
 
 	if @operationFlag = 2
-	begin
+	BEGIN
 		select * from Cliente
 		where idCliente = ISNULL(@idCliente,idCliente) and estado = 1 ;
-	end
+	END
 
 
 	if @operationFlag = 3
@@ -1112,19 +956,140 @@ CREATE Or ALTER PROCEDURE spLoginCostumer
 @contrasena varchar(20)
 AS
 BEGIN
-	if @nombrUsuario is not null and @contrasena is not null begin
+	if @nombrUsuario is not null and @contrasena is not null BEGIN
 		if EXISTS(Select * from Usuario where nombreUsuario = @nombrUsuario and contrasena = @contrasena)
 		BEGIN
 			Select 0 as ValueResult, 'Login Success' as MSG
-		end
+		END
 		ELSE
 		BEGIN
 			Select 1 as ValueResult, 'Invalid credentials' as MSG
-		End
+		END
 	END ELSE BEGIN
 		select 1 as ValueResult, 'No pueden haber campos nulos' as Mensaje
 		END  ---Final if validacion nulos
 END
 
 
+-- ***************************************************************************************************
+--							INGRESAR PRODUCTOS AL INVENTARIO
+-- ***************************************************************************************************
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetPriceOfProduct
+	
+	@idLote int,	
+	@idProducto int,	
+	@idPaisImpuesto int
+	
+ 	with encryption
+as
+BEGIN
+declare @errorInt int = 0, @errorMsg varchar(60)
 
+
+--INSERT OPERATION
+	IF @idProducto is not null and @idLote is not null BEGIN
+		declare @costoUnidad money;
+		declare @procentajeVenta float;
+		declare @procentajeImpuesto float;
+		declare @precioVentaTotal money;
+
+		set @costoUnidad = (SELECT costoUnidad from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
+		set @procentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
+		set @procentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
+									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoriaXImpuesto = Impuesto.idImpuesto
+									INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = CategoriaXImpuesto.idCategoriaXImpuesto
+									WHERE Impuesto.idPais = @idPaisImpuesto)
+		
+		set @precioVentaTotal = (@costoUnidad *@procentajeVenta) +@costoUnidad
+		set @precioVentaTotal = (@precioVentaTotal * @procentajeImpuesto) +@precioVentaTotal
+		
+		
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt !=0
+		RETURN 0
+	else
+		RETURN @precioVentaTotal 
+END
+
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
+	@idInventario int,
+	@cantidad int,
+	@idSucursal int,
+	@idLote int,
+	@precioVenta money,
+	@option int				--Insertar insertarProducto nuevo 0, agregarCantidad Pedido
+ 	with encryption
+as
+BEGIN
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	IF @cantidad is not null  and @idSucursal is not null and @idLote is not null BEGIN
+		IF (select count(*) from Sucursal where  idSucursal = @idSucursal) = 1 BEGIN
+			IF (select count(*) from MYSQLSERVER...Lote where idLote = @idLote) = 1 BEGIN	
+				BEGIN TRY
+					
+						declare @idPais int;
+						declare @idProducto int;
+						set @idPais = (select idPais FROM Sucursal 
+										INNER JOIN Lugar ON lugar.idLugar = Sucursal.idLugar
+										where Sucursal.idSucursal = @idSucursal)
+						set @idProducto = (select idProducto FROM MYSQLSERVER...Lote where idLote = @idLote)
+						
+						--idLote, idproducto, idPais
+						EXEC @precioVenta = spGetPriceOfProduct @idLote,@idProducto,@idPais
+					
+						INSERT INTO Inventario (cantidadInventario, idLote, idSucursal, precioVenta)
+						VALUES (@cantidad, @idLote,@idSucursal,@precioVenta)
+					
+				END TRY
+				BEGIN CATCH
+					set @errorInt=1
+					set @errorMsg = 'Error al agregar a la base de datos'
+				END CATCH
+			END ELSE BEGIN --Final if idCliente			
+				set @errorInt=1
+				set @errorMsg = 'idLote no existe'
+				END
+		END ELSE BEGIN 			
+			set @errorInt=1
+			set @errorMsg = 'idSucarsasl no existe'
+			END
+				
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'The user has sign up succesfuly' as REsult
+END
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetOtherBranches
+    @idSucursal int
+    with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(60)
+    BEGIN TRY
+        select * from Sucursal where idSucursal != @idSucursal
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'Error al agregar a la base de datos'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+
+-- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
+-- EXEC spInsertProductToInventory null, 30, 1, 1,null, 0

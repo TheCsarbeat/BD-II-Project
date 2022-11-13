@@ -11,98 +11,98 @@ namespace indioSupermercado
 {
 
 
-    public partial class adminFormSucursal
+    public partial class adminFormReporte
     {
 
         /// <summary>
-        /// Control TextBoxIDSucursal.
+        /// Control fotoProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDSucursal;
+        protected global::System.Web.UI.WebControls.FileUpload fotoProducto;
 
         /// <summary>
-        /// Control LinkButton4.
+        /// Control idProductotxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+        protected global::System.Web.UI.WebControls.TextBox idProductotxt;
 
         /// <summary>
-        /// Control TextBoxNombreSucursal.
+        /// Control botonIDP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreSucursal;
+        protected global::System.Web.UI.WebControls.LinkButton botonIDP;
 
         /// <summary>
-        /// Control TextBoxIDLugar.
+        /// Control nombreProductotxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDLugar;
+        protected global::System.Web.UI.WebControls.TextBox nombreProductotxt;
 
         /// <summary>
-        /// Control TextBoxIdMonedaXP.
+        /// Control DropDownListEstadoP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIdMonedaXP;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstadoP;
 
         /// <summary>
-        /// Control TextBoxEmpAdmin.
+        /// Control categoriaProductotxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxEmpAdmin;
+        protected global::System.Web.UI.WebControls.TextBox categoriaProductotxt;
 
         /// <summary>
-        /// Control DropDownListEstado.
+        /// Control descripcionProductotxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstado;
+        protected global::System.Web.UI.WebControls.TextBox descripcionProductotxt;
 
         /// <summary>
-        /// Control ButtonAgregarSucursal.
+        /// Control ButtonAgregarProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregarSucursal;
+        protected global::System.Web.UI.WebControls.Button ButtonAgregarProducto;
 
         /// <summary>
-        /// Control ButtonActualizarSucursal.
+        /// Control ButtonActualizarProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonActualizarSucursal;
+        protected global::System.Web.UI.WebControls.Button ButtonActualizarProducto;
 
         /// <summary>
-        /// Control ButtonBorrarSucursal.
+        /// Control ButtonBorrarProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBorrarSucursal;
+        protected global::System.Web.UI.WebControls.Button ButtonBorrarProducto;
 
         /// <summary>
         /// Control GridView1.

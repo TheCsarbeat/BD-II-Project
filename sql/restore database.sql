@@ -2,7 +2,7 @@
 -- =============================================
 --             script to drop Foreign Keys
 -- =============================================
-USE BD_PROYECTO    ;
+USE bdProyecto2    ;
 GO
 SET NOCOUNT ON;
 DECLARE @sql nvarchar(max) = N'';
@@ -36,7 +36,7 @@ SELECT @sql;
 -- =============================================
 --             script to drop user tables
 -- =============================================
-USE BD_PROYECTO    ;
+USE bdProyecto2    ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 
@@ -64,7 +64,7 @@ SELECT @sql;
 --             script to drop store procedures
 -- =============================================
 -- script to drop procedures
-USE BD_PROYECTO    ;
+USE bdProyecto2    ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 
@@ -196,4 +196,7 @@ END;
  
 CLOSE PKcursor;
 DEALLOCATE PKcursor;
+
+
+
 
