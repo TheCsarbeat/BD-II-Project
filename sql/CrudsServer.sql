@@ -849,7 +849,7 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 	ELSE
-		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
+		select 0 as valueResult , 'Funcion hecha sin problema' as Mensaje
 END
 
 --====================================================
@@ -945,8 +945,8 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	END ELSE IF @errorInt = 0 
-		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
+	ELSE IF @errorInt = 0 
+		select 0 as valueResult, 'Funcion hecha sin problema' as Mensaje
 END
 
 
@@ -963,10 +963,10 @@ BEGIN
 		END
 		ELSE
 		BEGIN
-			Select 1 as ValueResult, 'Invalid credentials' as MSG
+			select 0 as valueResult , 'Invalid credentials' as MSG
 		END
 	END ELSE BEGIN
-		select 1 as ValueResult, 'No pueden haber campos nulos' as Mensaje
+		select 0 as valueResult , 'No pueden haber campos nulos' as Mensaje
 		END  ---Final if validacion nulos
 END
 
@@ -1187,3 +1187,8 @@ end
 
 
 
+SELECT Producto.idProducto, Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.precioVenta, Sucursal.idSucursal FROM MYSQLSERVER...Producto as Producto
+INNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto
+INNER JOIN Inventario ON Inventario.idLote = Lote.idLote
+INNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal
+where Sucursal.idSucursal = 6

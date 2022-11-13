@@ -181,7 +181,7 @@ declare @identityValue int = -1
 		set estado = ISNULL(1, estado)
 		where idProducto = @idProducto
 	END
-	if @errorInt !=0
+	if @errorInt =1
 		select @errorInt as Error, @ErrorMsg as MensajeError
 	IF @errorInt = 0
 		select 0 as Result, @errorMsg as msg

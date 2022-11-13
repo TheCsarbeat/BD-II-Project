@@ -108,6 +108,11 @@ namespace indioSupermercado
             
         }
 
+        public void loadPostedImg()
+        {
+            
+        }
+
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
         {
             string nombreProducto = nombreProductotxt.Text;
@@ -117,6 +122,15 @@ namespace indioSupermercado
             string msgResult = "";
             int valueResult = -1;
             
+            if (nombreProducto != "" && descripcionProducto != "")
+            {
+
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                               "Swal.fire('Error','The are empty values','error')", true);
+            }
             string strFileName;
             string strFilePath = "";
             string strFolder;
