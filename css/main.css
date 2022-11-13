@@ -32,9 +32,10 @@
     --borde-curvo: 1rem 1rem 1rem 1rem;
     --fondo-login: url('img/loginBackground.jpg'); /**/
     --fondo-login-contenedor: rgba(0, 0, 0, 0.75);
+    --fondo-branch-selector: url('img/branchSelectorBackground.jpg');
     --borde-input: rgba(255, 255, 255, 0.479);
     --borde-input-hover: rgba(255, 255, 255, 0.932);
-    --borde-login: 30px ;
+    --borde-login: 30px;
     --borde-btn: 124px 124px 124px 124px;
     --fondo-color-login-registar: rgba(0, 0, 0, 1);
 }

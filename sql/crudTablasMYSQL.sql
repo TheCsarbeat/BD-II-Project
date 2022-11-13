@@ -134,12 +134,10 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 							BEGIN TRY
-
 								update MYSQLSERVER...Producto 
 								set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
 								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
 								where idProducto = @idProducto
-
 							END TRY
 							BEGIN CATCH
 								set @errorInt=1

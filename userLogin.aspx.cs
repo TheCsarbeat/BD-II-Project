@@ -13,7 +13,7 @@ namespace indioSupermercado
 {
     public partial class userLogin : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
+        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
 
         private string getCostumerId (string userName)
         {
@@ -88,10 +88,7 @@ namespace indioSupermercado
                 {
                     string id = getCostumerId(user);
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Perfect','" + msgResult + "','success').then(function() {window.location = 'homePage.aspx';})", true);
-
-                    
-
+                        "Swal.fire('Perfect','" + msgResult + "','success').then(function() {window.location = 'branchSelector.aspx';})", true);
                     Session["username"] = user;
                     Session["role"] = "user";
                     Session["idCliente"] = id;

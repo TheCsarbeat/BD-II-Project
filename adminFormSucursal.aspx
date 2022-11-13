@@ -85,7 +85,7 @@
                     
                   </div>
                  
-                  <div class="row">
+                  <div class="row m-2">
                       <div class="col-md-4">
                         <asp:Button ID="ButtonAgregarSucursal" class="btn btn-lg btn-block btn-success" runat="server" Text="Insertar" OnClick="ButtonAgregarSucursal_Click" />
                      </div>

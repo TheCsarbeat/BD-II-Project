@@ -50,7 +50,7 @@ CREATE TABLE Empleado(
     fechaContratacion date,
     fotoEmpleado nvarchar(MAX),
     idPuesto int FOREIGN KEY REFERENCES Puesto(idPuesto),
-	idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),
+    idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),
     estado int DEFAULT 1
 );
 
