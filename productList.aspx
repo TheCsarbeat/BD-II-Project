@@ -7,37 +7,18 @@
     
     
     
-    
-    
-    
-    <asp:Button ID="Button1" runat="server" Text="Button" />
-    
-    
-    
-    
-    
-    
-    
-    <asp:Repeater ID="Repeater1" runat="server">
+     <asp:Label id="Label2" font-names="Verdana" ForeColor="Green" font-size="10pt" runat="server"/>
 
-    </asp:Repeater>
-    
-    
-    
-    
-    
-    
-    
-    <asp:Repeater ID="d1" runat="server" OnItemCommand="d1_ItemCommand">
-        <HeaderTemplate>
-        <div class="wrapper">
-        <div class="container">
-        <div class="row g-1">
-
-        </HeaderTemplate>
-        <ItemTemplate>
-
-                <div class="col-md-3">
+         
+       <asp:Repeater id="Repeater1" OnItemCommand="R1_ItemCommand" runat="server">
+          <HeaderTemplate>
+             <div class="wrapper">
+            <div class="container">
+            <div class="row g-1">
+          </HeaderTemplate>
+             
+          <ItemTemplate>
+              <div class="col-md-3">
 
                 <div class="card p-3">
 
@@ -50,13 +31,16 @@
                     <div class="product-details">
 
 
-                         <span class="font-weight-bold d-block"></span>
+                         <span class="font-weight-bold d-block">$ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
                          <span><%#Eval("nombreProducto")%></span>
 
 
                          <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <asp:button id="<%#Eval("nombreProducto")%>" class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart >
+                            <div class="cart"><i class="fa fa-shopping-cart"></i></div>
+                            
                              
+                             <ASP:Button class="btn btn-success cart-button btn-block" 
+                                 CommandArgument=<%# DataBinder.Eval(Container.DataItem, "idLote") %> Text="Add to Cart" runat="server" />
                         </div>
 
                          <div class="weight">
@@ -69,13 +53,17 @@
                     </div>
                 </div>
 
-        </ItemTemplate>
-        <FooterTemplate>
-                </div>
-            </div>
-        </div>
-        </FooterTemplate>
-    </asp:Repeater>
+             
+          </ItemTemplate>
+             
+          <FooterTemplate>
+             </table>
+          </FooterTemplate>
+             
+       </asp:Repeater>
+       <br />
+         
+      
     
 
 </asp:Content>

@@ -36,7 +36,7 @@ SELECT @sql;
 -- =============================================
 --             script to drop user tables
 -- =============================================
-USE BD_PROYECTO        ;
+USE BD_PROYECTO    ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 
@@ -64,7 +64,7 @@ SELECT @sql;
 --             script to drop store procedures
 -- =============================================
 -- script to drop procedures
-USE BD_PROYECTO        ;
+USE BD_PROYECTO    ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 
@@ -196,4 +196,8 @@ END;
  
 CLOSE PKcursor;
 DEALLOCATE PKcursor;
+
+BEGIN TRY    ALTER TABLE [dbo].[MonedaXPais]      DROP CONSTRAINT [FK__MonedaXPa__idPai__35BE94B8];  END TRY  BEGIN CATCH    SELECT N'FK [FK__MonedaXPa__idPai__35BE94B8] failed. Run the script again.',       ERROR_MESSAGE();  END CATCH  BEGIN TRY    ALTER TABLE [dbo].[MonedaXPais]      DROP CONSTRAINT [FK__MonedaXPa__idMon__36B2B8F1];  END TRY  BEGIN CATCH    SELECT N'FK [FK__MonedaXPa__idMon__36B2B8F1] failed. Run the script again.',       ERROR_MESSAGE();  END CATCH  
+
+BEGIN TRY    EXEC sys.sp_executesql N'DROP TABLE [dbo].[Pais];';  END TRY  BEGIN CATCH    SELECT N'Table [dbo].[Pais] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP TABLE [dbo].[Moneda];';  END TRY  BEGIN CATCH    SELECT N'Table [dbo].[Moneda] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  BEGIN TRY    EXEC sys.sp_executesql N'DROP TABLE [dbo].[MonedaXPais];';  END TRY  BEGIN CATCH    SELECT N'Table [dbo].[MonedaXPais] failed - run the script again.',      ERROR_MESSAGE();  END CATCH  
 

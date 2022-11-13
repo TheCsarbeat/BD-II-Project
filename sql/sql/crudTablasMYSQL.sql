@@ -134,10 +134,12 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 							BEGIN TRY
+
 								update MYSQLSERVER...Producto 
 								set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
 								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
 								where idProducto = @idProducto
+
 							END TRY
 							BEGIN CATCH
 								set @errorInt=1
@@ -305,29 +307,30 @@ begin
 declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
-		IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 0 BEGIN
-				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
-					IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN									
-						BEGIN TRY	
-							INSERT INTO MYSQLSERVER...CategoriaXImpuesto (idCategoria,idImpuesto)
-							values (@idCategoria,@idImpuesto);							
-						END TRY
-						BEGIN CATCH
-							set @errorInt=1
-							set @errorMsg = 'Error al agregar a la base de datos'
-						END CATCH			
-					END ELSE BEGIN 				
-						set @errorInt =1
-						set @errorMsg = 'No existe un impuesto válido'
-						END
-				END ELSE BEGIN 			
-					set @errorInt=1
-					set @errorMsg = 'No existe una caterogia con este ID'
-					END
-					end
-			END ELSE BEGIN 			
+
+	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 0 BEGIN
+			IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
+				IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
+					BEGIN TRY
+	
+					INSERT INTO MYSQLSERVER...CategoriaXImpuesto (idCategoria,idImpuesto)
+					values (@idCategoria,@idImpuesto);
+							
+					END TRY
+					BEGIN CATCH
+						set @errorInt=1
+						set @errorMsg = 'Error al agregar a la base de datos'
+					END CATCH									
+						
+				END ELSE BEGIN 				
+					set @errorInt =1
+					set @errorMsg = 'No existe un impuesto válido'
+					END				
+			end ELSE BEGIN 			
 				set @errorInt=1
-				set @errorMsg = 'Ya existe una categoriaximpuesto con este ID'
+				set @errorMsg = 'Ya existe una categoria con este ID'
+				END
+				end
 
 		if @identityValue != -1
 			return @identityValue
@@ -898,23 +901,6 @@ declare @identityValue int = -1
 	END
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
-end
-
-
-
-GO
---====================================================
---						Limite
---===================================================
-CREATE or ALTER PROCEDURE dbo.spSelectProductsToView
-	
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion Categoria.nombreCategoria as Categoria from MYSQLSERVER...Producto  as Producto	
-	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
-	where Producto.estado = 1;
 end
 
 --  EXEC spCrudCategoriaProducto null, 'Frutas Verduras', 'Productos del campo',0

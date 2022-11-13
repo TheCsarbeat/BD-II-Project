@@ -15,11 +15,13 @@ namespace indioSupermercado
     {
         string strcon = ConfigurationManager.ConnectionStrings["connectionMaynor"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
-        {   
+        {
+            
 
             try
             {
-                id = Convert.ToInt32(Request.QueryString["id"].ToString());
+                int id = 6;//Convert.ToInt32(Request.QueryString["id"].ToString());
+                id = 6; 
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -27,13 +29,18 @@ namespace indioSupermercado
                 }
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM MYSQLSERVER...Producto";
+                cmd.CommandText = "SELECT Producto.idProducto,Producto.imgPath, Producto.nombreProducto, Producto.imgPath, Lote.idLote, \r\nInventario.precioVenta FROM MYSQLSERVER...Producto as Producto\r\nINNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto\r\nINNER JOIN Inventario ON Inventario.idLote = Lote.idLote\r\nINNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal";
                 cmd.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
-                d1.DataSource = dt;
-                d1.DataBind();
+
+
+                if (!IsPostBack)
+                {        
+                    Repeater1.DataSource = dt;
+                    Repeater1.DataBind();
+                }
 
             }
             catch (Exception ex)
@@ -47,15 +54,12 @@ namespace indioSupermercado
             Response.Write("<script>alert('Testing');</script>");
         }   
 
-        protected void d1_ItemCommand(object source, RepeaterCommandEventArgs e)
+
+        protected void R1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            switch (e.CommandName)
-            {
-                case "onClick":
-                    Response.Write("<script>alert('Testing');</script>");
-                    break;
-            }
-            
+            Label2.Text = "The " + ((Button)e.CommandSource).CommandArgument + " button has just been clicked; <br />";
         }
+       
+       
     }
 }

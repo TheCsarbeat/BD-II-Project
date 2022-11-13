@@ -13,7 +13,7 @@ namespace indioSupermercado
 {
     public partial class userSignup : System.Web.UI.Page
     {
-        string stringConnection = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
+        string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {

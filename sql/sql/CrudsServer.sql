@@ -975,7 +975,8 @@ END
 --							INGRESAR PRODUCTOS AL INVENTARIO
 -- ***************************************************************************************************
 GO
-CREATE OR ALTER PROCEDURE dbo.spGetPriceOfProduct	
+CREATE OR ALTER PROCEDURE dbo.spGetPriceOfProduct
+	
 	@idLote int,	
 	@idProducto int,	
 	@idPaisImpuesto int
@@ -989,20 +990,19 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 --INSERT OPERATION
 	IF @idProducto is not null and @idLote is not null BEGIN
 		declare @costoUnidad money;
-		declare @porcentajeVenta float;
-		declare @porcentajeImpuesto float;
+		declare @procentajeVenta float;
+		declare @procentajeImpuesto float;
 		declare @precioVentaTotal money;
 
 		set @costoUnidad = (SELECT costoUnidad from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
-		set @porcentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
-		set @porcentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
+		set @procentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
+		set @procentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
 									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoriaXImpuesto = Impuesto.idImpuesto
 									INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = CategoriaXImpuesto.idCategoriaXImpuesto
 									WHERE Impuesto.idPais = @idPaisImpuesto)
 		
-		set @precioVentaTotal = (@costoUnidad *@porcentajeVenta) + @costoUnidad
-		set @precioVentaTotal = (@precioVentaTotal * @porcentajeImpuesto) +@precioVentaTotal
-		
+		set @precioVentaTotal = (@costoUnidad *@procentajeVenta) +@costoUnidad
+		set @precioVentaTotal = (@precioVentaTotal * @procentajeImpuesto) +@precioVentaTotal
 		
 		
 	END ELSE BEGIN 			
@@ -1038,7 +1038,6 @@ declare @identityValue int = -1
 					
 						declare @idPais int;
 						declare @idProducto int;
-						
 						set @idPais = (select idPais FROM Sucursal 
 										INNER JOIN Lugar ON lugar.idLugar = Sucursal.idLugar
 										where Sucursal.idSucursal = @idSucursal)
@@ -1070,12 +1069,58 @@ declare @identityValue int = -1
 		END  ---Final if validacion nulos
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	--else
-		--select 0 as correct, 'The user has sign up succesfuly' as REsult
+	else
+		select 0 as correct, 'The user has sign up succesfuly' as REsult
 END
 
--- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
--- EXEC spInsertProductToInventory null, 30, 1, 1,null, 0
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetOtherBranches
+    @idSucursal int
+    with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(60)
+    BEGIN TRY
+        select * from Sucursal where idSucursal != @idSucursal
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'Error al agregar a la base de datos'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+
+GO 
+CREATE OR ALTER PROCEDURE dbo.spGetProfits
+	@fechaInicial date,
+	@fechaFinal date,
+	@idPais int,
+	@idSucursal int,
+	@idCategoriaProducto int
+with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(60)
+    BEGIN TRY
+        SELECT Producto.nombreProducto, Factura.fechaFactura, Pais.nombrePais, Sucursal.nombreSucursal, Categoria.nombreCategoria from Factura
+		INNER JOIN DetalleFactura ON DetalleFactura.idFactura = Factura.idFactura
+		INNER JOIN MYSQLSERVER...Producto as Producto ON  Producto.idProducto = DetalleFactura.idProducto
+		INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = Producto.idCategoria
+		INNER JOIN Sucursal ON Sucursal.idSucursal = Factura.idSucursal
+		INNER JOIN Lugar ON Lugar.idLugar = Sucursal.idLugar
+		INNER JOIN Pais ON Pais.idPais = Lugar.idPais
+		WHERE Factura.fechaFactura >= ISNULL (@fechaInicial,Factura.fechaFactura) and Factura.fechaFactura <=ISNULL (@fechaFinal,Factura.fechaFactura) AND
+		Pais.idPais = ISNULL(@idPais, PAis.idPais) and Sucursal.idSucursal = ISNULL(@idSucursal, Sucursal.idSucursal) and 
+		Categoria.idCategoria = ISNULL(@idCategoriaProducto, Categoria.idCategoria)
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'Error al agregar a la base de datos'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
 
 GO
 CREATE OR ALTER PROCEDURE dbo.spGetCortumerIdByUserName
@@ -1184,6 +1229,9 @@ declare @errorInt int = 0, @errorMsg varchar(20)
 		select @errorInt as error, @errorMsg as mensaje
 end
 */
+-- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
+-- EXEC spInsertProductToInventory null, 30, 1, 1,null, 0
 
 
-
+SELECT * FROM MYSQLSERVER...Producto
+WHERE idProducto
