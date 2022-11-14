@@ -41,7 +41,7 @@
                          <span><%#Eval("nombreProducto")%></span>
                          <div class="buttons d-flex flex-row">
                             <div class="cart"><i class="fa fa-shopping-cart"></i></div>  
-                            <asp:Button class="btn btn-success cart-button btn-block"
+                            <asp:Button class="btn btn-success cart-button"
                             CommandName='<%# DataBinder.Eval(Container.DataItem, "nombreProducto") +","+ DataBinder.Eval(Container.DataItem, "precioVenta")+","+
                                     DataBinder.Eval(Container.DataItem, "imgPath")+","+DataBinder.Eval(Container.DataItem, "descripcionProducto")%>  ' 
                             CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idLote") %>  ' 

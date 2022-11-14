@@ -104,6 +104,7 @@ namespace indioSupermercado
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
             Session["role"] = "";
+            Response.Redirect("homePage.aspx");
             Response.Write("<script>alert('Login out!');</script.");
         }
 

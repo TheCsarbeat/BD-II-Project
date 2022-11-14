@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="payOrder.aspx.cs" Inherits="indioSupermercado.payOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
+ <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
+<script src="bootstrap/mdb/js/mdb.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 

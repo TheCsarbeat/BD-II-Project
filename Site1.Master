@@ -10,17 +10,17 @@
     
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
-    <link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />
-
+    
+    <%--<link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />--%>
+    
     <%--dataTables Sweealert--%>
     <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="bootstrap/css/sweetalert2.min.css" rel="stylesheet" />
 
     <%--bootstrap css--%>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   
 
-
-    <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
     <%--our custom css--%>
     <link href="css/main.css" rel="stylesheet" />
 
@@ -28,15 +28,16 @@
 
 
     <%--bootstrap js--%>      <%--popper js--%>    
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
     <script src="bootstrap/js/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>-   
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
         
     <script src="datatables/js/jquery.dataTables.min.js"></script>
      <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
 
-    <script src="bootstrap/mdb/js/mdb.min.js"></script>
+    
 
 
 

@@ -1504,5 +1504,62 @@ declare @identityValue int = -1
     where Proveedor.estado = 1;
 end
 
+GO
+CREATE Or ALTER PROCEDURE verClientes
+AS
+BEGIN
+    Select idCliente as idCliente, nombreCliente as Nombre, apellidoCliente as Apellido
+    from Cliente
+    where Cliente.estado = 1;
+End
+GO
+
+go
+
+CREATE OR ALTER PROCEDURE dbo.spBonoPerformance
+    @idEmpleado varchar(20),
+    @fecha date,
+    @cantidad money,
+    @perform varchar(60)
+    with encryption
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+    IF @idEmpleado is not NULL and @fecha is not null and @cantidad is not null and @perform is not null
+    BEGIN
+        BEGIN TRY
+
+                insert into Bono(idEmpleado,fecha,cantidadBono,idTipoBono,performance)
+                Values (@idEmpleado,@fecha,@cantidad,1,@perform)
+
+        END TRY
+        BEGIN CATCH
+            set @errorInt=1
+            set @errorMsg = 'Error al insertar bono en la base de datos'
+        END CATCH
+
+    END ELSE BEGIN
+        set @errorInt=1
+        set @errorMsg = 'There are a null values'
+        END  ---Final if validacion nulos
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+    else
+        select 0 as correct, 'Bonus Awarded!' as REsult
+end
+GO
+
+CREATE Or ALTER PROCEDURE reporteBonos
+AS
+BEGIN
+    Select idBono as ID, nombreEmpleado as Nombre,  nombreTipoBono as NombreBono, descripcionTipoBono as TipoBono, cantidadBono as Monto, performance as Descripcion
+    from Bono JOIN Empleado on Empleado.idEmpleado = Bono.idEmpleado JOIN TipoBono on TipoBono.idTipoBono = Bono.idTipoBono
+End
+GO
+
+
 
 --    EXEC spGetIdCustomerFromUser "asdf"

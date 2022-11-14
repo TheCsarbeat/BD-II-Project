@@ -171,7 +171,9 @@ CREATE TABLE Bono(
     cantidadBono money,
     idTipoBono int FOREIGN KEY REFERENCES TipoBono(idTipoBono),
     idEmpleado int FOREIGN KEY REFERENCES Empleado(idEmpleado),
+	performance varchar(60),
     estado int DEFAULT 1
+	
 );
 
 
