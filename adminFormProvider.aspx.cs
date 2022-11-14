@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Collections;
 
 namespace indioSupermercado
 {
@@ -15,6 +16,44 @@ namespace indioSupermercado
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlDataSourceProvider.ConnectionString = usefull.strCon;
+            loadCateogory();
+        }
+        public void loadCateogory()
+        {
+            try
+            {
+                var nombrePais = new ArrayList();
+                var idPais = new ArrayList();
+
+
+                SqlConnection con = new SqlConnection(stringConnection);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand("spGetCountries", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nombrePais.Add(reader[1].ToString());
+                    idPais.Add(reader[0].ToString());
+                }
+
+                con.Close();
+                if (!IsPostBack)
+                {
+                    for (int i = 0; i < nombrePais.Count; i++)
+                        paisDropList.Items.Insert(0, new ListItem(nombrePais[i].ToString(), idPais[i].ToString()));
+                    paisDropList.DataBind();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script.");
+            }
         }
 
         protected void ButtonAgregarProvider_Click(object sender, EventArgs e)
@@ -22,7 +61,7 @@ namespace indioSupermercado
             string idProvider = TextBoxIDProvider.Text;
             string nameProvider = TextBoxNombreProvider.Text;
             string contactProvider = TextBoxContactProvider.Text;
-            string idCountry = TextBoxIDCountry.Text;
+            string idCountry = paisDropList.SelectedValue;
             string status = DropDownListStatusProvider.SelectedValue;
             int valueResult = 0;
             string msgResult = "";
@@ -91,7 +130,7 @@ namespace indioSupermercado
             string idProvider = TextBoxIDProvider.Text;
             string nameProvider = TextBoxNombreProvider.Text;
             string contactProvider = TextBoxContactProvider.Text;
-            string idCountry = TextBoxIDCountry.Text;
+            string idCountry = paisDropList.SelectedValue;
             string status = DropDownListStatusProvider.SelectedValue;
             int valueResult = 0;
             string msgResult = "";

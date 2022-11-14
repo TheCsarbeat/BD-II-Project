@@ -57,6 +57,9 @@
                      <div class="col-md-6">
                         <label>ID Country</label>
                         <div class="form-group">
+                            <asp:DropDownList class="form-control" ID="paisDropList" runat="server">
+                              
+                           </asp:DropDownList>
                            <asp:TextBox CssClass="form-control" ID="TextBoxIDCountry" runat="server" placeholder="idCountry" ></asp:TextBox>
                         </div>
                      </div>
