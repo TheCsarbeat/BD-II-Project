@@ -62,5 +62,20 @@
             </div>
         </div>
     </section>
-    <script src="js/scripts.js"></script>
+        <script type="text/javascript" language="javascript">
+            function addMarker(matrix) {
+                var map = L.map('map').setView([9.92, -84.07], 13);
+
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                for (var i = 0; i < matrix.length; i++) {
+                    var marker = L.marker([matrix[i][0], matrix[i][1]]).addTo(map);
+                    marker.bindPopup(matrix[i][2]).openPopup();
+                }
+                
+            }
+        </script>
 </asp:Content>

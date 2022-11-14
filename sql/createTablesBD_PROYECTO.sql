@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Moneda (
     idMoneda int PRIMARY Key not null IDENTITY(1,1),
     nombreMoneda nvarchar(20),
@@ -78,8 +76,6 @@ CREATE TABLE Horario(
     idSucursal int,
     estado int DEFAULT 1
 );
-
-select * from Sucursal
 
 -- TABLAS DEL BD_PROYECTO (Servidor)
 

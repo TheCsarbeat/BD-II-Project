@@ -1106,7 +1106,9 @@ as
 BEGIN
 	declare @errorInt int = 0, @errorMsg varchar(60)
 	BEGIN TRY
-		select * from Sucursal where idSucursal != @idSucursal
+		select Sucursal.idSucursal, Sucursal.nombreSucursal, Lugar.ubicacion.STX as X, Lugar.ubicacion.STY as Y
+		from Sucursal inner join Lugar on Sucursal.idLugar = Lugar.idLugar 
+		where idSucursal != @idSucursal
 	END TRY
 	BEGIN CATCH
 		set @errorInt=1
