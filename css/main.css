@@ -296,3 +296,8 @@ body {
     background-color: rgb(255, 255, 255, 0.75)
 }
 
+
+/*=====MAP======*/
+#map {
+    height: 720px;
+}

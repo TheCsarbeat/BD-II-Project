@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="branchSelector.aspx.cs" Inherits="indioSupermercado.branchSelector" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%--leaflet cs--%>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+     <%--leaflet js--%>
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section class="container-fluid" style="background-image: var(--fondo-branch-selector);
@@ -52,9 +56,11 @@
                 </FooterTemplate>
             
             </asp:Repeater>
-
+            <div class="py-5">
+                <h2 class="titulo-sucursal text-center">Mapa</h2>
+                <div id="map"></div>
+            </div>
         </div>
     </section>
-    
-    
+    <script src="js/scripts.js"></script>
 </asp:Content>

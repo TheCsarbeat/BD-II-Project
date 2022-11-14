@@ -59,6 +59,7 @@ namespace indioSupermercado
 
                 con.Close();
 
+
             }
             catch (Exception ex)
             {
