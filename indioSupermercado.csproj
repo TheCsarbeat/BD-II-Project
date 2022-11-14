@@ -71,11 +71,14 @@
     <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
-    <Content Include="bootstrap\js\bootstrap.min.js" />
-    <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
-    <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\css\sweetalert2.min.css" />
+    <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\js\sweetalert2.all.min.js" />
+    <Content Include="bootstrap\mdb\css\css.css" />
+    <Content Include="bootstrap\mdb\css\mdb.min.css" />
+    <Content Include="bootstrap\mdb\js\mdb.min.js" />
     <Content Include="branchSelector.aspx" />
     <Content Include="css\main.css" />
     <Content Include="datatables\css\jquery.dataTables.min.css" />

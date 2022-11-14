@@ -291,6 +291,11 @@ body {
     color: white;
     text-shadow: 2px 2px rgb(130,130,130);
 }
+.shop-info input {
+    background-color: var(--fondo-login-contenedor);
+}
+
+
 
 @media (min-width: 1025px) {
     .h-custom {
