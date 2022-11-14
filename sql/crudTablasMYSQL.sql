@@ -558,118 +558,99 @@ declare @identityValue int = -1
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
 
-
 GO
 --====================================================
---					Proveedor
+--          Proveedor
 --===================================================
 CREATE or ALTER PROCEDURE dbo.spCrudProveedor
-	@idProveedor int = null,
-	@nombreProveedor varchar(20)=null ,
-	@contacto varchar(20) = null,
-	@idPais int= null ,
-	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
-	with encryption
+  @idProveedor int = null,
+  @nombreProveedor varchar(20)=null ,
+  @contacto varchar(20) = null,
+  @idPais int= null ,
+  @operationFlag int  -- Insert 0, update 1, select 2, select-ALL 3, delete 4
+  with encryption
 as
 begin
 declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
-	if @operationFlag = 0 BEGIN
+  if @operationFlag = 0 BEGIN
 
-		if @nombreProveedor is not null and @contacto is not null  BEGIN
-			IF (select count(*) from MYSQLSERVER...Proveedor where idProveedor = @idProveedor) = 0 BEGIN
-				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
-					BEGIN TRY
-					INSERT INTO MYSQLSERVER...Proveedor (nombreProveedor,contacto,idPais)
-					values (@nombreProveedor,@contacto,@idPais);
-								
-	
-						END TRY
-						BEGIN CATCH
-							set @errorInt=1
-							set @errorMsg = 'Error al agregar a la base de datos'
-						END CATCH									
-						
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un pais v�lido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'Ya existe un proveedor con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
+    if @nombreProveedor is not null and @contacto is not null  BEGIN
+      IF (select count(*) from MYSQLSERVER...Proveedor where idProveedor = @idProveedor) = 0 BEGIN
+        IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
+          BEGIN TRY
+          INSERT INTO MYSQLSERVER...Proveedor (nombreProveedor,contacto,idPais)
+          values (@nombreProveedor,@contacto,@idPais);
+          
+          END TRY
+          BEGIN CATCH
+            set @errorInt=1
+            set @errorMsg = 'Error al agregar a la base de datos'
+          END CATCH                  
+            
+        END ELSE BEGIN         
+          set @errorInt =1
+          set @errorMsg = 'No existe un pais valido'
+          END        
+      END ELSE BEGIN       
+        set @errorInt=1
+        set @errorMsg = 'Ya existe un proveedor con este ID'
+        END
+    END ELSE BEGIN       
+      set @errorInt=1
+      set @errorMsg = 'Hay algun valor nulo'
+      END  ---Final if validaci?n nulos
 
-		if @identityValue != -1
-			return @identityValue
+    if @identityValue != -1
+      return @identityValue
 
-	END
-	
-	if @operationFlag = 1 BEGIN
-		if  @idProveedor is not null and @nombreProveedor is not null and @contacto is not null and @idPais is not null BEGIN
-			IF (select count(*) from MYSQLSERVER...Proveedor where idProveedor = @idProveedor) = 1 BEGIN
-				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
-					BEGIN TRY
-						BEGIN TRANSACTION
-						update MYSQLSERVER...Proveedor
-						set nombreProveedor = ISNULL(@nombreProveedor, nombreProveedor), contacto = ISNULL(@contacto, contacto),
-						idPais = ISNULL(@idPais, idPais) where idProveedor = @idProveedor
-						COMMIT TRANSACTION
-					END TRY
-					BEGIN CATCH
-						set @errorInt=1
-						set @errorMsg = 'Error al actualizar a la base de datos'
-					END CATCH
-	
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe una pais v�lido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'NO existe un proveedor con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
-	END
+  END
+  
+  if @operationFlag = 1 BEGIN
+    BEGIN TRY
+      
+      update MYSQLSERVER...Proveedor
+      set nombreProveedor = ISNULL(@nombreProveedor, nombreProveedor), contacto = ISNULL(@contacto, contacto),
+      idPais = ISNULL(@idPais, idPais) where idProveedor = @idProveedor
+      
+    END TRY
+    BEGIN CATCH
+      set @errorInt=1
+      set @errorMsg = 'Error al actualizar a la base de datos'
+    END CATCH
+        
+  END
 
-	if @operationFlag = 2
-	begin
-		select * from MYSQLSERVER...Proveedor 
-		where idProveedor = @idProveedor and estado =1;
-	end
+  if @operationFlag = 2
+  begin
+    select * from MYSQLSERVER...Proveedor 
+    where idProveedor = @idProveedor and estado =1;
+  end
 
-	IF @operationFlag = 3
-	BEGIN
-		select * from MYSQLSERVER...Proveedor 	
-		where estado = 1;
-	END
+  IF @operationFlag = 3
+  BEGIN
+    select * from MYSQLSERVER...Proveedor   
+    where estado = 1;
+  END
 
-	IF @operationFlag = 4
-	BEGIN
-		update MYSQLSERVER...Proveedor  
-		set estado = ISNULL(0, estado)
-		where idProveedor = @idProveedor
-	END
-	IF @operationFlag = 5
-	BEGIN
-		update MYSQLSERVER...Proveedor 	 
-		set estado = ISNULL(1, estado)
-		where idProveedor = @idProveedor
-	END
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	else
-			select 0 as correct, 'Action completed correctly!' as Result
+  IF @operationFlag = 4
+  BEGIN
+    update MYSQLSERVER...Proveedor  
+    set estado = ISNULL(0, estado)
+    where idProveedor = @idProveedor
+  END
+  IF @operationFlag = 5
+  BEGIN
+    update MYSQLSERVER...Proveedor    
+    set estado = ISNULL(1, estado)
+    where idProveedor = @idProveedor
+  END
+  if @errorInt !=0
+    select @errorInt as Error, @ErrorMsg as MensajeError
+  else
+      select 0 as correct, 'Action completed correctly!' as Result
 end
-exec spCrudProveedor null,'hershey', '43215678',2,0
-select * from pais
-select * from MYSQLSERVER...Proveedor 
+GO
 GO
 --====================================================
 --					  Lote
@@ -896,6 +877,8 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
+
+
 
 --  EXEC spCrudCategoriaProducto null, 'Frutas Verduras', 'Productos del campo',0
 

@@ -8,7 +8,7 @@ namespace indioSupermercado
 {
     public static class usefull
     {
-        public static string strCon = ConfigurationManager.ConnectionStrings["connectionFernanda"].ConnectionString;
+        public static string strCon = ConfigurationManager.ConnectionStrings["connectionMaynor"].ConnectionString;
         public static bool validateFloat(string num)
         {
             try
