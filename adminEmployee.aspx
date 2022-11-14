@@ -152,7 +152,7 @@
                   <div class="row">
 
                       <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                          ConnectionString="<%$ ConnectionStrings:connectionSebas %>" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
+                          ConnectionString="<%$ ConnectionStrings:connectionMaynor %>" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
                      <div class="col">
                           <asp:ScriptManager ID="ScriptManager1" runat="server">
                             </asp:ScriptManager>

@@ -106,7 +106,7 @@ namespace indioSupermercado
 
         protected void empleadosLinkButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("adminEmpleados.aspx");
+            Response.Redirect("adminEmployee.aspx");
         }
     }
 }

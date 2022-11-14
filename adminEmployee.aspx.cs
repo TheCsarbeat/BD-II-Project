@@ -9,15 +9,45 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
+using System.Net.NetworkInformation;
 
 namespace indioSupermercado
 {
     public partial class adminEmployee : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionSebas"].ConnectionString;
+        private string stringConnection = usefull.strCon;
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void loadFileImg()
+        {
+            string strFileName;
+            string strFilePath = "";
+            string strFolder;
+            strFolder = Server.MapPath("./profilePictures/");
+            // Retrieve the name of the file that is posted.
+            strFileName = FileEmpleado.PostedFile.FileName;
+            strFileName = Path.GetFileName(strFileName);
+
+            if (FileEmpleado.PostedFile.FileName != "")
+            {
+                // Create the folder if it does not exist.
+                if (!Directory.Exists(strFolder))
+                {
+                    Directory.CreateDirectory(strFolder);
+                }
+                // Save the uploaded file to the server.
+                strFilePath = strFolder + strFileName;
+                if (!File.Exists(strFilePath)) 
+                {
+                    FileEmpleado.PostedFile.SaveAs(strFilePath);
+                   
+                }
+            }
+
+            
         }
 
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
@@ -28,7 +58,7 @@ namespace indioSupermercado
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
             string office = TextBoxSucursal.Text;
-            string pic = "Ruta" + FileEmpleado.FileName;
+            string pic = "profilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
             string msgResult = "";
@@ -90,6 +120,7 @@ namespace indioSupermercado
 
                         if(valueResult == 0)
                         {
+                            loadFileImg();
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                         "Swal.fire('Perfect','" + msgResult + "','success')", true);
 

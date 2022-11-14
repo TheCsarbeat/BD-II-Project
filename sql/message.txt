@@ -1,0 +1,196 @@
+-- PROCEDURE PARA VALIDAR QUE EXISTA EL EMPLEADO
+Create or ALTER PROCEDURE spValidarEmpleado @idEmpleado int
+AS
+BEGIN
+    If @idEmpleado is not NULL
+    BEGIN
+        If EXISTS (SELECT * from Empleado where idEmpleado = @idEmpleado)
+        BEGIN
+            Select 0 as ValueResult, 'Employee updated' as MSG
+        END
+        Else
+        BEGIN
+            select 1 as ValueResult, 'Invalid ID' as MSG
+        END
+    ENd
+    Else
+    BEGIN
+        select 1 as ValueResult, 'No pueden haber campos nulos' as MSG
+    ENd
+END
+Go
+
+--PROCEDURE PARA ACTUALIZAR EMPLEADO
+CREATE OR ALTER PROCEDURE dbo.spActualizarEmpleado
+	@idEmpleado int ,
+	@nombreEmpleado varchar(20),
+	@apellido varchar(20),
+	@foto nvarchar(Max),
+	@fecha date,
+	@idSucursal int,
+	@idPuesto int
+	with encryption
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	IF @idEmpleado is not null and @nombreEmpleado is not null  and @apellido is not null and @fecha is not null and 
+	@idSucursal is not null  and @idPuesto is not null BEGIN
+		BEGIN TRY
+
+				UPDATE Empleado
+				set nombreEmpleado = @nombreEmpleado , apellidoEmpleado = @apellido,fechaContratacion = @fecha
+				,idPuesto = @idPuesto, fotoEmpleado = @foto,
+				idSucursal = @idSucursal , estado = 1
+				where idEmpleado = @idEmpleado
+
+		END TRY
+		BEGIN CATCH
+			set @errorInt=1
+			set @errorMsg = 'Error al agregar a la base de datos'
+		END CATCH
+				
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Employee Updated!' as REsult
+end
+GO
+
+--PROCEDURE QUE VALIDA QUE EXISTAN LAS SUCURSALES Y PUESTOS
+CREATE OR ALTER PROCEDURE dbo.spValidPuestoSucursal
+	@idSucursal int,
+	@idPuesto int
+	with encryption
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	IF @idSucursal is not null  and @idPuesto is not null BEGIN
+		BEGIN TRY
+
+				If EXISTS(Select * from Sucursal where idSucursal = @idSucursal)
+				BEGIN
+					If EXISTS(Select * from Puesto where idPuesto = @idPuesto)
+					begin
+						set @errorInt=0
+						set @errorMsg = 'Success'
+					End
+					Else
+					BEGIN
+						set @errorInt=1
+						set @errorMsg = 'Invalid Puesto ID!'
+					End
+				END
+				ELSE
+				BEGIN
+					set @errorInt=1
+					set @errorMsg = 'Invalid Sucursal ID!'
+				End
+
+		END TRY
+		BEGIN CATCH
+			set @errorInt=1
+			set @errorMsg = 'Error al agregar a la base de datos'
+		END CATCH
+				
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Sucursal and Puesto Works' as REsult
+end
+go
+
+--PROCEDURE PARA INSERTAR EMPLEADO
+CREATE OR ALTER PROCEDURE dbo.spInsertarEmpleado
+	@nombreEmpleado varchar(20),
+	@apellido varchar(20),
+	@foto nvarchar(Max),
+	@fecha date,
+	@idSucursal int,
+	@idPuesto int
+	with encryption
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	IF  @nombreEmpleado is not null  and @apellido is not null and @fecha is not null and 
+	@idSucursal is not null  and @idPuesto is not null and @foto is not null BEGIN
+		BEGIN TRY
+
+				insert into Empleado (nombreEmpleado,apellidoEmpleado,fotoEmpleado,fechaContratacion,idSucursal,idPuesto)
+				VALUES (@nombreEmpleado,@apellido,@foto,@fecha,@idSucursal,@idPuesto)
+
+		END TRY
+		BEGIN CATCH
+			set @errorInt=1
+			set @errorMsg = 'Error al agregar a la base de datos'
+		END CATCH
+				
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Employee Inserted!' as REsult
+end
+GO
+
+--PROCEDURE PARA ELIMINAR EMPLEADO
+CREATE OR ALTER PROCEDURE dbo.spEliminarEmpleado
+	@idEmpleado varchar(20)
+	with encryption
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	IF @idEmpleado is not NULL
+	BEGIN
+		BEGIN TRY
+
+				update Empleado
+				set estado = 2 where idEmpleado = @idEmpleado
+
+		END TRY
+		BEGIN CATCH
+			set @errorInt=1
+			set @errorMsg = 'Error al eliminar de la base de datos'
+		END CATCH
+				
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Employee Suspended!' as REsult
+end
+GO
+
+CREATE Or ALTER PROCEDURE verEmpleados
+AS
+BEGIN
+	Select idEmpleado as idEmpleado, nombreEmpleado as Nombre, apellidoEmpleado as Apellido, fechaContratacion as FechaContratacion,Puesto.nombrePuesto as Puesto,
+	Sucursal.nombreSucursal as Sucursal, fotoEmpleado as Foto from Empleado JOIN Puesto on Empleado.idPuesto = Puesto.idPuesto JOIN Sucursal on Empleado.idSucursal = Sucursal.idSucursal
+	where Empleado.estado = 1;
+End
+GO

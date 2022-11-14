@@ -76,12 +76,13 @@ EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 
 
+--insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
+--insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
 
-SELECT Producto.idProducto,Producto.imgPath, Producto.nombreProducto, Producto.imgPath, Lote.idLote, 
-Inventario.precioVenta FROM MYSQLSERVER...Producto as Producto
-INNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto
-INNER JOIN Inventario ON Inventario.idLote = Lote.idLote
-INNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal
+--insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);
+
+
+
 
 
 declare @punto4 geometry

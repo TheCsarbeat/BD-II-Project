@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormSucursal.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
@@ -2178,6 +2179,7 @@
     <Content Include="productImgs\raddish.jpg" />
     <Content Include="js\scripts.js" />
     <Content Include="productImgs\yuca.jpg" />
+    <Content Include="ProfilePictures\fotoPerfil.jpg" />
     <Content Include="userLogin.aspx" />
     <Content Include="userSignup.aspx" />
     <Content Include="Web.config" />
@@ -2186,6 +2188,13 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminEmployee.aspx.cs">
+      <DependentUpon>adminEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminEmployee.aspx.designer.cs">
+      <DependentUpon>adminEmployee.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminFormProductos.aspx.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
