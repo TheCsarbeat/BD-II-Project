@@ -17,6 +17,20 @@ grant execute
 ON object::dbo.spGetProductsByBranch
 to db_customer
 
+grant execute 
+ON object::dbo.spGetIdCustomerFromUser
+to db_customer
+
+grant execute 
+ON object::dbo.spClosestPoint
+to db_customer
+
+
+grant execute 
+ON object::dbo.spGetOtherBranches
+to db_customer
+
+
 
 
 
