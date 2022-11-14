@@ -76,14 +76,15 @@ EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 
 
+--insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
+--insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
+
+--insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);
+
+
+
 
 
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
-
-select * from Sucursal
-select * from Inventario
-
-select * from MYSQLSERVER...Lote
-select * from MYSQLSERVER...Producto
 

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="indioSupermercado.Site1" %>
+﻿﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="indioSupermercado.Site1" %>
 
 <!DOCTYPE html>
 
@@ -43,7 +43,7 @@
         
         <div>
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="homePage.aspx">
                     <img src="img/grocery-cart.png" width="30" height="30" />
                     Super-market
                 </a>
@@ -75,7 +75,7 @@
                             <asp:LinkButton class="nav-link" ID="userSignupLink" runat="server" OnClick="userSignupLink_Click">Sign Up</asp:LinkButton>
                         </li>
                         <li class="nav-item active">
-                            <asp:LinkButton class="nav-link" ID="helloUser" runat="server" OnClick="userSignupLink_Click">Sign Up</asp:LinkButton>
+                            <asp:LinkButton class="nav-link" ID="helloUser" runat="server" ></asp:LinkButton>
                         </li>
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="loginOut" runat="server" OnClick="LinkButton3_Click" Visible="False">Logout</asp:LinkButton>
@@ -105,7 +105,7 @@
                       </a>
 
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="adminFormSucursal.aspx">Sucursal</a></li>
+                        <li><a class="dropdown-item" href="adminFormBranch.aspx">Branch</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                       </ul>
@@ -118,6 +118,8 @@
                             <asp:LinkButton class="footerlinks" ID="inventarioLinkButton" runat="server">Inventario</asp:LinkButton>
                             &nbsp;
                             <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server">Reportes</asp:LinkButton>
+                             &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="empleadosLinkButton" runat="server" OnClick="empleadosLinkButton_Click">Empleados</asp:LinkButton>
 
                         </p>
 

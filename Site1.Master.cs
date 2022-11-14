@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace indioSupermercado
 {
@@ -28,6 +31,7 @@ namespace indioSupermercado
 
                     inventarioLinkButton.Visible = false; // author management link button
                     reportesLinkButton.Visible = false; // publisher management link button
+                    empleadosLinkButton.Visible = false;  //manejo empleados admin
 
 
                 }
@@ -45,6 +49,7 @@ namespace indioSupermercado
                     adminloginLink.Visible = true; // admin login link button
                     inventarioLinkButton.Visible = false; // author management link button
                     reportesLinkButton.Visible = false; // publisher management link button
+                    empleadosLinkButton.Visible = false;  //manejo empleados admin
 
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
@@ -61,6 +66,7 @@ namespace indioSupermercado
                     adminloginLink.Visible = false; // admin login link button
                     inventarioLinkButton.Visible = true; // author management link button
                     reportesLinkButton.Visible = true;
+                    empleadosLinkButton.Visible = true;  //manejo empleados admin
 
                 }
                 
@@ -95,7 +101,12 @@ namespace indioSupermercado
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
             Session["role"] = "";
-            Response.Write("<script LANGUAGE='JavaScript' >alert('Logout Sucessful');window.location='homePage.aspx';</script>");
+            Response.Write("<script>alert('Login out!');</script.");
+        }
+
+        protected void empleadosLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminEmployee.aspx");
         }
     }
 }
