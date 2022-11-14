@@ -44,8 +44,6 @@ namespace indioSupermercado
                 nombreSucursal = reader2[1].ToString();
                 reader2.Close();
 
-                //ScriptManager.RegisterStartupScript(this, GetType(), nombreSucursal, "alertMessage();", true);
-
 
                 SqlCommand cmd3 = con.CreateCommand();
                 cmd3.CommandType = CommandType.Text;
@@ -54,10 +52,14 @@ namespace indioSupermercado
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd3);
                 da.Fill(dt);
+
+                addToMap(dt); //agregar sucursales al mapa
+
                 d2.DataSource = dt;
                 d2.DataBind();
 
                 con.Close();
+
 
             }
             catch (Exception ex)
@@ -66,5 +68,39 @@ namespace indioSupermercado
             }
             
         }
+
+        protected void addToMap(DataTable dt) {
+            List<Tuple<float, float, string>> branchCoordinates = new List<Tuple<float, float, string>>();
+            float x, y;
+            string sx, sy, name;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                x = float.Parse(row["X"].ToString());
+                y = float.Parse(row["Y"].ToString());
+                name = row["nombreSucursal"].ToString();
+                branchCoordinates.Add(Tuple.Create(x,y,name));
+            }
+            string strFunc = "addMarker([";
+            int largo = branchCoordinates.Count;
+            int cont = 1;
+            foreach (var i in branchCoordinates)
+            {
+                sx = (i.Item1).ToString();
+                sy = (i.Item2).ToString();
+                name = i.Item3;
+                if (cont < largo)
+                {
+                    strFunc = strFunc + "[" + sx + "," + sy + ",'" +name+"'],";
+                }
+                else {
+                    strFunc = strFunc + "[" + sx + "," + sy + ",'" + name + "']";
+                }
+                cont++;
+            }
+            strFunc = strFunc + "])";
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "myFunc", strFunc, true);
+        }
+
     }
 }

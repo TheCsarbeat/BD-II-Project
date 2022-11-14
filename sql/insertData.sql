@@ -25,13 +25,6 @@ EXEC spCrudCategoriaImpuesto null,2, 1,0
 EXEC spCrudCategoriaImpuesto null,3, 1,0
 EXEC spCrudCategoriaImpuesto null,4, 1,0
 
-
-
-
-declare @punto geometry 
-set @punto = geometry::Point(12356, 32156, 0)
-EXEC insertLugar 'Cartago Puebla', 1, @punto
-
 EXEC insertMoneda 'Colon'
 EXEC insertMoneda 'Dolar panameno'
 EXEC insertMoneda 'cordoba'
@@ -40,23 +33,30 @@ EXEC crudMonedaXPais 1,null,1,600,1 -- Elcambio de colon es
 EXEC crudMonedaXPais 1,null,1,1,1 -- Elcambio de pana es 1
 EXEC crudMonedaXPais 1,null,1,30,1 -- Elcambio de cordoba es 
 
+declare @punto geometry 
+set @punto = geometry::Point(9.865843, -83.920612, 0)
+EXEC insertLugar 'Cartago Puebla', 1, @punto
+set @punto = geometry::Point(9.865843, -83.920612, 0)
+EXEC insertLugar 'Chepe', 1, @punto
+set @punto = geometry::Point(10.000409, -84.114865, 0)
+EXEC insertLugar 'Heredia', 1, @punto
+set @punto = geometry::Point(10.016436, -84.213052, 0)
+EXEC insertLugar 'Alajuela', 1, @punto
+set @punto = geometry::Point(9.372522, -83.660729, 0)
+EXEC insertLugar 'General Viejo', 1, @punto
+set @punto = geometry::Point(10.447159, -84.040080, 0)
+EXEC insertLugar 'Sarapiqui', 1, @punto
+set @punto = geometry::Point(9.346963, -83.656479, 0)
+EXEC insertLugar 'La hermosa', 1, @punto
+
 EXEC crudSucursal 1, null, 'Quiques', 1, 1
-EXEC crudSucursal 1, null, 'Fermeza', 1, 1
-EXEC crudSucursal 1, null, 'WAlMARt', 1, 1
+EXEC crudSucursal 1, null, 'Fermeza', 2, 1
+EXEC crudSucursal 1, null, 'WAlMARt', 3, 1
+EXEC crudSucursal 1, null, 'El chaparral', 4, 1
+EXEC crudSucursal 1, null, 'Super General', 5, 1
+EXEC crudSucursal 1, null, 'Paseo flores', 6, 1
+EXEC crudSucursal 1, null, 'El Dorado', 7, 1
 
-
-declare @punto2 geometry
-set @punto2 = geometry::Point(10500, 899, 0)
-EXEC insertLugar 'Heredia', 1, @punto2
-
-declare @punto3 geometry
-set @punto3 = geometry::Point(7000, 5899, 0)
-EXEC insertLugar 'Alajuela', 1, @punto3
-
-EXEC crudSucursal 1, null, 'Quiques', 1, 1
-EXEC crudSucursal 1, null, 'Fermeza', 1, 1
-EXEC crudSucursal 1, null, 'Paseo flores', 2, 1
-EXEC crudSucursal 1, null, 'El Dorado', 3, 1
 
 -- idproveedor, nombre, contacto, idPais, operation
 EXEC spCrudProveedor null, 'Coopeagri', 'ventas@coopeagri.com', 1,0

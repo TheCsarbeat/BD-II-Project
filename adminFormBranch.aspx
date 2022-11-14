@@ -40,7 +40,7 @@
                   <div class="row">
                      <div class="col">
                         <center>
-                           <img width="100px" src="img/supermercado.png" />
+                           <img width="100px" src="img/supermarkets.png" />
                         </center>
                      </div>
                   </div>

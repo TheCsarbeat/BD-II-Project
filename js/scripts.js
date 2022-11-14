@@ -13,7 +13,5 @@
         let button = this;
         button.classList.add('clicked');
     }
-
-
-
 });
+
