@@ -16,7 +16,7 @@
             </div>
             <div class="row g-1">
                 <div class="d-flex justify-content-center">
-                <div class="card text-center" style="width: 18rem;">
+                <div class="card text-center card-branch" style="width: 18rem;">
                   <img class="card-img-top" src="img/supermarkets.png" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"><%=nombreSucursal%></h5>
@@ -36,7 +36,7 @@
                     <ItemTemplate>
 
                         <div class="col-md-4 my-3">
-                        <div class="card text-center" style="width: 18rem;">
+                        <div class="card text-center card-branch mx-auto" style="width: 18rem;">
                           <img class="card-img-top" src="img/supermarkets.png" alt="Card image cap">
                           <div class="card-body">
                             <h5 class="card-title "><%#Eval("nombreSucursal")%></h5>

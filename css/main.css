@@ -32,7 +32,7 @@
     --borde-curvo: 1rem 1rem 1rem 1rem;
     --fondo-login: url('img/loginBackground.jpg'); /**/
     --fondo-login-contenedor: rgba(0, 0, 0, 0.75);
-    --fondo-branch-selector: url('img/branchSelectorBackground.jpg');
+    --fondo-branch-selector: url('img/branchBackground.jpg');
     --borde-input: rgba(255, 255, 255, 0.479);
     --borde-input-hover: rgba(255, 255, 255, 0.932);
     --borde-login: 30px;
@@ -290,5 +290,9 @@ body {
 .titulo-sucursal {
     color: white;
     text-shadow: 2px 2px rgb(130,130,130);
+}
+
+.card-branch {
+    background-color: rgb(255, 255, 255, 0.75)
 }
 
