@@ -54,8 +54,8 @@ CREATE TABLE Lote(
     estado int DEFAULT 1
 );
 
-CREATE TABLE Limite(
-    idLimite int PRIMARY Key not null AUTO_INCREMENT,
+CREATE TABLE Limit(
+    idLimit int PRIMARY Key not null AUTO_INCREMENT,
     maxCant int,
     minCant int,
     idProducto int, FOREIGN KEY(idProducto) REFERENCES Producto(idProducto),

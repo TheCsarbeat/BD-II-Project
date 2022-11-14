@@ -1,10 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="productList.aspx.cs" Inherits="indioSupermercado.productList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="js/scripts.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <asp:Label id="Label2" font-names="Verdana" ForeColor="Green" font-size="10pt" runat="server"/>
+        <div class="col-md-3">
 
+            <div class="card p-3 card-product">
+
+                <div class="product-details row">
+
+                    <div class="col">
+                        <div class="cart col"><center><i class="fa-2xl fa fa-shopping-cart"></i></center></div>
+                        <asp:Label class="font-weight-bold d-block col" ID="shoppingLb" Font-Names="Verdana"  ForeColor="Green" Font-Size="10pt" runat="server" />
+    
+                    </div>
+                    <div class="col buttons d-flex flex-row">
+                        <asp:Button ID="finisPurchasebtn" class="btn btn-success cart-button btn-block"
+                            Text="Finish Purchase" runat="server" OnClick="finisPurchasebtn_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
          
        <asp:Repeater id="Repeater1" OnItemCommand="R1_ItemCommand" runat="server">
           <HeaderTemplate>
@@ -24,13 +41,16 @@
                          <span><%#Eval("nombreProducto")%></span>
                          <div class="buttons d-flex flex-row">
                             <div class="cart"><i class="fa fa-shopping-cart"></i></div>  
-                             <ASP:Button class="btn btn-success cart-button btn-block" 
-                                 CommandArgument=<%# DataBinder.Eval(Container.DataItem, "idLote") %> Text="Add to Cart" runat="server" />
+                            <asp:Button class="btn btn-success cart-button btn-block"
+                            CommandName='<%# DataBinder.Eval(Container.DataItem, "nombreProducto") +", "+ DataBinder.Eval(Container.DataItem, "precioVenta")%>  ' 
+                            CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idLote") %>  ' 
+                            Text="Add to Cart" runat="server" />
                         </div>
                          <div class="weight">
                             <small>1 piece 2.5kg</small>                             
                          </div>
                         </div>
+
                     </div>
                 </div>    
           </ItemTemplate>
@@ -38,12 +58,6 @@
              </div>
             </div>
           </div>
-          </FooterTemplate>
-             
+          </FooterTemplate>   
        </asp:Repeater>
-       <br />
-         
-      
-    
-
 </asp:Content>
