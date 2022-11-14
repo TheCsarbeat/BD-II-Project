@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Moneda (
     idMoneda int PRIMARY Key not null IDENTITY(1,1),
     nombreMoneda nvarchar(20),

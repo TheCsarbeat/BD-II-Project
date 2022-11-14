@@ -15,7 +15,7 @@ namespace indioSupermercado
         public string idCustomer = "";
         public int idSucursal = 0;
         public string nombreSucursal = "";
-        string strcon = ConfigurationManager.ConnectionStrings["connectionMaynor"].ConnectionString;
+        string strcon = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             
