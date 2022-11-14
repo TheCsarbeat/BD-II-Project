@@ -7,7 +7,6 @@
     <title></title>
 
     
-
     
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
@@ -123,10 +122,11 @@
                             
                             <asp:LinkButton class="footerlinks" ID="inventarioLinkButton" runat="server">Inventario</asp:LinkButton>
                             &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server">Reportes</asp:LinkButton>
-                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server" OnClick="reportesLinkButton_Click">Reportes</asp:LinkButton>
+                             &nbsp;
                             <asp:LinkButton class="footerlinks" ID="empleadosLinkButton" runat="server" OnClick="empleadosLinkButton_Click">Empleados</asp:LinkButton>
-
+                             &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="clientesAdmin" runat="server" OnClick="clientesAdmin_Click">Clientes</asp:LinkButton>
                         </p>
 
                     </div>

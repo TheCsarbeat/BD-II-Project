@@ -87,6 +87,24 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.TextBox TextBoxIDEmpleado;
 
         /// <summary>
+        /// TextBoxPerformance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPerformance;
+
+        /// <summary>
+        /// TextBoxMontoBono control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxMontoBono;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,15 @@ namespace indioSupermercado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// ButtonBono control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonBono;
 
         /// <summary>
         /// ButtonBorrarSucursal control.
@@ -123,13 +150,13 @@ namespace indioSupermercado
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// UpdatePanelEmpleado control.
+        /// UpdatePanelEmployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelEmpleado;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelEmployee;
 
         /// <summary>
         /// GridViewEmpleado control.
