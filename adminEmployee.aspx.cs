@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace indioSupermercado
 {
-    public partial class adminEmpleados : System.Web.UI.Page
+    public partial class adminEmployee : System.Web.UI.Page
     {
         private string stringConnection = ConfigurationManager.ConnectionStrings["connectionSebas"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
@@ -23,12 +23,12 @@ namespace indioSupermercado
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
         {
 
-            string nombre = TextBoxNombreEmpleado.Text;
-            string apellido = TextBoxApellidoEmpleado.Text;
-            string fecha = TextBoxFecha.Text;
-            string puesto = TextBoxPuesto.Text;
-            string sucursal = TextBoxSucursal.Text;
-            string foto = "Ruta" + FileEmpleado.FileName;
+            string name = TextBoxNombreEmpleado.Text;
+            string lastName = TextBoxApellidoEmpleado.Text;
+            string inputDate = TextBoxFecha.Text;
+            string position = TextBoxPuesto.Text;
+            string office = TextBoxSucursal.Text;
+            string pic = "Ruta" + FileEmpleado.FileName;
 
             int valueResult = -1;
             string msgResult = "";
@@ -52,8 +52,8 @@ namespace indioSupermercado
                     SqlCommand cmd3 = new SqlCommand("spValidPuestoSucursal", conObj);
                     cmd3.CommandType = CommandType.StoredProcedure;
 
-                    cmd3.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
-                    cmd3.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
+                    cmd3.Parameters.Add("@idSucursal", SqlDbType.Int).Value = office;
+                    cmd3.Parameters.Add("@idPuesto", SqlDbType.Int).Value = position;
 
                     SqlDataReader reader3 = cmd3.ExecuteReader();
 
@@ -71,12 +71,12 @@ namespace indioSupermercado
                         SqlCommand cmd = new SqlCommand("spInsertarEmpleado", conObj);
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar).Value = nombre;
-                        cmd.Parameters.Add("@apellido", SqlDbType.VarChar).Value = apellido;
-                        cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
-                        cmd.Parameters.Add("@foto", SqlDbType.VarChar).Value = foto;
-                        cmd.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
-                        cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
+                        cmd.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar).Value = name;
+                        cmd.Parameters.Add("@apellido", SqlDbType.VarChar).Value = lastName;
+                        cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = inputDate;
+                        cmd.Parameters.Add("@foto", SqlDbType.VarChar).Value = pic;
+                        cmd.Parameters.Add("@idPuesto", SqlDbType.Int).Value = position;
+                        cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = office;
 
                         SqlDataReader reader = cmd.ExecuteReader();
 
@@ -92,6 +92,10 @@ namespace indioSupermercado
                         {
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                         "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                            GridViewEmpleado.DataBind();
+                            UpdatePanelEmpleado.Update();
+
                         }
                         else
                         {
@@ -123,12 +127,12 @@ namespace indioSupermercado
         protected void Button2_Click(object sender, EventArgs e)
         {
             string idInput = TextBoxIDEmpleado.Text;
-            string nombre = TextBoxNombreEmpleado.Text;
-            string apellido = TextBoxApellidoEmpleado.Text;
-            string fecha = TextBoxFecha.Text;
-            string puesto = TextBoxPuesto.Text;
-            string sucursal = TextBoxSucursal.Text;
-            string foto = "Ruta" + FileEmpleado.FileName;
+            string name = TextBoxNombreEmpleado.Text;
+            string lastName = TextBoxApellidoEmpleado.Text;
+            string inputDate = TextBoxFecha.Text;
+            string position = TextBoxPuesto.Text;
+            string office = TextBoxSucursal.Text;
+            string pic = "Ruta" + FileEmpleado.FileName;
 
             int valueResult = -1;
             string msgResult = "";
@@ -157,8 +161,8 @@ namespace indioSupermercado
                         SqlCommand cmd3 = new SqlCommand("spValidPuestoSucursal", conObj);
                         cmd3.CommandType = CommandType.StoredProcedure;
 
-                        cmd3.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
-                        cmd3.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
+                        cmd3.Parameters.Add("@idSucursal", SqlDbType.Int).Value = office;
+                        cmd3.Parameters.Add("@idPuesto", SqlDbType.Int).Value = position;
 
                         SqlDataReader reader3 = cmd3.ExecuteReader();
 
@@ -205,12 +209,12 @@ namespace indioSupermercado
                                     cmd2.CommandType = CommandType.StoredProcedure;
 
                                     cmd2.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
-                                    cmd2.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar).Value = nombre;
-                                    cmd2.Parameters.Add("@apellido", SqlDbType.VarChar).Value = apellido;
-                                    cmd2.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
-                                    cmd2.Parameters.Add("@foto", SqlDbType.VarChar).Value = foto;
-                                    cmd2.Parameters.Add("@idPuesto", SqlDbType.Int).Value = puesto;
-                                    cmd2.Parameters.Add("@idSucursal", SqlDbType.Int).Value = sucursal;
+                                    cmd2.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar).Value = name;
+                                    cmd2.Parameters.Add("@apellido", SqlDbType.VarChar).Value = lastName;
+                                    cmd2.Parameters.Add("@fecha", SqlDbType.Date).Value = inputDate;
+                                    cmd2.Parameters.Add("@foto", SqlDbType.VarChar).Value = pic;
+                                    cmd2.Parameters.Add("@idPuesto", SqlDbType.Int).Value = position;
+                                    cmd2.Parameters.Add("@idSucursal", SqlDbType.Int).Value = office;
 
                                     SqlDataReader reader2 = cmd2.ExecuteReader();
 
@@ -226,6 +230,9 @@ namespace indioSupermercado
                                     {
                                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                         "Swal.fire('Perfect','" + msgUpdate + "','success')", true);
+
+                                        GridViewEmpleado.DataBind();
+                                        UpdatePanelEmpleado.Update();
                                     }
                                     else
                                     {
@@ -333,6 +340,10 @@ namespace indioSupermercado
                         {
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                         "Swal.fire('Perfect','" + msgDelete + "','success')", true);
+
+                            GridViewEmpleado.DataBind();
+                            UpdatePanelEmpleado.Update();
+
                         }
                         else
                         {

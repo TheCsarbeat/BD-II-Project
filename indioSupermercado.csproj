@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="adminEmpleados.aspx" />
+    <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormSucursal.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
@@ -2180,12 +2180,12 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="adminEmpleados.aspx.cs">
-      <DependentUpon>adminEmpleados.aspx</DependentUpon>
+    <Compile Include="adminEmployee.aspx.cs">
+      <DependentUpon>adminEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminEmpleados.aspx.designer.cs">
-      <DependentUpon>adminEmpleados.aspx</DependentUpon>
+    <Compile Include="adminEmployee.aspx.designer.cs">
+      <DependentUpon>adminEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="adminFormSucursal.aspx.cs">

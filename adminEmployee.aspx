@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminEmpleados.aspx.cs" Inherits="indioSupermercado.adminEmpleados" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminEmployee.aspx.cs" Inherits="indioSupermercado.adminEmployee" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -150,8 +150,39 @@
                      </div>
                   </div>
                   <div class="row">
+
+                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                          ConnectionString="<%$ ConnectionStrings:connectionSebas %>" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
                      <div class="col">
-                        <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server"></asp:GridView>
+                          <asp:ScriptManager ID="ScriptManager1" runat="server">
+                            </asp:ScriptManager>
+                         <asp:UpdatePanel ID="UpdatePanelEmpleado" runat="server" UpdateMode="Conditional">
+                             <ContentTemplate>
+                                <asp:GridView class="table table-striped table-bordered" ID="GridViewEmpleado" runat="server"
+                                    AutoGenerateColumns="False" DataKeyNames="idEmpleado" DataSourceID="SqlDataSource1" >
+                                        <Columns>
+                                            <asp:BoundField DataField="idEmpleado" HeaderText="ID" ReadOnly="True" SortExpression="empleadoID">
+                                                <ControlStyle Font-Bold="True" />
+                                                <ItemStyle Font-Bold="True" />
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
+                                            <asp:BoundField DataField="Apellido" HeaderText="Apellido" ReadOnly="True" SortExpression="Apellido"></asp:BoundField>
+                                            <asp:BoundField DataField="FechaContratacion" HeaderText="FechaDeContratacion" ReadOnly="True" SortExpression="FechaDeContratacion"></asp:BoundField>
+                                            <asp:BoundField DataField="Puesto" HeaderText="PuestoID" ReadOnly="True" SortExpression="idPuesto"></asp:BoundField>
+                                            <asp:BoundField DataField="Sucursal" HeaderText="SucursalID" ReadOnly="True" SortExpression="idSucursal"></asp:BoundField>
+                                            
+                                             <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <div class="col-lg-2">
+                                                        <asp:Image class="img-fluid" ID="Image1" runat="server" ImageUrl='<%# Eval("Foto") %>' />
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                    
+                                        </Columns>
+                                </asp:GridView>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                      </div>
                   </div>
                </div>
