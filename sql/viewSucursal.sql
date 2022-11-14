@@ -12,3 +12,4 @@ declare @identityValue int = -1
 end
 
 exec spSelectSucursalesToView
+

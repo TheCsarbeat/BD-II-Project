@@ -4,7 +4,7 @@
 -- Sucursal
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
 go
-create or alter procedure crudSucursal @opcion int, @idSucursal int =NULL, @nombre varchar(20), @idLugar int, @idMonedaXPais int
+create or alter procedure crudSucursal @opcion int, @idSucursal int = null, @nombre varchar(20) = null, @idLugar int =null, @idMonedaXPais int= null, @estado int = null
 as
 BEGIN
 	declare @error int, @errorMsg varchar(20)
@@ -25,23 +25,23 @@ BEGIN
 						END TRY
 						BEGIN CATCH
 							set @error=1
-							set @errorMsg = 'Error al actualizar a la base de datos'
+							set @errorMsg = 'Error updating data base'
 						END CATCH
 					END ELSE BEGIN 
 						set @error = 1
-						set @errorMsg = 'La idMonedaXPais no existe'
+						set @errorMsg = 'idMonedaXPais does no exist'
 					END
 				END ELSE BEGIN
 					set @error = 3
-					set @errorMsg = 'El idLugar no existe'
+					set @errorMsg = 'idLugar does no exist'
 				END
 			END ELSE BEGIN
 				set @error = 4
-				set @errorMsg = 'nombre nulo'
+				set @errorMsg = 'name null'
 			END
 		END ELSE BEGIN
 			set @error = 5
-			set @errorMsg = 'idSucursal ya existe'
+			set @errorMsg = 'idSucursal already exist'
 		END
 	END
 
@@ -51,13 +51,13 @@ BEGIN
 		if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
 			BEGIN transaction
 				update Sucursal
-				set nombreSucursal = ISNULL(@nombre, nombreSucursal), idLugar = ISNULL(@idLugar, idLugar), idMonedaXPais = ISNULL(@idMonedaXPais, idMonedaXPais)
-				where idSucursal = @idSucursal			
+				set nombreSucursal = ISNULL(@nombre, nombreSucursal), idLugar = ISNULL(@idLugar, idLugar), idMonedaXPais = ISNULL(@idMonedaXPais, idMonedaXPais),
+				estado = ISNULL(@estado, estado)where idSucursal = @idSucursal			
 			commit transaction 
 
 			END ELSE BEGIN 
 				set @error = 1
-				set @errorMsg = 'El idSucursal no existe'
+				set @errorMsg = 'El idSucursal does no exist'
 			END
 		
 		END
@@ -73,10 +73,10 @@ BEGIN
 
 		END ELSE BEGIN 
 			set @error = 1
-			set @errorMsg = 'El idSucursal no existe'
+			set @errorMsg = 'El idSucursal does no exist'
 		END
 		
-		END
+		end
 
 	if @opcion = 4
 		BEGIN
@@ -92,13 +92,18 @@ BEGIN
 			else
 		BEGIN
 			set @error = 1
-			set @errorMsg = 'El idSucursal no existe'
+			set @errorMsg = 'El idSucursal does no exist'
 		
-		END
-	END
-		select @error as error, @errorMsg as mensaje
+		end
+		end
+		if @error !=0
+			select @error as Error, @ErrorMsg as MensajeError
+		else
+			select 0 as correct, 'Action completed correctly!' as Result
 	
 END
+exec crudSucursal 2,1,'Sucursal Perez', null,null
+select * from sucursal
 
 -- ****************************************************************************************************************
 
@@ -188,6 +193,7 @@ BEGIN
 	END
 	select @error as error, @errorMsg as mensaje
 END
+select * from Sucursal
 
 -- ****************************************************************************************************************
 
@@ -743,7 +749,7 @@ declare @identityValue int = -1
 				END TRY
 				BEGIN CATCH
 					set @errorInt=1
-					set @errorMsg = 'There is an error in de database'
+					set @errorMsg = 'Error al agregar a la base de datos'
 				END CATCH
 			END ELSE BEGIN --Final if idCliente			
 				set @errorInt=1
@@ -791,7 +797,7 @@ declare @identityValue int = -1
 				END TRY
 				BEGIN CATCH
 					set @errorInt=1
-					set @errorMsg = 'There is an error in de database'
+					set @errorMsg = 'Error al agregar a la base de datos'
 				END CATCH
 				
 			END ELSE BEGIN 			
@@ -849,7 +855,7 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 	ELSE
-		select 0 as valueResult , 'Funcion hecha sin problema' as Mensaje
+		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
 END
 
 --====================================================
@@ -882,7 +888,7 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 					END TRY
 					BEGIN CATCH
 						set @errorInt=1
-						set @errorMsg = 'There is an error in de database'
+						set @errorMsg = 'Error al agregar a la base de datos'
 						END CATCH
 								
 
@@ -910,7 +916,7 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 					END TRY
 					BEGIN CATCH
 						set @errorInt=1
-						set @errorMsg = 'There is an error in de database'
+						set @errorMsg = 'Error al agregar a la base de datos'
 					END CATCH
 
 			END ELSE BEGIN --Final if idCliente			
@@ -945,8 +951,8 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	ELSE IF @errorInt = 0 
-		select 0 as valueResult, 'Funcion hecha sin problema' as Mensaje
+	ELSE 
+		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
 END
 
 
@@ -963,10 +969,10 @@ BEGIN
 		END
 		ELSE
 		BEGIN
-			select 1 as valueResult , 'Invalid credentials' as MSG
+			Select 1 as ValueResult, 'Invalid credentials' as MSG
 		END
 	END ELSE BEGIN
-		select 1 as valueResult , 'No pueden haber campos nulos' as Mensaje
+		select 1 as ValueResult, 'No pueden haber campos nulos' as Mensaje
 		END  ---Final if validacion nulos
 END
 
@@ -975,7 +981,8 @@ END
 --							INGRESAR PRODUCTOS AL INVENTARIO
 -- ***************************************************************************************************
 GO
-CREATE OR ALTER PROCEDURE dbo.spGetPriceOfProduct	
+CREATE OR ALTER PROCEDURE dbo.spGetPriceOfProduct
+	
 	@idLote int,	
 	@idProducto int,	
 	@idPaisImpuesto int
@@ -989,20 +996,19 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 --INSERT OPERATION
 	IF @idProducto is not null and @idLote is not null BEGIN
 		declare @costoUnidad money;
-		declare @porcentajeVenta float;
-		declare @porcentajeImpuesto float;
+		declare @procentajeVenta float;
+		declare @procentajeImpuesto float;
 		declare @precioVentaTotal money;
 
 		set @costoUnidad = (SELECT costoUnidad from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
-		set @porcentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
-		set @porcentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
+		set @procentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
+		set @procentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
 									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoriaXImpuesto = Impuesto.idImpuesto
 									INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = CategoriaXImpuesto.idCategoriaXImpuesto
 									WHERE Impuesto.idPais = @idPaisImpuesto)
 		
-		set @precioVentaTotal = (@costoUnidad *@porcentajeVenta) + @costoUnidad
-		set @precioVentaTotal = (@precioVentaTotal * @porcentajeImpuesto) +@precioVentaTotal
-		
+		set @precioVentaTotal = (@costoUnidad *@procentajeVenta) +@costoUnidad
+		set @precioVentaTotal = (@precioVentaTotal * @procentajeImpuesto) +@precioVentaTotal
 		
 		
 	END ELSE BEGIN 			
@@ -1038,7 +1044,6 @@ declare @identityValue int = -1
 					
 						declare @idPais int;
 						declare @idProducto int;
-						
 						set @idPais = (select idPais FROM Sucursal 
 										INNER JOIN Lugar ON lugar.idLugar = Sucursal.idLugar
 										where Sucursal.idSucursal = @idSucursal)
@@ -1053,7 +1058,7 @@ declare @identityValue int = -1
 				END TRY
 				BEGIN CATCH
 					set @errorInt=1
-					set @errorMsg = 'There is an error in de database'
+					set @errorMsg = 'Error al agregar a la base de datos'
 				END CATCH
 			END ELSE BEGIN --Final if idCliente			
 				set @errorInt=1
@@ -1070,422 +1075,28 @@ declare @identityValue int = -1
 		END  ---Final if validacion nulos
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	--else
-		--select 0 as correct, 'The user has sign up succesfuly' as REsult
+	else
+		select 0 as correct, 'The user has sign up succesfuly' as REsult
 END
 
--- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
--- EXEC spInsertProductToInventory null, 30, 1, 1,null, 0
-
 GO
-CREATE OR ALTER PROCEDURE dbo.spGetCortumerIdByUserName
-	@nombreUsuario varchar(200)
-with encryption
+CREATE OR ALTER PROCEDURE dbo.spGetOtherBranches
+    @idSucursal int
+    with encryption
 as
 BEGIN
     declare @errorInt int = 0, @errorMsg varchar(60)
     BEGIN TRY
-        SELECT Cliente.idCliente FROM Cliente
-		INNER JOIN UsuarioXCliente ON UsuarioxCliente.idCliente = Cliente.idCliente
-		INNER JOIN Usuario ON Usuario.nombreUsuario = UsuarioXCliente.nombreUsuario
-		WHERE  UsuarioXCliente.nombreUsuario = @nombreUsuario
+        select * from Sucursal where idSucursal != @idSucursal
     END TRY
     BEGIN CATCH
         set @errorInt=1
-        set @errorMsg = 'There is an error in de database'
+        set @errorMsg = 'Error al agregar a la base de datos'
     END CATCH
     if @errorInt !=0
         select @errorInt as Error, @ErrorMsg as MensajeError
 END
 
-GO
-CREATE OR ALTER PROCEDURE dbo.spGetOtherBranches
-	@idSucursal int
-	with encryption
-as
-BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
-	BEGIN TRY
-		select * from Sucursal where idSucursal != @idSucursal
-	END TRY
-	BEGIN CATCH
-		set @errorInt=1
-		set @errorMsg = 'There is an error in de database'
-	END CATCH
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-END
+-- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
+-- EXEC spInsertProductToInventory null, 30, 1, 1,null, 0
 
-GO
-CREATE OR ALTER PROCEDURE dbo.spGetIdCustomerFromUser
-	@nombreUsuario varchar(50)
-	with encryption
-as
-BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
-	BEGIN TRY
-		select Cliente.idCliente from Cliente inner join UsuarioXCliente on
-		UsuarioXCliente.idCliente = Cliente.idCliente inner join Usuario on
-		UsuarioXCliente.nombreUsuario = Usuario.nombreUsuario
-		where Usuario.nombreUsuario = @nombreUsuario
-	END TRY
-	BEGIN CATCH
-		set @errorInt=1
-		set @errorMsg = 'There is an error in de database'
-	END CATCH
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-END
-
-GO
-CREATE OR ALTER PROCEDURE dbo.spClosestPoint
-	@idCliente nvarchar(20)
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(20)
-declare @pointCliente geometry
-	
-	BEGIN TRY
-		set @pointCliente = (select ubicacion from Cliente where idCliente = @idCliente);
-
-		SELECT TOP 1 Sucursal.idSucursal, Sucursal.nombreSucursal FROM Sucursal 
-		inner join Lugar on Lugar.idLugar = Sucursal.idLugar
-		ORDER BY @pointCliente.STDistance(Lugar.ubicacion) ASC;
-	END TRY
-	BEGIN CATCH
-		set @errorInt=1
-		set @errorMsg = 'There is an error in de database'
-	END CATCH
-	if @errorInt != 0
-		select @errorInt as error, @errorMsg as mensaje
-end
-
-GO
-CREATE OR ALTER PROCEDURE dbo.spGetProductsByBranch
-    @idSucursal int
-    with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(20)
-
-    BEGIN TRY
-        select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario, Inventario.precioVenta from Sucursal 
-        inner join Inventario on Sucursal.idSucursal = Inventario.idSucursal inner join MYSQLSERVER...Lote on
-        Lote.idLote = Inventario.idLote inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
-        where Sucursal.idSucursal = @idSucursal
-    END TRY
-    BEGIN CATCH
-        set @errorInt=1
-        set @errorMsg = 'There is an error in de database'
-    END CATCH
-
-    if @errorInt != 0
-        select @errorInt as error, @errorMsg as mensaje
-end
-
-GO
--- PROCEDURE PARA VALIDAR QUE EXISTA EL EMPLEADO
-Create or ALTER PROCEDURE spValidarEmpleado @idEmpleado int
-AS
-BEGIN
-    If @idEmpleado is not NULL
-    BEGIN
-        If EXISTS (SELECT * from Empleado where idEmpleado = @idEmpleado)
-        BEGIN
-            Select 0 as ValueResult, 'Employee updated' as MSG
-        END
-        Else
-        BEGIN
-            select 1 as ValueResult, 'Invalid ID' as MSG
-        END
-    ENd
-    Else
-    BEGIN
-        select 1 as ValueResult, 'No pueden haber campos nulos' as MSG
-    ENd
-END
-Go
-
---PROCEDURE PARA ACTUALIZAR EMPLEADO
-CREATE OR ALTER PROCEDURE dbo.spActualizarEmpleado
-	@idEmpleado int ,
-	@nombreEmpleado varchar(20),
-	@apellido varchar(20),
-	@foto nvarchar(Max),
-	@fecha date,
-	@idSucursal int,
-	@idPuesto int
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-
---INSERT OPERATION
-	IF @idEmpleado is not null and @nombreEmpleado is not null  and @apellido is not null and @fecha is not null and 
-	@idSucursal is not null  and @idPuesto is not null BEGIN
-		BEGIN TRY
-
-				UPDATE Empleado
-				set nombreEmpleado = @nombreEmpleado , apellidoEmpleado = @apellido,fechaContratacion = @fecha
-				,idPuesto = @idPuesto, fotoEmpleado = @foto,
-				idSucursal = @idSucursal , estado = 1
-				where idEmpleado = @idEmpleado
-
-		END TRY
-		BEGIN CATCH
-			set @errorInt=1
-			set @errorMsg = 'Error al agregar a la base de datos'
-		END CATCH
-				
-	END ELSE BEGIN 			
-		set @errorInt=1
-		set @errorMsg = 'There are a null values'
-		END  ---Final if validacion nulos
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	else
-		select 0 as correct, 'Employee Updated!' as REsult
-end
-GO
-
---PROCEDURE QUE VALIDA QUE EXISTAN LAS SUCURSALES Y PUESTOS
-CREATE OR ALTER PROCEDURE dbo.spValidPuestoSucursal
-	@idSucursal int,
-	@idPuesto int
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-
---INSERT OPERATION
-	IF @idSucursal is not null  and @idPuesto is not null BEGIN
-		BEGIN TRY
-
-				If EXISTS(Select * from Sucursal where idSucursal = @idSucursal)
-				BEGIN
-					If EXISTS(Select * from Puesto where idPuesto = @idPuesto)
-					begin
-						set @errorInt=0
-						set @errorMsg = 'Success'
-					End
-					Else
-					BEGIN
-						set @errorInt=1
-						set @errorMsg = 'Invalid Puesto ID!'
-					End
-				END
-				ELSE
-				BEGIN
-					set @errorInt=1
-					set @errorMsg = 'Invalid Sucursal ID!'
-				End
-
-		END TRY
-		BEGIN CATCH
-			set @errorInt=1
-			set @errorMsg = 'Error al agregar a la base de datos'
-		END CATCH
-				
-	END ELSE BEGIN 			
-		set @errorInt=1
-		set @errorMsg = 'There are a null values'
-		END  ---Final if validacion nulos
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	else
-		select 0 as correct, 'Sucursal and Puesto Works' as REsult
-end
-go
-
---PROCEDURE PARA INSERTAR EMPLEADO
-CREATE OR ALTER PROCEDURE dbo.spInsertarEmpleado
-	@nombreEmpleado varchar(20),
-	@apellido varchar(20),
-	@foto nvarchar(Max),
-	@fecha date,
-	@idSucursal int,
-	@idPuesto int
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-
---INSERT OPERATION
-	IF  @nombreEmpleado is not null  and @apellido is not null and @fecha is not null and 
-	@idSucursal is not null  and @idPuesto is not null and @foto is not null BEGIN
-		BEGIN TRY
-
-				insert into Empleado (nombreEmpleado,apellidoEmpleado,fotoEmpleado,fechaContratacion,idSucursal,idPuesto)
-				VALUES (@nombreEmpleado,@apellido,@foto,@fecha,@idSucursal,@idPuesto)
-
-		END TRY
-		BEGIN CATCH
-			set @errorInt=1
-			set @errorMsg = 'Error al agregar a la base de datos'
-		END CATCH
-				
-	END ELSE BEGIN 			
-		set @errorInt=1
-		set @errorMsg = 'There are a null values'
-		END  ---Final if validacion nulos
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	else
-		select 0 as correct, 'Employee Inserted!' as REsult
-end
-GO
-
---PROCEDURE PARA ELIMINAR EMPLEADO
-CREATE OR ALTER PROCEDURE dbo.spEliminarEmpleado
-	@idEmpleado varchar(20)
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-
---INSERT OPERATION
-	IF @idEmpleado is not NULL
-	BEGIN
-		BEGIN TRY
-
-				update Empleado
-				set estado = 2 where idEmpleado = @idEmpleado
-
-		END TRY
-		BEGIN CATCH
-			set @errorInt=1
-			set @errorMsg = 'Error al eliminar de la base de datos'
-		END CATCH
-				
-	END ELSE BEGIN 			
-		set @errorInt=1
-		set @errorMsg = 'There are a null values'
-		END  ---Final if validacion nulos
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	else
-		select 0 as correct, 'Employee Suspended!' as REsult
-end
-GO
-
-CREATE Or ALTER PROCEDURE verEmpleados
-AS
-BEGIN
-	Select idEmpleado as idEmpleado, nombreEmpleado as Nombre, apellidoEmpleado as Apellido, fechaContratacion as FechaContratacion,Puesto.nombrePuesto as Puesto,
-	Sucursal.nombreSucursal as Sucursal, fotoEmpleado as Foto from Empleado JOIN Puesto on Empleado.idPuesto = Puesto.idPuesto JOIN Sucursal on Empleado.idSucursal = Sucursal.idSucursal
-	where Empleado.estado = 1;
-End
-GO
-
-GO
-CREATE or ALTER PROCEDURE dbo.spSelectSucursalesToView    
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-
-    select Sucursal.idSucursal, Sucursal.nombreSucursal as Nombre, Lugar.nombreLugar as Lugar, Sucursal.idMonedaXPais as Moneda from Sucursal as Sucursal    
-    INNER JOIN Lugar as Lugar ON  Lugar.idLugar = Sucursal.idLugar
-
-    where Sucursal.estado = 1;
-end
-
-go
-create or alter procedure crudSucursal @opcion int, @idSucursal int = null, @nombre varchar(20) = null, @idLugar int =null, @idMonedaXPais int= null, @estado int = null
-as
-BEGIN
-  declare @error int, @errorMsg varchar(20)
-
-  if @opcion = 1
-    BEGIN
-    if (select count(*) from Sucursal where idSucursal = @idSucursal)=0  BEGIN
-      if @nombre is not null  BEGIN
-        if (select count(*) from Lugar where idLugar = @idLugar)!=0  BEGIN
-          if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 BEGIN
-            
-            BEGIN TRY
-              BEGIN transaction
-                insert into Sucursal( nombreSucursal, idLugar, idMonedaXpais) 
-                values(@nombre, @idLugar, @idMonedaXpais)
-          
-              commit transaction
-            END TRY
-            BEGIN CATCH
-              set @error=1
-              set @errorMsg = 'Error updating data base'
-            END CATCH
-          END ELSE BEGIN 
-            set @error = 1
-            set @errorMsg = 'idMonedaXPais does no exist'
-          END
-        END ELSE BEGIN
-          set @error = 3
-          set @errorMsg = 'idLugar does no exist'
-        END
-      END ELSE BEGIN
-        set @error = 4
-        set @errorMsg = 'name null'
-      END
-    END ELSE BEGIN
-      set @error = 5
-      set @errorMsg = 'idSucursal already exist'
-    END
-  END
-
-
-  if @opcion = 2
-    BEGIN
-    if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
-      BEGIN transaction
-        update Sucursal
-        set nombreSucursal = ISNULL(@nombre, nombreSucursal), idLugar = ISNULL(@idLugar, idLugar), idMonedaXPais = ISNULL(@idMonedaXPais, idMonedaXPais),
-        estado = ISNULL(@estado, estado)where idSucursal = @idSucursal      
-      commit transaction 
-
-      END ELSE BEGIN 
-        set @error = 1
-        set @errorMsg = 'El idSucursal does no exist'
-      END    
-    END
-
-  if @opcion = 3
-    BEGIN
-    if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0  BEGIN
-      BEGIN transaction
-
-      select * from Sucursal where idSucursal = @idSucursal
-
-      commit transaction
-
-    END ELSE BEGIN 
-      set @error = 1
-      set @errorMsg = 'El idSucursal does no exist'
-    END    
-    end
-
-  if @opcion = 4
-    BEGIN
-    if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
-      BEGIN transaction
-      update Sucursal
-      set estado = 0 where idSucursal = @idSucursal
-
-      commit transaction
-      END
-      else
-    BEGIN
-      set @error = 1
-      set @errorMsg = 'El idSucursal does no exist' 
-    end
-    end
-    if @error !=0
-      select @error as Error, @ErrorMsg as MensajeError
-    else
-      select 0 as correct, 'Action completed correctly!' as Result
-  
-END

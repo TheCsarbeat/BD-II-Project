@@ -70,6 +70,7 @@
     <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormProductos.aspx" />
+    <Content Include="adminFormProvider.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
@@ -2162,6 +2163,8 @@
     <Content Include="img\oficinas.jpg" />
     <Content Include="img\Panel.png" />
     <Content Include="img\photo_appointment_setting_page_pharmassent_consulting.jpg" />
+    <Content Include="img\producto.png" />
+    <Content Include="img\proveedor.png" />
     <Content Include="img\publisher.png" />
     <Content Include="img\rol-de-la-tecnología.jpg" />
     <Content Include="img\search-online.png" />
@@ -2208,6 +2211,13 @@
     </Compile>
     <Compile Include="adminFormProductos.aspx.designer.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormProvider.aspx.cs">
+      <DependentUpon>adminFormProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormProvider.aspx.designer.cs">
+      <DependentUpon>adminFormProvider.aspx</DependentUpon>
     </Compile>
     <Compile Include="branchSelector.aspx.cs">
       <DependentUpon>branchSelector.aspx</DependentUpon>
