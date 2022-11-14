@@ -16,7 +16,7 @@ namespace indioSupermercado
     public partial class productList : System.Web.UI.Page
     {
         string strcon = usefull.strCon;
-        public ArrayList cartItems = new ArrayList();
+
         public static List<ItemCart> myList = new List<ItemCart>();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,7 +24,7 @@ namespace indioSupermercado
 
             try
             {
-                int id = Convert.ToInt32(Request.QueryString["id"].ToString());
+                int id = 6;//Convert.ToInt32(Request.QueryString["id"].ToString());
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -45,7 +45,7 @@ namespace indioSupermercado
                     Repeater1.DataBind();
                 }
 
-                shoppingLb.Text = "Shhoping cart $1236";
+                shoppingLb.Text = "Shopping Cart TOTAL: $ " + getTotal().ToString(); ;
 
             }
             catch (Exception ex)
@@ -78,70 +78,53 @@ namespace indioSupermercado
             {
                 myList.Add(item);
             }
-           
+            
+
         }
 
-        public void seeCart()
-        {           
-           
-            for (int i = 0; i < myList.Count; i++)                
-                Response.Write("<h1>" + myList[i].toString() + "</h1>");
+        public double getTotal()
+        {
+            double total = 0.0;
+            //Calcular el total
+            foreach (var i in myList)
+            {
+                total += i.getSubTotal();
 
+            }
+            return total;
         }
         protected void finisPurchasebtn_Click(object sender, EventArgs e)
         {
-            seeCart();
+            shoppingLb.Text = "Shopping Cart TOTAL: $ " + getTotal().ToString(); ;
+            Response.Redirect("payOrder.aspx");
         }
 
         protected void R1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             int idLote = Convert.ToInt32(((Button)e.CommandSource).CommandArgument);
-            string nameProduct = ((Button)e.CommandSource).CommandName.ToString();
-            shoppingLb.Text = "A "+ nameProduct+" was added ";
+            double precioVenta = 0.0;
+            string nameProduct = "";
+            string picturePath = "";
+            string description = "";
 
-            //idLote, nombreProducto, cantidad
-            ItemCart item = new ItemCart(idLote, nameProduct, 1);
-             
+            string s = ((Button)e.CommandSource).CommandName.ToString();
+
+            string[] subs = s.Split(',');
+           
+            nameProduct = subs[0];
+            precioVenta = Convert.ToDouble(subs[1]);
+            picturePath = subs[2];
+            description = subs[3];
+
+
+            //int id, string name, int cant, double precio, string picture, string description
+            ItemCart item = new ItemCart(idLote, nameProduct, 1, precioVenta, picturePath, description);
             addToCart(item);
-            
+            precioVenta = getTotal();
+            shoppingLb.Text = "A " + nameProduct + " was added " + " TOTAL: $ " + precioVenta.ToString(); ;
         }
 
-        public class ItemCart
-        {
-            public int idLote;
-            public string nameProduct;
-            public int cant;
-            public float precio;
-            public float subTotal;
-
-            public ItemCart(int id, string name, int cant)
-            {
-                this.idLote = id;
-                this.nameProduct = name;
-                this.cant = cant;
-            }
-
-            public string getNombre()
-            {
-                return this.nameProduct;
-            }
-
-            public int getId()
-            {
-                return this.idLote;
-            }
-
-            public void addSameItem()
-            {
-                this.cant += 1;
-                
-            }
-
-            public string toString()
-            {
-                return this.nameProduct +" "+ this.idLote.ToString() +" "+ this.cant.ToString();
-            }
-        }
+        
 
         
     }

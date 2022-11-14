@@ -13,6 +13,11 @@ grant execute
 ON object::dbo.spGetCortumerIdByUserName
 to db_customer
 
+grant execute 
+ON object::dbo.spGetProductsByBranch
+to db_customer
+
+
 
 
 -- Se le asigna el permiso de ejecutar cualquier procedimiento en la base de datos, (SOLO EJECUTARLO)
