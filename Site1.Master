@@ -5,42 +5,48 @@
 <html>
 <head runat="server">
     <title></title>
-    
 
     
-    <%--bootstrap css--%>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     
-    <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
+    
+    <%--<link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />--%>
+    
+    <%--dataTables Sweealert--%>
+    <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="bootstrap/css/sweetalert2.min.css" rel="stylesheet" />
+
+    <%--bootstrap css--%>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   
+
     <%--our custom css--%>
     <link href="css/main.css" rel="stylesheet" />
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="bootstrap/js/sweetalert2.all.min.js"></script>
-    <%--jquery--%>
-    <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
-    <%--popper js--%>
-    <script src="bootstrap/js/popper.min.js"></script>  
+    <%--bootstrap js--%>      <%--popper js--%>    
 
-    <%--bootstrap js--%>
+
+    <script src="bootstrap/js/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
+        
     <script src="datatables/js/jquery.dataTables.min.js"></script>
+     <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
+
+    
+
+
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        
+
         <div>
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="homePage.aspx">
@@ -52,7 +58,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
                             <a class="nav-link" href="homepage.aspx">Home</a>
@@ -67,7 +73,7 @@
                     </ul>
 
                     <ul class="navbar-nav d-flex">
-                        
+
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="userLoginLink" runat="server" OnClick="userLoginLink_Click">User Login</asp:LinkButton>
                         </li>
@@ -75,7 +81,7 @@
                             <asp:LinkButton class="nav-link" ID="userSignupLink" runat="server" OnClick="userSignupLink_Click">Sign Up</asp:LinkButton>
                         </li>
                         <li class="nav-item active">
-                            <asp:LinkButton class="nav-link" ID="helloUser" runat="server" ></asp:LinkButton>
+                            <asp:LinkButton class="nav-link" ID="helloUser" runat="server"></asp:LinkButton>
                         </li>
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="loginOut" runat="server" OnClick="LinkButton3_Click" Visible="False">Logout</asp:LinkButton>
@@ -86,6 +92,7 @@
 
             </nav>
         </div>
+        <hr>
 
 
         <!-- Main Content Placeholder -->
@@ -95,20 +102,19 @@
         </div>
         <!-- Main Content Placeholder -->
 
-         <!-- Footer -->
+        <!-- Footer -->
         <footer>
             <div id="footer1" class="container-fluid">
                 <div class="row">
                     <div class="dropdown" id="linksAdmin">
-                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                      </a>
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown link
+                        </a>
 
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="adminFormBranch.aspx">Branch</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      </ul>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="adminFormBranch.aspx">Branch</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <p>
@@ -117,10 +123,11 @@
                             
                             <asp:LinkButton class="footerlinks" ID="inventarioLinkButton" runat="server">Inventario</asp:LinkButton>
                             &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server">Reportes</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server" OnClick="reportesLinkButton_Click">Reportes</asp:LinkButton>
                              &nbsp;
                             <asp:LinkButton class="footerlinks" ID="empleadosLinkButton" runat="server" OnClick="empleadosLinkButton_Click">Empleados</asp:LinkButton>
-
+                             &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="clientesAdmin" runat="server" OnClick="clientesAdmin_Click">Clientes</asp:LinkButton>
                         </p>
 
                     </div>
@@ -130,7 +137,7 @@
             <div id="footer2" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <p style="color:whitesmoke">&copy All right Reversed. <a class="footerlinks" href="#" target="_blank">Ferks</a></p>
+                        <p style="color: whitesmoke">&copy All right Reversed. <a class="footerlinks" href="#" target="_blank">Ferks</a></p>
                     </div>
                 </div>
             </div>

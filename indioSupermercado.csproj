@@ -67,15 +67,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminClientes.aspx" />
     <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormProductos.aspx" />
+    <Content Include="adminFormProvider.aspx" />
+    <Content Include="adminReportes.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
-    <Content Include="bootstrap\js\bootstrap.min.js" />
-    <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
-    <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\css\sweetalert2.min.css" />
+    <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\js\sweetalert2.all.min.js" />
+    <Content Include="bootstrap\mdb\css\css.css" />
+    <Content Include="bootstrap\mdb\css\mdb.min.css" />
+    <Content Include="bootstrap\mdb\js\mdb.min.js" />
     <Content Include="branchSelector.aspx" />
     <Content Include="css\main.css" />
     <Content Include="datatables\css\jquery.dataTables.min.css" />
@@ -2162,6 +2168,8 @@
     <Content Include="img\oficinas.jpg" />
     <Content Include="img\Panel.png" />
     <Content Include="img\photo_appointment_setting_page_pharmassent_consulting.jpg" />
+    <Content Include="img\producto.png" />
+    <Content Include="img\proveedor.png" />
     <Content Include="img\publisher.png" />
     <Content Include="img\rol-de-la-tecnología.jpg" />
     <Content Include="img\search-online.png" />
@@ -2188,6 +2196,13 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminClientes.aspx.cs">
+      <DependentUpon>adminClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminClientes.aspx.designer.cs">
+      <DependentUpon>adminClientes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminEmployee.aspx.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2208,6 +2223,20 @@
     </Compile>
     <Compile Include="adminFormProductos.aspx.designer.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormProvider.aspx.cs">
+      <DependentUpon>adminFormProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormProvider.aspx.designer.cs">
+      <DependentUpon>adminFormProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminReportes.aspx.cs">
+      <DependentUpon>adminReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminReportes.aspx.designer.cs">
+      <DependentUpon>adminReportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="branchSelector.aspx.cs">
       <DependentUpon>branchSelector.aspx</DependentUpon>

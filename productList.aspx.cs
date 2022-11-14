@@ -24,7 +24,7 @@ namespace indioSupermercado
 
             try
             {
-                int id = Convert.ToInt32(Request.QueryString["id"].ToString());
+                int id = 6;//Convert.ToInt32(Request.QueryString["id"].ToString());
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {

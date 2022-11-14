@@ -93,8 +93,6 @@ namespace indioSupermercado
                 Response.Write("<script>alert('" + ex.Message + "');</script.");
             }
 
-
-            productosGridView.DataBind();
         }
         protected void Page_Load(object sender, EventArgs e)
         {

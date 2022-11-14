@@ -30,7 +30,7 @@ namespace indioSupermercado
                 //{
                   //  conObj.Open(); 
                 //}
-                if (user_txt.Text.Trim() == "Management" && pass_txt.Text.Trim() == "asdfasdf")
+                if (user_txt.Text== "Management" && pass_txt.Text == "asdfasdf")
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                         "Swal.fire('Perfect','Login Success ','success').then(function() {window.location = 'homePage.aspx';})", true);

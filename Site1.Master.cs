@@ -31,7 +31,8 @@ namespace indioSupermercado
 
                     inventarioLinkButton.Visible = false; // author management link button
                     reportesLinkButton.Visible = false; // publisher management link button
-                    empleadosLinkButton.Visible = false;  //manejo empleados admin
+                    empleadosLinkButton.Visible = false;  // admin employees
+                    clientesAdmin.Visible = false; //admin clients
 
 
                 }
@@ -49,7 +50,8 @@ namespace indioSupermercado
                     adminloginLink.Visible = true; // admin login link button
                     inventarioLinkButton.Visible = false; // author management link button
                     reportesLinkButton.Visible = false; // publisher management link button
-                    empleadosLinkButton.Visible = false;  //manejo empleados admin
+                    empleadosLinkButton.Visible = false;  // admin employees
+                    clientesAdmin.Visible = false;//admin clients
 
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
@@ -66,7 +68,8 @@ namespace indioSupermercado
                     adminloginLink.Visible = false; // admin login link button
                     inventarioLinkButton.Visible = true; // author management link button
                     reportesLinkButton.Visible = true;
-                    empleadosLinkButton.Visible = true;  //manejo empleados admin
+                    empleadosLinkButton.Visible = true;  // admin employees
+                    clientesAdmin.Visible = true; //admin clients
 
                 }
                 
@@ -101,12 +104,23 @@ namespace indioSupermercado
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
             Session["role"] = "";
+            Response.Redirect("homePage.aspx");
             Response.Write("<script>alert('Login out!');</script.");
         }
 
         protected void empleadosLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminEmployee.aspx");
+        }
+
+        protected void clientesAdmin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminClientes.aspx");
+        }
+
+        protected void reportesLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminReportes.aspx");
         }
     }
 }

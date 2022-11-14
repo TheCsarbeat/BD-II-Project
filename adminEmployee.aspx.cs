@@ -125,7 +125,7 @@ namespace indioSupermercado
                                         "Swal.fire('Perfect','" + msgResult + "','success')", true);
 
                             GridViewEmpleado.DataBind();
-                            UpdatePanelEmpleado.Update();
+                            UpdatePanelEmployee.Update();
 
                         }
                         else
@@ -163,7 +163,7 @@ namespace indioSupermercado
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
             string office = TextBoxSucursal.Text;
-            string pic = "Ruta" + FileEmpleado.FileName;
+            string pic = "ProfilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
             string msgResult = "";
@@ -263,7 +263,7 @@ namespace indioSupermercado
                                         "Swal.fire('Perfect','" + msgUpdate + "','success')", true);
 
                                         GridViewEmpleado.DataBind();
-                                        UpdatePanelEmpleado.Update();
+                                        UpdatePanelEmployee.Update();
                                     }
                                     else
                                     {
@@ -373,7 +373,7 @@ namespace indioSupermercado
                                         "Swal.fire('Perfect','" + msgDelete + "','success')", true);
 
                             GridViewEmpleado.DataBind();
-                            UpdatePanelEmpleado.Update();
+                            UpdatePanelEmployee.Update();
 
                         }
                         else
@@ -394,6 +394,103 @@ namespace indioSupermercado
                 {
                     Response.Write("<script>alert('" + ex.Message + "');</script.");
 
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Error','Missing ID','error')", true);
+            }
+        }
+
+        protected void ButtonBono_Click(object sender, EventArgs e)
+        {
+
+            string idInput = TextBoxIDEmpleado.Text;
+            string performanceInput = TextBoxPerformance.Text;
+            string montoInput = TextBoxMontoBono.Text;
+            string fechaInput = TextBoxFecha.Text;
+
+            int valueResult = -1;
+            string msgResult = "";
+
+            int valueBono = -1;
+            string msgBono = "";
+
+            if (!string.IsNullOrWhiteSpace(TextBoxIDEmpleado.Text))
+            {
+                try
+                {
+                    SqlConnection conObj = new SqlConnection(stringConnection);
+                    if (conObj.State == ConnectionState.Closed)
+                    {
+                        conObj.Open();
+                    }
+
+                    SqlCommand cmd = new SqlCommand("spValidarEmpleado", conObj);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        valueResult = Convert.ToInt32(reader[0].ToString());
+                        msgResult = reader[1].ToString();
+                    }
+
+                    reader.Close();
+
+                    if (valueResult == 0)
+                    {
+                        if (!string.IsNullOrWhiteSpace(TextBoxPerformance.Text) || (!string.IsNullOrWhiteSpace(TextBoxMontoBono.Text)) || (!string.IsNullOrWhiteSpace(TextBoxFecha.Text)))
+                        {
+                            
+                            SqlCommand cmdBono = new SqlCommand("spBonoPerformance", conObj);
+                            cmdBono.CommandType = CommandType.StoredProcedure;
+
+                            cmdBono.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
+                            cmdBono.Parameters.Add("@fecha", SqlDbType.Date).Value = fechaInput;
+                            cmdBono.Parameters.Add("@cantidad", SqlDbType.Money).Value = montoInput;
+                            cmdBono.Parameters.Add("@perform", SqlDbType.VarChar).Value = performanceInput;
+
+                            SqlDataReader readerBono = cmdBono.ExecuteReader();
+
+                            while (readerBono.Read())
+                            {
+                                valueBono = Convert.ToInt32(readerBono[0].ToString());
+                                msgBono = readerBono[1].ToString();
+                            }
+
+                            readerBono.Close();
+
+                            if (valueBono == 0)
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                        "Swal.fire('Perfect','" + msgBono + "','success')", true);
+                            }
+                            else
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgBono + "','error')", true);
+                            }
+                        }
+                        else
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','Missing Credentials','error')", true);
+                        }
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script.");
                 }
             }
             else
