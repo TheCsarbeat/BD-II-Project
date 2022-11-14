@@ -31,6 +31,7 @@ namespace indioSupermercado
 
                     inventarioLinkButton.Visible = false; // author management link button
                     reportesLinkButton.Visible = false; // publisher management link button
+                    empleadosLinkButton.Visible = false;  //manejo empleados admin
 
 
                 }
@@ -48,6 +49,7 @@ namespace indioSupermercado
                     adminloginLink.Visible = true; // admin login link button
                     inventarioLinkButton.Visible = false; // author management link button
                     reportesLinkButton.Visible = false; // publisher management link button
+                    empleadosLinkButton.Visible = false;  //manejo empleados admin
 
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
@@ -64,6 +66,7 @@ namespace indioSupermercado
                     adminloginLink.Visible = false; // admin login link button
                     inventarioLinkButton.Visible = true; // author management link button
                     reportesLinkButton.Visible = true;
+                    empleadosLinkButton.Visible = true;  //manejo empleados admin
 
                 }
                 
@@ -99,6 +102,11 @@ namespace indioSupermercado
         {
             Session["role"] = "";
             Response.Write("<script>alert('Login out!');</script.");
+        }
+
+        protected void empleadosLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminEmpleados.aspx");
         }
     }
 }

@@ -11,106 +11,133 @@ namespace indioSupermercado
 {
 
 
-    public partial class Site1
+    public partial class adminEmployee
     {
 
         /// <summary>
-        /// head control.
+        /// FileEmpleado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.FileUpload FileEmpleado;
 
         /// <summary>
-        /// form1 control.
+        /// TextBoxNombreEmpleado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreEmpleado;
 
         /// <summary>
-        /// userLoginLink control.
+        /// TextBoxApellidoEmpleado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userLoginLink;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxApellidoEmpleado;
 
         /// <summary>
-        /// userSignupLink control.
+        /// TextBoxFecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userSignupLink;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxFecha;
 
         /// <summary>
-        /// helloUser control.
+        /// TextBoxPuesto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton helloUser;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPuesto;
 
         /// <summary>
-        /// loginOut control.
+        /// TextBoxSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton loginOut;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSucursal;
 
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// ButtonEmpleado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button ButtonEmpleado;
 
         /// <summary>
-        /// adminloginLink control.
+        /// TextBoxIDEmpleado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton adminloginLink;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIDEmpleado;
 
         /// <summary>
-        /// inventarioLinkButton control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton inventarioLinkButton;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// reportesLinkButton control.
+        /// ButtonBorrarSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton reportesLinkButton;
+        protected global::System.Web.UI.WebControls.Button ButtonBorrarSucursal;
 
         /// <summary>
-        /// empleadosLinkButton control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton empleadosLinkButton;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
+        /// UpdatePanelEmpleado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelEmpleado;
+
+        /// <summary>
+        /// GridViewEmpleado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewEmpleado;
     }
 }
