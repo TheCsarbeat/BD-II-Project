@@ -3,7 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section>
-    <img src="img/home-bg.jpg" class="img-fluid"/>
+        <a href="homePage.aspx"><img src="img/home-bg.jpg" class="img-fluid"/></a>
+    
  </section>
     <section>
     <div class="container">

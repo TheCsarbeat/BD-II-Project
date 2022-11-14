@@ -11,34 +11,43 @@ namespace indioSupermercado
 {
 
 
-    public partial class productList
+    public partial class adminClientes
     {
 
         /// <summary>
-        /// shoppingLb control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label shoppingLb;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
 
         /// <summary>
-        /// finisPurchasebtn control.
+        /// ScriptManagerCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button finisPurchasebtn;
+        protected global::System.Web.UI.ScriptManager ScriptManagerCliente;
 
         /// <summary>
-        /// Repeater1 control.
+        /// UpdatePanelCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelCliente;
+
+        /// <summary>
+        /// GridViewCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewCliente;
     }
 }

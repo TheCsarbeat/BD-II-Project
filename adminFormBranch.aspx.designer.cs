@@ -11,116 +11,71 @@ namespace indioSupermercado
 {
 
 
-    public partial class adminEmployee
+    public partial class adminFormSucursal
     {
 
         /// <summary>
-        /// FileEmpleado control.
+        /// TextBoxIDSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileEmpleado;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIDSucursal;
 
         /// <summary>
-        /// TextBoxNombreEmpleado control.
+        /// TextBoxNombreSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreEmpleado;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreSucursal;
 
         /// <summary>
-        /// TextBoxApellidoEmpleado control.
+        /// TextBoxIDLugar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxApellidoEmpleado;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIDLugar;
 
         /// <summary>
-        /// TextBoxFecha control.
+        /// TextBoxIdMonedaXP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFecha;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIdMonedaXP;
 
         /// <summary>
-        /// TextBoxPuesto control.
+        /// DropDownListEstado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPuesto;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstado;
 
         /// <summary>
-        /// TextBoxSucursal control.
+        /// ButtonAgregarSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSucursal;
+        protected global::System.Web.UI.WebControls.Button ButtonAgregarSucursal;
 
         /// <summary>
-        /// ButtonEmpleado control.
+        /// ButtonActualizarSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonEmpleado;
-
-        /// <summary>
-        /// TextBoxIDEmpleado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDEmpleado;
-
-        /// <summary>
-        /// TextBoxPerformance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPerformance;
-
-        /// <summary>
-        /// TextBoxMontoBono control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxMontoBono;
-
-        /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-
-        /// <summary>
-        /// ButtonBono control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBono;
+        protected global::System.Web.UI.WebControls.Button ButtonActualizarSucursal;
 
         /// <summary>
         /// ButtonBorrarSucursal control.
@@ -150,21 +105,21 @@ namespace indioSupermercado
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// UpdatePanelEmployee control.
+        /// UpdatePanelSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelEmployee;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelSucursal;
 
         /// <summary>
-        /// GridViewEmpleado control.
+        /// GridViewSucursal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewEmpleado;
+        protected global::System.Web.UI.WebControls.GridView GridViewSucursal;
     }
 }

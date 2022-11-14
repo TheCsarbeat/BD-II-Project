@@ -1,5 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminEmployee.aspx.cs" Inherits="indioSupermercado.adminEmployee" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+      $(document).ready(function () {
+      
+          //$(document).ready(function () {
+              //$('.table').DataTable();
+         // });
+      
+          $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+          //$('.table1').DataTable();
+      });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -51,7 +74,7 @@
                   <div class="row">
 
                      <div class="col-md-6">
-                        <label>Fecha Contratacion</label>
+                        <label>Fecha Contratacion/Bono</label>
                         <div class="form-group">
                            <asp:TextBox CssClass="form-control" ID="TextBoxFecha" runat="server" placeholder="YYYY-MM-DD" ></asp:TextBox>
                         </div>
@@ -87,7 +110,7 @@
                               
                            </asp:DropDownList>--%>
                             <div class="form-group">
-                           <asp:TextBox CssClass="form-control" ID="TextBoxSucursal" runat="server" placeholder="ID Puesto" ></asp:TextBox>
+                           <asp:TextBox CssClass="form-control" ID="TextBoxSucursal" runat="server" placeholder="ID Sucursal" ></asp:TextBox>
                             </div>
 
                         </div>
@@ -104,22 +127,45 @@
                     </div>
 
                    <div class="row">
-                        <div class="col">
-                            <div align="center">
-                               <label>ID Empleado</label>
+                            <div class="col">
+                                <label>ID Empleado</label>
                                 <div class="form-group">
-                                   <div class="input-group">
+                                    <div class="input-group">
 
-                                      <asp:TextBox CssClass="form-control" ID="TextBoxIDEmpleado" runat="server" placeholder="ID Empleado" ></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBoxIDEmpleado" runat="server" placeholder="ID Empleado" ></asp:TextBox>
                                        
-                                   </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                           <div class="col">
+                            <label>Performance</label>
+                            <div class="form-group">
+
+                                <div class="form-group">
+                               <asp:TextBox CssClass="form-control" ID="TextBoxPerformance" runat="server" placeholder="Performance" ></asp:TextBox>
+                                </div>
+
+                            </div>
+                         </div>
+                           <div class="col">
+                            <label>MontoBono</label>
+                            <div class="form-group">
+
+                                <div class="form-group">
+                               <asp:TextBox CssClass="form-control" ID="TextBoxMontoBono" runat="server" placeholder="Monto" ></asp:TextBox>
+                                </div>
+
+                            </div>
+                         </div>
                     </div>
                    <div class="row m-4">
-                        <div class="col-md-4">
+                        <div class="col">
                                <asp:Button ID="Button1" class="btn btn-lg btn-block btn-warning" runat="server" Text="Actualizar" OnClick="Button2_Click" />
+                        </div>
+                       <div class="col">
+                            <div align="center">
+                              <asp:Button ID="ButtonBono" class="btn btn-lg btn-block btn-primary" runat="server" Text="Bono" OnClick="ButtonBono_Click" />
+                            </div>
                         </div>
                        <div class="col">
                            <div style="float: right">
@@ -151,12 +197,12 @@
                   </div>
                   <div class="row">
 
-                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                          ConnectionString="<%$ ConnectionStrings:connectionSebas %>" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
+                      <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+        ConnectionString="" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
                      <div class="col">
                           <asp:ScriptManager ID="ScriptManager1" runat="server">
                             </asp:ScriptManager>
-                         <asp:UpdatePanel ID="UpdatePanelEmpleado" runat="server" UpdateMode="Conditional">
+                         <asp:UpdatePanel ID="UpdatePanelEmployee" runat="server" UpdateMode="Conditional">
                              <ContentTemplate>
                                 <asp:GridView class="table table-striped table-bordered" ID="GridViewEmpleado" runat="server"
                                     AutoGenerateColumns="False" DataKeyNames="idEmpleado" DataSourceID="SqlDataSource1" >
@@ -168,8 +214,8 @@
                                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField DataField="Apellido" HeaderText="Apellido" ReadOnly="True" SortExpression="Apellido"></asp:BoundField>
                                             <asp:BoundField DataField="FechaContratacion" HeaderText="FechaDeContratacion" ReadOnly="True" SortExpression="FechaDeContratacion"></asp:BoundField>
-                                            <asp:BoundField DataField="Puesto" HeaderText="PuestoID" ReadOnly="True" SortExpression="idPuesto"></asp:BoundField>
-                                            <asp:BoundField DataField="Sucursal" HeaderText="SucursalID" ReadOnly="True" SortExpression="idSucursal"></asp:BoundField>
+                                            <asp:BoundField DataField="Puesto" HeaderText="Puesto" ReadOnly="True" SortExpression="idPuesto"></asp:BoundField>
+                                            <asp:BoundField DataField="Sucursal" HeaderText="Sucursal" ReadOnly="True" SortExpression="idSucursal"></asp:BoundField>
                                             
                                              <asp:TemplateField>
                                                 <ItemTemplate>

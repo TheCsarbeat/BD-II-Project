@@ -67,14 +67,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminReportes.aspx" />
+    <Content Include="adminClientes.aspx" />
     <Content Include="adminEmployee.aspx" />
-    <Content Include="adminFormSucursal.aspx" />
+    <Content Include="adminFormBranch.aspx" />
+    <Content Include="adminFormProductos.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\css\sweetalert2.min.css" />
     <Content Include="bootstrap\js\sweetalert2.all.min.js" />
+    <Content Include="branchSelector.aspx" />
     <Content Include="css\main.css" />
     <Content Include="datatables\css\jquery.dataTables.min.css" />
     <Content Include="datatables\js\jquery.dataTables.min.js" />
@@ -2140,6 +2144,7 @@
     <Content Include="books\b3.jpg" />
     <Content Include="books\b4.jpg" />
     <Content Include="books\b5.jpg" />
+    <Content Include="img\branchSelectorBackground.jpg" />
     <Content Include="img\cropped-1366-768-320144.jpg" />
     <Content Include="img\cropped-1366-768-329050.jpg" />
     <Content Include="img\defaulters-list.png" />
@@ -2169,9 +2174,14 @@
     <Content Include="img\Transparent Panel 3.png" />
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
-    <Content Include="pruebamasterfenana.aspx" />
+    <Content Include="payOrder.aspx" />
+    <Content Include="productImgs\carrot.jpg" />
+    <Content Include="productImgs\onion.jpg" />
+    <Content Include="productImgs\potato.jpg" />
+    <Content Include="productImgs\raddish.jpg" />
     <Content Include="js\scripts.js" />
     <Content Include="productImgs\yuca.jpg" />
+    <Content Include="ProfilePictures\fotoPerfil.jpg" />
     <Content Include="userLogin.aspx" />
     <Content Include="userSignup.aspx" />
     <Content Include="Web.config" />
@@ -2180,6 +2190,20 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminReportes.aspx.cs">
+      <DependentUpon>adminReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminReportes.aspx.designer.cs">
+      <DependentUpon>adminReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminClientes.aspx.cs">
+      <DependentUpon>adminClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminClientes.aspx.designer.cs">
+      <DependentUpon>adminClientes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminEmployee.aspx.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2187,14 +2211,28 @@
     <Compile Include="adminEmployee.aspx.designer.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
-    <Compile Include="adminFormSucursal.aspx.cs">
-      <DependentUpon>adminFormSucursal.aspx</DependentUpon>
+    <Compile Include="adminFormBranch.aspx.cs">
+      <DependentUpon>adminFormBranch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminFormSucursal.aspx.designer.cs">
-      <DependentUpon>adminFormSucursal.aspx</DependentUpon>
+    <Compile Include="adminFormBranch.aspx.designer.cs">
+      <DependentUpon>adminFormBranch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminFormProductos.aspx.cs">
+      <DependentUpon>adminFormProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormProductos.aspx.designer.cs">
+      <DependentUpon>adminFormProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="branchSelector.aspx.cs">
+      <DependentUpon>branchSelector.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="branchSelector.aspx.designer.cs">
+      <DependentUpon>branchSelector.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="homePage.aspx.cs">
       <DependentUpon>homePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2202,14 +2240,15 @@
     <Compile Include="homePage.aspx.designer.cs">
       <DependentUpon>homePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pruebamasterfenana.aspx.cs">
-      <DependentUpon>pruebamasterfenana.aspx</DependentUpon>
+    <Compile Include="ItemCart.cs" />
+    <Compile Include="payOrder.aspx.cs">
+      <DependentUpon>payOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pruebamasterfenana.aspx.designer.cs">
-      <DependentUpon>pruebamasterfenana.aspx</DependentUpon>
+    <Compile Include="payOrder.aspx.designer.cs">
+      <DependentUpon>payOrder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

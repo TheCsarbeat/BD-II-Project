@@ -13,8 +13,41 @@ namespace indioSupermercado
 {
     public partial class userLogin : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCostumer"].ConnectionString;
+        private string stringConnection = usefull.strCon;
 
+        private string getCostumerId (string userName)
+        {
+            string costumerId = "";
+            try
+            {
+                SqlConnection conObj = new SqlConnection(stringConnection);
+                if (conObj.State == ConnectionState.Closed)
+                {
+                    conObj.Open();
+                }
+                SqlCommand cmd = new SqlCommand("spGetCortumerIdByUserName", conObj);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@nombreUsuario", SqlDbType.VarChar).Value = userName;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    costumerId = reader[0].ToString();
+                }
+
+                //stringConnection.Close();
+                reader.Close();
+                conObj.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script.");
+
+            }
+            return costumerId;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -53,14 +86,13 @@ namespace indioSupermercado
                 conObj.Close();
                 if (valueResult == 0)
                 {
+                    string id = getCostumerId(user);
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
-
+                        "Swal.fire('Perfect','" + msgResult + "','success').then(function() {window.location = 'branchSelector.aspx';})", true);
                     Session["username"] = user;
                     Session["role"] = "user";
-                    Session["status"] = "user";
+                    Session["idCliente"] = id;
 
-                    Response.Redirect("productList.aspx");
                 }
                 else
                 {

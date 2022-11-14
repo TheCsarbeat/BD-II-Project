@@ -11,71 +11,53 @@ namespace indioSupermercado
 {
 
 
-    public partial class adminFormSucursal
+    public partial class adminFormReporte
     {
 
         /// <summary>
-        /// FileSucursal control.
+        /// lblUploadResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileSucursal;
+        protected global::System.Web.UI.WebControls.Label lblUploadResult;
 
         /// <summary>
-        /// TextBoxIDSucursal control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDSucursal;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
-        /// LinkButton4 control.
+        /// idProductotxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+        protected global::System.Web.UI.WebControls.TextBox idProductotxt;
 
         /// <summary>
-        /// TextBoxNombreSucursal control.
+        /// botonIDP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreSucursal;
+        protected global::System.Web.UI.WebControls.LinkButton botonIDP;
 
         /// <summary>
-        /// TextBoxIDLugar control.
+        /// nombreProductotxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDLugar;
-
-        /// <summary>
-        /// TextBoxIdMonedaXP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIdMonedaXP;
-
-        /// <summary>
-        /// TextBoxEmpAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxEmpAdmin;
+        protected global::System.Web.UI.WebControls.TextBox nombreProductotxt;
 
         /// <summary>
         /// DropDownListEstado control.
@@ -85,6 +67,24 @@ namespace indioSupermercado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListEstado;
+
+        /// <summary>
+        /// categoriaDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList categoriaDropDownList;
+
+        /// <summary>
+        /// descripcionProductotxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox descripcionProductotxt;
 
         /// <summary>
         /// ButtonAgregarSucursal control.
@@ -114,12 +114,12 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.Button ButtonBorrarSucursal;
 
         /// <summary>
-        /// GridView1 control.
+        /// productosGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView productosGridView;
     }
 }
