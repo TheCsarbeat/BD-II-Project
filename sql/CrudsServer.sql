@@ -944,8 +944,8 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 	END
 
 	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	END ELSE IF @errorInt = 0 
+		select @errorInt as Error, @ErrorMsg as MensajeError 
+	ELSE IF @errorInt = 0 
 		select 1 as valueResult, 'Funcion hecha sin problema' as Mensaje
 END
 
@@ -1160,7 +1160,7 @@ declare @pointCliente geometry
 		select @errorInt as error, @errorMsg as mensaje
 end
 
-/*
+
 GO
 CREATE OR ALTER PROCEDURE dbo.spGetProductsByBranch
 	@idSucursal int
@@ -1170,7 +1170,7 @@ begin
 declare @errorInt int = 0, @errorMsg varchar(20)
 	
 	BEGIN TRY
-		select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario from Sucursal 
+		select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario, Inventario.precioVenta from Sucursal 
 		inner join Inventario on Sucursal.idSucursal = Inventario.idSucursal inner join MYSQLSERVER...Lote on
 		Lote.idLote = Inventario.idLote inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
 		where Sucursal.idSucursal = @idSucursal
@@ -1183,7 +1183,9 @@ declare @errorInt int = 0, @errorMsg varchar(20)
 	if @errorInt != 0
 		select @errorInt as error, @errorMsg as mensaje
 end
-*/
+
+
+-- exec spGetProductsByBranch 6
 
 
 

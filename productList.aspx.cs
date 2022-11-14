@@ -13,15 +13,14 @@ namespace indioSupermercado
 {
     public partial class productList : System.Web.UI.Page
     {
-        string strcon = ConfigurationManager.ConnectionStrings["connectionMaynor"].ConnectionString;
+        string strcon = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             
 
             try
             {
-                int id = 6;//Convert.ToInt32(Request.QueryString["id"].ToString());
-                id = 6; 
+                int id = Convert.ToInt32(Request.QueryString["id"].ToString());
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -29,10 +28,7 @@ namespace indioSupermercado
                 }
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT Producto.idProducto, Producto.nombreProducto, Producto.imgPath, Lote.idLote, " +
-                    "Inventario.precioVenta FROM MYSQLSERVER...Producto as Producto\r\nINNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto" +
-                    " INNER JOIN Inventario ON Inventario.idLote = Lote.idLote\r\nINNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal" +
-                    "where Sucursal.idSucursal = 6";
+                cmd.CommandText = "spGetProductsByBranch " + id;
                 cmd.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -48,7 +44,7 @@ namespace indioSupermercado
             }
             catch (Exception ex)
             {
-
+                Response.Write("<script>alert('" + ex.Message + "');</script.");
             }
         }
 

@@ -3,10 +3,6 @@
     <script src="js/scripts.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    
-    
-    
      <asp:Label id="Label2" font-names="Verdana" ForeColor="Green" font-size="10pt" runat="server"/>
 
          
@@ -19,45 +15,29 @@
              
           <ItemTemplate>
               <div class="col-md-3">
-
                 <div class="card p-3 card-product">
-
                     <div class="text-center">
-
                         <img src="<%#Eval("imgPath")%>" width="200" height="200">
-                        
                     </div>
-
                     <div class="product-details">
-
-
-                         <span class="font-weight-bold d-block">$ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
+                         <span class="font-weight-bold d-block">₡ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
                          <span><%#Eval("nombreProducto")%></span>
-
-
                          <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div>
-                            
-                             
+                            <div class="cart"><i class="fa fa-shopping-cart"></i></div>  
                              <ASP:Button class="btn btn-success cart-button btn-block" 
                                  CommandArgument=<%# DataBinder.Eval(Container.DataItem, "idLote") %> Text="Add to Cart" runat="server" />
                         </div>
-
                          <div class="weight">
-
-                            <small>1 piece 2.5kg</small>
-                                                         
+                            <small>1 piece 2.5kg</small>                             
                          </div>
-
                         </div>
                     </div>
-                </div>
-
-             
+                </div>    
           </ItemTemplate>
-             
           <FooterTemplate>
-             </table>
+             </div>
+            </div>
+          </div>
           </FooterTemplate>
              
        </asp:Repeater>

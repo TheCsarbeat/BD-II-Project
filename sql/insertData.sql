@@ -77,13 +77,13 @@ EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 
 
 
-SELECT Producto.idProducto,Producto.imgPath, Producto.nombreProducto, Producto.imgPath, Lote.idLote, 
-Inventario.precioVenta FROM MYSQLSERVER...Producto as Producto
-INNER JOIN MYSQLSERVER...Lote AS Lote ON Lote.idProducto = Producto.idProducto
-INNER JOIN Inventario ON Inventario.idLote = Lote.idLote
-INNER JOIN Sucursal ON Sucursal.idSucursal = Inventario.idSucursal
-
 
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
+
+select * from Sucursal
+select * from Inventario
+
+select * from MYSQLSERVER...Lote
+select * from MYSQLSERVER...Producto
 
