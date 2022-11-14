@@ -4,7 +4,7 @@
 -- Sucursal
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
 go
-create or alter procedure crudSucursal @opcion int, @idSucursal int, @nombre varchar(20), @idLugar int, @idMonedaXPais int
+create or alter procedure crudSucursal @opcion int, @idSucursal int = null, @nombre varchar(20), @idLugar int, @idMonedaXPais int
 as
 BEGIN
 	declare @error int, @errorMsg varchar(20)
@@ -188,6 +188,7 @@ BEGIN
 	END
 	select @error as error, @errorMsg as mensaje
 END
+select * from Sucursal
 
 -- ****************************************************************************************************************
 
@@ -1093,3 +1094,4 @@ END
 
 -- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
 -- EXEC spInsertProductToInventory null, 30, 1, 1,null, 0
+

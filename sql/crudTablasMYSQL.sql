@@ -72,18 +72,18 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
-
-
+exec spCrudCategoriaProducto 1,'No se','Cosas ricas',0
+select * from MYSQLSERVER...CategoriaProducto
+select * from MYSQLSERVER...Producto
 GO
 --====================================================
 --						Producto
 --===================================================
 CREATE or ALTER PROCEDURE dbo.spCrudProducto
-	@idProducto int,
+	@idProducto int = null,
 	@nombreProducto varchar(30) ,
 	@descripcionProducto varchar(40) ,
-	@idCategoria int ,
-	@nombreImg varchar(250),
+	@idCategoria int,
 	@imgPath varchar(2000),
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
@@ -92,16 +92,16 @@ begin
 declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
-
-		if @nombreProducto is not null and @descripcionProducto is not null and @descripcionProducto is not null and @idCategoria is not null
-		and @nombreImg is not null and @imgPath is not null BEGIN
+	--select * from MYSQLSERVER...Producto
+		if @nombreProducto is not null and @descripcionProducto is not null and @idCategoria is not null
+		and @imgPath is not null BEGIN
 			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 0 BEGIN
 				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 					
 						BEGIN TRY
 	
-								INSERT INTO MYSQLSERVER...Producto (nombreProducto,descripcionProducto,idCategoria,nombreImg ,imgPath)
-								values (@nombreProducto,@descripcionProducto,@idCategoria,@nombreImg, @imgPath);
+							INSERT INTO MYSQLSERVER...Producto (nombreProducto,descripcionProducto,idCategoria ,imgPath)
+							values (@nombreProducto,@descripcionProducto,@idCategoria, @imgPath);
 								
 	
 						END TRY
@@ -127,38 +127,21 @@ declare @identityValue int = -1
 			return @identityValue
 
 	END
-	
+
 	if @operationFlag = 1 BEGIN
-		if  @idProducto is not null and @nombreProducto is not null and @descripcionProducto is not null and @descripcionProducto is not null and @idCategoria is not null
-		and @nombreImg is not null and @imgPath is not null BEGIN
-			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
-				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
-							BEGIN TRY
+		BEGIN TRY
 
-								update MYSQLSERVER...Producto 
-								set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
-								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
-								where idProducto = @idProducto
+		update MYSQLSERVER...Producto 
+		set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
+		idCategoria = ISNULL(@idCategoria, idCategoria), imgPath = ISNULL(@imgPath, imgPath)
+		where idProducto = @idProducto
 
-							END TRY
-							BEGIN CATCH
-								set @errorInt=1
-								set @errorMsg = 'Error al actualizar a la base de datos'
-							END CATCH
-	
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe una categoria válido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'NO existe un producto con este ID'
-				END
-		END ELSE BEGIN 			
+		END TRY
+		BEGIN CATCH
 			set @errorInt=1
-			set @errorMsg = 'Hay algún valor nulo'
-			END  ---Final if validaci�n nulos
-	END
+			set @errorMsg = 'Error al actualizar a la base de datos'
+		END CATCH			
+	end
 
 	if @operationFlag = 2	begin
 		select * from MYSQLSERVER...Producto 
@@ -182,9 +165,16 @@ declare @identityValue int = -1
 	END
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+        select 0 as correct, 'producto inserted!' as Result
 end
+exec spCrudProducto 5,'no se', 'aaa',1,'img/producto.png',0
 
-GO
+select * from MYSQLSERVER...Producto 
+delete from MYSQLSERVER...Producto where idProducto = 2
+
+GO 
+
 --====================================================
 --						Impuesto
 --===================================================
@@ -854,11 +844,11 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Limite where idLimite = @idLimite) = 1 BEGIN
 				IF (select count(*) from Producto where idProducto = @idProducto) = 1 BEGIN
 						BEGIN TRY
-							BEGIN TRANSACTION
+							
 							update MYSQLSERVER...Limite 
-							set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
-							idProducto = ISNULL(@idProducto, idProducto) where idLimite = @idLimite;
-							COMMIT TRANSACTION
+							--set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
+							set idProducto = ISNULL(@idProducto, idProducto) where idLimite = @idLimite;
+							
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
