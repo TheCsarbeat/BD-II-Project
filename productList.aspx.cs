@@ -45,7 +45,7 @@ namespace indioSupermercado
                     Repeater1.DataBind();
                 }
 
-                shoppingLb.Text = "Shhoping cart $1236";
+                shoppingLb.Text = "Shopping Cart TOTAL: $ " + getTotal().ToString(); ;
 
             }
             catch (Exception ex)
@@ -59,9 +59,8 @@ namespace indioSupermercado
             Response.Write("<script>alert('Testing');</script>");
         }   
 
-        protected double addToCart(ItemCart item)
+        protected void addToCart(ItemCart item)
         {
-            double total = 0.0;
             string nombre;
             int id = 0;
             bool flag = true;
@@ -79,81 +78,53 @@ namespace indioSupermercado
             {
                 myList.Add(item);
             }
-            //Calcular el total
-            foreach (var i in myList)
-            {
-                total +=i.getSubTotal();  
-
-            }
-            return total;
+            
 
         }
 
+        public double getTotal()
+        {
+            double total = 0.0;
+            //Calcular el total
+            foreach (var i in myList)
+            {
+                total += i.getSubTotal();
+
+            }
+            return total;
+        }
         protected void finisPurchasebtn_Click(object sender, EventArgs e)
         {
-            
+            shoppingLb.Text = "Shopping Cart TOTAL: $ " + getTotal().ToString(); ;
+            Response.Redirect("payOrder.aspx");
         }
 
         protected void R1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             int idLote = Convert.ToInt32(((Button)e.CommandSource).CommandArgument);
             double precioVenta = 0.0;
-            string nameProduct = ((Button)e.CommandSource).CommandName.ToString();
-            string[] subs = nameProduct.Split(',');
-            precioVenta = Convert.ToDouble(subs[1]);
-            nameProduct = subs[0];
-            
+            string nameProduct = "";
+            string picturePath = "";
+            string description = "";
 
-            //idLote, nombreProducto, cantidad
-            ItemCart item = new ItemCart(idLote, nameProduct, 1, precioVenta);
-            precioVenta = addToCart(item);
+            string s = ((Button)e.CommandSource).CommandName.ToString();
+
+            string[] subs = s.Split(',');
+           
+            nameProduct = subs[0];
+            precioVenta = Convert.ToDouble(subs[1]);
+            picturePath = subs[2];
+            description = subs[3];
+
+
+            //int id, string name, int cant, double precio, string picture, string description
+            ItemCart item = new ItemCart(idLote, nameProduct, 1, precioVenta, picturePath, description);
+            addToCart(item);
+            precioVenta = getTotal();
             shoppingLb.Text = "A " + nameProduct + " was added " + " TOTAL: $ " + precioVenta.ToString(); ;
         }
 
-        public class ItemCart
-        {
-            public int idLote;
-            public string nameProduct;
-            public int cant;
-            public double precio;
-            public double subTotal;
-
-            public ItemCart(int id, string name, int cant, double precio)
-            {
-                this.idLote = id;
-                this.nameProduct = name;
-                this.cant = cant;
-                this.precio = precio;
-                this.subTotal = precio * this.cant;
-            }
-
-            public string getNombre()
-            {
-                return this.nameProduct;
-            }
-
-            public int getId()
-            {
-                return this.idLote;
-            }
-
-            public void addSameItem()
-            {
-                this.cant += 1;
-                this.subTotal = this.precio * this.cant;
-                
-            }
-
-            public string toString()
-            {
-                return this.nameProduct +" "+ this.idLote.ToString() +" "+ this.cant.ToString()+ " "+this.subTotal;
-            }
-
-            public double getSubTotal()
-            {
-                return this.subTotal;
-            }
-        }
+        
 
         
     }

@@ -14,32 +14,17 @@ namespace indioSupermercado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (!IsPostBack)
             {
-                this.BindGrid();
+                Repeater1.DataSource = productList.myList;
+                Repeater1.DataBind();
             }
         }
 
         private void BindGrid()
         {
             string constr = usefull.strCon;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM MYSQLSERVER...Producto"))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter())
-                    {
-                        cmd.Connection = con;
-                        sda.SelectCommand = cmd;
-                        using (DataTable dt = new DataTable())
-                        {
-                            sda.Fill(dt);
-                            gridProducts.DataSource = dt;
-                            gridProducts.DataBind();
-                        }
-                    }
-                }
-            }
+            
         }
     }
 }

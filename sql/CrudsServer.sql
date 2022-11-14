@@ -1170,7 +1170,7 @@ begin
 declare @errorInt int = 0, @errorMsg varchar(20)
 
     BEGIN TRY
-        select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario, Inventario.precioVenta from Sucursal 
+        select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario, Inventario.precioVenta, Producto.descripcionProducto from Sucursal 
         inner join Inventario on Sucursal.idSucursal = Inventario.idSucursal inner join MYSQLSERVER...Lote on
         Lote.idLote = Inventario.idLote inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
         where Sucursal.idSucursal = @idSucursal

@@ -2224,6 +2224,7 @@
     <Compile Include="homePage.aspx.designer.cs">
       <DependentUpon>homePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ItemCart.cs" />
     <Compile Include="payOrder.aspx.cs">
       <DependentUpon>payOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

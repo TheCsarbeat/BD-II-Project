@@ -292,3 +292,8 @@ body {
     text-shadow: 2px 2px rgb(130,130,130);
 }
 
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
