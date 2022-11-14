@@ -1120,7 +1120,7 @@ END
 
 GO
 CREATE OR ALTER PROCEDURE dbo.spGetIdCustomerFromUser
-	@nombreUsuario varchar(50)
+	@nombreUsuario varchar(20)
 	with encryption
 as
 BEGIN
@@ -1492,7 +1492,7 @@ BEGIN
   
 END
 
-
+GO
 CREATE or ALTER PROCEDURE dbo.spSelectProviderToView
 
 as
@@ -1503,3 +1503,6 @@ declare @identityValue int = -1
     INNER JOIN Pais as Pais ON  Pais.idPais = Proveedor.idPais
     where Proveedor.estado = 1;
 end
+
+
+--    EXEC spGetIdCustomerFromUser "asdf"

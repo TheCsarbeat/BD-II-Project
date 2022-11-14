@@ -36,7 +36,7 @@ EXEC crudMonedaXPais 1,null,1,30,1 -- Elcambio de cordoba es
 declare @punto geometry 
 set @punto = geometry::Point(9.865843, -83.920612, 0)
 EXEC insertLugar 'Cartago Puebla', 1, @punto
-set @punto = geometry::Point(9.865843, -83.920612, 0)
+set @punto = geometry::Point(9.933583, -84.098887, 0)
 EXEC insertLugar 'Chepe', 1, @punto
 set @punto = geometry::Point(10.000409, -84.114865, 0)
 EXEC insertLugar 'Heredia', 1, @punto
@@ -48,6 +48,8 @@ set @punto = geometry::Point(10.447159, -84.040080, 0)
 EXEC insertLugar 'Sarapiqui', 1, @punto
 set @punto = geometry::Point(9.346963, -83.656479, 0)
 EXEC insertLugar 'La hermosa', 1, @punto
+
+
 
 EXEC crudSucursal 1, null, 'Quiques', 1, 1
 EXEC crudSucursal 1, null, 'Fermeza', 2, 1
@@ -76,15 +78,16 @@ EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 
 
+
 -- insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
 --insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
 
 --insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);
 
-EXEC spLoginCostumer 'chaca' ,'asdf'
 
+/*
 select * from  Usuario
 
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
-
+*/

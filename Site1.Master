@@ -18,7 +18,7 @@
     <link href="bootstrap/css/sweetalert2.min.css" rel="stylesheet" />
 
     <%--bootstrap css--%>
-    <%--<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 
     <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
