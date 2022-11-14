@@ -1182,6 +1182,8 @@ declare @errorInt int = 0, @errorMsg varchar(20)
     if @errorInt != 0
         select @errorInt as error, @errorMsg as mensaje
 end
+
+GO
 -- PROCEDURE PARA VALIDAR QUE EXISTA EL EMPLEADO
 Create or ALTER PROCEDURE spValidarEmpleado @idEmpleado int
 AS
@@ -1378,3 +1380,111 @@ BEGIN
 	where Empleado.estado = 1;
 End
 GO
+
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectSucursalesToView    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+    select Sucursal.idSucursal, Sucursal.nombreSucursal as Nombre, Lugar.nombreLugar as Lugar, Sucursal.idMonedaXPais as Moneda from Sucursal as Sucursal    
+    INNER JOIN Lugar as Lugar ON  Lugar.idLugar = Sucursal.idLugar
+
+    where Sucursal.estado = 1;
+end
+
+go
+create or alter procedure crudSucursal @opcion int, @idSucursal int = null, @nombre varchar(20) = null, @idLugar int =null, @idMonedaXPais int= null, @estado int = null
+as
+BEGIN
+  declare @error int, @errorMsg varchar(20)
+
+  if @opcion = 1
+    BEGIN
+    if (select count(*) from Sucursal where idSucursal = @idSucursal)=0  BEGIN
+      if @nombre is not null  BEGIN
+        if (select count(*) from Lugar where idLugar = @idLugar)!=0  BEGIN
+          if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 BEGIN
+            
+            BEGIN TRY
+              BEGIN transaction
+                insert into Sucursal( nombreSucursal, idLugar, idMonedaXpais) 
+                values(@nombre, @idLugar, @idMonedaXpais)
+          
+              commit transaction
+            END TRY
+            BEGIN CATCH
+              set @error=1
+              set @errorMsg = 'Error updating data base'
+            END CATCH
+          END ELSE BEGIN 
+            set @error = 1
+            set @errorMsg = 'idMonedaXPais does no exist'
+          END
+        END ELSE BEGIN
+          set @error = 3
+          set @errorMsg = 'idLugar does no exist'
+        END
+      END ELSE BEGIN
+        set @error = 4
+        set @errorMsg = 'name null'
+      END
+    END ELSE BEGIN
+      set @error = 5
+      set @errorMsg = 'idSucursal already exist'
+    END
+  END
+
+
+  if @opcion = 2
+    BEGIN
+    if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
+      BEGIN transaction
+        update Sucursal
+        set nombreSucursal = ISNULL(@nombre, nombreSucursal), idLugar = ISNULL(@idLugar, idLugar), idMonedaXPais = ISNULL(@idMonedaXPais, idMonedaXPais),
+        estado = ISNULL(@estado, estado)where idSucursal = @idSucursal      
+      commit transaction 
+
+      END ELSE BEGIN 
+        set @error = 1
+        set @errorMsg = 'El idSucursal does no exist'
+      END    
+    END
+
+  if @opcion = 3
+    BEGIN
+    if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0  BEGIN
+      BEGIN transaction
+
+      select * from Sucursal where idSucursal = @idSucursal
+
+      commit transaction
+
+    END ELSE BEGIN 
+      set @error = 1
+      set @errorMsg = 'El idSucursal does no exist'
+    END    
+    end
+
+  if @opcion = 4
+    BEGIN
+    if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
+      BEGIN transaction
+      update Sucursal
+      set estado = 0 where idSucursal = @idSucursal
+
+      commit transaction
+      END
+      else
+    BEGIN
+      set @error = 1
+      set @errorMsg = 'El idSucursal does no exist' 
+    end
+    end
+    if @error !=0
+      select @error as Error, @ErrorMsg as MensajeError
+    else
+      select 0 as correct, 'Action completed correctly!' as Result
+  
+END
