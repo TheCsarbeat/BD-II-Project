@@ -79,6 +79,7 @@ CREATE TABLE Horario(
     estado int DEFAULT 1
 );
 
+select * from Sucursal
 
 -- TABLAS DEL BD_PROYECTO (Servidor)
 

@@ -11,106 +11,115 @@ namespace indioSupermercado
 {
 
 
-    public partial class Site1
+    public partial class adminFormSucursal
     {
 
         /// <summary>
-        /// Control head.
+        /// Control TextBoxIDSucursal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIDSucursal;
 
         /// <summary>
-        /// Control form1.
+        /// Control TextBoxNombreSucursal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreSucursal;
 
         /// <summary>
-        /// Control userLoginLink.
+        /// Control TextBoxIDLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userLoginLink;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIDLugar;
 
         /// <summary>
-        /// Control userSignupLink.
+        /// Control TextBoxIdMonedaXP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userSignupLink;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIdMonedaXP;
 
         /// <summary>
-        /// Control helloUser.
+        /// Control DropDownListEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton helloUser;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstado;
 
         /// <summary>
-        /// Control loginOut.
+        /// Control ButtonAgregarSucursal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton loginOut;
+        protected global::System.Web.UI.WebControls.Button ButtonAgregarSucursal;
 
         /// <summary>
-        /// Control ContentPlaceHolder1.
+        /// Control ButtonActualizarSucursal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button ButtonActualizarSucursal;
 
         /// <summary>
-        /// Control adminloginLink.
+        /// Control ButtonBorrarSucursal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton adminloginLink;
+        protected global::System.Web.UI.WebControls.Button ButtonBorrarSucursal;
 
         /// <summary>
-        /// Control inventarioLinkButton.
+        /// Control SqlDataSource1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton inventarioLinkButton;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
 
         /// <summary>
-        /// Control reportesLinkButton.
+        /// Control ScriptManager1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton reportesLinkButton;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// empleadosLinkButton control.
+        /// Control UpdatePanelSucursal.
         /// </summary>
         /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton empleadosLinkButton;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelSucursal;
+
+        /// <summary>
+        /// Control GridViewSucursal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewSucursal;
     }
 }

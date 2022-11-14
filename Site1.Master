@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="indioSupermercado.Site1" %>
+﻿﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="indioSupermercado.Site1" %>
 
 <!DOCTYPE html>
 
@@ -102,7 +102,7 @@
                       </a>
 
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="adminFormSucursal.aspx">Sucursal</a></li>
+                        <li><a class="dropdown-item" href="adminFormBranch.aspx">Branch</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                       </ul>
