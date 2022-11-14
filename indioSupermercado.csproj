@@ -2201,7 +2201,6 @@
     <Compile Include="branchSelector.aspx.designer.cs">
       <DependentUpon>branchSelector.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="adminFormSucursal.aspx.cs">
       <DependentUpon>adminFormSucursal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2209,6 +2208,7 @@
     <Compile Include="adminFormSucursal.aspx.designer.cs">
       <DependentUpon>adminFormSucursal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="homePage.aspx.cs">
       <DependentUpon>homePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,5 +1,29 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminFormProductos.aspx.cs" Inherits="indioSupermercado.adminFormReporte" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<script type="text/javascript">
+      $(document).ready(function () {
+      
+          //$(document).ready(function () {
+              //$('.table').DataTable();
+         // });
+      
+          $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+          //$('.table1').DataTable();
+      });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -7,6 +31,7 @@
          <div class="col-md-5">
             <div class="card">
                <div class="card-body">
+
                   <div class="row">
                      <div class="col">
                         <center>
@@ -17,11 +42,13 @@
                   <div class="row">
                      <div class="col">
                         <center>
-                           <img width="100px" src="img/producto.png" />
+                            <img id="imgview" Height="250px" Width="250px" src="img/producto.png" />
+                           
                         </center>
                      </div>
                   </div>
                    <asp:Label id="lblUploadResult" Text="Estoy aqu" Runat="server"></asp:Label>
+
                   <div class="row">
                      <div class="col">
                         <hr>
@@ -43,7 +70,6 @@
                      <div class="col-md-8">
                         <label>Nombre Producto</label>
                         <div class="form-group">
-                           <asp:TextBox CssClass="form-control" ID="asdf" runat="server" placeholder="Nombre Producto" ></asp:TextBox>
                             <asp:TextBox Class="form-control" ID="nombreProductotxt"  placeholder="Nombre Producto" runat="server"></asp:TextBox>
                         </div>
                      </div>

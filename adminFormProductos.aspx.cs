@@ -124,73 +124,73 @@ namespace indioSupermercado
             
             if (nombreProducto != "" && descripcionProducto != "")
             {
+                string strFileName;
+                string strFilePath = "";
+                string strFolder;
+                strFolder = Server.MapPath("./productImgs/");
+                // Retrieve the name of the file that is posted.
+                strFileName = FileUpload1.PostedFile.FileName;
+                strFileName = Path.GetFileName(strFileName);
 
+                if (FileUpload1.PostedFile.FileName != "")
+                {
+                    // Create the folder if it does not exist.
+                    if (!Directory.Exists(strFolder))
+                    {
+                        Directory.CreateDirectory(strFolder);
+                    }
+                    // Save the uploaded file to the server.
+                    strFilePath = strFolder + strFileName;
+                    if (File.Exists(strFilePath))
+                    {
+                        lblUploadResult.Text = strFileName + " already exists on the server!";
+                    }
+                    else
+                    {
+                        FileUpload1.PostedFile.SaveAs(strFilePath);
+                        lblUploadResult.Text = strFileName + " has been successfully uploaded.";
+                    }
+                }
+                else
+                {
+                    lblUploadResult.Text = "Click 'Browse' to select the file to upload.";
+                }
+
+                SqlConnection con = new SqlConnection(stringConnection);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand("spCrudProducto null, '" + nombreProducto + "', '" + descripcionProducto + "'," +
+                    " " + categoria + ", '" + strFileName + "','" + strFilePath + "', 0", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Read();
+                valueResult = Convert.ToInt32(reader[0].ToString());
+                msgResult = (reader[1].ToString());
+
+                reader.Close();
+                con.Close();
+                if (valueResult == 0)
+                {
+                    bindGridProducts();
+                    loadCateogory();
+                    clearForm();
+
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Error','" + msgResult + "','error')", true);
+                }
             }
             else
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                "Swal.fire('Error','The are empty values','error')", true);
             }
-            string strFileName;
-            string strFilePath = "";
-            string strFolder;
-            strFolder = Server.MapPath("./productImgs/");
-            // Retrieve the name of the file that is posted.
-            strFileName = FileUpload1.PostedFile.FileName;
-            strFileName = Path.GetFileName(strFileName);
-
-            if (FileUpload1.PostedFile.FileName != "")
-            {
-                // Create the folder if it does not exist.
-                if (!Directory.Exists(strFolder))
-                {
-                    Directory.CreateDirectory(strFolder);
-                }
-                // Save the uploaded file to the server.
-                strFilePath = strFolder + strFileName;
-                if (File.Exists(strFilePath))
-                {
-                    lblUploadResult.Text = strFileName + " already exists on the server!";
-                }
-                else
-                {
-                    FileUpload1.PostedFile.SaveAs(strFilePath);
-                    lblUploadResult.Text = strFileName + " has been successfully uploaded.";
-                }
-            }
-            else
-            {
-                lblUploadResult.Text = "Click 'Browse' to select the file to upload.";
-            }
-
-            SqlConnection con = new SqlConnection(stringConnection);
-            if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
-
-            SqlCommand cmd = new SqlCommand("spCrudProducto null, '"+nombreProducto+"', '"+descripcionProducto+"'," +
-                " "+ categoria + ", '"+strFileName+"','"+ strFilePath + "', 0", con);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            reader.Read();
-            valueResult= Convert.ToInt32( reader[0].ToString());
-            msgResult = (reader[1].ToString());
-
-            reader.Close();
-            con.Close();
-            if (valueResult == 0)
-            {
-                bindGridProducts();
-                loadCateogory();
-                clearForm();
-
-            }
-            else
-            {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                    "Swal.fire('Error','" + msgResult + "','error')", true);
-            }
+            
 
         }
 

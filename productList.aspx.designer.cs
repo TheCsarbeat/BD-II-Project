@@ -15,13 +15,22 @@ namespace indioSupermercado
     {
 
         /// <summary>
-        /// Label2 control.
+        /// shoppingLb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label shoppingLb;
+
+        /// <summary>
+        /// finisPurchasebtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button finisPurchasebtn;
 
         /// <summary>
         /// Repeater1 control.
