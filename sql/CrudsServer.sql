@@ -963,10 +963,10 @@ BEGIN
 		END
 		ELSE
 		BEGIN
-			select 0 as valueResult , 'Invalid credentials' as MSG
+			select 1 as valueResult , 'Invalid credentials' as MSG
 		END
 	END ELSE BEGIN
-		select 0 as valueResult , 'No pueden haber campos nulos' as Mensaje
+		select 1 as valueResult , 'No pueden haber campos nulos' as Mensaje
 		END  ---Final if validacion nulos
 END
 
@@ -1126,7 +1126,8 @@ BEGIN
 	BEGIN TRY
 		select Cliente.idCliente from Cliente inner join UsuarioXCliente on
 		UsuarioXCliente.idCliente = Cliente.idCliente inner join Usuario on
-		UsuarioXCliente.nombreUsuario = Usuario.nombreUsuario where Usuario.nombreUsuario = @nombreUsuario
+		UsuarioXCliente.nombreUsuario = Usuario.nombreUsuario
+		where Usuario.nombreUsuario = @nombreUsuario
 	END TRY
 	BEGIN CATCH
 		set @errorInt=1

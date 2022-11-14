@@ -12,10 +12,10 @@ namespace indioSupermercado
 {
     public partial class adminFormSucursal : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionFernanda"].ConnectionString;
+        private string stringConnection = usefull.strCon;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SqlDataSource1.ConnectionString = stringConnection;
         }
         // Insertar en la sucursal
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
@@ -58,8 +58,10 @@ namespace indioSupermercado
                     if (valueResult == 0)
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
-                        
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                        GridViewSucursal.DataBind();
+                        UpdatePanelSucursal.Update();
+
                     }
                     else
                     {
@@ -203,6 +205,8 @@ namespace indioSupermercado
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                             "Swal.fire('Perfect','" + msgResult + "','s')", true);
+                        GridViewSucursal.DataBind();
+                        UpdatePanelSucursal.Update();
                     }
                     else
                     {

@@ -18,7 +18,7 @@ namespace indioSupermercado
         private string stringConnection = usefull.strCon;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SqlDataSource1.ConnectionString = stringConnection;
         }
 
         public void loadFileImg()

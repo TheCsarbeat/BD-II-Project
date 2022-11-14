@@ -68,8 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminEmployee.aspx" />
+    <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormProductos.aspx" />
-    <Content Include="adminFormSucursal.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
@@ -2195,6 +2195,13 @@
     <Compile Include="adminEmployee.aspx.designer.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminFormBranch.aspx.cs">
+      <DependentUpon>adminFormBranch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormBranch.aspx.designer.cs">
+      <DependentUpon>adminFormBranch.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminFormProductos.aspx.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2208,13 +2215,6 @@
     </Compile>
     <Compile Include="branchSelector.aspx.designer.cs">
       <DependentUpon>branchSelector.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adminFormSucursal.aspx.cs">
-      <DependentUpon>adminFormSucursal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminFormSucursal.aspx.designer.cs">
-      <DependentUpon>adminFormSucursal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="homePage.aspx.cs">

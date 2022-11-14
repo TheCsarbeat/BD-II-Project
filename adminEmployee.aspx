@@ -1,5 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminEmployee.aspx.cs" Inherits="indioSupermercado.adminEmployee" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+      $(document).ready(function () {
+      
+          //$(document).ready(function () {
+              //$('.table').DataTable();
+         // });
+      
+          $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+          //$('.table1').DataTable();
+      });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -152,7 +175,7 @@
                   <div class="row">
 
                       <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                          ConnectionString="<%$ ConnectionStrings:connectionMaynor %>" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
+                          ConnectionString="" SelectCommand="exec verEmpleados"></asp:SqlDataSource>
                      <div class="col">
                           <asp:ScriptManager ID="ScriptManager1" runat="server">
                             </asp:ScriptManager>
