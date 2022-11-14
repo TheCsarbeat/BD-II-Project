@@ -15,7 +15,7 @@ namespace indioSupermercado
 {
     public partial class adminFormReporte : System.Web.UI.Page
     {
-        string stringConnection = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
+        string stringConnection = usefull.strCon;
         public void clearForm()
         {
             idProductotxt.Text = "";

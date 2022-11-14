@@ -22,7 +22,7 @@ namespace indioSupermercado
 
         private void BindGrid()
         {
-            string constr = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
+            string constr = usefull.strCon;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("SELECT * FROM MYSQLSERVER...Producto"))

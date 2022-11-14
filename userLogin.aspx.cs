@@ -13,7 +13,7 @@ namespace indioSupermercado
 {
     public partial class userLogin : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
+        private string stringConnection = usefull.strCon;
 
         private string getCostumerId (string userName)
         {

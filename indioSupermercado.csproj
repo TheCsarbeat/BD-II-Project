@@ -2176,7 +2176,6 @@
     <Content Include="productImgs\onion.jpg" />
     <Content Include="productImgs\potato.jpg" />
     <Content Include="productImgs\raddish.jpg" />
-    <Content Include="pruebamasterfenana.aspx" />
     <Content Include="js\scripts.js" />
     <Content Include="productImgs\yuca.jpg" />
     <Content Include="userLogin.aspx" />
@@ -2224,13 +2223,6 @@
       <DependentUpon>payOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pruebamasterfenana.aspx.cs">
-      <DependentUpon>pruebamasterfenana.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="pruebamasterfenana.aspx.designer.cs">
-      <DependentUpon>pruebamasterfenana.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

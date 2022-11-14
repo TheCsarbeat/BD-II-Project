@@ -12,7 +12,7 @@ namespace indioSupermercado
 {
     public partial class adminFormSucursal : System.Web.UI.Page
     {
-        private string stringConnection = ConfigurationManager.ConnectionStrings["connectionCesar"].ConnectionString;
+        private string stringConnection = usefull.strCon;
         protected void Page_Load(object sender, EventArgs e)
         {
 
