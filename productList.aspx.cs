@@ -16,7 +16,7 @@ namespace indioSupermercado
     public partial class productList : System.Web.UI.Page
     {
         string strcon = usefull.strCon;
-        public ArrayList cartItems = new ArrayList();
+
         public static List<ItemCart> myList = new List<ItemCart>();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,7 +24,7 @@ namespace indioSupermercado
 
             try
             {
-                int id = Convert.ToInt32(Request.QueryString["id"].ToString());
+                int id = 6;//Convert.ToInt32(Request.QueryString["id"].ToString());
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -59,8 +59,9 @@ namespace indioSupermercado
             Response.Write("<script>alert('Testing');</script>");
         }   
 
-        protected void addToCart(ItemCart item)
+        protected double addToCart(ItemCart item)
         {
+            double total = 0.0;
             string nombre;
             int id = 0;
             bool flag = true;
@@ -78,32 +79,35 @@ namespace indioSupermercado
             {
                 myList.Add(item);
             }
-           
+            //Calcular el total
+            foreach (var i in myList)
+            {
+                total +=i.getSubTotal();  
+
+            }
+            return total;
+
         }
 
-        public void seeCart()
-        {           
-           
-            for (int i = 0; i < myList.Count; i++)                
-                Response.Write("<h1>" + myList[i].toString() + "</h1>");
-
-        }
         protected void finisPurchasebtn_Click(object sender, EventArgs e)
         {
-            seeCart();
+            
         }
 
         protected void R1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             int idLote = Convert.ToInt32(((Button)e.CommandSource).CommandArgument);
+            double precioVenta = 0.0;
             string nameProduct = ((Button)e.CommandSource).CommandName.ToString();
-            shoppingLb.Text = "A "+ nameProduct+" was added ";
+            string[] subs = nameProduct.Split(',');
+            precioVenta = Convert.ToDouble(subs[1]);
+            nameProduct = subs[0];
+            
 
             //idLote, nombreProducto, cantidad
-            ItemCart item = new ItemCart(idLote, nameProduct, 1);
-             
-            addToCart(item);
-            
+            ItemCart item = new ItemCart(idLote, nameProduct, 1, precioVenta);
+            precioVenta = addToCart(item);
+            shoppingLb.Text = "A " + nameProduct + " was added " + " TOTAL: $ " + precioVenta.ToString(); ;
         }
 
         public class ItemCart
@@ -111,14 +115,16 @@ namespace indioSupermercado
             public int idLote;
             public string nameProduct;
             public int cant;
-            public float precio;
-            public float subTotal;
+            public double precio;
+            public double subTotal;
 
-            public ItemCart(int id, string name, int cant)
+            public ItemCart(int id, string name, int cant, double precio)
             {
                 this.idLote = id;
                 this.nameProduct = name;
                 this.cant = cant;
+                this.precio = precio;
+                this.subTotal = precio * this.cant;
             }
 
             public string getNombre()
@@ -134,12 +140,18 @@ namespace indioSupermercado
             public void addSameItem()
             {
                 this.cant += 1;
+                this.subTotal = this.precio * this.cant;
                 
             }
 
             public string toString()
             {
-                return this.nameProduct +" "+ this.idLote.ToString() +" "+ this.cant.ToString();
+                return this.nameProduct +" "+ this.idLote.ToString() +" "+ this.cant.ToString()+ " "+this.subTotal;
+            }
+
+            public double getSubTotal()
+            {
+                return this.subTotal;
             }
         }
 

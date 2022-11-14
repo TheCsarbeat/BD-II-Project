@@ -42,7 +42,7 @@
                          <div class="buttons d-flex flex-row">
                             <div class="cart"><i class="fa fa-shopping-cart"></i></div>  
                             <asp:Button class="btn btn-success cart-button btn-block"
-                            CommandName='<%# DataBinder.Eval(Container.DataItem, "nombreProducto") +", "+ DataBinder.Eval(Container.DataItem, "precioVenta")%>  ' 
+                            CommandName='<%# DataBinder.Eval(Container.DataItem, "nombreProducto") +","+ DataBinder.Eval(Container.DataItem, "precioVenta")%>  ' 
                             CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idLote") %>  ' 
                             Text="Add to Cart" runat="server" />
                         </div>
