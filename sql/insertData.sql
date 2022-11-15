@@ -76,6 +76,7 @@ EXEC spInsertProductToInventory null, 20, 6, 1,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 2,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
+EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
 
 
 EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 94.565,-83.264

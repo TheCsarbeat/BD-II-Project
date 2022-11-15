@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using System.Collections;
+using System.Runtime.Remoting.Messaging;
 
 namespace indioSupermercado
 {
@@ -23,7 +24,10 @@ namespace indioSupermercado
                 Repeater1.DataSource = productList.myList;
                 Repeater1.DataBind();
                 loadPaymentMethod();
-                totalLb.Text = "$ "+productList.getTotal().ToString();
+                subTotalLb.Text = "$" + productList.getTotal().ToString();
+
+                totalLb.Text = "$"+productList.getTotal().ToString();
+                //createScripToProducts();
             }
         }
 
@@ -65,6 +69,58 @@ namespace indioSupermercado
             }
         }
 
+        public string createScripToProducts()
+        {
+            string script = "INSER INTO DetalleFactura (idProducto, cantidad, idFactura)VALUES ";
+            foreach (var i in productList.myList)
+            {
+                script = script + "("+ i.getIdProducto().ToString()+","+i.cantProduct.ToString()+","+"@idFactura),";
 
+            }
+            script = script.Remove(script.Length - 1, 1);
+            return script;
+            
+        }
+
+        protected void payButton_Click(object sender, EventArgs e)
+        {
+            string idCostumer = Session["idCliente"].ToString();
+            string idPaymentMethod = paymentMethodDrop.SelectedValue.ToString();
+
+            string msgResult = "";
+            int idFactura = -1;
+            SqlConnection con = new SqlConnection(stringConnection);
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "EXEC spCostumerPurcharse null, " + productList.myList[0].getIdSucursal().ToString()+","+ productList.getTotal().ToString()+",'"+
+                idCostumer+"',"+ idPaymentMethod+", 0";
+            cmd.ExecuteNonQuery();
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            idFactura = Convert.ToInt32(reader[0].ToString());
+            reader.Close();
+
+            foreach (var i in productList.myList)
+            {
+                try
+                {
+                    SqlCommand cmdPro = con.CreateCommand();
+                    cmdPro.CommandType = CommandType.Text;
+                    cmdPro.CommandText = "EXEC spProductByPucharse " + i.getIdProducto().ToString() + "," + idFactura.ToString() + "," + i.cantProduct.ToString() + ",0";
+                    cmdPro.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script.");
+
+                }
+
+
+            }
+        }
     }
 }

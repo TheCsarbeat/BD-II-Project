@@ -116,6 +116,8 @@
                                                 aria-labelledby="ex1-tab-1">
                                                 Tab 1 content
                                                 
+                                               
+                                                
                                             </div>
                                             <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                                                 <%--inciocuadro azul--%>
@@ -145,10 +147,10 @@
 
                                                         <div class="row px-2">
                                                             <div class="form-outline form-white mb-4">
-                                                            <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                                                                placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
-                                                            <label class="form-label" for="typeText">Card Number</label>
-                                                        </div>
+                                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                                                                    placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                                                                <label class="form-label" for="typeText">Card Number</label>
+                                                            </div>
                                                         </div>
 
                                                         <div class="row mb-4">
@@ -175,13 +177,13 @@
                                                             <p class="mb-2">
                                                                 Subtotal
                                                             </p>
-                               
-                                                            <asp:Label class="mb-2" ID="subTotalLb" runat="server" Text="$4798.00"></asp:Label>
+
+                                                            <asp:Label class="mb-2" ID="subTotalLb" runat="server" Text="0.00"></asp:Label>
                                                         </div>
 
                                                         <div class="d-flex justify-content-between">
-                                                            <p class="mb-2">Shipping</p>
-                                                            <asp:Label class="mb-2" ID="Label1" runat="server" Text="$4798.00"></asp:Label>
+                                                            <p class="mb-2">Other</p>
+                                                            <asp:Label class="mb-2" ID="Label1" runat="server" Text="$0.00"></asp:Label>
                                                         </div>
 
                                                         <div class="d-flex justify-content-between mb-4">
@@ -189,12 +191,13 @@
                                                             <asp:Label class="mb-2" ID="totalLb" runat="server" Text="$4798.00"></asp:Label>
                                                         </div>
 
-                                                        <button type="button" class="btn btn-info btn-block btn-lg">
+                                                        <asp:LinkButton CssClass="btn btn-info btn-block btn-lg" ID="payButton" runat="server" Text="Button" OnClick="payButton_Click">
                                                             <div class="d-flex justify-content-between">
-                                                                <span>$4818.00</span>
+                                                                <asp:Label ID="checkoutLbcheckoutLb" runat="server" Text="Label"></asp:Label>
                                                                 <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                                             </div>
-                                                        </button>
+
+                                                        </asp:LinkButton>
 
                                                     </div>
                                                 </div>
