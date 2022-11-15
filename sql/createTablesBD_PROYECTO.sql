@@ -112,7 +112,7 @@ CREATE TABLE UsuarioXEmpleado(
 CREATE TABLE MetodoPago(
     idMetodoPago INT PRIMARY Key not null IDENTITY(1,1),
     nombreMetodo varchar(20),
-    otrosDetalles varchar(40),
+    otrosDetalles varchar(200),
     estado int DEFAULT 1        
 );
 
@@ -121,12 +121,17 @@ CREATE TABLE Factura(
     idFactura INT PRIMARY Key not null IDENTITY(1,1),
     fechaFactura Date,
     hora time,
-    idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),
-    idEmpleado int FOREIGN KEY REFERENCES Empleado(idEmpleado),
+    idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),    
     montoTotal money,
     idCliente varchar(20) FOREIGN KEY REFERENCES Cliente(idCliente),
     idMetodoPago int FOREIGN KEY REFERENCES MetodoPago(idMetodoPago),
     estado int DEFAULT 1        
+);
+
+CREATE TABLE FacturaxEmpleado(
+idFacturaxEmpleado INT PRIMARY Key not null IDENTITY(1,1),
+	idFactura int FOREIGN KEY REFERENCES Factura(idFactura),
+	idEmpleado int FOREIGN KEY REFERENCES Empleado(idEmpleado)
 );
 
 CREATE TABLE DetalleFactura(
