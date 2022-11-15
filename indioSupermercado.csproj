@@ -72,11 +72,15 @@
     <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormProvider.aspx" />
+    <Content Include="adminFormTaxByCategory.aspx" />
+    <Content Include="adminOrderProducts.aspx" />
     <Content Include="adminReportes.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\css\sweetalert2.min.css" />
     <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
+    <Content Include="bootstrap\js\jquery-3.6.1.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\js\sweetalert2.all.min.js" />
     <Content Include="bootstrap\mdb\css\css.css" />
@@ -2180,6 +2184,7 @@
     <Content Include="img\Transparent Panel 3.png" />
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
+    <Content Include="js\JavaScript.js" />
     <Content Include="payOrder.aspx" />
     <Content Include="productImgs\carrot.jpg" />
     <Content Include="productImgs\onion.jpg" />
@@ -2230,6 +2235,20 @@
     </Compile>
     <Compile Include="adminFormProvider.aspx.designer.cs">
       <DependentUpon>adminFormProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormTaxByCategory.aspx.cs">
+      <DependentUpon>adminFormTaxByCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormTaxByCategory.aspx.designer.cs">
+      <DependentUpon>adminFormTaxByCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminOrderProducts.aspx.cs">
+      <DependentUpon>adminOrderProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminOrderProducts.aspx.designer.cs">
+      <DependentUpon>adminOrderProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminReportes.aspx.cs">
       <DependentUpon>adminReportes.aspx</DependentUpon>

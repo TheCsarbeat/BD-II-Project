@@ -33,6 +33,10 @@ namespace indioSupermercado
                     reportesLinkButton.Visible = false; // publisher management link button
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false; //admin clients
+                    productsLinkButton.Visible = false;
+                    orderProducts.Visible = false;
+                    taxCategoria.Visible = false;
+                    providers.Visible = false;
 
 
                 }
@@ -52,7 +56,11 @@ namespace indioSupermercado
                     reportesLinkButton.Visible = false; // publisher management link button
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false;//admin clients
+                    productsLinkButton.Visible = false;
 
+                    orderProducts.Visible = false;
+                    taxCategoria.Visible = false;
+                    providers.Visible = false;
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
@@ -70,7 +78,10 @@ namespace indioSupermercado
                     reportesLinkButton.Visible = true;
                     empleadosLinkButton.Visible = true;  // admin employees
                     clientesAdmin.Visible = true; //admin clients
-
+                    productsLinkButton.Visible = true;
+                    orderProducts.Visible = true;
+                    taxCategoria.Visible = true;
+                    providers.Visible = true;
                 }
                 
             }
@@ -121,6 +132,36 @@ namespace indioSupermercado
         protected void reportesLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminReportes.aspx");
+        }
+
+        protected void productsLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormProductos.aspx");
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void taxCategori_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormTaxByCategory.aspx");
+        }
+
+        protected void providers_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormProvider.aspx");
+        }
+
+        protected void orderProducts_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminOrderProducts.aspx");
+        }
+
+        protected void providers_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormProvider.aspx");
         }
     }
 }

@@ -67,11 +67,8 @@ namespace indioSupermercado
                 {
                     conObj.Open();
                 }
-                SqlCommand cmd = new SqlCommand("spLoginCostumer", conObj);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.Add("@nombrUsuario", SqlDbType.VarChar).Value = user;
-                cmd.Parameters.Add("@contrasena", SqlDbType.VarChar).Value = pass;
+                SqlCommand cmd = new SqlCommand("EXEC spLoginCostumer '"+ user+"', '"+pass+"'", conObj);
+                cmd.CommandType = CommandType.Text;
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
