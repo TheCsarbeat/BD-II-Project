@@ -1106,9 +1106,7 @@ as
 BEGIN
 	declare @errorInt int = 0, @errorMsg varchar(60)
 	BEGIN TRY
-		select Sucursal.idSucursal, Sucursal.nombreSucursal, Lugar.ubicacion.STX as X, Lugar.ubicacion.STY as Y
-		from Sucursal inner join Lugar on Sucursal.idLugar = Lugar.idLugar 
-		where idSucursal != @idSucursal
+		select * from Sucursal where idSucursal != @idSucursal
 	END TRY
 	BEGIN CATCH
 		set @errorInt=1
@@ -1126,7 +1124,7 @@ as
 BEGIN
 	declare @errorInt int = 0, @errorMsg varchar(60)
 	BEGIN TRY
-		select Cliente.idCliente from Cliente inner join UsuarioXCliente on
+		select Cliente.idCliente, ubicacion.STX as X, ubicacion.STY from Cliente inner join UsuarioXCliente on
 		UsuarioXCliente.idCliente = Cliente.idCliente inner join Usuario on
 		UsuarioXCliente.nombreUsuario = Usuario.nombreUsuario
 		where Usuario.nombreUsuario = @nombreUsuario
@@ -1175,7 +1173,7 @@ declare @errorInt int = 0, @errorMsg varchar(20)
         select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario, Inventario.precioVenta, Producto.descripcionProducto from Sucursal 
         inner join Inventario on Sucursal.idSucursal = Inventario.idSucursal inner join MYSQLSERVER...Lote on
         Lote.idLote = Inventario.idLote inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
-        where Sucursal.idSucursal = @idSucursal
+        where Sucursal.idSucursal = @idSucursal and Inventario.cantidad > 0
     END TRY
     BEGIN CATCH
         set @errorInt=1
@@ -1560,6 +1558,54 @@ BEGIN
 End
 GO
 
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetBranchesLocation
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	BEGIN TRY
+		select Sucursal.idSucursal, Sucursal.nombreSucursal, Lugar.ubicacion.STX as X, Lugar.ubicacion.STY as Y
+		from Sucursal inner join Lugar on Sucursal.idLugar = Lugar.idLugar
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+END
 
+GO
+CREATE OR ALTER PROCEDURE dbo.spRemoveExpiredProducts
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @today date
+	set @today = GETDATE()
+	BEGIN TRY
+		update Inventario
+		set Inventario.cantidadInventario = 0
+		from Inventario inner join MYSQLSERVER...Lote on Inventario.idLote = Lote.idLote
+		where Lote.fechaExpiracion < @today
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+END
 
+/*
+DECLARE @date1 DATE, @date2 DATE;                               
+SET @date1='2021-01-01';
+SET @date2='2021-02-02';                                       
+IF @date1=@date2                                                
+SELECT 'equal date'
+ELSE
+IF @date1<@date2 SELECT 'date2 is greater'              
+ELSE SELECT 'date1 is greater';
+*/
 --    EXEC spGetIdCustomerFromUser "asdf"

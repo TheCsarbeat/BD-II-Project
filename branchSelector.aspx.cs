@@ -16,6 +16,7 @@ namespace indioSupermercado
         public int idSucursal = 0;
         public string nombreSucursal = "";
         string strcon = usefull.strCon;
+        public string[] customerCoords = new string[2];
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -33,6 +34,8 @@ namespace indioSupermercado
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
                 idCustomer = reader[0].ToString();
+                customerCoords[0] = reader[1].ToString();
+                customerCoords[1] = reader[2].ToString(); 
                 reader.Close();
 
                 SqlCommand cmd2 = new SqlCommand("spClosestPoint", con);
@@ -54,6 +57,16 @@ namespace indioSupermercado
                 da.Fill(dt);
                 d2.DataSource = dt;
                 d2.DataBind();
+
+
+                SqlCommand cmd4 = con.CreateCommand();
+                cmd4.CommandType = CommandType.Text;
+                cmd4.CommandText = "spGetBranchesLocation";
+                cmd4.ExecuteNonQuery();
+                DataTable dt2 = new DataTable();
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd4);
+                da2.Fill(dt2);
+                addToMap(dt2); //agregar sucursales al mapa
 
                 con.Close();
 
@@ -94,7 +107,8 @@ namespace indioSupermercado
                 }
                 cont++;
             }
-            strFunc = strFunc + "])";
+            strFunc = strFunc + "],[" + customerCoords[0] + "," + customerCoords[1] +"])";
+
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "myFunc", strFunc, true);
         }
 

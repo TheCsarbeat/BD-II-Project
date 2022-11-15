@@ -63,18 +63,22 @@
         </div>
     </section>
         <script type="text/javascript" language="javascript">
-            function addMarker(matrix) {
-                var map = L.map('map').setView([9.92, -84.07], 13);
+            function addMarker(matrix,customerCoords) {
+                var map = L.map('map').setView([customerCoords[0], customerCoords[1]], 10);
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 }).addTo(map);
 
+
                 for (var i = 0; i < matrix.length; i++) {
                     var marker = L.marker([matrix[i][0], matrix[i][1]]).addTo(map);
                     marker.bindPopup(matrix[i][2]).openPopup();
                 }
+
+                var marker = L.marker([customerCoords[0], customerCoords[1]]).addTo(map);
+                marker.bindPopup("Usted esta aqui").openPopup();
                 
             }
         </script>
