@@ -37,7 +37,7 @@
                         <img src="<%#Eval("imgPath")%>" width="200" height="200">
                     </div>
                     <div class="product-details">
-                         <span class="font-weight-bold d-block">₡ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
+                         <span class="font-weight-bold d-block">$ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
                          <span><%#Eval("nombreProducto")%></span>
                          <div class="buttons d-flex flex-row">
                             <div class="cart"><i class="fa fa-shopping-cart"></i></div>  

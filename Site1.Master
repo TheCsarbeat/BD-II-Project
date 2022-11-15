@@ -35,7 +35,7 @@
 
         
     <script src="datatables/js/jquery.dataTables.min.js"></script>
-     <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
+    <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
 
     
 
