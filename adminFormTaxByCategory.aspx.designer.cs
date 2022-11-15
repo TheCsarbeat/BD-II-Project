@@ -11,80 +11,53 @@ namespace indioSupermercado
 {
 
 
-    public partial class adminFormReporte
+    public partial class adminFormTaxByCategory
     {
 
         /// <summary>
-        /// FileUpload1 control.
+        /// idtxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.WebControls.TextBox idtxt;
 
         /// <summary>
-        /// idProductotxt control.
+        /// LinkButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox idProductotxt;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
-        /// botonIDP control.
+        /// taxDropList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton botonIDP;
+        protected global::System.Web.UI.WebControls.DropDownList taxDropList;
 
         /// <summary>
-        /// nombreProductotxt control.
+        /// producCategoryDropList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox nombreProductotxt;
+        protected global::System.Web.UI.WebControls.DropDownList producCategoryDropList;
 
         /// <summary>
-        /// DropDownListEstado control.
+        /// insert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstado;
-
-        /// <summary>
-        /// categoriaDropDownList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList categoriaDropDownList;
-
-        /// <summary>
-        /// descripcionProductotxt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox descripcionProductotxt;
-
-        /// <summary>
-        /// insertProductBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button insertProductBtn;
+        protected global::System.Web.UI.WebControls.Button insert;
 
         /// <summary>
         /// update control.
@@ -105,31 +78,13 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.Button delete;
 
         /// <summary>
-        /// deleteF control.
+        /// sqlDataSourceTaxxCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteF;
-
-        /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-
-        /// <summary>
-        /// sqlDataSourceProductos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlDataSourceProductos;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlDataSourceTaxxCategory;
 
         /// <summary>
         /// ScriptManager1 control.
@@ -141,21 +96,21 @@ namespace indioSupermercado
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// updatePanelProducts control.
+        /// updatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelProducts;
+        protected global::System.Web.UI.UpdatePanel updatePanel1;
 
         /// <summary>
-        /// productsGridView control.
+        /// taxGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView productsGridView;
+        protected global::System.Web.UI.WebControls.GridView taxGridView;
     }
 }

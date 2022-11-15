@@ -102,7 +102,7 @@ declare @identityValue int = -1
 								values (@nombreProducto,@descripcionProducto,@idCategoria,@nombreImg, @imgPath);
 								
 								set @errorMsg = 'Se ha insertado correctamente'
-	
+					
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
@@ -136,7 +136,11 @@ declare @identityValue int = -1
 								update MYSQLSERVER...Producto 
 								set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
 								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
+
 								where idProducto = @idProducto
+
+								set @errorMsg = 'The product has update'
+								set @errorInt = 2
 							END TRY
 							BEGIN CATCH
 								set @errorInt=1
@@ -165,30 +169,79 @@ declare @identityValue int = -1
 
 	IF @operationFlag = 3	BEGIN
 		select * from MYSQLSERVER...Producto 	
-		where estado = 1;
+		
 		set @errorInt =-1;
 	END
 
 	IF @operationFlag = 4	BEGIN
-		update MYSQLSERVER...Producto  
-		set estado = ISNULL(0, estado)
-		where idProducto = @idProducto
+		IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto ) = 1 BEGIN
+			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto and estado !=0) = 1 BEGIN
+				update MYSQLSERVER...Producto 	 
+				set estado = ISNULL(0, estado)
+				where idProducto = @idProducto
+				set @errorInt=0
+				set @errorMsg = 'Producto Eliminado'
+			END ELSE BEGIN 			
+					set @errorInt=4
+					set @errorMsg = 'El producto ya se ha eliminado'
+					END
+		END ELSE BEGIN 			
+				set @errorInt=4
+				set @errorMsg = 'NO existe un producto con este ID'
+				END
 	END
+
 	IF @operationFlag = 5	BEGIN
-		update MYSQLSERVER...Producto 	 
-		set estado = ISNULL(1, estado)
-		where idProducto = @idProducto
+		IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto ) = 1 BEGIN
+			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto and estado !=1) = 1 BEGIN
+				update MYSQLSERVER...Producto 	 
+				set estado = 1
+				where idProducto = @idProducto
+				set @errorInt=0
+				set @errorMsg = 'Se ha reactivado'
+			END ELSE BEGIN 			
+				set @errorInt=4
+				set @errorMsg = 'El producto ya está activado'
+				END
+		END ELSE BEGIN 			
+				set @errorInt=4
+				set @errorMsg = 'NO existe un producto con este ID'
+				END
 	END
-	if @errorInt =1
+
+	IF @operationFlag = 6	BEGIN
+		IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto ) = 1 BEGIN
+			
+				delete from MYSQLSERVER...Producto 	 
+				where idProducto = @idProducto
+				set @errorInt=0
+				set @errorMsg = 'Se ha eliminado permanentemente'
+			
+		END ELSE BEGIN 			
+				set @errorInt=1
+				set @errorMsg = 'NO existe un producto con este ID'
+				END
+	END
+	IF @errorInt =1
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	IF @errorInt = 0
-		select 0 as Result, @errorMsg as msg
+	IF @errorInt =0
+		select 0 as Result, @ErrorMsg as MensajeError
+	IF @errorInt =2
+		select 0 as Result, @ErrorMsg as MensajeError
+	IF @errorInt =4
+		select 5 as Result, @ErrorMsg as MensajeError
+
+
 end
 GO 
+
+--   EXEC spCrudProducto 13, null, null,null,null,null, 4
+
 
 --====================================================
 --						Impuesto
 --===================================================
+GO
 CREATE or ALTER PROCEDURE dbo.spCrudImpuesto
 	@idImpuesto int,
 	@nombre varchar(20) ,
@@ -244,7 +297,8 @@ declare @identityValue int = -1
 								BEGIN TRANSACTION
 								update MYSQLSERVER...Impuesto 
 								set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
-								idPais = ISNULL(@idPais, idPais) where idImpuesto = @idImpuesto
+								idPais = ISNULL(@idPais, idPais)
+								where idImpuesto = @idImpuesto
 							COMMIT TRANSACTION
 							END TRY
 							BEGIN CATCH
@@ -273,8 +327,9 @@ declare @identityValue int = -1
 	end
 
 	IF @operationFlag = 3	BEGIN
-		select * from MYSQLSERVER...Impuesto	
-		where estado = 1;
+		select * from MYSQLSERVER...Impuesto as Impuesto
+		INNER JOIN Pais ON Pais.idPais =Impuesto.idPais
+		
 	END
 
 	IF @operationFlag = 4	BEGIN
@@ -290,9 +345,10 @@ declare @identityValue int = -1
 	END
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
+	
 end
-
-
+GO
+-- EXEC spCrudImpuesto null, null, null, null, 3
 GO
 --====================================================
 --			Categoria CategoriaXImpuesto
@@ -305,7 +361,7 @@ CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = -1, @errorMsg varchar(60)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -316,7 +372,8 @@ declare @identityValue int = -1
 	
 					INSERT INTO MYSQLSERVER...CategoriaXImpuesto (idCategoria,idImpuesto)
 					values (@idCategoria,@idImpuesto);
-							
+					set @errorMsg = 'The tax by category has inserted'
+					set @errorInt = 0
 					END TRY
 					BEGIN CATCH
 						set @errorInt=1
@@ -333,27 +390,31 @@ declare @identityValue int = -1
 				END
 				end
 
-		if @identityValue != -1
-			return @identityValue
-
 	END
 	
 	if @operationFlag = 1 BEGIN
-		if @idCategoria is not null and @idImpuesto is not null begin
-					BEGIN TRY
-						BEGIN TRANSACTION
-						update MYSQLSERVER...CategoriaXImpuesto
-						set idCategoria = ISNULL(@idCategoria, idCategoria), idImpuesto = ISNULL(@idImpuesto, idImpuesto)
-						where idCategoriaXImpuesto = @idCategoriaXImpuesto;
-						COMMIT TRANSACTION
-					END TRY
-					BEGIN CATCH
-						set @errorInt=1
-						set @errorMsg = 'Error al agregar a la base de datos'
-					END CATCH
+	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 1 BEGIN
+			if @idCategoria is not null and @idImpuesto is not null begin
+						BEGIN TRY
+						
+							update MYSQLSERVER...CategoriaXImpuesto
+							set idCategoria = ISNULL(@idCategoria, idCategoria), idImpuesto = ISNULL(@idImpuesto, idImpuesto)
+							where idCategoriaXImpuesto = @idCategoriaXImpuesto;
+							set @errorMsg = 'The tax by category has updated'
+							set @errorInt= 2
+						
+						END TRY
+						BEGIN CATCH
+							set @errorInt=1
+							set @errorMsg = 'Error al agregar a la base de datos'
+						END CATCH
+			END ELSE BEGIN --Final if idConductor			
+				set @errorInt=1
+				set @errorMsg = 'Hay algún valor nulo'
+				END  ---Final if validaci�n nulos
 		END ELSE BEGIN --Final if idConductor			
 			set @errorInt=1
-			set @errorMsg = 'Hay algún valor nulo'
+			set @errorMsg = 'No hay una elemento con ese ID'
 			END  ---Final if validaci�n nulos
 	END
 
@@ -365,209 +426,45 @@ declare @identityValue int = -1
 
 	if @operationFlag = 3
 	begin
-		select * from MYSQLSERVER...CategoriaXImpuesto 			
+		select * from MYSQLSERVER...CategoriaXImpuesto 	
+		
 	end
 
-	if @operationFlag = 4
-	begin
-		DELETE from MYSQLSERVER...CategoriaXImpuesto 	
-		where idCategoriaXImpuesto = @idCategoriaXImpuesto;
-	end
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-END
-GO
---====================================================
---						Impuesto
---===================================================
-CREATE or ALTER PROCEDURE dbo.spCrudImpuesto
-	@idImpuesto int,
-	@nombre varchar(20) ,
-	@porcentaje float ,
-	@idPais int ,
-	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-	if @operationFlag = 0 BEGIN
-
-		if @nombre is not null and @porcentaje is not null  BEGIN
-			IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 0 BEGIN
-				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
-					
-						BEGIN TRY
-	
-								INSERT INTO MYSQLSERVER...Impuesto (nombreImpuesto,porcentajeImpuesto,idPais)
-								values (@nombre,@porcentaje,@idPais);
-								
-	
-						END TRY
-						BEGIN CATCH
-							set @errorInt=1
-							set @errorMsg = 'Error al agregar a la base de datos'
-						END CATCH									
-						
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un pais v�lida'
-					END				
-			END ELSE BEGIN 			
+	if @operationFlag = 4	begin
+		IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 1 BEGIN
+			IF (Select count(*) from Inventario 
+			INNER JOIN MYSQLSERVER...Lote as Lote ON Lote.idLote = inventario.idLote
+			INNER JOIN MYSQLSERVER...Producto as Producto ON Producto.idProducto = Lote.idProducto
+			INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = Producto.idCategoria
+			INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoria = Categoria.idCategoria
+			INNER JOIN MYSQLSERVER...Impuesto as Impuesto ON Impuesto.idImpuesto = CategoriaXImpuesto.idImpuesto
+			where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 0 BEGIN
+			
+				
+				DELETE from MYSQLSERVER...CategoriaXImpuesto 	
+				where idCategoriaXImpuesto = @idCategoriaXImpuesto;
+				select 4 as REsul, 'eliminado correctamente' as msg
+			END ELSE BEGIN --Final if idConductor			
 				set @errorInt=1
-				set @errorMsg = 'Ya existe un producto con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
+				set @errorMsg = 'Esta impuesto esta realacionado a una categoria que se usa'
+				END  ---Final if validaci�n nulos
 
-		if @identityValue != -1
-			return @identityValue
-
-	end
-	
-	if @operationFlag = 1 BEGIN
-		if  @idImpuesto is not null and @nombre is not null and @porcentaje is not null and @idPais is not null BEGIN
-			IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
-				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
-							BEGIN TRY
-								BEGIN TRANSACTION
-								update MYSQLSERVER...Impuesto 
-								set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
-								idPais = ISNULL(@idPais, idPais) where idImpuesto = @idImpuesto
-							COMMIT TRANSACTION
-							END TRY
-							BEGIN CATCH
-								set @errorInt=1
-								set @errorMsg = 'Error al actualizar a la base de datos'
-							END CATCH
-	
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un pais v�lido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'NO existe un producto con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
-	END
-
-	if @operationFlag = 2
-	begin
-		select * from MYSQLSERVER...Impuesto
-		where idImpuesto= @idImpuesto and estado =1;
-	end
-
-	IF @operationFlag = 3
-	BEGIN
-		select * from MYSQLSERVER...Impuesto	
-		where estado = 1;
-	END
-
-	IF @operationFlag = 4
-	BEGIN
-		update MYSQLSERVER...Impuesto  
-		set estado = ISNULL(0, estado)
-		where idImpuesto = @idImpuesto
-	END
-	IF @operationFlag = 5
-	BEGIN
-		update MYSQLSERVER...Impuesto	 
-		set estado = ISNULL(1, estado)
-		where idImpuesto= @idImpuesto
-	END
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-end
-
-GO
---====================================================
---			Categoria CategoriaXImpuesto
---===================================================
-CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto
-	@idCategoriaXImpuesto int null, 
-	@idCategoria int ,
-	@idImpuesto int ,
-	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-	if @operationFlag = 0 BEGIN
-
-	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 0 BEGIN
-			IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
-				IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
-					BEGIN TRY
-	
-					INSERT INTO MYSQLSERVER...CategoriaXImpuesto (idCategoria,idImpuesto)
-					values (@idCategoria,@idImpuesto);
-							
-					END TRY
-					BEGIN CATCH
-						set @errorInt=1
-						set @errorMsg = 'Error al agregar a la base de datos'
-					END CATCH									
-						
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un impuesto v�lido'
-					END				
-			end ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'Ya existe una categoria con este ID'
-				END
-				end
-
-		if @identityValue != -1
-			return @identityValue
-
-	END
-	
-	if @operationFlag = 1 BEGIN
-		if @idCategoria is not null and @idImpuesto is not null begin
-					BEGIN TRY
-						BEGIN TRANSACTION
-						update MYSQLSERVER...CategoriaXImpuesto
-						set idCategoria = ISNULL(@idCategoria, idCategoria), idImpuesto = ISNULL(@idImpuesto, idImpuesto)
-						where idCategoriaXImpuesto = @idCategoriaXImpuesto;
-						COMMIT TRANSACTION
-					END TRY
-					BEGIN CATCH
-						set @errorInt=1
-						set @errorMsg = 'Error al agregar a la base de datos'
-					END CATCH
 		END ELSE BEGIN --Final if idConductor			
 			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
+			set @errorMsg = 'Este id no existe'
+			END  ---Final if validaci�n nulos
 	END
-
-	if @operationFlag = 2
-	begin
-		select * from MYSQLSERVER...CategoriaXImpuesto	
-		where idCategoriaXImpuesto = @idCategoriaXImpuesto;
-	end
-
-	if @operationFlag = 3
-	begin
-		select * from MYSQLSERVER...CategoriaXImpuesto 			
-	end
-
-	if @operationFlag = 4
-	begin
-		DELETE from MYSQLSERVER...CategoriaXImpuesto 	
-		where idCategoriaXImpuesto = @idCategoriaXImpuesto;
-	end
-	if @errorInt !=0
+	IF @errorInt =1
 		select @errorInt as Error, @ErrorMsg as MensajeError
-end
+	IF @errorInt =0
+		select 0 as Result, @ErrorMsg as MensajeError
+	IF @errorInt =2
+		select 0 as Result, @ErrorMsg as MensajeError
+END
+GO
+-- EXEC spCrudCategoriaImpuesto null, 4, 3, 1
+-- 		EXEC spCrudCategoriaImpuesto 1, 2, 2,4
+
 
 GO
 --====================================================
@@ -888,3 +785,26 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
+
+--====================================================
+--						productos para ver
+--===================================================
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectProductsToView
+	
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion, Categoria.nombreCategoria as Categoria, imgPath, Producto.estado from MYSQLSERVER...Producto as Producto	
+	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
+	
+end
+GO
+
+
+-- @idCategoriaXImpuesto int null, 	@idCategoria int ,	@idImpuesto int ,	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
+
+-- EXEC spCrudCategoriaImpuesto null, null, null, 3
+
+-- EXEC spCrudImpuesto null, null, null, null, 3

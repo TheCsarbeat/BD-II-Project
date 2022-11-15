@@ -82,7 +82,7 @@ namespace indioSupermercado
 
         }
 
-        public double getTotal()
+        public static double getTotal()
         {
             double total = 0.0;
             //Calcular el total

@@ -78,8 +78,18 @@ EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 
 
+EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 94.565,-83.264
+
 
 insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
+
+insert into TipoBono (nombreTipoBono,descripcionTipoBono) values ('BonoXPerformance','Dado por administrador')
+insert into TipoBono (nombreTipoBono,descripcionTipoBono) values ('BonoXVenta','Semanal')
+
+insert into MetodoPago (nombreMetodo, otrosDetalles)
+VALUES('Efecto', 'nominacion')
+
+select * from MetodoPago
 --insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
 
 --insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);

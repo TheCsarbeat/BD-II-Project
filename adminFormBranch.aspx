@@ -8,6 +8,8 @@
          // });
       
           $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+
+
           //$('.table1').DataTable();
       });
 
