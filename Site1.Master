@@ -9,8 +9,6 @@
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
-    <%--<link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />--%>
-
     <%--dataTables Sweealert--%>
     <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="bootstrap/css/sweetalert2.min.css" rel="stylesheet" />
@@ -19,14 +17,19 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 
+
+    <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
+    <link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />
     <%--our custom css--%>
     <link href="css/main.css" rel="stylesheet" />
 
 
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
     <%--bootstrap js--%>      <%--popper js--%>
 
-        <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
     <script src="bootstrap/js/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
@@ -36,6 +39,9 @@
     <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
 
     <script src="js/scripts.js"></script>
+
+
+
 
 
 </head>
@@ -113,13 +119,7 @@
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="clientesAdmin" runat="server" OnClick="clientesAdmin_Click">Clientes</asp:LinkButton>
                         &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
-                        &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="taxCategoria" runat="server" OnClick="taxCategori_Click">ImpuestosxCategoria</asp:LinkButton>
-                        &nbsp;
                             <asp:LinkButton class="footerlinks" ID="providers" runat="server" OnClick="providers_Click1">Proveedores</asp:LinkButton>
-                        &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server">Inventario</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="discount" runat="server" OnClick="discount_Click">Descuentos</asp:LinkButton>
                         &nbsp;
@@ -131,7 +131,7 @@
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="TipoCambioAdmin" runat="server" OnClick="tipoCambioLinkButton_Click">TipoCambio</asp:LinkButton>
                         &nbsp;
-                        <asp:LinkButton class="footerlinks" ID="ImpuestoAdmin" runat="server" OnClick="impuestoLinkButton_Click">Impuesto</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="ImpuestoAdmin" runat="server" OnClick="impuestoLinkButton_Click">Impuesto</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="TipoPagoAdmin" runat="server" OnClick="tipoPagoLinkButton_Click">TipoPago</asp:LinkButton>
                         &nbsp;
@@ -140,8 +140,14 @@
                             <asp:LinkButton class="footerlinks" ID="Lugar" runat="server" OnClick="Lugar_Click">Lugar</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="Manager" runat="server" OnClick="Manager_Click">Manager</asp:LinkButton>
-
-                        </p>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server" OnClick="orderProducts_Click1">Inventario</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="loteLinkButton" runat="server" OnClick="loteLinkButton_Click">Lote</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="taxCategoria" runat="server" OnClick="taxCategoria_Click">ImpuestosxCategoria</asp:LinkButton>
 
                     </div>
 

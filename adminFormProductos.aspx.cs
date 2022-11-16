@@ -114,6 +114,8 @@ namespace indioSupermercado
             string strFileName;
             string strFilePath = "";
             string ruta = "productImgs/";
+            string min = minTxt.Text;
+            string max = maxTxt.Text;
 
             // Retrieve the name of the file that is posted.
             strFileName = FileUpload1.PostedFile.FileName;
@@ -122,51 +124,79 @@ namespace indioSupermercado
 
             string msgResult = "";
             int valueResult = -1;
-            
+
             if (nombreProducto != "" && descripcionProducto != "")
             {
-                loadFileImg();
-
-                SqlConnection con = new SqlConnection(stringConnection);
-                if (con.State == ConnectionState.Closed)
+                if (usefull.validateInt(min) && usefull.validateInt(max))
                 {
-                    con.Open();
-                }
+                    int min1 = Convert.ToInt32(min);
+                    int max2 = Convert.ToInt32(max);
 
-                SqlCommand cmd = new SqlCommand("spCrudProducto null, '" + nombreProducto + "', '" + descripcionProducto + "'," +
-                    " " + categoria + ", '" + strFileName + "','" + strFilePath + "', 0", con);
-                SqlDataReader reader = cmd.ExecuteReader();
+                    if (min1 <= max2)
+                    {
 
-                reader.Read();
-                valueResult = Convert.ToInt32(reader[0].ToString());
-                msgResult = (reader[1].ToString());
+                        try
+                        {
+                            loadFileImg();
 
-                reader.Close();
-                con.Close();
-                if (valueResult == 0)
-                {
-                    productsGridView.DataBind();
-                    updatePanelProducts.Update();
-                    clearForm();
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                            SqlConnection con = new SqlConnection(stringConnection);
+                            if (con.State == ConnectionState.Closed)
+                            {
+                                con.Open();
+                            }
 
+                            SqlCommand cmd = new SqlCommand("EXEC spCrudProducto null, '" + nombreProducto + "', '" + descripcionProducto + "'," + " " + categoria + ", '" + strFileName + "','" + strFilePath + "'," + min + "," + max + ", 0", con);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            reader.Read();
+                            valueResult = Convert.ToInt32(reader[0].ToString());
+                            msgResult = (reader[1].ToString());
+
+                            reader.Close();
+                            con.Close();
+                            if (valueResult == 0)
+                            {
+                                productsGridView.DataBind();
+                                updatePanelProducts.Update();
+                                clearForm();
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                            }
+                            else
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + ex.Message + "','error')", true);
+
+                        }
+
+
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                   "Swal.fire('Error','The min and max are wrong','errerroror')", true);
+                    }
                 }
                 else
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Error','" + msgResult + "','error')", true);
-                }
+                                    "Swal.fire('Error','The are empty values','error')", true);
+                }             
+
             }
             else
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                               "Swal.fire('Error','The are empty values','error')", true);
+                                "Swal.fire('Error','The are empty values','error')", true);
             }
-            
-
         }
-
         protected void update_Click(object sender, EventArgs e)
         {
             string nombreProducto = nombreProductotxt.Text;
@@ -176,6 +206,9 @@ namespace indioSupermercado
             string strFilePath = "";
             string ruta = "productImgs/";
             string id = idProductotxt.Text;
+
+            string min = minTxt.Text;
+            string max = maxTxt.Text;
 
             // Retrieve the name of the file that is posted.
             strFileName = FileUpload1.PostedFile.FileName;
@@ -187,37 +220,68 @@ namespace indioSupermercado
 
             if (id != "" && nombreProducto != "" && descripcionProducto != "")
             {
-                loadFileImg();
-
-                SqlConnection con = new SqlConnection(stringConnection);
-                if (con.State == ConnectionState.Closed)
+                if (usefull.validateInt(min) && usefull.validateInt(max))
                 {
-                    con.Open();
-                }
 
-                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto "+id+", '" + nombreProducto + "', '" + descripcionProducto + "'," +
-                    " " + categoria + ", '" + strFileName + "','" + strFilePath + "', 1", con);
-                SqlDataReader reader = cmd.ExecuteReader();
+                    int min1 = Convert.ToInt32(min);
+                    int max2 = Convert.ToInt32(max);
 
-                reader.Read();
-                valueResult = Convert.ToInt32(reader[0].ToString());
-                msgResult = (reader[1].ToString());
+                    if (min1 <= max2)
+                    {
+                        
+                        try
+                        {
+                            loadFileImg();
 
-                reader.Close();
-                con.Close();
-                if (valueResult == 0)
-                {
-                    productsGridView.DataBind();
-                    updatePanelProducts.Update();
-                    //clearForm();
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                            SqlConnection con = new SqlConnection(stringConnection);
+                            if (con.State == ConnectionState.Closed)
+                            {
+                                con.Open();
+                            }
 
+                            SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", '" + nombreProducto + "', '" + descripcionProducto + "'," + " " + categoria + ", '" + strFileName + "','" + strFilePath + "', " + min +max+","+ min + ",1", con);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            reader.Read();
+                            valueResult = Convert.ToInt32(reader[0].ToString());
+                            msgResult = (reader[1].ToString());
+
+                            reader.Close();
+                            con.Close();
+                            if (valueResult == 0)
+                            {
+                                productsGridView.DataBind();
+                                updatePanelProducts.Update();
+                                //clearForm();
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                            }
+                            else
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + ex.Message + "','error')", true);
+
+                        }
+
+                        
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                   "Swal.fire('Error','Dates are wrong','error')", true);
+                    }
                 }
                 else
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Error','" + msgResult + "','error')", true);
+                                   "Swal.fire('Error','The are empty values','error')", true);
                 }
             }
             else

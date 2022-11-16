@@ -2,24 +2,25 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+ 
+        <script type="text/javascript">
+            $(document).ready(function () {
 
-            //$(document).ready(function () {
-            //$('.table').DataTable();
-            // });
+                //$(document).ready(function () {
+                //$('.table').DataTable();
+                // });
+                $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+                // Code that uses other library's $ can follow here.
 
-            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-            //$('.table1').DataTable();
-        });
+            });
 
-    </script>
-
+        </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section class="container">
         <h2 class="text-center">Product Administration</h2>
+
     </section>
     <section class="container-xxl">
         <div class="row">
@@ -68,6 +69,7 @@
                             </div>
 
                         </div>
+                        <%--estado categoria--%>
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -90,6 +92,22 @@
                             </div>
 
                         </div>
+                        <%--limite--%>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Min</label>
+                                <div class="form-group">
+                                    <asp:TextBox CssClass="form-control" ID="minTxt" runat="server" TextMode="Number"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Max</label>
+                                <div class="form-group">
+                                    <asp:TextBox CssClass="form-control" ID="maxTxt" runat="server" TextMode="Number"></asp:TextBox>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Descripcion</label>
@@ -108,7 +126,7 @@
                                 <asp:Button ID="update" class="btn btn-lg btn-block btn-warning" runat="server" Text="Actualizar" OnClick="update_Click" />
                             </div>
                             <div class="col-4">
-                                <asp:Button ID="delete" class="btn btn-lg btn-block btn-danger" runat="server" Text="Desactivar" OnClick="delete_Click" />                                
+                                <asp:Button ID="delete" class="btn btn-lg btn-block btn-danger" runat="server" Text="Desactivar" OnClick="delete_Click" />
                             </div>
                         </div>
                         <div class="row">
@@ -139,7 +157,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                
+
 
                                 <asp:SqlDataSource ID="sqlDataSourceProductos" runat="server"
                                     ConnectionString="" SelectCommand="exec spSelectProductsToView"></asp:SqlDataSource>
@@ -156,6 +174,8 @@
                                                     <ItemStyle Font-Bold="True" />
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
+                                                <asp:BoundField DataField="minCant" HeaderText="Minimo" ReadOnly="True" SortExpression="minCant"></asp:BoundField>
+                                                <asp:BoundField DataField="maxCant" HeaderText="Máximo" ReadOnly="True" SortExpression="maxCant"></asp:BoundField>
                                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ReadOnly="True" SortExpression="Descripcion"></asp:BoundField>
                                                 <asp:BoundField DataField="Categoria" HeaderText="Categoria" ReadOnly="True" SortExpression="Categoria"></asp:BoundField>
                                                 <asp:BoundField DataField="estado" HeaderText="Estado" ReadOnly="True" SortExpression="estado"></asp:BoundField>

@@ -84,7 +84,7 @@ namespace indioSupermercado
 
         protected void payButton_Click(object sender, EventArgs e)
         {
-            string idCostumer = Session["idCliente"].ToString();
+            string idCostumer = "2021052792";//Session["idCliente"].ToString();
             string idPaymentMethod = paymentMethodDrop.SelectedValue.ToString();
 
             string msgResult = "";
@@ -98,12 +98,12 @@ namespace indioSupermercado
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "EXEC spCostumerPurcharse null, " + productList.myList[0].getIdSucursal().ToString()+","+ productList.getTotal().ToString()+",'"+
                 idCostumer+"',"+ idPaymentMethod+", 0";
-            cmd.ExecuteNonQuery();
+            
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             idFactura = Convert.ToInt32(reader[0].ToString());
             reader.Close();
-
+            bool flag = true;
             foreach (var i in productList.myList)
             {
                 try
@@ -116,10 +116,21 @@ namespace indioSupermercado
                 catch (Exception ex)
                 {
                     Response.Write("<script>alert('" + ex.Message + "');</script.");
-
+                    flag = false;
                 }
+            }
 
-
+            if (flag)
+            {                
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                    "Swal.fire('Perfect','Your purchase was register successfuly','success')", true);
+                productList.myList= new List<ItemCart>();
+                Repeater1.DataBind();
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                    "Swal.fire('Erorr','An error have ocurred','error')", true);
             }
         }
     }

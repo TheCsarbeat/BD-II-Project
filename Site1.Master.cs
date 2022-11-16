@@ -48,6 +48,8 @@ namespace indioSupermercado
                     TipoPagoAdmin.Visible = false; // admin tipoPago
                     PuestoTrabajo.Visible = false; // admin puesto
                     Lugar.Visible = false;
+                    loteLinkButton.Visible = false;
+
 
                 }
                 else if (Session["role"].Equals("user"))
@@ -81,6 +83,7 @@ namespace indioSupermercado
                     PuestoTrabajo.Visible = false; // admin puesto
                     Lugar.Visible = false;
 
+                    loteLinkButton.Visible = false;
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
@@ -113,6 +116,7 @@ namespace indioSupermercado
                     PuestoTrabajo.Visible = true; // admin puesto
                     Lugar.Visible = true;
 
+                    loteLinkButton.Visible = true;
                 }
                 
             }
@@ -241,6 +245,20 @@ namespace indioSupermercado
         protected void Manager_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminFormManager.aspx");
+        }
+        protected void orderProducts_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("adminOrderProducts.aspx");
+        }
+
+        protected void loteLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminLote.aspx");
+        }
+
+        protected void taxCategoria_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormTaxByCategory.aspx");
         }
     }
 }
