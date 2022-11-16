@@ -87,6 +87,8 @@
                                     <div class="form-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBoxPuesto" runat="server" placeholder="ID Puesto"></asp:TextBox>
                                     </div>
+                                    <%--<asp:DropDownList class="form-control" ID="puestosDropList" runat="server">
+                                    </asp:DropDownList>--%>
 
                                 </div>
                             </div>

@@ -17,7 +17,6 @@ namespace indioSupermercado
     public partial class adminEmployee : System.Web.UI.Page
     {
         private string stringConnection = usefull.strCon;
-        private string sqlQuerryTry = "insert into Bono(idEmpleado,fecha,cantidadBono,idTipoBono,Performance) Values(@idEmp,GETDATE(),60,2,'Realizó 1000 ventas')";
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlDataSource1.ConnectionString = stringConnection;
@@ -46,6 +45,7 @@ namespace indioSupermercado
                     idCategoria.Add(reader[1].ToString());
                 }
 
+                reader.Close();
                 con.Close();
                 if (!IsPostBack)
                 {
@@ -80,14 +80,14 @@ namespace indioSupermercado
                 }
                 // Save the uploaded file to the server.
                 strFilePath = strFolder + strFileName;
-                if (!File.Exists(strFilePath)) 
+                if (!File.Exists(strFilePath))
                 {
                     FileEmpleado.PostedFile.SaveAs(strFilePath);
-                   
+
                 }
             }
 
-            
+
         }
 
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
@@ -107,8 +107,8 @@ namespace indioSupermercado
             string msgPS = "";
 
 
-            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)) 
-                ||!string.IsNullOrEmpty(TextBoxNombreEmpleado.Text) || (!string.IsNullOrEmpty(TextBoxApellidoEmpleado.Text)) || (!string.IsNullOrEmpty(TextBoxFecha.Text))
+            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue))
+                || !string.IsNullOrEmpty(TextBoxNombreEmpleado.Text) || (!string.IsNullOrEmpty(TextBoxApellidoEmpleado.Text)) || (!string.IsNullOrEmpty(TextBoxFecha.Text))
                                     || (!string.IsNullOrEmpty(FileEmpleado.FileName)))
             {
                 try
@@ -136,7 +136,7 @@ namespace indioSupermercado
 
                     reader3.Close();
 
-                    if(valuePS == 0)
+                    if (valuePS == 0)
                     {
                         SqlCommand cmd = new SqlCommand("spInsertarEmpleado", conObj);
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -158,7 +158,7 @@ namespace indioSupermercado
 
                         reader.Close();
 
-                        if(valueResult == 0)
+                        if (valueResult == 0)
                         {
                             loadFileImg();
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
@@ -166,6 +166,7 @@ namespace indioSupermercado
 
                             GridViewEmpleado.DataBind();
                             UpdatePanelEmployee.Update();
+
 
                         }
                         else
@@ -212,16 +213,16 @@ namespace indioSupermercado
             string msgUpdate = "";
 
             int valuePS = -1;
-            string msgPS= "";
+            string msgPS = "";
 
 
             if (!string.IsNullOrWhiteSpace(TextBoxIDEmpleado.Text))
-            {   
+            {
 
                 try
-                {   
+                {
 
-                    if(!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)))
+                    if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)))
                     {
                         SqlConnection conObj = new SqlConnection(stringConnection);
                         if (conObj.State == ConnectionState.Closed)
@@ -339,7 +340,7 @@ namespace indioSupermercado
                                     "Swal.fire('Error','Missing Credentials','error')", true);
                     }
 
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -352,7 +353,7 @@ namespace indioSupermercado
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                             "Swal.fire('Error','Missing ID','error')", true);
             }
-            
+
         }
 
         protected void ButtonBorrarSucursal_Click(object sender, EventArgs e)
@@ -457,18 +458,26 @@ namespace indioSupermercado
             int valueBono = -1;
             string msgBono = "";
 
+
+
             if (!string.IsNullOrWhiteSpace(TextBoxIDEmpleado.Text))
             {
                 try
                 {
+
+
                     SqlConnection conObj = new SqlConnection(stringConnection);
                     if (conObj.State == ConnectionState.Closed)
                     {
                         conObj.Open();
                     }
 
+
+                    /////////////////////////////////////////////////////////////////////////////
+
                     SqlCommand cmd = new SqlCommand("spValidarEmpleado", conObj);
                     cmd.CommandType = CommandType.StoredProcedure;
+
 
                     cmd.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idInput;
 
@@ -486,6 +495,8 @@ namespace indioSupermercado
                     {
                         if (!string.IsNullOrWhiteSpace(TextBoxPerformance.Text) || (!string.IsNullOrWhiteSpace(TextBoxMontoBono.Text)) || (!string.IsNullOrWhiteSpace(TextBoxFecha.Text)))
                         {
+
+                            
 
                             SqlCommand cmdVerventas = new SqlCommand("viewBono", conObj);
                             cmdVerventas.CommandType = CommandType.StoredProcedure;
@@ -510,7 +521,7 @@ namespace indioSupermercado
                                         //cmdBonoAutomatico.ExecuteNonQuery();
 
                                     }
-                                }   
+                                }
                             }
 
 
@@ -568,6 +579,7 @@ namespace indioSupermercado
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                             "Swal.fire('Error','Missing ID','error')", true);
+
             }
         }
     }
