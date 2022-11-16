@@ -194,4 +194,14 @@ CREATE TABLE DescuentoXInventario(
 	idDescuento int FOREIGN KEY REFERENCES Descuento(idDescuento),
 );
 
+Create table ventasEmpleado(
+    ventasEmpleadoID int primary key not null identity(1,1),
+    idEmpleado int foreign key references Empleado(idEmpleado),
+    cantidadVentas int default 0,
+    fecha date default GETDATE(),
+    aumento float default 60.0,
+    tipo int default 2,
+    descrip varchar(20) default 'Realizó 1000 ventas'
+);
+
 

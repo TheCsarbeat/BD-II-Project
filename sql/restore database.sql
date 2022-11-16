@@ -2,7 +2,7 @@
 -- =============================================
 --             script to drop Foreign Keys
 -- =============================================
-USE BD_PROYECTO   ;
+USE FERMEZA   ;
 GO
 SET NOCOUNT ON;
 DECLARE @sql nvarchar(max) = N'';
@@ -32,7 +32,7 @@ SELECT @sql;
 -- =============================================
 --             script to drop user tables
 -- =============================================
-USE BD_PROYECTO   ;
+USE FERMEZA   ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 

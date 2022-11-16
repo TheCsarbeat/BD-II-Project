@@ -170,7 +170,7 @@ namespace indioSupermercado
                     if (valueResult == 0)
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','successs')", true);
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
                         GridViewProvider.DataBind();
                         UpdatePanelProvider.Update();
                     }
@@ -232,7 +232,7 @@ namespace indioSupermercado
                     if (valueResult == 0)
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','successs')", true);
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
                         GridViewProvider.DataBind();
                         UpdatePanelProvider.Update();
                     }

@@ -123,7 +123,7 @@
                         </div>
                         <div class="row">
                             <asp:SqlDataSource ID="SqlDataSourceExchange" runat="server"
-                                ConnectionString="" SelectCommand="exec spSelectExchangexToView"></asp:SqlDataSource>
+                                ConnectionString="" SelectCommand="exec spSelectExchangeToView"></asp:SqlDataSource>
                             <div class="col">
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>

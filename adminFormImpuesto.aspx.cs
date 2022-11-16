@@ -19,6 +19,13 @@ namespace indioSupermercado
             loadCountry();
         }
 
+        public void clearForm()
+        {
+            IDTaxTxt.Text = "";
+            nameTaxtxt.Text = "";
+            taxPorcentagetxt.Text = "";
+        }
+
         public void loadCountry()
         {
             try
@@ -95,6 +102,7 @@ namespace indioSupermercado
 
                     if (valueResult == 0)
                     {
+                        clearForm();
                         GridViewImpuesto.DataBind();
                         UpdatePanelImpuesto.Update();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
@@ -167,6 +175,7 @@ namespace indioSupermercado
 
                     if (valueResult == 0)
                     {
+                        clearForm();
                         GridViewImpuesto.DataBind();
                         UpdatePanelImpuesto.Update();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
@@ -230,6 +239,7 @@ namespace indioSupermercado
 
                     if (valueResult == 0)
                     {
+                        clearForm();
                         GridViewImpuesto.DataBind();
                         UpdatePanelImpuesto.Update();
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",

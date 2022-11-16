@@ -894,7 +894,5 @@ GO
 -- EXEC spCrudImpuesto null, null, null, null, 3
 
 /*
-
 EXEC spSelectInventoryView
-
 */

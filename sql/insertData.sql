@@ -1,4 +1,3 @@
--- EXECUTE IN SERVER
 EXEC insertPais 'Costa Rica'
 EXEC insertPais 'Panama'
 EXEC insertPais 'Nicaragua'
@@ -87,8 +86,6 @@ EXEC spInsertProductToInventory null, 25, 6, 2,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 --EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
-
-
 EXEC spSelectProductsToView
 */
 
@@ -104,14 +101,18 @@ insert into MetodoPago (nombreMetodo, otrosDetalles)
 VALUES('Efectivo', 'No se acepta monedas de baja denominacion')
 
 
+
 --insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
 
 --insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);
 
 
 /*
+insert into ventasEmpleado (idEmpleado,cantidadVentas) values (1,1000)
+insert into ventasEmpleado (idEmpleado,cantidadVentas) values (2,50)
 
 select * from MYSQLSERVER...Producto
+select * from MYSQLSERVER...Limite
 select * from Inventario
 select * from MetodoPago
 select * from  Usuario
@@ -119,18 +120,11 @@ select * from Sucursal
 select * from MYSQLSERVER...Lote
 select * from Descuento
 select * from DescuentoXInventario
-select * from Factura
-select * from DetalleFactura
-
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
-
 --	@descuentoPorcent float
 exec spChangeDiscount 0.50
-
 exec spApplyDiscount 4
-
 exec spGetProductsForDiscount
-
-
 */
+

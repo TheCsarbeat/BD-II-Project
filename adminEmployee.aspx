@@ -76,18 +76,8 @@
                             <div class="col-md-6">
                                 <label>Puesto</label>
                                 <div class="form-group">
-
-                                    <%--<asp:DropDownList class="form-control" ID="DropDownListPuesto" runat="server">
-                              <asp:ListItem Text="Activo" Value=1 />
-                              <asp:ListItem Text="Inactivo" Value=2 />
-                              <asp:ListItem Text="Suspendido" Value=3 />
-
-                               </asp:DropDownList>--%>
-
-                                    <div class="form-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBoxPuesto" runat="server" placeholder="ID Puesto"></asp:TextBox>
-                                    </div>
-
+                                    <asp:DropDownList class="form-control" ID="DropDownListPuesto" runat="server">
+                                    </asp:DropDownList>
                                 </div>
                             </div>
                             <div class="col-md-6">

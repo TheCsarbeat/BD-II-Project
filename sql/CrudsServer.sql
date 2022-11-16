@@ -1,5 +1,4 @@
-﻿
--- Creación de cruds
+﻿-- Creación de cruds
 
 -- Sucursal
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
@@ -102,6 +101,7 @@ create or alter procedure crudSucursalManager @opcion int,@idSucursalManger int,
 as
 BEGIN
 	declare @error int, @errorMsg varchar(200)
+	set @error = 0
 
 	if @opcion = 1
 		BEGIN
@@ -109,7 +109,6 @@ BEGIN
 			if @idSucursal is not null and @idEmpleado is not null BEGIN
 				if (select count(*) from Empleado where idEmpleado = @idEmpleado)!=0 BEGIN
 					if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 BEGIN
-						
 						BEGIN transaction
 							insert into SucursalManager
 							values(@idSucursal,@idEmpleado)
@@ -153,7 +152,7 @@ BEGIN
 			END			
 		END ELSE BEGIN 
 			set @error = 1
-			set @errorMsg = 'El idEmpleado no existe'
+			set @errorMsg = 'El Manager no existe'
 		END
 	END
 
@@ -169,13 +168,23 @@ BEGIN
 			set @errorMsg = 'El idEmpleado no existe'
 		END
 	END
-
-	
+	if @error != 0
 	select @error as error, @errorMsg as mensaje
+	else
+	begin
+		set @error = 0
+		set @errorMsg = 'Manager was added successfully'
+		select @error as error, @errorMsg as mensaje
+	end	
 END
 
 
-
+/*
+crudSucursalManager 2, 12, 7, 1
+select * from SucursalManager
+delete from SucursalManager
+select * from Empleado
+*/
 		
 -- ****************************************************************************************************************
 
@@ -186,6 +195,7 @@ create or alter procedure crudPerformance @opcion int,@idPerformance int, @calif
 as
 BEGIN
 	declare @error int, @errorMsg varchar(200)
+	set @error = 0
 
 	if @opcion = 1
 		BEGIN
@@ -249,9 +259,9 @@ BEGIN
 		END
 
 	END
-
+	if @error != 0
 		select @error as error, @errorMsg as mensaje
-		
+
 END
 
 -- ****************************************************************************************************************
@@ -879,24 +889,14 @@ GO
 --							INGRESAR PRODUCTOS AL INVENTARIO
 -- ***************************************************************************************************
 /*
-
 declare @precioVentaTotal float
 EXEC spGetPriceOfProduct 1,1,1 , precioVenta OUTPUT
 select @precioVentaTotal
-
-
-
 declare @Test money
-
-
 exec prTest 1,1,1,@Test output
 select @Test
-
-
-
 ";
       
-
 */
 
 -- EXEC spGetPriceOfProduct 1,1,1
@@ -905,8 +905,6 @@ GO
 
 GO
 /*
-
-
 */
 create or alter procedure spGetPriceOfProduct 
 	@idLote int,	
@@ -948,11 +946,7 @@ go
 go
 
 /*
-
 EXEC spInsertProductToInventory null, 0, 7, 7,null, 0
-
-
-
 */
 GO
 CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
@@ -1531,27 +1525,19 @@ GO
 
 
 /*
-
 select * from DetalleFactura
-
 select * from Factura
-
 INSER INTO DetalleFactura (idProducto, cantidad, idFactura)
 VALUES ()
-
-
 	  DECLARE @SQLString NVARCHAR(500);  
 DECLARE @ParmDefinition NVARCHAR(500);  
 declare @id int
 set @id = 1;
 SET @SQLString = 'insert into MetodoPago (nombreMetodo, otrosDetalles, estado) VALUES(''Tarjeta'', ''VISA'', '+CAST(@id as varchar)+')'
 EXECUTE sp_executesql @SQLString
-
 select * from MetodoPago
-
 select * from DetalleFactura
 select * from Factura
-
 */
 
 
@@ -1664,19 +1650,16 @@ declare @errorInt int = 0, @errorMsg varchar(200)
 			set @errorMsg = 'Hay algún valor nulo'
 			END  ---Final if validaci�n nulos
 	END
-
 	if @operationFlag = 2
 	begin
 		select * from MYSQLSERVER...Impuesto
 		where idImpuesto= @idImpuesto and estado =1;
 	end
-
 	IF @operationFlag = 3	BEGIN
 		select * from MYSQLSERVER...Impuesto as Impuesto
 		INNER JOIN Pais ON Pais.idPais =Impuesto.idPais
 		
 	END
-
 	IF @operationFlag = 4	BEGIN
 		update MYSQLSERVER...Impuesto  
 		set estado = ISNULL(0, estado)
@@ -1779,19 +1762,16 @@ declare @errorInt int = 0, @errorMsg varchar(200)
 			set @errorMsg = 'Hay algún valor nulo'
 			END  ---Final if validaci�n nulos
 	END
-
 	if @operationFlag = 2
 	begin
 		select * from MYSQLSERVER...Impuesto
 		where idImpuesto= @idImpuesto and estado =1;
 	end
-
 	IF @operationFlag = 3	BEGIN
 		select * from MYSQLSERVER...Impuesto as Impuesto
 		INNER JOIN Pais ON Pais.idPais =Impuesto.idPais
 		
 	END
-
 	IF @operationFlag = 4	BEGIN
 		update MYSQLSERVER...Impuesto  
 		set estado = ISNULL(0, estado)
@@ -2026,8 +2006,6 @@ BEGIN
 End
 GO
 /*
-
-
 */
 -- cambio crud Impuesto
 GO
@@ -2865,6 +2843,7 @@ End
 GO
 
 
+
 GO
 CREATE OR ALTER PROCEDURE dbo.spGetSucursalDropList
 	with encryption
@@ -2883,12 +2862,50 @@ BEGIN
 		select @errorInt as Error, @ErrorMsg as MensajeError
 END
 GO
+
+
+CREATE OR ALTER PROCEDURE dbo.spGetPuestoDropList
+    with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(60)
+    BEGIN TRY
+        SELECT idPuesto, nombrePuesto from Puesto
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'There is an error in de database'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+GO
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'
 
 
+Create or alter procedure spBonoAutomaticoSucio 
+AS
+begin
 
-select * from FacturaXEmpleado
+    insert into Bono(idEmpleado,fecha,cantidadBono,idTipoBono,Performance)
+    Select idEmpleado,fecha,aumento,tipo,descrip from ventasEmpleado where cantidadVentas >= 1000
+End
+go
 
-insert into FacturaXEmpleado(idFactura,idEmpleado) values(1,1)
+CREATE or ALTER PROCEDURE dbo.spSelectExchangeToView
 
-exec viewBono
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select MonedaXPais.idMonedaXPais, Pais.nombrePais as Pais, Moneda.nombreMoneda as Moneda,  MonedaXPais.cambioPorcentaje as Porcentaje  from MonedaXPais as MonedaXPais
+    INNER JOIN Pais as Pais ON  Pais.idPais = MonedaXPais.idPais
+    INNER JOIN Moneda as Moneda ON Moneda.idMoneda = MonedaXPais.idMoneda
+    where MonedaXPais.estado = 1;
+end
+
+/*
+select * from MonedaXPais
+*/
+
+
