@@ -1258,10 +1258,11 @@ declare @identityValue int = -1
 	IF  @nombreEmpleado is not null  and @apellido is not null and @fecha is not null and 
 	@idSucursal is not null  and @idPuesto is not null and @foto is not null BEGIN
 		BEGIN TRY
-
+				declare @idEmpleado int
 				insert into Empleado (nombreEmpleado,apellidoEmpleado,fotoEmpleado,fechaContratacion,idSucursal,idPuesto)
 				VALUES (@nombreEmpleado,@apellido,@foto,@fecha,@idSucursal,@idPuesto)
-
+				set @idEmpleado = @@identity
+				insert into ventasEmpleado(idEmpleado) VALUES(@idEmpleado)
 		END TRY
 		BEGIN CATCH
 			set @errorInt=1
@@ -1574,6 +1575,7 @@ CREATE Or ALTER PROCEDURE spCostumerPurcharse
 	@montoTotal money,
 	@idCliente varchar(200),
     @idMetodoPago int,
+	@idEmpleado int,
 	@operationFlag int
     with encryption
 AS
@@ -1591,6 +1593,10 @@ declare @errorInt int = 0, @errorMsg varchar(200)
 								INSERT INTO Factura (fechaFactura,hora,idSucursal,montoTotal,idCliente,idMetodoPago)
 								values (GETDATE(),CONVERT (TIME, GETDATE()),@idSucursal,@montoTotal,@idCliente,@idMetodoPago);
 								set @idFactura = @@identity;
+
+								UPDATE ventasEmpleado
+								set cantidadVentas = cantidadVentas+1
+								where idEmpleado = @idEmpleado
 
 								set @errorInt=0
 								set @errorMsg = 'The purchase was inserted correcty'
@@ -1619,171 +1625,7 @@ declare @errorInt int = 0, @errorMsg varchar(200)
 			END  ---Final if validaci�n nuloss
 
 	END
-	/*
-	if @operationFlag = 1 BEGIN
-		if  @idImpuesto is not null and @nombre is not null and @porcentaje is not null and @idPais is not null BEGIN
-			IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
-				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
-							BEGIN TRY
-								BEGIN TRANSACTION
-								update MYSQLSERVER...Impuesto 
-								set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
-								idPais = ISNULL(@idPais, idPais)
-								where idImpuesto = @idImpuesto
-							COMMIT TRANSACTION
-							END TRY
-							BEGIN CATCH
-								set @errorInt=1
-								set @errorMsg = 'Error al actualizar a la base de datos'
-							END CATCH
 	
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un pais válido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'NO existe un producto con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay algún valor nulo'
-			END  ---Final if validaci�n nulos
-	END
-	if @operationFlag = 2
-	begin
-		select * from MYSQLSERVER...Impuesto
-		where idImpuesto= @idImpuesto and estado =1;
-	end
-	IF @operationFlag = 3	BEGIN
-		select * from MYSQLSERVER...Impuesto as Impuesto
-		INNER JOIN Pais ON Pais.idPais =Impuesto.idPais
-		
-	END
-	IF @operationFlag = 4	BEGIN
-		update MYSQLSERVER...Impuesto  
-		set estado = ISNULL(0, estado)
-		where idImpuesto = @idImpuesto
-	END
-	IF @operationFlag = 5
-	BEGIN
-		update MYSQLSERVER...Impuesto	 
-		set estado = ISNULL(1, estado)
-		where idImpuesto= @idImpuesto
-	END
-	*/
-	if @errorInt =-1
-		select @errorInt as Error, @ErrorMsg as MensajeError
-	if @errorInt =0
-		select @idFactura as Id
-End
-GO
-
-GO
-CREATE Or ALTER PROCEDURE spCostumerPurcharse
-    @idFactura int,
-    @idSucursal int,
-	@montoTotal money,
-	@idCliente varchar(200),
-    @idMetodoPago int,
-	@operationFlag int
-    with encryption
-AS
-BEGIN
-declare @errorInt int = 0, @errorMsg varchar(200)
-
-    IF @operationFlag = 0 BEGIN
-		if @idSucursal is not null and @idCliente is not null  and @idMetodoPago is not null and @montoTotal is not null BEGIN
-			IF (select count(*) from Sucursal where idSucursal = @idSucursal) = 1 BEGIN
-				IF (select count(*) from Cliente where idCliente = @idCliente) = 1 BEGIN
-					IF (select count(*) from MetodoPago where idMetodoPago = @idMetodoPago) = 1 BEGIN
-					
-						BEGIN TRY
-							BEGIN TRANSACTION;
-								INSERT INTO Factura (fechaFactura,hora,idSucursal,montoTotal,idCliente,idMetodoPago)
-								values (GETDATE(),CONVERT (TIME, GETDATE()),@idSucursal,@montoTotal,@idCliente,@idMetodoPago);
-								set @idFactura = @@identity;
-
-								set @errorInt=0
-								set @errorMsg = 'The purchase was inserted correcty'
-							COMMIT TRANSACTION;
-	
-						END TRY
-						BEGIN CATCH
-							set @errorInt=-1
-							set @errorMsg = 'An error has ocurred try to insert into the data base'
-						END CATCH		
-				END ELSE BEGIN 				
-					set @errorInt =-1
-					set @errorMsg = 'No exits this paymentMethod'
-					END						
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No exits this user'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=-1
-				set @errorMsg = 'No exits this branch'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=-1
-			set @errorMsg = 'There are null values'
-			END  ---Final if validaci�n nuloss
-
-	END
-	/*
-	if @operationFlag = 1 BEGIN
-		if  @idImpuesto is not null and @nombre is not null and @porcentaje is not null and @idPais is not null BEGIN
-			IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
-				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
-							BEGIN TRY
-								BEGIN TRANSACTION
-								update MYSQLSERVER...Impuesto 
-								set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
-								idPais = ISNULL(@idPais, idPais)
-								where idImpuesto = @idImpuesto
-							COMMIT TRANSACTION
-							END TRY
-							BEGIN CATCH
-								set @errorInt=1
-								set @errorMsg = 'Error al actualizar a la base de datos'
-							END CATCH
-	
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un pais válido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'NO existe un producto con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay algún valor nulo'
-			END  ---Final if validaci�n nulos
-	END
-	if @operationFlag = 2
-	begin
-		select * from MYSQLSERVER...Impuesto
-		where idImpuesto= @idImpuesto and estado =1;
-	end
-	IF @operationFlag = 3	BEGIN
-		select * from MYSQLSERVER...Impuesto as Impuesto
-		INNER JOIN Pais ON Pais.idPais =Impuesto.idPais
-		
-	END
-	IF @operationFlag = 4	BEGIN
-		update MYSQLSERVER...Impuesto  
-		set estado = ISNULL(0, estado)
-		where idImpuesto = @idImpuesto
-	END
-	IF @operationFlag = 5
-	BEGIN
-		update MYSQLSERVER...Impuesto	 
-		set estado = ISNULL(1, estado)
-		where idImpuesto= @idImpuesto
-	END
-	*/
 	if @errorInt =-1
 		select @errorInt as Error, @ErrorMsg as MensajeError
 	if @errorInt =0
@@ -2907,5 +2749,48 @@ end
 /*
 select * from MonedaXPais
 */
+GO
+CREATE OR ALTER PROCEDURE dbo.getAllEmployee
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+    BEGIN TRY
+
+            Select idEmpleado from Empleado
+
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'Error al insertar bono en la base de datos'
+        if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+    END CATCH
+end
+GO
+
+GO
+CREATE OR ALTER PROCEDURE dbo.insertPedido
+	@idPedido int,
+    @idFactura int ,
+	@porcentajeCosto float,
+	@otrosDetalles varchar(200),
+	@idCliente varchar(200),
+	@idOperation int
+	with encryption
+
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+	INSERT INTO Pedido (idFactura,otrosDetalles,idCliente) 
+	VALUES(@idFactura,@otrosDetalles,@idCliente)
+--INSERT OPERATION
+   
+end
+GO
+
 
 

@@ -498,25 +498,23 @@ namespace indioSupermercado
             int valueBono = -1;
             string msgBono = "";
 
+            SqlConnection conObj = new SqlConnection(stringConnection);
+            if (conObj.State == ConnectionState.Closed)
+            {
+                conObj.Open();
+            }
+
+
+            SqlCommand cmdVerventas = conObj.CreateCommand();
+            cmdVerventas.CommandType = CommandType.Text;
+            cmdVerventas.CommandText = "spBonoAutomaticoSucio";
+            cmdVerventas.ExecuteNonQuery();
 
 
             if (!string.IsNullOrWhiteSpace(TextBoxIDEmpleado.Text))
             {
                 try
                 {
-
-
-                    SqlConnection conObj = new SqlConnection(stringConnection);
-                    if (conObj.State == ConnectionState.Closed)
-                    {
-                        conObj.Open();
-                    }
-
-
-                    SqlCommand cmdVerventas = conObj.CreateCommand();
-                    cmdVerventas.CommandType = CommandType.Text;
-                    cmdVerventas.CommandText = "spBonoAutomaticoSucio";
-                    cmdVerventas.ExecuteNonQuery();
 
                     SqlCommand cmd = new SqlCommand("spValidarEmpleado", conObj);
                     cmd.CommandType = CommandType.StoredProcedure;

@@ -144,9 +144,8 @@ CREATE TABLE DetalleFactura(
 
 CREATE TABLE Pedido(
     idPedido INT PRIMARY Key not null IDENTITY(1,1),
-	idLugar int,
     idFactura int FOREIGN KEY REFERENCES Factura(idFactura),
-	porcentajeCosto float,
+	porcentajeCosto float DEFAULT 0.1,
 	otrosDetalles varchar(200),
 	idCliente varchar(200) FOREIGN KEY REFERENCES Cliente(idCliente),
     estado int DEFAULT 1        
@@ -201,7 +200,7 @@ Create table ventasEmpleado(
     fecha date default GETDATE(),
     aumento float default 60.0,
     tipo int default 2,
-    descrip varchar(20) default 'Realizó 1000 ventas'
+    descrip varchar(20) default 'Realizo 1000 ventas'
 );
 
 
