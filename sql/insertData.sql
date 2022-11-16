@@ -8,12 +8,11 @@ EXEC spCrudCategoriaProducto null, 'Limpieza', 'Productos del P&G',0
 EXEC spCrudCategoriaProducto null, 'Comida', 'Productos del empacado',0
 EXEC spCrudCategoriaProducto null, 'LAtas', 'Productos en latados',0
 
-EXEC spCrudProducto null, 'Yuca', 'yuca sembrada en tierras aledanas', 1, 'yuca.jpg','productImgs/yuca.jpg', 0
-EXEC spCrudProducto null, 'Zanahoria', 'naranja', 1, 'carrot.jpg','productImgs/carrot.jpg', 0
-EXEC spCrudProducto null, 'Cebolla', 'una cebolla', 1, 'onion.jpg','productImgs/onion.jpg', 0
-EXEC spCrudProducto null, 'Rabano', 'pequenno', 1, 'raddish.jpg','productImgs/raddish.jpg', 0
-EXEC spCrudProducto null, 'Papa', 'a potato', 1, 'potato.jpg','productImgs/potato.jpg', 0
-
+EXEC spCrudProducto null, 'Yuca', 'yuca sembrada en tierras aledanas', 1, 'yuca.jpg','productImgs/yuca.jpg',15,30 0
+EXEC spCrudProducto null, 'Zanahoria', 'naranja', 1, 'carrot.jpg','productImgs/carrot.jpg', 15,30, 0
+EXEC spCrudProducto null, 'Cebolla', 'una cebolla', 1, 'onion.jpg','productImgs/onion.jpg',15,30, 0
+EXEC spCrudProducto null, 'Rabano', 'pequenno', 1, 'raddish.jpg','productImgs/raddish.jpg', 15,30, 0
+EXEC spCrudProducto null, 'Papa', 'a potato', 1, 'potato.jpg','productImgs/potato.jpg',15,30, 0
 -- EXEC spCrudProducto 15, 'FEkrs', 'a potato', 1, 'ferks.jpg','productImgs/ferks.jpg', 3
 
 EXEC spCrudImpuesto null, 'IVA', 0.13, 1,0
@@ -64,6 +63,8 @@ EXEC crudSucursal 1, null, 'El Dorado', 7, 1
 EXEC spCrudProveedor null, 'Coopeagri', 'ventas@coopeagri.com', 1,0
 EXEC spCrudProveedor null, 'tresjotas', 'ventas@tresjotas.com', 1,0
 
+-- EXEC spCrudLote 13, '2022-11-01','2022-11-15', 3,1, 50,634.5, 0.3,6
+-- EXEC spCrudLote 4, '2022-11-01','2022-11-15', 3,1, 50,634.5, 0.3,3
 --fechaProduccion, fechaExpiracion, idProducto, idProveedor, cantidadExistencias,costoUnidad,porcentajeVenta, operation
 EXEC spCrudLote null, '2022-08-31','2022-12-31', 1,1, 30, 500,0.05,0
 EXEC spCrudLote null, '2022-08-31','2022-12-31', 2,1, 50, 320,0.02,0
@@ -79,7 +80,7 @@ EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
 
 
-EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 94.565,-83.264
+EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 10.021677,-83.984586
 
 
 insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
@@ -90,15 +91,32 @@ insert into TipoBono (nombreTipoBono,descripcionTipoBono) values ('BonoXVenta','
 insert into MetodoPago (nombreMetodo, otrosDetalles)
 VALUES('Efecto', 'nominacion')
 
-select * from MetodoPago
+
 --insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
 
 --insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);
 
 
 /*
+
+select * from MYSQLSERVER...Producto
+select * from Inventario
+select * from MetodoPago
 select * from  Usuario
+select * from Sucursal
+select * from MYSQLSERVER...Lote
+select * from Descuento
+select * from DescuentoXInventario
 
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
+
+--	@descuentoPorcent float
+exec spChangeDiscount 0.50
+
+exec spApplyDiscount 4
+
+exec spGetProductsForDiscount
+
+
 */

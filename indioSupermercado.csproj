@@ -73,6 +73,7 @@
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormProvider.aspx" />
     <Content Include="adminFormTaxByCategory.aspx" />
+    <Content Include="adminLote.aspx" />
     <Content Include="adminOrderProducts.aspx" />
     <Content Include="adminReportes.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
@@ -2166,6 +2167,7 @@
     <Content Include="img\Icono_logo.png" />
     <Content Include="img\imagen.jpg" />
     <Content Include="img\in-homepage-banner.jpg" />
+    <Content Include="img\inventory.png" />
     <Content Include="img\library.png" />
     <Content Include="img\loginBackground.jpg" />
     <Content Include="img\Logo Ferks.png" />
@@ -2242,6 +2244,13 @@
     </Compile>
     <Compile Include="adminFormTaxByCategory.aspx.designer.cs">
       <DependentUpon>adminFormTaxByCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminLote.aspx.cs">
+      <DependentUpon>adminLote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminLote.aspx.designer.cs">
+      <DependentUpon>adminLote.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminOrderProducts.aspx.cs">
       <DependentUpon>adminOrderProducts.aspx</DependentUpon>

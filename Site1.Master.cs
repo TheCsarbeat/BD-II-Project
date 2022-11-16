@@ -37,6 +37,7 @@ namespace indioSupermercado
                     orderProducts.Visible = false;
                     taxCategoria.Visible = false;
                     providers.Visible = false;
+                    loteLinkButton.Visible = false;
 
 
                 }
@@ -61,6 +62,7 @@ namespace indioSupermercado
                     orderProducts.Visible = false;
                     taxCategoria.Visible = false;
                     providers.Visible = false;
+                    loteLinkButton.Visible = false;
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
@@ -82,6 +84,7 @@ namespace indioSupermercado
                     orderProducts.Visible = true;
                     taxCategoria.Visible = true;
                     providers.Visible = true;
+                    loteLinkButton.Visible = true;
                 }
                 
             }
@@ -162,6 +165,21 @@ namespace indioSupermercado
         protected void providers_Click1(object sender, EventArgs e)
         {
             Response.Redirect("adminFormProvider.aspx");
+        }
+
+        protected void orderProducts_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("adminOrderProducts.aspx");
+        }
+
+        protected void loteLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminLote.aspx");
+        }
+
+        protected void taxCategoria_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormTaxByCategory.aspx");
         }
     }
 }

@@ -53,7 +53,7 @@ namespace indioSupermercado
                 SqlDataAdapter da = new SqlDataAdapter(cmd3);
                 da.Fill(dt);
 
-                addToMap(dt); //agregar sucursales al mapa
+                //addToMap(dt); //agregar sucursales al mapa
 
                 d2.DataSource = dt;
                 d2.DataBind();

@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="payOrder.aspx.cs" Inherits="indioSupermercado.payOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
-    <link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />
+
     <script src="bootstrap/mdb/js/mdb.min.js"></script>
 </asp:Content>
 
@@ -85,7 +84,7 @@
                                         <ul class="nav nav-tabs mb-3 shop-tab" id="ex1" role="tablist">
                                             <li class="nav-item" role="presentation">
                                                 <a
-                                                    class="nav-link active"
+                                                    class="nav-link active padre-toggle"
                                                     id="ex1-tab-1"
                                                     data-mdb-toggle="tab"
                                                     href="#ex1-tabs-1"
@@ -110,7 +109,7 @@
                                         <!-- Tabs content -->
                                         <div class="tab-content" id="ex1-content">
                                             <div
-                                                class="tab-pane fade show active"
+                                                class="tab-pane fade show active hijo-toggle"
                                                 id="ex1-tabs-1"
                                                 role="tabpanel"
                                                 aria-labelledby="ex1-tab-1">

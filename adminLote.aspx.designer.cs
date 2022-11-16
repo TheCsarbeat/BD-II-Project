@@ -11,160 +11,151 @@ namespace indioSupermercado
 {
 
 
-    public partial class Site1
+    public partial class adminLote
     {
 
         /// <summary>
-        /// head control.
+        /// idLotetxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.TextBox idLotetxt;
 
         /// <summary>
-        /// form1 control.
+        /// botonIDP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.LinkButton botonIDP;
 
         /// <summary>
-        /// userLoginLink control.
+        /// dateProText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userLoginLink;
+        protected global::System.Web.UI.WebControls.TextBox dateProText;
 
         /// <summary>
-        /// userSignupLink control.
+        /// dateExpText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton userSignupLink;
+        protected global::System.Web.UI.WebControls.TextBox dateExpText;
 
         /// <summary>
-        /// helloUser control.
+        /// productosDropList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton helloUser;
+        protected global::System.Web.UI.WebControls.DropDownList productosDropList;
 
         /// <summary>
-        /// loginOut control.
+        /// providersDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton loginOut;
+        protected global::System.Web.UI.WebControls.DropDownList providersDropDownList;
 
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// cantTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.TextBox cantTxt;
 
         /// <summary>
-        /// adminloginLink control.
+        /// costText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton adminloginLink;
+        protected global::System.Web.UI.WebControls.TextBox costText;
 
         /// <summary>
-        /// inventarioLinkButton control.
+        /// profitPercentTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton inventarioLinkButton;
+        protected global::System.Web.UI.WebControls.TextBox profitPercentTxt;
 
         /// <summary>
-        /// reportesLinkButton control.
+        /// insert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton reportesLinkButton;
+        protected global::System.Web.UI.WebControls.Button insert;
 
         /// <summary>
-        /// empleadosLinkButton control.
+        /// update control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton empleadosLinkButton;
+        protected global::System.Web.UI.WebControls.Button update;
 
         /// <summary>
-        /// clientesAdmin control.
+        /// deleteF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton clientesAdmin;
+        protected global::System.Web.UI.WebControls.Button deleteF;
 
         /// <summary>
-        /// providers control.
+        /// sqlDataSourceProductos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton providers;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlDataSourceProductos;
 
         /// <summary>
-        /// orderProducts control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton orderProducts;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// productsLinkButton control.
+        /// updatePanelProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton productsLinkButton;
+        protected global::System.Web.UI.UpdatePanel updatePanelProducts;
 
         /// <summary>
-        /// loteLinkButton control.
+        /// productsGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton loteLinkButton;
-
-        /// <summary>
-        /// taxCategoria control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton taxCategoria;
+        protected global::System.Web.UI.WebControls.GridView productsGridView;
     }
 }

@@ -60,7 +60,7 @@ SELECT @sql;
 --             script to drop store procedures
 -- =============================================
 -- script to drop procedures
-USE BD_PROYECTO        ;
+USE BD_PROYECTO           ;
 GO
 DECLARE @sql nvarchar(max) = N'';
 

@@ -181,4 +181,17 @@ CREATE TABLE Bono(
 	
 );
 
+CREATE TABLE Descuento(
+    idDescuento INT PRIMARY Key not null IDENTITY(1,1),
+    nombre nvarchar(100),
+	descuentoPorcent float,
+    estado int DEFAULT 1
+);
+
+CREATE TABLE DescuentoXInventario(
+    idDescuentoXInventario INT PRIMARY Key not null IDENTITY(1,1),
+    idInventario int FOREIGN KEY REFERENCES Inventario(idInventario),
+	idDescuento int FOREIGN KEY REFERENCES Descuento(idDescuento),
+);
+
 
