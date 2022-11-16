@@ -110,6 +110,8 @@ select * from Sucursal
 select * from MYSQLSERVER...Lote
 select * from Descuento
 select * from DescuentoXInventario
+select * from Factura
+select * from DetalleFactura
 
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
