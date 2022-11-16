@@ -1,0 +1,211 @@
+GO
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
+	@idInventario int,
+	@cantidad int,
+	@idSucursal int,
+	@idLote int,
+	@precioVenta money,
+	@option int				--Insertar insertarProducto nuevo 0, agregarCantidad Pedido
+ 	with encryption
+as
+BEGIN
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1, @aux int
+
+--INSERT OPERATION
+	IF @cantidad is not null  and @idSucursal is not null and @idLote is not null BEGIN
+		IF (select count(*) from Sucursal where  idSucursal = @idSucursal) = 1 BEGIN
+			IF (select count(*) from MYSQLSERVER...Lote where idLote = @idLote) = 1 BEGIN	
+				BEGIN TRY
+					
+						declare @idPais int;
+						declare @idProducto int;
+						
+						set @idPais = (select idPais FROM Sucursal 
+										INNER JOIN Lugar ON lugar.idLugar = Sucursal.idLugar
+										where Sucursal.idSucursal = @idSucursal)
+						set @idProducto = (select idProducto FROM MYSQLSERVER...Lote where idLote = @idLote)
+						
+						--idLote, idproducto, idPais
+						EXEC @aux = spGetPriceOfProduct @idLote,@idProducto,@idPais, @precioVenta OUTPUT
+
+						
+						INSERT INTO Inventario (cantidadInventario, idLote, idSucursal, precioVenta)
+						VALUES (@cantidad, @idLote,@idSucursal,@precioVenta)
+						
+						--Actualizar Cantidad lote
+						UPDATE MYSQLSERVER...Lote 
+						set cantidadExistencias = (cantidadExistencias-@cantidad)
+						where idLote = @idLote
+
+					set @errorInt=0
+					set @errorMsg = 'The product has inserted in the inventory'
+				END TRY
+				BEGIN CATCH
+					set @errorInt=1
+					set @errorMsg = 'There is an error in de database'
+				END CATCH
+			END ELSE BEGIN --Final if idCliente			
+				set @errorInt=1
+				set @errorMsg = 'idLote no existe'
+				END
+		END ELSE BEGIN 			
+			set @errorInt=1
+			set @errorMsg = 'idSucarsasl no existe'
+			END
+				
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+		END  ---Final if validacion nulos
+	if @errorInt = 1
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	IF @errorInt = 0
+		select 0 as correct, @errorMsg as REsult
+END
+
+GO
+create or alter procedure spGetPriceOfProduct 
+	@idLote int,	
+	@idProducto int,	
+	@idPaisImpuesto int,
+	@precioVentaTotal money OUTPUT
+as BEGIN
+declare @costo money;
+declare @errorInt int = 0, @errorMsg varchar(60)
+	IF @idProducto is not null and @idLote is not null BEGIN
+		declare @costoUnidad float;
+		declare @porcentajeVenta float;
+		declare @porcentajeImpuesto float;		
+
+		set @costo = (SELECT costoUnidad from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
+		set @porcentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
+		set @porcentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
+									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoriaXImpuesto = Impuesto.idImpuesto
+									INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = CategoriaXImpuesto.idCategoriaXImpuesto
+									WHERE Impuesto.idPais = @idPaisImpuesto)
+		
+		set @costoUnidad = CAST(@costo AS float)
+		
+		set @precioVentaTotal = CONVERT(money, (CAST(@costoUnidad AS float) *@porcentajeVenta) + CAST(@costoUnidad AS float))
+		set @precioVentaTotal = CONVERT(money, (CAST(@precioVentaTotal AS float) * @porcentajeImpuesto) +CAST(@precioVentaTotal AS float))
+
+	END ELSE BEGIN 			
+		set @errorInt=1
+		set @errorMsg = 'There are a null values'
+	END  ---Final if validacion nulos
+END
+go
+
+GO 
+CREATE OR ALTER PROCEDURE dbo.spGetCantNeed
+	@idSucursal int,
+	@idProducto int
+with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(60)
+    BEGIN TRY
+		declare @pointSucursal geometry
+
+		declare @current int
+		declare @need int
+
+		declare @max int
+
+		set @current = (select sum(cantidadInventario) as cantidadInventario from Inventario
+		INNER JOIN Sucursal as Sucursal ON  Sucursal.idSucursal = Inventario.idSucursal
+		INNER JOIN MYSQLSERVER...Lote as Lote ON Inventario.idLote = Lote.idLote
+		INNER JOIN MYSQLSERVER...Producto as Producto ON  Producto.idProducto = Lote.idProducto		
+		where Lote.estado = 1 and Producto.estado = 1 and Producto.idProducto = @idProducto and Sucursal.idSucursal = @idSucursal)
+		
+		if @current is null
+			set @current = 0
+
+		set @max = (select Limite.maxCant from MYSQLSERVER...Producto
+		INNER JOIN MYSQLSERVER...Limite as Limite ON  Limite.idProducto = Producto.idProducto	
+		where Producto.estado = 1 and Producto.idProducto = @idProducto) 
+		set @need = @max - @current
+		select @need
+
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'There is an error in de database'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+GO
+
+--  EXEC spGetBestProvider 6, 1,10
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetBestProvider
+	@idSucursal int,
+	@idProducto int,
+	@idNeed int
+with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(60)
+    BEGIN TRY
+		declare @pointSucursal geometry
+
+		set @pointSucursal = (select Lugar.ubicacion from Sucursal
+								INNER JOIN Lugar ON Lugar.idLugar = Sucursal.idLugar
+								where Sucursal.idSucursal = @idSucursal);
+
+		declare @idProvider int
+		declare @idLote int
+		set @idLote = (select top 1 Lote.idLote from MYSQLSERVER...Proveedor as Proveedor
+		INNER JOIN MYSQLSERVER...Lote as Lote ON Lote.idProveedor = Proveedor.idProveedor
+		INNER JOIN MYSQLSERVER...Producto as Producto ON Producto.idProducto = Lote.idProducto
+		where Producto.idProducto = @idProducto and Lote.cantidadExistencias >= @idNeed
+		ORDER BY Lote.costoUnidad ASC)
+
+		IF @idLote is not null 
+			select Proveedor.idProveedor, Proveedor.nombreProveedor, idLote from  MYSQLSERVER...Proveedor as Proveedor
+			INNER JOIN MYSQLSERVER...Lote as Lote ON Lote.idProveedor = Proveedor.idProveedor			
+			where Lote.idLote = @idLote 
+		else
+			select -1,'No exist a provider with products'
+
+		/*SELECT TOP 1 Sucursal.idSucursal, Sucursal.nombreSucursal FROM Sucursal 
+		inner join Lugar on Lugar.idLugar = Sucursal.idLugar
+		ORDER BY @pointCliente.STDistance(Lugar.ubicacion) ASC;*/
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'There is an error in de database'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+
+GO
+
+
+
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectSucursalesToView    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+    select Sucursal.idSucursal, Sucursal.nombreSucursal as Nombre, Lugar.nombreLugar as Lugar, Sucursal.idMonedaXPais as Moneda from Sucursal as Sucursal    
+    INNER JOIN Lugar as Lugar ON  Lugar.idLugar = Sucursal.idLugar
+
+    where Sucursal.estado = 1;
+end
+
+GO
+CREATE Or ALTER PROCEDURE spGetCountries
+AS
+BEGIN
+    Select * from Pais
+End
+GO

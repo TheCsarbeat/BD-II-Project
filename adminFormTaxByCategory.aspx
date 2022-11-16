@@ -1,25 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminFormTaxByCategory.aspx.cs" Inherits="indioSupermercado.adminFormTaxByCategory" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <script type="text/javascript">
+    <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript">
         $(document).ready(function () {
 
             //$(document).ready(function () {
             //$('.table').DataTable();
             // });
-
             $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-            //$('.table1').DataTable();
+            // Code that uses other library's $ can follow here.
+
         });
 
-        </script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+
     <section class="container">
         <h2 class="text-center">Set tax to a Product Category</h2>
     </section>
 
-    
+
     <section class="container-xxl">
         <div class="row">
             <div class="col-md-5">
@@ -43,7 +45,7 @@
                         </div>
 
                         <hr>
-                           
+
                         <%--ID--%>
                         <div class="row">
                             <div class="col">
@@ -64,10 +66,10 @@
                                 <label>Choose a tax</label>
                                 <div class="form-group">
                                     <asp:DropDownList class="form-control" ID="taxDropList" runat="server" OnSelectedIndexChanged="taxDropList_SelectedIndexChanged">
-                                    </asp:DropDownList>                                    
+                                    </asp:DropDownList>
                                 </div>
                             </div>
-                     <%--       <div class="col-6">
+                            <%--       <div class="col-6">
                                 <asp:Label ID="countryLb" runat="server" Text="Country"></asp:Label>
                                 <asp:TextBox CssClass="form-control" ID="countrytxt" runat="server" placeholder="Set tax to see the country" Enabled="False"></asp:TextBox>
                             </div>--%>

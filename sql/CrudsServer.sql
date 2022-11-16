@@ -903,6 +903,7 @@ select @Test
 GO
 
 GO
+
 create or alter procedure spGetPriceOfProduct 
 	@idLote int,	
 	@idProducto int,	
@@ -910,18 +911,20 @@ create or alter procedure spGetPriceOfProduct
 	@precioVentaTotal money OUTPUT
 as BEGIN
 declare @costo money;
-declare @errorInt int = 0, @errorMsg varchar(200)
+declare @errorInt int = 0, @errorMsg varchar(60)
 	IF @idProducto is not null and @idLote is not null BEGIN
 		declare @costoUnidad float;
 		declare @porcentajeVenta float;
 		declare @porcentajeImpuesto float;		
-
+		declare @idCategoria int
+		set @idCategoria = (select idCategoria from MYSQLSERVER...Producto
+							where Producto.idProducto = @idProducto)
 		set @costo = (SELECT costoUnidad from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
 		set @porcentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
-		set @porcentajeImpuesto = (SELECT porcentajeImpuesto from MYSQLSERVER...Impuesto as Impuesto
+		set @porcentajeImpuesto = (SELECT sum(porcentajeImpuesto) from MYSQLSERVER...Impuesto as Impuesto
 									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoriaXImpuesto = Impuesto.idImpuesto
 									INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = CategoriaXImpuesto.idCategoriaXImpuesto
-									WHERE Impuesto.idPais = @idPaisImpuesto)
+									WHERE Impuesto.idPais = 1 and Categoria.idCategoria = @idCategoria)
 		
 		set @costoUnidad = CAST(@costo AS float)
 		
@@ -934,7 +937,11 @@ declare @errorInt int = 0, @errorMsg varchar(200)
 	END  ---Final if validacion nulos
 END
 go
+go
 
+/*
+EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
+*/
 GO
 CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
 	@idInventario int,
@@ -954,8 +961,7 @@ declare @identityValue int = -1, @aux int
 		IF (select count(*) from Sucursal where  idSucursal = @idSucursal) = 1 BEGIN
 			IF (select count(*) from MYSQLSERVER...Lote where idLote = @idLote) = 1 BEGIN	
 				BEGIN TRY
-					
-						declare @idPais int;
+					declare @idPais int;
 						declare @idProducto int;
 						
 						set @idPais = (select idPais FROM Sucursal 
@@ -963,10 +969,11 @@ declare @identityValue int = -1, @aux int
 										where Sucursal.idSucursal = @idSucursal)
 						set @idProducto = (select idProducto FROM MYSQLSERVER...Lote where idLote = @idLote)
 						
-						--idLote, idproducto, idPais
-						EXEC @aux = spGetPriceOfProduct @idLote,@idProducto,@idPais, @precioVenta OUTPUT
-
 						
+						--idLote, idproducto, idPais
+						EXEC spGetPriceOfProduct @idLote,@idProducto,@idPais, @precioVenta OUTPUT
+
+						select @precioVenta
 						INSERT INTO Inventario (cantidadInventario, idLote, idSucursal, precioVenta)
 						VALUES (@cantidad, @idLote,@idSucursal,@precioVenta)
 						
@@ -2828,5 +2835,25 @@ AS
 BEGIN
     Select * from Empleado
 End
+GO
+
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetSucursalDropList
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @descuentoPorcent float
+	BEGIN TRY
+		SELECT idSucursal, nombreSucursal from Sucursal
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+END
 GO
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'

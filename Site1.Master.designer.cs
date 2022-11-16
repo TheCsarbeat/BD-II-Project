@@ -96,15 +96,6 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton adminloginLink;
 
         /// <summary>
-        /// inventarioLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton inventarioLinkButton;
-
-        /// <summary>
         /// reportesLinkButton control.
         /// </summary>
         /// <remarks>
@@ -123,6 +114,15 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton empleadosLinkButton;
 
         /// <summary>
+        /// PuestoTrabajo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PuestoTrabajo;
+
+        /// <summary>
         /// clientesAdmin control.
         /// </summary>
         /// <remarks>
@@ -130,15 +130,6 @@ namespace indioSupermercado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton clientesAdmin;
-
-        /// <summary>
-        /// providers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton providers;
 
         /// <summary>
         /// discount control.
@@ -168,6 +159,15 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton SucursalAdmin;
 
         /// <summary>
+        /// Manager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Manager;
+
+        /// <summary>
         /// ProveedorAdmin control.
         /// </summary>
         /// <remarks>
@@ -195,6 +195,15 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton ImpuestoAdmin;
 
         /// <summary>
+        /// taxCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton taxCategoria;
+
+        /// <summary>
         /// TipoPagoAdmin control.
         /// </summary>
         /// <remarks>
@@ -204,15 +213,6 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton TipoPagoAdmin;
 
         /// <summary>
-        /// PuestoTrabajo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PuestoTrabajo;
-
-        /// <summary>
         /// Lugar control.
         /// </summary>
         /// <remarks>
@@ -220,24 +220,6 @@ namespace indioSupermercado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton Lugar;
-
-        /// <summary>
-        /// Manager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Manager;
-
-        /// <summary>
-        /// orderProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton orderProducts;
 
         /// <summary>
         /// productsLinkButton control.
@@ -258,12 +240,12 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton loteLinkButton;
 
         /// <summary>
-        /// taxCategoria control.
+        /// orderProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton taxCategoria;
+        protected global::System.Web.UI.WebControls.LinkButton orderProducts;
     }
 }

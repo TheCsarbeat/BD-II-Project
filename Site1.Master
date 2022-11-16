@@ -32,11 +32,8 @@
 
     <script src="bootstrap/js/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
-
-    <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
     <script src="datatables/js/jquery.dataTables.min.js"></script>
-    <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
+    <script src="bootstrap/js/sweetalert2.all.min.js"></script>
 
     <script src="js/scripts.js"></script>
 
@@ -111,15 +108,14 @@
 
                         <asp:LinkButton class="footerlinks" ID="adminloginLink" runat="server" OnClick="LinkButton6_Click">Admin Login</asp:LinkButton>
                         &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="inventarioLinkButton" runat="server">Inventario</asp:LinkButton>
-                        &nbsp;
+
                             <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server" OnClick="reportesLinkButton_Click">Reportes</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="empleadosLinkButton" runat="server" OnClick="empleadosLinkButton_Click">Empleados</asp:LinkButton>
                         &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="PuestoTrabajo" runat="server" OnClick="puestoLinkButton_Click">PuestoTrabajo</asp:LinkButton>
+                        &nbsp;                            
                             <asp:LinkButton class="footerlinks" ID="clientesAdmin" runat="server" OnClick="clientesAdmin_Click">Clientes</asp:LinkButton>
-                        &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="providers" runat="server" OnClick="providers_Click1">Proveedores</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="discount" runat="server" OnClick="discount_Click">Descuentos</asp:LinkButton>
                         &nbsp;
@@ -127,27 +123,28 @@
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="SucursalAdmin" runat="server" OnClick="sucursalLinkButton_Click">Sucursal</asp:LinkButton>
                         &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="Manager" runat="server" OnClick="Manager_Click">Manager</asp:LinkButton>
+                        &nbsp;
                             <asp:LinkButton class="footerlinks" ID="ProveedorAdmin" runat="server" OnClick="proveedorLinkButton_Click">Proveedor</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="TipoCambioAdmin" runat="server" OnClick="tipoCambioLinkButton_Click">TipoCambio</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="ImpuestoAdmin" runat="server" OnClick="impuestoLinkButton_Click">Impuesto</asp:LinkButton>
                         &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="taxCategoria" runat="server" OnClick="taxCategoria_Click">ImpuestosxCategoria</asp:LinkButton>
+                        &nbsp;
                             <asp:LinkButton class="footerlinks" ID="TipoPagoAdmin" runat="server" OnClick="tipoPagoLinkButton_Click">TipoPago</asp:LinkButton>
                         &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="PuestoTrabajo" runat="server" OnClick="puestoLinkButton_Click">PuestoTrabajo</asp:LinkButton>
-                        &nbsp;
                             <asp:LinkButton class="footerlinks" ID="Lugar" runat="server" OnClick="Lugar_Click">Lugar</asp:LinkButton>
-                        &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="Manager" runat="server" OnClick="Manager_Click">Manager</asp:LinkButton>
-                        &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server">Inventario</asp:LinkButton>
-                        &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
+                        &nbsp;       
+                        <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="loteLinkButton" runat="server" OnClick="loteLinkButton_Click">Lote</asp:LinkButton>
                         &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="taxCategoria" runat="server" OnClick="taxCategoria_Click">ImpuestosxCategoria</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server" OnClick="orderProducts_Click2">Inventario</asp:LinkButton>
+                        &nbsp;
+                            
+                            
 
                     </div>
 

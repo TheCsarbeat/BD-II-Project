@@ -748,21 +748,16 @@ CREATE or ALTER PROCEDURE dbo.spCrudLimite
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(200)
+declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
 		if @max is not null and @min is not null  BEGIN
 			IF (select count(*) from MYSQLSERVER...Limite where idLimite = @idLimite) = 0 BEGIN
 				IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
-					
 						BEGIN TRY
-	
-							--INSERT INTO MYSQLSERVER...Limtie (maxCant,minCant,idProducto)
-							--values (@max,@min,@idProducto);
-							select 0
-								
-	
+							INSERT INTO MYSQLSERVER...Limite (maxCant,minCant,idProducto)
+							values (@max,@min,@idProducto);
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
@@ -784,7 +779,6 @@ declare @identityValue int = -1
 
 		if @identityValue != -1
 			return @identityValue
-
 	end
 	
 	if @operationFlag = 1 BEGIN
@@ -794,8 +788,9 @@ declare @identityValue int = -1
 						BEGIN TRY
 							
 							update MYSQLSERVER...Limite 
-							--set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
-							set idProducto = ISNULL(@idProducto, idProducto) where idLimite = @idLimite;
+							set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
+							idProducto = ISNULL(@idProducto, idProducto) 
+							where idLimite = @idLimite;
 							
 						END TRY
 						BEGIN CATCH
@@ -840,10 +835,7 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
-
---====================================================
---						productos para ver
---===================================================
+GO
 GO
 CREATE or ALTER PROCEDURE dbo.spSelectProductsToView
 	
@@ -855,6 +847,8 @@ declare @identityValue int = -1
 	Producto.estado, Limite.maxCant, Limite.minCant from MYSQLSERVER...Producto as Producto
 	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
 	INNER JOIN MYSQLSERVER...Limite as Limite ON Limite.idProducto = Producto.idProducto 
+
+	select * from MYSQLSERVER...Limite
 	
 end
 GO

@@ -10,6 +10,7 @@ using System.Configuration;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
+using System.Collections;
 
 namespace indioSupermercado
 {
@@ -19,6 +20,44 @@ namespace indioSupermercado
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlDataSource1.ConnectionString = stringConnection;
+            loadBranches();
+        }
+        public void loadBranches()
+        {
+            try
+            {
+                var nombreCategoria = new ArrayList();
+                var idCategoria = new ArrayList();
+
+
+                SqlConnection con = new SqlConnection(stringConnection);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand("EXEC spGetSucursalDropList", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nombreCategoria.Add(reader[0].ToString());
+                    idCategoria.Add(reader[1].ToString());
+                }
+
+                con.Close();
+                if (!IsPostBack)
+                {
+                    for (int i = 0; i < nombreCategoria.Count; i++)
+                        branchesDropList.Items.Insert(0, new ListItem(idCategoria[i].ToString(), nombreCategoria[i].ToString()));
+                    branchesDropList.DataBind();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script.");
+            }
         }
 
         public void loadFileImg()
@@ -57,7 +96,7 @@ namespace indioSupermercado
             string lastName = TextBoxApellidoEmpleado.Text;
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
-            string office = TextBoxSucursal.Text;
+            string office = branchesDropList.SelectedValue;
             string pic = "profilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
@@ -67,7 +106,7 @@ namespace indioSupermercado
             string msgPS = "";
 
 
-            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(TextBoxSucursal.Text)) 
+            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)) 
                 ||!string.IsNullOrEmpty(TextBoxNombreEmpleado.Text) || (!string.IsNullOrEmpty(TextBoxApellidoEmpleado.Text)) || (!string.IsNullOrEmpty(TextBoxFecha.Text))
                                     || (!string.IsNullOrEmpty(FileEmpleado.FileName)))
             {
@@ -162,7 +201,7 @@ namespace indioSupermercado
             string lastName = TextBoxApellidoEmpleado.Text;
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
-            string office = TextBoxSucursal.Text;
+            string office = branchesDropList.SelectedValue;
             string pic = "profilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
@@ -181,7 +220,7 @@ namespace indioSupermercado
                 try
                 {   
 
-                    if(!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(TextBoxSucursal.Text)))
+                    if(!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)))
                     {
                         SqlConnection conObj = new SqlConnection(stringConnection);
                         if (conObj.State == ConnectionState.Closed)

@@ -31,14 +31,13 @@ namespace indioSupermercado
 
                     adminloginLink.Visible = true; // admin login link button
 
-                    inventarioLinkButton.Visible = false; // author management link button
+                    
                     reportesLinkButton.Visible = false; // publisher management link button
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false; //admin clients
                     productsLinkButton.Visible = false;
                     orderProducts.Visible = false;
-                    taxCategoria.Visible = false;
-                    providers.Visible = false;
+                    taxCategoria.Visible = false;                    
                     discount.Visible = false;
                     expired.Visible = false;
                     SucursalAdmin.Visible = false; // admin sucursales
@@ -49,6 +48,7 @@ namespace indioSupermercado
                     PuestoTrabajo.Visible = false; // admin puesto
                     Lugar.Visible = false;
                     loteLinkButton.Visible = false;
+                    Manager.Visible = false;
 
 
                 }
@@ -65,14 +65,14 @@ namespace indioSupermercado
 
 
                     adminloginLink.Visible = true; // admin login link button
-                    inventarioLinkButton.Visible = false; // author management link button
+                    
                     reportesLinkButton.Visible = false; // publisher management link button
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false;//admin clients
                     productsLinkButton.Visible = false;
                     orderProducts.Visible = false;
                     taxCategoria.Visible = false;
-                    providers.Visible = false;
+                   
                     discount.Visible = false;
                     expired.Visible = false;
                     SucursalAdmin.Visible = false; // admin sucursales
@@ -82,6 +82,7 @@ namespace indioSupermercado
                     TipoPagoAdmin.Visible = false; // admin tipoPago
                     PuestoTrabajo.Visible = false; // admin puesto
                     Lugar.Visible = false;
+                    Manager.Visible = false;
 
                     loteLinkButton.Visible = false;
                 }
@@ -98,14 +99,14 @@ namespace indioSupermercado
 
 
                     adminloginLink.Visible = false; // admin login link button
-                    inventarioLinkButton.Visible = true; // author management link button
+                   
                     reportesLinkButton.Visible = true;
                     empleadosLinkButton.Visible = true;  // admin employees
                     clientesAdmin.Visible = true; //admin clients
                     productsLinkButton.Visible = true;
                     orderProducts.Visible = true;
                     taxCategoria.Visible = true;
-                    providers.Visible = true;
+                    
                     discount.Visible = true;
                     expired.Visible = true;
                     SucursalAdmin.Visible = true; // admin sucursales
@@ -115,7 +116,7 @@ namespace indioSupermercado
                     TipoPagoAdmin.Visible = true; // admin tipoPago
                     PuestoTrabajo.Visible = true; // admin puesto
                     Lugar.Visible = true;
-
+                    Manager.Visible = true;
                     loteLinkButton.Visible = true;
                 }
                 
@@ -259,6 +260,11 @@ namespace indioSupermercado
         protected void taxCategoria_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminFormTaxByCategory.aspx");
+        }
+
+        protected void orderProducts_Click2(object sender, EventArgs e)
+        {
+            Response.Redirect("adminOrderProducts.aspx");
         }
     }
 }
