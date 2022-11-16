@@ -446,7 +446,26 @@ namespace indioSupermercado
                     {
                         if (!string.IsNullOrWhiteSpace(TextBoxPerformance.Text) || (!string.IsNullOrWhiteSpace(TextBoxMontoBono.Text)) || (!string.IsNullOrWhiteSpace(TextBoxFecha.Text)))
                         {
-                            
+
+                            SqlCommand cmdVerventas = new SqlCommand("viewBono", conObj);
+                            cmdVerventas.CommandType = CommandType.StoredProcedure;
+
+                            SqlCommand cmdBonoAutomatico = new SqlCommand("spBonoAutomatico", conObj);
+                            cmdBonoAutomatico.CommandType = CommandType.StoredProcedure;
+
+                            SqlDataReader readerventas = cmdVerventas.ExecuteReader();
+
+                            while (readerventas.Read())
+                            {
+                                if (Convert.ToInt32(readerventas.GetString(0)) >= 1000)
+                                {
+                                    int idEmp = readerventas.GetInt32(0);
+                                    cmdBonoAutomatico.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idEmp;
+                                    SqlDataReader readerAuto = cmdBonoAutomatico.ExecuteReader();
+                                }
+                            }
+
+
                             SqlCommand cmdBono = new SqlCommand("spBonoPerformance", conObj);
                             cmdBono.CommandType = CommandType.StoredProcedure;
 
