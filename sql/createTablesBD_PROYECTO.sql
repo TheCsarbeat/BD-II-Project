@@ -70,9 +70,9 @@ CREATE TABLE Inventario(
 
 CREATE TABLE Horario(
     idHorario INT PRIMARY Key not null IDENTITY(1,1),
-    horarioInicial time,
-    horarioFinal time,
-    dia date,
+    horarioInicial varchar(20),
+    horarioFinal varchar(20),
+    dia varchar(20),
     idSucursal int,
     estado int DEFAULT 1
 );

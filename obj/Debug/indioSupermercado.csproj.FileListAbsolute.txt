@@ -234,8 +234,6 @@ C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesI
 C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.csproj.CopyComplete
 C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.dll
 C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.pdb
-D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
-D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\indioSupermercado.dll.config
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\indioSupermercado.dll
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\indioSupermercado.pdb
@@ -290,6 +288,8 @@ D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\VBCSCompiler.
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\VBCSCompiler.exe.config
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.CopyComplete
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.dll
 D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.pdb

@@ -237,5 +237,10 @@ namespace indioSupermercado
         {
             Response.Redirect("branchSelector.aspx");
         }
+
+        protected void Manager_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormManager.aspx");
+        }
     }
 }

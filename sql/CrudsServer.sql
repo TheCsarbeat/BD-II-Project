@@ -2690,7 +2690,7 @@ declare @identityValue int = -1
             From Factura inner join FacturaxEmpleado on Factura.idFactura = FacturaxEmpleado.idFactura
 			inner join Empleado on Empleado.idEmpleado = FacturaxEmpleado.idEmpleado inner join Bono on
 			Bono.idEmpleado = Empleado.idEmpleado
-            group by Empleado.idEmpleado order by Bono.idBono asc
+            group by Empleado.idEmpleado, Bono.idBono  order by Bono.idBono asc
     END TRY
     BEGIN CATCH
         set @errorInt=1
@@ -2699,5 +2699,134 @@ declare @identityValue int = -1
         select @errorInt as Error, @ErrorMsg as MensajeError
     END CATCH
 end
+GO
+
+
+-- cambiar tabla horario
+
+GO
+-- para ver el horario
+CREATE or ALTER PROCEDURE dbo.spSelectHorarioToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select Horario.idHorario, Horario.horarioInicial as HoraInicial, Horario.horarioFinal as HoraFinal, Horario.dia as Dia, Sucursal.nombreSucursal from Horario as Horario    
+    INNER JOIN Sucursal as Sucursal ON  Sucursal.idSucursal = Horario.idSucursal
+    where Horario.estado = 1;
+end
+
+-- para ver sucursal en drop box
+
+GO
+CREATE Or ALTER PROCEDURE spGetSucursales
+AS
+BEGIN
+    Select * from Sucursal
+End
+GO
+
+-- cambio en crud horario
+
+go
+create or alter procedure crudHorario @opcion int,@idHorario int = null, @horaInicial varchar(20) = null, @horaFinal varchar(20)= null, @dia varchar(15)= null, @idSucursal int = null
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+
+	if @opcion = 1
+		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)= 0 BEGIN
+			if @horaInicial is not null and @horaFinal is not null and @dia is not null
+				BEGIN
+				if (select count(*) from Sucursal where idSucursal = @idSucursal)!=0 
+					BEGIN
+					BEGIN transaction
+					insert into Horario( horarioInicial, horarioFinal, dia, idSucursal) 
+					values( @horaInicial, @horaFinal, @dia, @idSucursal)
+					commit transaction
+
+				END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'idSucursal no existe'
+				END
+
+			END ELSE BEGIN 
+			set @error = 2
+			set @errorMsg = 'No pueden ir valores nulos' 
+			END
+
+		END ELSE BEGIN 
+		set @error = 3
+		set @errorMsg = 'idHorario ya existe'
+		END
+
+	END
+	
+
+	if @opcion = 2
+		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)!=0 			BEGIN
+			BEGIN transaction
+				update Horario
+				set horarioInicial = ISNULL(@horaInicial, horarioInicial),horarioFinal = ISNULL(@horaFinal, horarioFinal), dia = ISNULL(@dia, dia),
+				idSucursal = ISNULL(@idSucursal, idSucursal) where idHorario = @idHorario
+			commit transaction 
+
+		END ELSE BEGIN  
+			set @error = 1
+			set @errorMsg = 'El idHorario no existe'
+		END
+	END
+	if @opcion = 3		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)!= 0 BEGIN
+			BEGIN transaction
+				select * from Horario where idHorario = @idHorario
+			commit transaction
+		END ELSE BEGIN 
+		set @error = 1
+		set @errorMsg = 'El idHorario no existe'
+		END
+	END
+
+	if @opcion = 4
+		BEGIN
+		if (select count(*) from Horario where idHorario = @idHorario)!=0 			BEGIN
+			BEGIN transaction
+				delete from Horario where idHorario = @idHorario
+			commit transaction
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idHorario no existe'
+		END
+	END
+		if @error !=0
+		select @error as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Action completed correctly!' as Result
+	end
+
+-- para ver manager sucursal
+go
+CREATE or ALTER PROCEDURE dbo.spSelectManagerToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select SucursalManager.idSucursalManager, Sucursal.nombreSucursal as Sucursal, Empleado.nombreEmpleado as Empleado from SucursalManager as SucursalManager    
+    INNER JOIN Sucursal as Sucursal ON  Sucursal.idSucursal = SucursalManager.idSucursal
+	INNER JOIN Empleado as Empleado ON Empleado.idEmpleado = SucursalManager.idEmpleado
+end 
+
+-- para obtener empleado
+GO
+CREATE Or ALTER PROCEDURE spGetEmpleado
+AS
+BEGIN
+    Select * from Empleado
+End
 GO
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'
