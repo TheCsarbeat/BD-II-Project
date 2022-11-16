@@ -2895,3 +2895,5 @@ declare @identityValue int = -1
 end
 
 GO
+
+--EXEC spCrudProducto 6, 'Rambutan', 'RICO Y SABROSO', 2, 'rambutan.jpg','productImgs/rambutan.jpg',10,100, 1

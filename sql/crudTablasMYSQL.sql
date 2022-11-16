@@ -135,23 +135,25 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 							BEGIN TRY
-								update MYSQLSERVER...Producto 
-								set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
-								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
-
+								
+								update OPENQUERY ( MYSQLSERVER ,'select * from Producto')  
+								set nombreProducto = @nombreProducto, descripcionProducto = @descripcionProducto,
+								idCategoria = @idCategoria, nombreImg = @nombreImg, imgPath = @imgPath
 								where idProducto = @idProducto
+
 								declare @idLimite int
 
-								
 								set @idLimite = (select idLimite from MYSQLSERVER...Limite  where idProducto = 1)  
-								select @idLimite
+								
+														
 								EXEC spCrudLimite @idLimite, @cantMax, @cantMin, @idProducto, 1 
+								
 								set @errorMsg = 'The product has update'
 								set @errorInt = 2
 							END TRY
 							BEGIN CATCH
 								set @errorInt=1
-								set @errorMsg = 'Error al actualizar a la base de datos'
+								set @errorMsg = 'An error hasve ocurre a la base de datos'
 							END CATCH
 	
 				END ELSE BEGIN 				
@@ -255,9 +257,7 @@ declare @identityValue int = -1
 end
 GO 
 
---   EXEC spCrudProducto 13, null, null,null,null,null, 4
-
-
+--spCrudImpuesto 1,'IVACR', 0.13, 1, 1
 --====================================================
 --						Impuesto
 --===================================================
@@ -314,12 +314,10 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
 				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
 							BEGIN TRY
-								BEGIN TRANSACTION
 								update MYSQLSERVER...Impuesto 
 								set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
 								idPais = ISNULL(@idPais, idPais)
 								where idImpuesto = @idImpuesto
-							COMMIT TRANSACTION
 							END TRY
 							BEGIN CATCH
 								set @errorInt=1
@@ -784,10 +782,9 @@ declare @identityValue int = -1
 	if @operationFlag = 1 BEGIN
 		if  @max is not null and @min is not null and  @idProducto is not null BEGIN
 			IF (select count(*) from MYSQLSERVER...Limite where idLimite = @idLimite) = 1 BEGIN
-				IF (select count(*) from Producto where idProducto = @idProducto) = 1 BEGIN
+				IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
 						BEGIN TRY
-							
-							update MYSQLSERVER...Limite 
+							update OPENQUERY ( MYSQLSERVER ,'select * from Limite')   
 							set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
 							idProducto = ISNULL(@idProducto, idProducto) 
 							where idLimite = @idLimite;
@@ -822,16 +819,6 @@ declare @identityValue int = -1
 		where estado = 1;
 	END
 
-	IF @operationFlag = 4	BEGIN
-		update MYSQLSERVER...Limite  
-		set estado = ISNULL(0, estado)
-		where idLimite = @idLimite
-	END
-	IF @operationFlag = 5	BEGIN
-		update MYSQLSERVER...Limite	 
-		set estado = ISNULL(1, estado)
-		where idLimite= @idLimite
-	END
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
