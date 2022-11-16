@@ -181,7 +181,7 @@ namespace indioSupermercado
                     else
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                                   "Swal.fire('Error','The min and max are wrong','errerroror')", true);
+                                   "Swal.fire('Error','The min and max are wrong','error')", true);
                     }
                 }
                 else
@@ -239,7 +239,7 @@ namespace indioSupermercado
                                 con.Open();
                             }
 
-                            SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", '" + nombreProducto + "', '" + descripcionProducto + "'," + " " + categoria + ", '" + strFileName + "','" + strFilePath + "', " + min +max+","+ min + ",1", con);
+                            SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", '" + nombreProducto + "', '" + descripcionProducto + "'," + " " + categoria + ", '" + strFileName + "','" + strFilePath + "'," + min + "," + max + ", 1", con);
                             SqlDataReader reader = cmd.ExecuteReader();
 
                             reader.Read();

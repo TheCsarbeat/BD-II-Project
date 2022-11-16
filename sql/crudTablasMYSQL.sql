@@ -142,7 +142,9 @@ declare @identityValue int = -1
 								where idProducto = @idProducto
 								declare @idLimite int
 
+								
 								set @idLimite = (select idLimite from MYSQLSERVER...Limite  where idProducto = 1)  
+								select @idLimite
 								EXEC spCrudLimite @idLimite, @cantMax, @cantMin, @idProducto, 1 
 								set @errorMsg = 'The product has update'
 								set @errorInt = 2
