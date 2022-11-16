@@ -2655,4 +2655,49 @@ BEGIN
     Select * from Pais
 End
 GO
+
+CREATE OR ALTER PROCEDURE dbo.spBonoAutomatico @idEmp int
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+    BEGIN TRY
+
+            insert into Bono(idEmpleado,fecha,cantidadBono,idTipoBono,Performance)
+            Values(@idEmp,GETDATE(),60,2,'Realizó 1000 ventas')
+
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'Error al insertar bono en la base de datos'
+        if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+    END CATCH
+end
+GO
+
+CREATE OR ALTER PROCEDURE dbo.viewBono
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+    BEGIN TRY
+            Select Empleado.idEmpleado, COUNT(Bono.idBono) as ventas
+            From Factura inner join FacturaxEmpleado on Factura.idFactura = FacturaxEmpleado.idFactura
+			inner join Empleado on Empleado.idEmpleado = FacturaxEmpleado.idEmpleado inner join Bono on
+			Bono.idEmpleado = Empleado.idEmpleado
+            group by Empleado.idEmpleado order by Bono.idBono asc
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'Error al insertar bono en la base de datos'
+        if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+    END CATCH
+end
+GO
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'

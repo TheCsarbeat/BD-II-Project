@@ -6,8 +6,6 @@
 <head runat="server">
     <title></title>
 
-
-
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
@@ -25,9 +23,6 @@
     <link href="css/main.css" rel="stylesheet" />
 
 
-
-
-
     <%--bootstrap js--%>      <%--popper js--%>
 
         <asp:ContentPlaceHolder ID="head" runat="server">
@@ -39,9 +34,6 @@
     <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
     <script src="datatables/js/jquery.dataTables.min.js"></script>
     <script src="bootstrap/js/sweetalert2.all.min.js"></script> 
-
-    
-
 
     <script src="js/scripts.js"></script>
 
