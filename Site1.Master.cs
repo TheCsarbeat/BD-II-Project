@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Collections;
 
 namespace indioSupermercado
 {
@@ -25,6 +26,7 @@ namespace indioSupermercado
 
                     loginOut.Visible = false; // logout link button
                     helloUser.Visible = false; // hello user link button
+                    Comprar.Visible = false;
 
 
                     adminloginLink.Visible = true; // admin login link button
@@ -56,6 +58,7 @@ namespace indioSupermercado
 
                     loginOut.Visible = true; // logout link button
                     helloUser.Visible = true; // hello user link button
+                    Comprar.Visible = true;
                     helloUser.Text = "Hello " + Session["username"].ToString();
 
 
@@ -84,6 +87,7 @@ namespace indioSupermercado
                     //Response.Write("<script>alert('estoy en admin');</script.");
                     userLoginLink.Visible = false; // user login link button
                     userSignupLink.Visible = false; // sign up link button
+                    Comprar.Visible= false;
 
                     loginOut.Visible = true; // logout link button
                     helloUser.Visible = true; // hello user link button
@@ -227,6 +231,11 @@ namespace indioSupermercado
         protected void Lugar_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminFormLugar.aspx");
+        }
+
+        protected void Comprar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("branchSelector.aspx");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace indioSupermercado
             SqlDataSourceExpirados.ConnectionString = stringConnection;
             SqlDataSourceGanancias.ConnectionString = stringConnection;
             GridViewReporteBono.Visible = false;
-            //GridViewExpirados.Visible = false
+            GridViewExpirados.Visible = false;
 
         }
 
@@ -34,5 +34,28 @@ namespace indioSupermercado
             UpdatePanelCliente.Update();
         }
 
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            GridViewExpirados.Visible = true;
+            UpdatePanelCliente.Update();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            GridViewVendidos.Visible = true;
+            UpdatePanelCliente.Update();
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            GridViewClientes.Visible = true;
+            UpdatePanelCliente.Update();
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            GridViewGanancias.Visible = true;
+            UpdatePanelCliente.Update();
+        }
     }
 }

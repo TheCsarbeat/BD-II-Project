@@ -2468,7 +2468,78 @@ if @opcion = 3
 		
 END
 
+GO
+CREATE OR ALTER PROCEDURE dbo.spReporteExpirados
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
 
+--INSERT OPERATION
+	BEGIN TRY
+			Select nombreProducto as Nombre, L.fechaExpiracion as Vencimiento, idLote as Lote, costoUnidad as Precio, nombreCategoria as Categoria
+			from MYSQLSERVER...Producto as P 
+			JOIN MYSQLSERVER...Lote as L ON P.idProducto = L.idProducto 
+			JOIN MYSQLSERVER...CategoriaProducto as C ON P.idCategoria = C.idCategoria
+			where L.fechaExpiracion < GETDATE();
+
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'Error al insertar bono en la base de datos'
+		if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	END CATCH
+end
+GO
+
+CREATE OR ALTER PROCEDURE dbo.spReporteClientes
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	BEGIN TRY
+
+			Select F.idCliente as ID,nombreCliente as Nombre, apellidoCliente as Apellido,COUNT(F.idCliente) as Compras
+			from Factura as F JOIN Cliente as c on c.idCliente = F.idCliente
+			group by F.idCliente,C.nombreCliente,C.apellidoCliente order by F.idCliente asc
+
+
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'Error al insertar bono en la base de datos'
+		if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	END CATCH
+end
+GO
+
+
+CREATE OR ALTER PROCEDURE dbo.spReporteProductosVendidos
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+
+--INSERT OPERATION
+	BEGIN TRY
+
+			Select d.idProducto, nombreProducto as Nombre, SUM(d.cantidad) as Cantidad
+			From DetalleFactura as d JOIN MYSQLSERVER...Producto as p on d.idProducto = p.idProducto
+			group by Cantidad, p.nombreProducto, d.idProducto order by Cantidad asc
+
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'Error al insertar bono en la base de datos'
+		if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	END CATCH
+end
+GO
 
 
 
