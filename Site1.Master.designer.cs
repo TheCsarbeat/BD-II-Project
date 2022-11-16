@@ -141,17 +141,7 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.LinkButton providers;
 
         /// <summary>
-        /// orderProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton orderProducts;
-
-        /// <summary>
         /// discount control.
-        /// productsLinkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -161,10 +151,6 @@ namespace indioSupermercado
 
         /// <summary>
         /// expired control.
-        protected global::System.Web.UI.WebControls.LinkButton productsLinkButton;
-
-        /// <summary>
-        /// loteLinkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -174,10 +160,6 @@ namespace indioSupermercado
 
         /// <summary>
         /// SucursalAdmin control.
-        protected global::System.Web.UI.WebControls.LinkButton loteLinkButton;
-
-        /// <summary>
-        /// taxCategoria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -247,6 +229,41 @@ namespace indioSupermercado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton Manager;
+
+        /// <summary>
+        /// orderProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton orderProducts;
+
+        /// <summary>
+        /// productsLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton productsLinkButton;
+
+        /// <summary>
+        /// loteLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton loteLinkButton;
+
+        /// <summary>
+        /// taxCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton taxCategoria;
     }
 }

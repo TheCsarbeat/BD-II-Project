@@ -141,7 +141,7 @@
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="Manager" runat="server" OnClick="Manager_Click">Manager</asp:LinkButton>
                         &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server" OnClick="orderProducts_Click1">Inventario</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server">Inventario</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
                         &nbsp;
