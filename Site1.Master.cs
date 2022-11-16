@@ -51,6 +51,7 @@ namespace indioSupermercado
                     Manager.Visible = false;
                     adminCategoria.Visible = false;
                     adminFormHorario.Visible = false;
+                    adminPais.Visible = false;
 
 
                 }
@@ -88,6 +89,7 @@ namespace indioSupermercado
                     adminCategoria.Visible = false;
                     loteLinkButton.Visible = false;
                     adminFormHorario.Visible = false;
+                    adminPais.Visible = false;
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
@@ -123,6 +125,7 @@ namespace indioSupermercado
                     loteLinkButton.Visible = true;
                     adminCategoria.Visible = true;
                     adminFormHorario.Visible = true;
+                    adminPais.Visible = true;
                 }
                 
             }
@@ -178,11 +181,6 @@ namespace indioSupermercado
         protected void productsLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminFormProductos.aspx");
-        }
-
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         protected void taxCategori_Click(object sender, EventArgs e)
@@ -280,6 +278,11 @@ namespace indioSupermercado
         protected void adminFormHorario_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminFormHorario.aspx");
+        }
+
+        protected void adminPais_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormPais.aspx");
         }
     }
 }

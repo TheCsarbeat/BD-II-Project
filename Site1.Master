@@ -147,7 +147,7 @@
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="adminFormHorario" runat="server" OnClick="adminFormHorario_Click">Horario</asp:LinkButton>
                         &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="adminPais" runat="server" OnClick="pais_Click">Pais</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="adminPais" runat="server" OnClick="adminPais_Click">Pais</asp:LinkButton>
                             
 
                     </div>
