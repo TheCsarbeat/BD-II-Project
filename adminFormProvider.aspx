@@ -140,7 +140,7 @@
                                                     <ItemStyle Font-Bold="True" />
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="Nombre" HeaderText="Name" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
-                                                <asp:BoundField DataField="Contacto" HeaderText="Contact" ReadOnly="True" SortExpression="Contacto"></asp:BoundField>
+                                                <asp:BoundField DataField="Contacto" HeaderText="Email" ReadOnly="True" SortExpression="Contacto"></asp:BoundField>
                                                 <asp:BoundField DataField="Pais" HeaderText="Country" ReadOnly="True" SortExpression="Pais"></asp:BoundField>
 
                                             </Columns>
