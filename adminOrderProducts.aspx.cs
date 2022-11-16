@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Runtime.Remoting.Messaging;
 
 namespace indioSupermercado
 {
@@ -171,48 +172,57 @@ namespace indioSupermercado
                 cantNeed = Convert.ToInt32(reader[0].ToString());
                 reader.Close();
 
-                SqlCommand cmd2 = new SqlCommand("EXEC spGetBestProvider " + idSucursal + ", "+idProducto+","+cantNeed, con);
-                SqlDataReader reader2 = cmd2.ExecuteReader();
-
-                reader2.Read();
-                idProvider = Convert.ToInt32(reader2[0].ToString());
-                nombreProvider = (reader2[1].ToString());
-                if (idProvider != -1)
+                if(cantNeed> 0)
                 {
-                    
-                    idLote = Convert.ToInt32(reader2[2].ToString());
-                    reader2.Close();
-                    //-- idInventario, cantidad, @idSucursal, @idLote, @precioVenta, operation    el precio de venta nulo para que se autocalcule
-                    //          null,       20,     6,          1,      null,            0
+                    SqlCommand cmd2 = new SqlCommand("EXEC spGetBestProvider " + idSucursal + ", " + idProducto + "," + cantNeed, con);
+                    SqlDataReader reader2 = cmd2.ExecuteReader();
 
-                    SqlCommand cmd3 = new SqlCommand("EXEC spInsertProductToInventory null, "+cantNeed.ToString()+", " + idSucursal.ToString() + ", " + idLote.ToString()+ ",null, 0", con);
-                    SqlDataReader reader3 = cmd3.ExecuteReader();
-                    reader3.Read();
-                    value = Convert.ToInt32(reader3[0].ToString());
-                    msgResult = (reader3[1].ToString());
-                    if(value == 0)
+                    reader2.Read();
+                    idProvider = Convert.ToInt32(reader2[0].ToString());
+                    nombreProvider = (reader2[1].ToString());
+                    if (idProvider != -1)
                     {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
 
-                        productsGridView.DataBind();
-                        updatePanelProducts.Update();
+                        idLote = Convert.ToInt32(reader2[2].ToString());
+                        reader2.Close();
+                        //-- idInventario, cantidad, @idSucursal, @idLote, @precioVenta, operation    el precio de venta nulo para que se autocalcule
+                        //          null,       20,     6,          1,      null,            0
+
+                        SqlCommand cmd3 = new SqlCommand("EXEC spInsertProductToInventory null, " + cantNeed.ToString() + ", " + idSucursal.ToString() + ", " + idLote.ToString() + ",null, 0", con);
+                        SqlDataReader reader3 = cmd3.ExecuteReader();
+                        reader3.Read();
+                        value = Convert.ToInt32(reader3[0].ToString());
+                        msgResult = (reader3[1].ToString());
+                        if (value == 0)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                            productsGridView.DataBind();
+                            updatePanelProducts.Update();
+                        }
+                        else
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Error','" + msgResult + "','error')", true);
+                        }
+
                     }
                     else
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Error','" + msgResult + "','error')", true);
+                            "Swal.fire('Sorry','" + nombreProvider + "','error')", true);
+                        reader2.Close();
                     }
-                    
+
+                    con.Close();
                 }
                 else
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                        "Swal.fire('Sorry','"+ nombreProvider + "','error')", true);
-                    reader2.Close();
+                            "Swal.fire('Sorry','The inventory is full','error')", true);
+                    
                 }
-                
-                con.Close();
 
 
             }

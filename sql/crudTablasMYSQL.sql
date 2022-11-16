@@ -375,7 +375,7 @@ GO
 --====================================================
 --			Categoria CategoriaXImpuesto
 --===================================================
-CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto
+CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto 
 	@idCategoriaXImpuesto int null, 
 	@idCategoria int ,
 	@idImpuesto int ,
@@ -386,7 +386,7 @@ begin
 declare @errorInt int = -1, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
-
+	
 	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 0 BEGIN
 			IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
@@ -396,6 +396,7 @@ declare @identityValue int = -1
 					values (@idCategoria,@idImpuesto);
 					set @errorMsg = 'The tax by category has inserted'
 					set @errorInt = 0
+
 					END TRY
 					BEGIN CATCH
 						set @errorInt=1
@@ -413,15 +414,16 @@ declare @identityValue int = -1
 				end
 
 	END
-	
+	 --- EXEC spCrudCategoriaImpuesto 2, 6, 2, 1
 	if @operationFlag = 1 BEGIN
 	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 1 BEGIN
 			if @idCategoria is not null and @idImpuesto is not null begin
 						BEGIN TRY
-						
+							
 							update MYSQLSERVER...CategoriaXImpuesto
-							set idCategoria = ISNULL(@idCategoria, idCategoria), idImpuesto = ISNULL(@idImpuesto, idImpuesto)
-							where idCategoriaXImpuesto = @idCategoriaXImpuesto;
+							set idCategoria = ISNULL(6, idCategoria),
+							idImpuesto = ISNULL(2, idImpuesto)
+							where idCategoriaXImpuesto = 2;
 							set @errorMsg = 'The tax by category has updated'
 							set @errorInt= 2
 						
@@ -890,3 +892,9 @@ GO
 -- EXEC spCrudCategoriaImpuesto null, null, null, 3
 
 -- EXEC spCrudImpuesto null, null, null, null, 3
+
+/*
+
+EXEC spSelectInventoryView
+
+*/

@@ -110,7 +110,7 @@ namespace indioSupermercado
                 {
                     SqlCommand cmdPro = con.CreateCommand();
                     cmdPro.CommandType = CommandType.Text;
-                    cmdPro.CommandText = "EXEC spProductByPucharse " + i.getIdProducto().ToString() + "," + idFactura.ToString() + "," + i.cantProduct.ToString() + ",0";
+                    cmdPro.CommandText = "EXEC spProductByPucharse " + i.getIdProducto().ToString() + "," + idFactura.ToString() + "," + i.cantProduct.ToString() + ","+i.idInventario.ToString()+",0";
                     cmdPro.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -132,6 +132,11 @@ namespace indioSupermercado
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                     "Swal.fire('Erorr','An error have ocurred','error')", true);
             }
+        }
+
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("productList.aspx?id="+productList.idSucursal.ToString());
         }
     }
 }

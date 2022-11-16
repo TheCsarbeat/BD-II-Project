@@ -900,10 +900,14 @@ select @Test
 */
 
 -- EXEC spGetPriceOfProduct 1,1,1
-GO
 
 GO
 
+GO
+/*
+
+
+*/
 create or alter procedure spGetPriceOfProduct 
 	@idLote int,	
 	@idProducto int,	
@@ -922,10 +926,14 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 		set @costo = (SELECT costoUnidad from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
 		set @porcentajeVenta = (SELECT porcentajeVenta from MYSQLSERVER...Lote where idLote = @idLote and idProducto = @idProducto)
 		set @porcentajeImpuesto = (SELECT sum(porcentajeImpuesto) from MYSQLSERVER...Impuesto as Impuesto
-									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idCategoriaXImpuesto = Impuesto.idImpuesto
-									INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON Categoria.idCategoria = CategoriaXImpuesto.idCategoriaXImpuesto
-									WHERE Impuesto.idPais = 1 and Categoria.idCategoria = @idCategoria)
-		
+									INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idImpuesto = Impuesto.idImpuesto
+									INNER JOIN MYSQLSERVER...CategoriaProducto as CategoriaProducto ON CategoriaProducto.idCategoria = CategoriaXImpuesto.idCategoria
+									
+									WHERE Impuesto.idPais = @idPaisImpuesto and CategoriaProducto.idCategoria = @idCategoria)
+		if @porcentajeImpuesto is null 
+			set @porcentajeImpuesto =0
+
+
 		set @costoUnidad = CAST(@costo AS float)
 		
 		set @precioVentaTotal = CONVERT(money, (CAST(@costoUnidad AS float) *@porcentajeVenta) + CAST(@costoUnidad AS float))
@@ -940,7 +948,11 @@ go
 go
 
 /*
-EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
+
+EXEC spInsertProductToInventory null, 0, 7, 7,null, 0
+
+
+
 */
 GO
 CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
@@ -1505,10 +1517,12 @@ GO
 CREATE Or ALTER PROCEDURE spGetImpuestoxCategory
 AS
 BEGIN
-    Select idCategoriaxImpuesto, Impuesto.nombreImpuesto as taxName, porcentajeImpuesto, nombreCategoria, descripcionCategoria,  nombrePais  from MYSQLSERVER...Impuesto as Impuesto
+	
+	Select idCategoriaxImpuesto, Impuesto.nombreImpuesto as taxName, porcentajeImpuesto, nombreCategoria, descripcionCategoria,  nombrePais  from MYSQLSERVER...Impuesto as Impuesto
 	INNER JOIN MYSQLSERVER...CategoriaXImpuesto as CategoriaXImpuesto ON CategoriaXImpuesto.idImpuesto = Impuesto.idImpuesto
 	INNER JOIN MYSQLSERVER...CategoriaProducto as CategoriaProducto ON CategoriaProducto.idCategoria = CategoriaXImpuesto.idCategoria
 	INNER JOIN Pais on Pais.idPais = Impuesto.idPais
+
 End
 GO
 
@@ -1550,12 +1564,20 @@ CREATE Or ALTER PROCEDURE dbo.spProductByPucharse
 	@idProducto int,
 	@idFactura int,
 	@cant int,
+	@idInventario int,
 	@operationFlag int
     with encryption
 AS
 BEGIN
+
+
     INSERT INTO DetalleFactura (idProducto, cantidad, idFactura)
 	VALUES (@idProducto,@cant,@idFactura)
+
+	UPDATE Inventario
+	set cantidadInventario = (cantidadInventario-@cant)
+	where idInventario = @idInventario
+
 End
 GO
 
@@ -2003,7 +2025,10 @@ BEGIN
     Select * from MonedaXPais
 End
 GO
+/*
 
+
+*/
 -- cambio crud Impuesto
 GO
 --====================================================
@@ -2018,7 +2043,7 @@ CREATE or ALTER PROCEDURE dbo.spCrudImpuesto
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(200)
+declare @errorInt int = -1, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -2030,7 +2055,7 @@ declare @identityValue int = -1
 	
 								INSERT INTO MYSQLSERVER...Impuesto (nombreImpuesto,porcentajeImpuesto,idPais)
 								values (@nombre,@porcentaje,@idPais);
-								
+								set @errorInt=0
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
@@ -2059,7 +2084,9 @@ declare @identityValue int = -1
 		BEGIN TRY
 			update MYSQLSERVER...Impuesto 
 			set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
-			idPais = ISNULL(@idPais, idPais) where idImpuesto = @idImpuesto
+			idPais = ISNULL(@idPais, idPais) 
+			where idImpuesto = @idImpuesto
+			set @errorInt=0
 		END TRY
 		BEGIN CATCH
 			set @errorInt=1
@@ -2092,10 +2119,11 @@ declare @identityValue int = -1
 		set estado = ISNULL(1, estado)
 		where idImpuesto= @idImpuesto
 	END
-	if @errorInt !=0
+	if @errorInt =1
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	else
-			select 0 as correct, 'Action completed correctly!' as Result
+	if @errorInt =0
+		select 0 as correct, 'Action completed correctly!' as Result
+
 
 end
 

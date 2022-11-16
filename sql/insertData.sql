@@ -1,9 +1,9 @@
 -- EXECUTE IN SERVER
 EXEC insertPais 'Costa Rica'
-EXEC insertPais'Panama'
-EXEC insertPais'Nicaragua'
-EXEC insertPais'Salvador'
-EXEC insertPais'Honduras'
+EXEC insertPais 'Panama'
+EXEC insertPais 'Nicaragua'
+EXEC insertPais 'Salvador'
+EXEC insertPais 'Honduras'
 
 EXEC spCrudCategoriaProducto null, 'Hortaliza', 'Productos del campo',0
 EXEC spCrudCategoriaProducto null, 'Frutas', 'Productos extraidos de la madre tierra',0
@@ -22,9 +22,9 @@ EXEC spCrudProducto null, 'Papa', 'a potato', 1, 'potato.jpg','productImgs/potat
 
 
 EXEC spCrudImpuesto null, 'IVA CR', 0.13, 1,0
-EXEC spCrudImpuesto null, 'IVA Alcohol', 0.03, 1,0
 EXEC spCrudImpuesto null, 'IVA PAN',0.1,2,0
 EXEC spCrudImpuesto null, 'IVA NIC',0.18,3,0
+
 EXEC spCrudCategoriaImpuesto null,1, 1,0
 EXEC spCrudCategoriaImpuesto null,2, 1,0
 EXEC spCrudCategoriaImpuesto null,3, 1,0

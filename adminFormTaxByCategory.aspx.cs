@@ -44,7 +44,7 @@ namespace indioSupermercado
                 while (reader.Read())
                 {
                     idtax.Add(reader[0].ToString());
-                    taxName.Add(reader[1].ToString()+"("+ reader[6].ToString()+")");
+                    taxName.Add(reader[1].ToString());
                 }
 
                 con.Close();
