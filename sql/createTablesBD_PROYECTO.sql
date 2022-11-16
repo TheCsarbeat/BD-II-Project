@@ -1,11 +1,11 @@
 CREATE TABLE Moneda (
     idMoneda int PRIMARY Key not null IDENTITY(1,1),
-    nombreMoneda nvarchar(20),
+    nombreMoneda nvarchar(200),
     estado int DEFAULT 1
 );
 CREATE TABLE Pais(
     idPais INT PRIMARY Key not null IDENTITY(1,1),
-    nombrePais nvarchar(20),
+    nombrePais nvarchar(200),
     estado int DEFAULT 1
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE MonedaXPais(
 
 CREATE TABLE Lugar(
     idLugar INT PRIMARY Key not null IDENTITY(1,1),
-    nombreLugar nvarchar(20),
+    nombreLugar nvarchar(200),
     idPais int FOREIGN KEY REFERENCES Pais(idPais),
     ubicacion Geometry,
     estado int DEFAULT 1                         
@@ -28,14 +28,14 @@ CREATE TABLE Lugar(
 
 CREATE TABLE Puesto(
     idPuesto INT PRIMARY Key not null IDENTITY(1,1),
-    nombrePuesto nvarchar(20),
+    nombrePuesto nvarchar(200),
     salario money,
     estado int DEFAULT 1
 );
 
 CREATE TABLE Sucursal(
     idSucursal INT PRIMARY Key not null IDENTITY(1,1),
-    nombreSucursal nvarchar(20),
+    nombreSucursal nvarchar(200),
     idLugar int FOREIGN KEY REFERENCES Lugar(idLugar),
     idMonedaXPais int FOREIGN KEY REFERENCES MonedaXPais(idMonedaXPais),
     estado int DEFAULT 1
@@ -43,8 +43,8 @@ CREATE TABLE Sucursal(
 
 CREATE TABLE Empleado(
     idEmpleado INT PRIMARY Key not null IDENTITY(1,1),
-    nombreEmpleado nvarchar(20),
-    apellidoEmpleado nvarchar(20),
+    nombreEmpleado nvarchar(200),
+    apellidoEmpleado nvarchar(200),
     fechaContratacion date,
     fotoEmpleado nvarchar(MAX),
     idPuesto int FOREIGN KEY REFERENCES Puesto(idPuesto),
@@ -81,29 +81,29 @@ CREATE TABLE Horario(
 
 
 CREATE TABLE Usuario(
-    nombreUsuario varchar(50) PRIMARY Key not null,
-    contrasena varchar(20),
+    nombreUsuario varchar(200) PRIMARY Key not null,
+    contrasena varchar(200),
     estado int DEFAULT 1
 );
 
 CREATE TABLE Cliente(
-    idCliente varchar(20) PRIMARY Key ,
-    nombreCliente varchar(20),
-    apellidoCliente varchar(20),
+    idCliente varchar(200) PRIMARY Key ,
+    nombreCliente varchar(200),
+    apellidoCliente varchar(200),
     ubicacion Geometry,
     estado int DEFAULT 1
 );
 
 CREATE TABLE UsuarioXCliente(
     idUsuarioXCliente INT PRIMARY Key not null IDENTITY(1,1),
-    idCliente varchar(20) FOREIGN KEY REFERENCES Cliente(idCliente),
-    nombreUsuario varchar(50) FOREIGN KEY REFERENCES Usuario(nombreUsuario),
+    idCliente varchar(200) FOREIGN KEY REFERENCES Cliente(idCliente),
+    nombreUsuario varchar(200) FOREIGN KEY REFERENCES Usuario(nombreUsuario),
     estado int DEFAULT 1
 );
 
 CREATE TABLE UsuarioXEmpleado(
     idUsuarioXEmpleado INT PRIMARY Key not null IDENTITY(1,1),
-    nombreUsuario varchar(50)  FOREIGN KEY REFERENCES Usuario(nombreUsuario),
+    nombreUsuario varchar(200)  FOREIGN KEY REFERENCES Usuario(nombreUsuario),
     idEmpleado int, --FOREIGN KEY REFERENCES Empleado(idEmpleado),
     estado int DEFAULT 1        
 );
@@ -111,7 +111,7 @@ CREATE TABLE UsuarioXEmpleado(
 
 CREATE TABLE MetodoPago(
     idMetodoPago INT PRIMARY Key not null IDENTITY(1,1),
-    nombreMetodo varchar(20),
+    nombreMetodo varchar(200),
     otrosDetalles varchar(200),
     estado int DEFAULT 1        
 );
@@ -123,7 +123,7 @@ CREATE TABLE Factura(
     hora time,
     idSucursal int FOREIGN KEY REFERENCES Sucursal(idSucursal),    
     montoTotal money,
-    idCliente varchar(20) FOREIGN KEY REFERENCES Cliente(idCliente),
+    idCliente varchar(200) FOREIGN KEY REFERENCES Cliente(idCliente),
     idMetodoPago int FOREIGN KEY REFERENCES MetodoPago(idMetodoPago),
     estado int DEFAULT 1        
 );
@@ -148,14 +148,14 @@ CREATE TABLE Pedido(
     idFactura int FOREIGN KEY REFERENCES Factura(idFactura),
 	porcentajeCosto float,
 	otrosDetalles varchar(200),
-	idCliente varchar(20) FOREIGN KEY REFERENCES Cliente(idCliente),
+	idCliente varchar(200) FOREIGN KEY REFERENCES Cliente(idCliente),
     estado int DEFAULT 1        
 );
 
 CREATE TABLE Performance(
     idPerformance INT PRIMARY Key not null IDENTITY(1,1),
     calificacion int,
-    descripcionPerformance nvarchar(40),
+    descripcionPerformance nvarchar(200),
     fecha date,
     idEmpleado int FOREIGN KEY REFERENCES Empleado(idEmpleado),
     estado int DEFAULT 1
@@ -163,8 +163,8 @@ CREATE TABLE Performance(
 
 CREATE TABLE TipoBono(
     idTipoBono INT PRIMARY Key not null IDENTITY(1,1),
-    nombreTipoBono nvarchar(20),
-    descripcionTipoBono nvarchar(40),
+    nombreTipoBono nvarchar(200),
+    descripcionTipoBono nvarchar(200),
     estado int DEFAULT 1
 );
 
@@ -176,7 +176,7 @@ CREATE TABLE Bono(
     cantidadBono money,
     idTipoBono int FOREIGN KEY REFERENCES TipoBono(idTipoBono),
     idEmpleado int FOREIGN KEY REFERENCES Empleado(idEmpleado),
-	performance varchar(60),
+	performance varchar(200),
     estado int DEFAULT 1
 	
 );

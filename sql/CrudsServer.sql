@@ -9,11 +9,11 @@
 -- crudEmpleado
 
 go
-create or alter procedure crudEmpleado @opcion int,@idEmpleado int, @nombre varchar(20), @apellido varchar(20), @fechaContratacion date,
+create or alter procedure crudEmpleado @opcion int,@idEmpleado int, @nombre varchar(200), @apellido varchar(200), @fechaContratacion date,
 @foto varchar(100), @idPuesto int, @idSucursal int
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1
 		BEGIN
@@ -101,7 +101,7 @@ go
 create or alter procedure crudSucursalManager @opcion int,@idSucursalManger int, @idSucursal int , @idEmpleado int
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1
 		BEGIN
@@ -182,10 +182,10 @@ END
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
 
 go
-create or alter procedure crudPerformance @opcion int,@idPerformance int, @calificacion int, @descripcion varchar(50), @fecha date, @idEmpleado int with encryption
+create or alter procedure crudPerformance @opcion int,@idPerformance int, @calificacion int, @descripcion varchar(200), @fecha date, @idEmpleado int with encryption
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1
 		BEGIN
@@ -260,7 +260,7 @@ go
 create or alter procedure crudBono @opcion int,@idBono int, @fecha date, @cantidadBono money, @idTipoBono int, @idEmpleado int with encryption
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1
 		BEGIN
@@ -349,7 +349,7 @@ go
 create or alter procedure crudHorario @opcion int,@idHorario int, @horaInicial time, @horaFinal time, @dia varchar(15), @idSucursal int
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1
 		BEGIN
@@ -429,7 +429,7 @@ go
 create or alter procedure crudMonedaXPais @opcion int,@idMonedaXPais int, @idPais int, @cambioPorcentaje float,  @idMoneda int
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1		BEGIN
 		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)= 0 BEGIN
@@ -506,7 +506,7 @@ if @opcion = 3
 END
 
 go
-CREATE OR ALTER PROCEDURE insertMoneda @nombre varchar(20)
+CREATE OR ALTER PROCEDURE insertMoneda @nombre varchar(200)
 AS
 BEGIN
     IF NOT EXISTS (SELECT 1 from Moneda where nombreMoneda = @nombre)
@@ -520,7 +520,7 @@ END
 
 GO
 
-CREATE OR ALTER PROCEDURE insertPais @nombre varchar(20)
+CREATE OR ALTER PROCEDURE insertPais @nombre varchar(200)
 AS
 BEGIN
     IF NOT EXISTS (SELECT 1 from Pais where nombrePais = @nombre)
@@ -553,7 +553,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE insertLugar @nombre varchar(20), @idP int, @ubi Geometry
+CREATE OR ALTER PROCEDURE insertLugar @nombre varchar(200), @idP int, @ubi Geometry
 AS
 BEGIN
     If EXISTS(Select 1 from Pais where idPais = @idP)
@@ -566,7 +566,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE insertPuesto @nombre VARCHAR(20), @salario money
+CREATE OR ALTER PROCEDURE insertPuesto @nombre VARCHAR(200), @salario money
 AS
 BEGIN
     If NOT EXISTS(SELECT 1 from Puesto where nombrePuesto = @nombre)
@@ -579,7 +579,7 @@ BEGIN
 END
 Go
 
-Create OR ALTER PROCEDURE insertEmpleado @nombre VARCHAR(20), @apellido varchar(20), @fecha date, @foto NVARCHAR(MAX), @idPuesto int
+Create OR ALTER PROCEDURE insertEmpleado @nombre VARCHAR(200), @apellido varchar(200), @fecha date, @foto NVARCHAR(MAX), @idPuesto int
 AS
 BEGIN
     If EXISTS (SELECT 1 from Puesto where idPuesto = @idPuesto)
@@ -615,9 +615,9 @@ GO
 --						Tipo de SignUpCostumer
 --===================================================
 CREATE OR ALTER PROCEDURE dbo.spSignUpCostumer
-	@nombrUsuario varchar(20) ,
-	@contrasena varchar(20),
-	@idCliente varchar(20),
+	@nombrUsuario varchar(200) ,
+	@contrasena varchar(200),
+	@idCliente varchar(200),
 	@nombre varchar (15),
 	@apellidos varchar (15),
 	@xPosition float,
@@ -625,7 +625,7 @@ CREATE OR ALTER PROCEDURE dbo.spSignUpCostumer
 	with encryption
 as
 BEGIN
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -674,13 +674,13 @@ END
 
 GO
 CREATE OR ALTER PROCEDURE dbo.spUser
-	@userName varchar(50) null, 
-	@password varchar(20),
+	@userName varchar(200) null, 
+	@password varchar(200),
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 BEGIN
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 	if @operationFlag = 0 BEGIN
@@ -762,7 +762,7 @@ END
 --Creacion de procedimientoCliente
 GO
 CREATE OR ALTER PROCEDURE spCliente
-	@idCliente varchar (20),
+	@idCliente varchar (200),
 	@nombre varchar (15),
 	@apellidos varchar (15),
 	@xPosition float,
@@ -771,7 +771,7 @@ CREATE OR ALTER PROCEDURE spCliente
 	with encryption
 as
 BEGIN
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 
 	if @operationFlag = 0 BEGIN
 		if @nombre is not null  and @apellidos is not null and @xPosition is not null and @yPosition is not null BEGIN
@@ -856,8 +856,8 @@ END
 
 GO
 CREATE Or ALTER PROCEDURE spLoginCostumer 
-@nombrUsuario varchar(20),
-@contrasena varchar(20)
+@nombrUsuario varchar(200),
+@contrasena varchar(200)
 AS
 BEGIN
 	if @nombrUsuario is not null and @contrasena is not null BEGIN
@@ -902,6 +902,7 @@ select @Test
 -- EXEC spGetPriceOfProduct 1,1,1
 GO
 
+GO
 create or alter procedure spGetPriceOfProduct 
 	@idLote int,	
 	@idProducto int,	
@@ -909,7 +910,7 @@ create or alter procedure spGetPriceOfProduct
 	@precioVentaTotal money OUTPUT
 as BEGIN
 declare @costo money;
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 	IF @idProducto is not null and @idLote is not null BEGIN
 		declare @costoUnidad float;
 		declare @porcentajeVenta float;
@@ -926,8 +927,7 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 		
 		set @precioVentaTotal = CONVERT(money, (CAST(@costoUnidad AS float) *@porcentajeVenta) + CAST(@costoUnidad AS float))
 		set @precioVentaTotal = CONVERT(money, (CAST(@precioVentaTotal AS float) * @porcentajeImpuesto) +CAST(@precioVentaTotal AS float))
-		
-		select @precioVentaTotal
+
 	END ELSE BEGIN 			
 		set @errorInt=1
 		set @errorMsg = 'There are a null values'
@@ -946,7 +946,7 @@ CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
  	with encryption
 as
 BEGIN
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1, @aux int
 
 --INSERT OPERATION
@@ -970,7 +970,13 @@ declare @identityValue int = -1, @aux int
 						INSERT INTO Inventario (cantidadInventario, idLote, idSucursal, precioVenta)
 						VALUES (@cantidad, @idLote,@idSucursal,@precioVenta)
 						
-					
+						--Actualizar Cantidad lote
+						UPDATE MYSQLSERVER...Lote 
+						set cantidadExistencias = (cantidadExistencias-@cantidad)
+						where idLote = @idLote
+
+					set @errorInt=0
+					set @errorMsg = 'The product has inserted in the inventory'
 				END TRY
 				BEGIN CATCH
 					set @errorInt=1
@@ -989,10 +995,10 @@ declare @identityValue int = -1, @aux int
 		set @errorInt=1
 		set @errorMsg = 'There are a null values'
 		END  ---Final if validacion nulos
-	if @errorInt !=0
+	if @errorInt = 1
 		select @errorInt as Error, @ErrorMsg as MensajeError
-	--else
-		--select 0 as correct, 'The user has sign up succesfuly' as REsult
+	IF @errorInt = 0
+		select 0 as correct, @errorMsg as REsult
 END
 
 -- idInventario, cantidad, @idSucursal, @idLote, @precioVenta
@@ -1004,7 +1010,7 @@ CREATE OR ALTER PROCEDURE dbo.spGetCortumerIdByUserName
 with encryption
 as
 BEGIN
-    declare @errorInt int = 0, @errorMsg varchar(60)
+    declare @errorInt int = 0, @errorMsg varchar(200)
     BEGIN TRY
         SELECT Cliente.idCliente FROM Cliente
 		INNER JOIN UsuarioXCliente ON UsuarioxCliente.idCliente = Cliente.idCliente
@@ -1025,7 +1031,7 @@ CREATE OR ALTER PROCEDURE dbo.spGetOtherBranches
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	BEGIN TRY
 		select * from Sucursal where idSucursal != @idSucursal
 	END TRY
@@ -1039,11 +1045,11 @@ END
 
 GO
 CREATE OR ALTER PROCEDURE dbo.spGetIdCustomerFromUser
-	@nombreUsuario varchar(20)
+	@nombreUsuario varchar(200)
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	BEGIN TRY
 		select Cliente.idCliente, ubicacion.STX as X, ubicacion.STY from Cliente inner join UsuarioXCliente on
 		UsuarioXCliente.idCliente = Cliente.idCliente inner join Usuario on
@@ -1060,11 +1066,11 @@ END
 
 GO
 CREATE OR ALTER PROCEDURE dbo.spClosestPoint
-	@idCliente nvarchar(20)
+	@idCliente nvarchar(200)
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(20)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @pointCliente geometry
 	
 	BEGIN TRY
@@ -1088,7 +1094,7 @@ CREATE OR ALTER PROCEDURE dbo.spGetProductsByBranch
     with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(20)
+declare @errorInt int = 0, @errorMsg varchar(200)
 
     BEGIN TRY
         select Sucursal.idSucursal, Producto.idProducto, Producto.nombreProducto, Producto.imgPath, Lote.idLote, 
@@ -1132,8 +1138,8 @@ Go
 --PROCEDURE PARA ACTUALIZAR EMPLEADO
 CREATE OR ALTER PROCEDURE dbo.spActualizarEmpleado
 	@idEmpleado int ,
-	@nombreEmpleado varchar(20),
-	@apellido varchar(20),
+	@nombreEmpleado varchar(200),
+	@apellido varchar(200),
 	@foto nvarchar(Max),
 	@fecha date,
 	@idSucursal int,
@@ -1141,7 +1147,7 @@ CREATE OR ALTER PROCEDURE dbo.spActualizarEmpleado
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -1179,7 +1185,7 @@ CREATE OR ALTER PROCEDURE dbo.spValidPuestoSucursal
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -1224,8 +1230,8 @@ go
 
 --PROCEDURE PARA INSERTAR EMPLEADO
 CREATE OR ALTER PROCEDURE dbo.spInsertarEmpleado
-	@nombreEmpleado varchar(20),
-	@apellido varchar(20),
+	@nombreEmpleado varchar(200),
+	@apellido varchar(200),
 	@foto nvarchar(Max),
 	@fecha date,
 	@idSucursal int,
@@ -1233,7 +1239,7 @@ CREATE OR ALTER PROCEDURE dbo.spInsertarEmpleado
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -1263,11 +1269,11 @@ GO
 
 --PROCEDURE PARA ELIMINAR EMPLEADO
 CREATE OR ALTER PROCEDURE dbo.spEliminarEmpleado
-	@idEmpleado varchar(20)
+	@idEmpleado varchar(200)
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -1308,7 +1314,7 @@ GO
 CREATE or ALTER PROCEDURE dbo.spSelectSucursalesToView    
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
     select Sucursal.idSucursal, Sucursal.nombreSucursal as Nombre, Lugar.nombreLugar as Lugar, Sucursal.idMonedaXPais as Moneda from Sucursal as Sucursal    
@@ -1318,10 +1324,10 @@ declare @identityValue int = -1
 end
 
 go
-create or alter procedure crudSucursal @opcion int, @idSucursal int = null, @nombre varchar(20) = null, @idLugar int =null, @idMonedaXPais int= null, @estado int = null
+create or alter procedure crudSucursal @opcion int, @idSucursal int = null, @nombre varchar(200) = null, @idLugar int =null, @idMonedaXPais int= null, @estado int = null
 as
 BEGIN
-  declare @error int, @errorMsg varchar(20)
+  declare @error int, @errorMsg varchar(200)
 
   if @opcion = 1
     BEGIN
@@ -1417,7 +1423,7 @@ CREATE or ALTER PROCEDURE dbo.spSelectProviderToView
 
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
     select Proveedor.idProveedor, nombreProveedor as Nombre, Proveedor.contacto as Contacto, Pais.nombrePais as Pais from MYSQLSERVER...Proveedor  as Proveedor
     INNER JOIN Pais as Pais ON  Pais.idPais = Proveedor.idPais
@@ -1439,14 +1445,14 @@ go
 
 
 CREATE OR ALTER PROCEDURE dbo.spBonoPerformance
-    @idEmpleado varchar(20),
+    @idEmpleado varchar(200),
     @fecha date,
     @cantidad money,
-    @perform varchar(60)
+    @perform varchar(200)
     with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -1552,13 +1558,13 @@ CREATE Or ALTER PROCEDURE spCostumerPurcharse
     @idFactura int,
     @idSucursal int,
 	@montoTotal money,
-	@idCliente varchar(20),
+	@idCliente varchar(200),
     @idMetodoPago int,
 	@operationFlag int
     with encryption
 AS
 BEGIN
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 
     IF @operationFlag = 0 BEGIN
 		if @idSucursal is not null and @idCliente is not null  and @idMetodoPago is not null and @montoTotal is not null BEGIN
@@ -1667,13 +1673,13 @@ CREATE Or ALTER PROCEDURE spCostumerPurcharse
     @idFactura int,
     @idSucursal int,
 	@montoTotal money,
-	@idCliente varchar(20),
+	@idCliente varchar(200),
     @idMetodoPago int,
 	@operationFlag int
     with encryption
 AS
 BEGIN
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 
     IF @operationFlag = 0 BEGIN
 		if @idSucursal is not null and @idCliente is not null  and @idMetodoPago is not null and @montoTotal is not null BEGIN
@@ -1791,7 +1797,7 @@ CREATE OR ALTER PROCEDURE dbo.spGetBranchesLocation
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	BEGIN TRY
 		select Sucursal.idSucursal, Sucursal.nombreSucursal, Lugar.ubicacion.STX as X, Lugar.ubicacion.STY as Y
 		from Sucursal inner join Lugar on Sucursal.idLugar = Lugar.idLugar
@@ -1810,7 +1816,7 @@ CREATE OR ALTER PROCEDURE dbo.spRemoveExpiredProducts
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	declare @today date
 	set @today = GETDATE()
 	BEGIN TRY
@@ -1838,7 +1844,7 @@ CREATE OR ALTER PROCEDURE dbo.spShowExpiredProducts
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	declare @today date
 	set @today = GETDATE()
 	BEGIN TRY
@@ -1861,7 +1867,7 @@ CREATE OR ALTER PROCEDURE dbo.spChangeDiscount
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	BEGIN TRY
 		IF (select count(*) from Descuento) != 0 BEGIN
 			update Descuento
@@ -1893,7 +1899,7 @@ CREATE OR ALTER PROCEDURE dbo.spGetProductsForDiscount
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	declare @today date
 	set @today = GETDATE()
 	BEGIN TRY
@@ -1920,7 +1926,7 @@ CREATE OR ALTER PROCEDURE dbo.spApplyDiscount
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	declare @descuentoPorcent float
 	BEGIN TRY
 		IF (select count(*) from DescuentoXInventario where idInventario = @idInventario) = 0 BEGIN
@@ -1946,7 +1952,7 @@ CREATE OR ALTER PROCEDURE dbo.spShowProductsDiscount
 	with encryption
 as
 BEGIN
-	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @errorInt int = 0, @errorMsg varchar(200)
 	declare @descuentoPorcent float
 	BEGIN TRY
 		select Producto.idProducto, Inventario.idInventario, Producto.nombreProducto, Inventario.precioVenta, Inventario.cantidadInventario, Producto.imgPath
@@ -1967,7 +1973,7 @@ CREATE or ALTER PROCEDURE dbo.spSelectTaxToView
     
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
     select Impuesto.idImpuesto, nombreImpuesto as Nombre, Impuesto.porcentajeImpuesto as Porcentaje, Pais.nombrePais as Pais from MYSQLSERVER...Impuesto  as Impuesto    
     INNER JOIN Pais as Pais ON  Pais.idPais = Impuesto.idPais
@@ -1999,14 +2005,14 @@ GO
 --===================================================
 CREATE or ALTER PROCEDURE dbo.spCrudImpuesto
 	@idImpuesto int = null,
-	@nombre varchar(20) = null ,
+	@nombre varchar(200) = null ,
 	@porcentaje float = null ,
 	@idPais int = null,
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -2092,10 +2098,10 @@ end
 -- Lugar
 -- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
 go
-create or alter procedure crudLugar @opcion int, @idLugar int =NULL, @nombre varchar(20) = null, @idPais int = null, @longitud float = null, @latitud float = null
+create or alter procedure crudLugar @opcion int, @idLugar int =NULL, @nombre varchar(200) = null, @idPais int = null, @longitud float = null, @latitud float = null
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 	
 
 	if @opcion = 1
@@ -2193,7 +2199,7 @@ CREATE or ALTER PROCEDURE dbo.spSelectLugarToView
     
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
     select Lugar.idLugar, nombreLugar as Nombre, Pais.nombrePais as Pais  from Lugar  as Lugar    
     INNER JOIN Pais as Pais ON  Pais.idPais = Lugar.idPais
@@ -2215,7 +2221,7 @@ go
 create or alter procedure crudMonedaXPais @opcion int,@idMonedaXPais int = null, @idPais int = null, @cambioPorcentaje float = null,  @idMoneda int = null
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1		BEGIN
 		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)= 0 BEGIN
@@ -2300,7 +2306,7 @@ CREATE or ALTER PROCEDURE dbo.spSelectMetodoToView
     
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
     select MetodoPago.idMetodoPago, MetodoPago.nombreMetodo as Nombre, MetodoPago.otrosDetalles as OtrosDetalles  from MetodoPago  as MetodoPago    
     
@@ -2321,7 +2327,7 @@ CREATE or ALTER PROCEDURE dbo.spSelectPuestoToView
     
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
     select Puesto.idPuesto, Puesto.nombrePuesto as Nombre, Puesto.salario as Salario  from Puesto  as Puesto    
     
@@ -2330,10 +2336,10 @@ end
 
 -- crud metodoPago
 go
-create or alter procedure crudMetodoPago @opcion int,@idMetodoPago int = null, @nombre varchar(20) = null, @otrosDetalles varchar(50) = null
+create or alter procedure crudMetodoPago @opcion int,@idMetodoPago int = null, @nombre varchar(200) = null, @otrosDetalles varchar(200) = null
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1		BEGIN
 		if (select count(*) from MetodoPago where idMetodoPago = @idMetodoPago)= 0 BEGIN
@@ -2400,10 +2406,10 @@ END
 
 -- crud puesto
 go
-create or alter procedure crudPuesto @opcion int,@idPuesto int = null, @nombre varchar(20) = null, @salario money = null
+create or alter procedure crudPuesto @opcion int,@idPuesto int = null, @nombre varchar(200) = null, @salario money = null
 as
 BEGIN
-	declare @error int, @errorMsg varchar(20)
+	declare @error int, @errorMsg varchar(200)
 
 	if @opcion = 1		BEGIN
 		if (select count(*) from Puesto where idPuesto = @idPuesto)= 0 BEGIN
@@ -2472,7 +2478,7 @@ GO
 CREATE OR ALTER PROCEDURE dbo.spReporteExpirados
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -2496,7 +2502,7 @@ GO
 CREATE OR ALTER PROCEDURE dbo.spReporteClientes
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -2521,7 +2527,7 @@ GO
 CREATE OR ALTER PROCEDURE dbo.spReporteProductosVendidos
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 
 --INSERT OPERATION
@@ -2542,5 +2548,111 @@ end
 GO
 
 
+GO 
+CREATE OR ALTER PROCEDURE dbo.spGetCantNeed
+	@idSucursal int,
+	@idProducto int
+with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(200)
+    BEGIN TRY
+		declare @pointSucursal geometry
 
+		declare @current int
+		declare @need int
+
+		declare @max int
+
+		set @current = (select sum(cantidadInventario) as cantidadInventario from Inventario
+		INNER JOIN Sucursal as Sucursal ON  Sucursal.idSucursal = Inventario.idSucursal
+		INNER JOIN MYSQLSERVER...Lote as Lote ON Inventario.idLote = Lote.idLote
+		INNER JOIN MYSQLSERVER...Producto as Producto ON  Producto.idProducto = Lote.idProducto		
+		where Lote.estado = 1 and Producto.estado = 1 and Producto.idProducto = @idProducto and Sucursal.idSucursal = @idSucursal)
+		
+		if @current is null
+			set @current = 0
+
+		set @max = (select Limite.maxCant from MYSQLSERVER...Producto
+		INNER JOIN MYSQLSERVER...Limite as Limite ON  Limite.idProducto = Producto.idProducto	
+		where Producto.estado = 1 and Producto.idProducto = @idProducto) 
+		set @need = @max - @current
+		select @need
+
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'There is an error in de database'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+GO
+
+
+--  EXEC spGetBestProvider 6, 1,10
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetBestProvider
+	@idSucursal int,
+	@idProducto int,
+	@idNeed int
+with encryption
+as
+BEGIN
+    declare @errorInt int = 0, @errorMsg varchar(200)
+    BEGIN TRY
+		declare @pointSucursal geometry
+
+		set @pointSucursal = (select Lugar.ubicacion from Sucursal
+								INNER JOIN Lugar ON Lugar.idLugar = Sucursal.idLugar
+								where Sucursal.idSucursal = @idSucursal);
+
+		declare @idProvider int
+		declare @idLote int
+		set @idLote = (select top 1 Lote.idLote from MYSQLSERVER...Proveedor as Proveedor
+		INNER JOIN MYSQLSERVER...Lote as Lote ON Lote.idProveedor = Proveedor.idProveedor
+		INNER JOIN MYSQLSERVER...Producto as Producto ON Producto.idProducto = Lote.idProducto
+		where Producto.idProducto = @idProducto and Lote.cantidadExistencias >= @idNeed
+		ORDER BY Lote.costoUnidad ASC)
+
+		IF @idLote is not null 
+			select Proveedor.idProveedor, Proveedor.nombreProveedor, idLote from  MYSQLSERVER...Proveedor as Proveedor
+			INNER JOIN MYSQLSERVER...Lote as Lote ON Lote.idProveedor = Proveedor.idProveedor			
+			where Lote.idLote = @idLote 
+		else
+			select -1,'No exist a provider with products'
+
+		/*SELECT TOP 1 Sucursal.idSucursal, Sucursal.nombreSucursal FROM Sucursal 
+		inner join Lugar on Lugar.idLugar = Sucursal.idLugar
+		ORDER BY @pointCliente.STDistance(Lugar.ubicacion) ASC;*/
+    END TRY
+    BEGIN CATCH
+        set @errorInt=1
+        set @errorMsg = 'There is an error in de database'
+    END CATCH
+    if @errorInt !=0
+        select @errorInt as Error, @ErrorMsg as MensajeError
+END
+
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectSucursalesToView    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(200)
+declare @identityValue int = -1
+
+    select Sucursal.idSucursal, Sucursal.nombreSucursal as Nombre, Lugar.nombreLugar as Lugar, Sucursal.idMonedaXPais as Moneda from Sucursal as Sucursal    
+    INNER JOIN Lugar as Lugar ON  Lugar.idLugar = Sucursal.idLugar
+
+    where Sucursal.estado = 1;
+end
+
+GO
+CREATE Or ALTER PROCEDURE spGetCountries
+AS
+BEGIN
+    Select * from Pais
+End
+GO
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'

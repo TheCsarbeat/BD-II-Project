@@ -4,13 +4,13 @@ GO
 --===================================================
 CREATE or ALTER PROCEDURE dbo.spCrudCategoriaProducto
 	@idCategoriaProducto int null, 
-	@nombre varchar(20) ,
+	@nombre varchar(200) ,
 	@descripcion varchar(100) ,
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -76,18 +76,21 @@ GO
 --====================================================
 --						Producto
 --===================================================
+GO
 CREATE or ALTER PROCEDURE dbo.spCrudProducto
 	@idProducto int,
-	@nombreProducto varchar(30) ,
-	@descripcionProducto varchar(40) ,
+	@nombreProducto varchar(200) ,
+	@descripcionProducto varchar(200) ,
 	@idCategoria int ,
 	@nombreImg varchar(250),
-	@imgPath varchar(2000),
+	@imgPath varchar(200),
+	@cantMin int, 
+	@cantMax int,
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -97,12 +100,15 @@ declare @identityValue int = -1
 				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 					
 						BEGIN TRY
-	
+								
 								INSERT INTO MYSQLSERVER...Producto (nombreProducto,descripcionProducto,idCategoria,nombreImg ,imgPath)
 								values (@nombreProducto,@descripcionProducto,@idCategoria,@nombreImg, @imgPath);
+
 								
+								set @idProducto = (SELECT TOP 1 idProducto FROM MYSQLSERVER...Producto ORDER BY idProducto DESC)
+
 								set @errorMsg = 'Se ha insertado correctamente'
-					
+								EXEC spCrudLimite null, @cantMax, @cantMin, @idProducto, 0 
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
@@ -138,7 +144,10 @@ declare @identityValue int = -1
 								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
 
 								where idProducto = @idProducto
+								declare @idLimite int
 
+								set @idLimite = (select idLimite from MYSQLSERVER...Limite  where idProducto = 1)  
+								EXEC spCrudLimite @idLimite, @cantMax, @cantMin, @idProducto, 1 
 								set @errorMsg = 'The product has update'
 								set @errorInt = 2
 							END TRY
@@ -169,7 +178,7 @@ declare @identityValue int = -1
 
 	IF @operationFlag = 3	BEGIN
 		select * from MYSQLSERVER...Producto 	
-		
+		where estado =1;
 		set @errorInt =-1;
 	END
 
@@ -211,11 +220,24 @@ declare @identityValue int = -1
 
 	IF @operationFlag = 6	BEGIN
 		IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto ) = 1 BEGIN
-			
-				delete from MYSQLSERVER...Producto 	 
-				where idProducto = @idProducto
-				set @errorInt=0
-				set @errorMsg = 'Se ha eliminado permanentemente'
+			IF( SELECT COUNT(*) from MYSQLSERVER...Producto as Producto
+			INNER JOIN MYSQLSERVER...Lote as Lote ON Lote.idProducto = Producto.idProducto
+			where Producto.idProducto = @idProducto ) =1 BEGIN
+				IF( SELECT COUNT(*) from MYSQLSERVER...Producto as Producto
+				INNER JOIN DetalleFactura ON DetalleFactura.idProducto = Producto.idProducto
+				where Producto.idProducto = @idProducto 	) =1 BEGIN
+					delete from MYSQLSERVER...Producto 	 
+					where idProducto = @idProducto
+					set @errorInt=0
+					set @errorMsg = 'Se ha eliminado permanentemente'
+				END ELSE BEGIN 			
+					set @errorInt=1
+					set @errorMsg = 'THE product is related '
+					END
+			END ELSE BEGIN 			
+				set @errorInt=1
+				set @errorMsg = 'THE product is related '
+				END
 			
 		END ELSE BEGIN 			
 				set @errorInt=1
@@ -244,14 +266,14 @@ GO
 GO
 CREATE or ALTER PROCEDURE dbo.spCrudImpuesto
 	@idImpuesto int,
-	@nombre varchar(20) ,
+	@nombre varchar(200) ,
 	@porcentaje float ,
 	@idPais int ,
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -361,7 +383,7 @@ CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto
 	with encryption
 as
 begin
-declare @errorInt int = -1, @errorMsg varchar(60)
+declare @errorInt int = -1, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -472,14 +494,14 @@ GO
 --===================================================
 CREATE or ALTER PROCEDURE dbo.spCrudProveedor
   @idProveedor int = null,
-  @nombreProveedor varchar(20)=null ,
-  @contacto varchar(20) = null,
+  @nombreProveedor varchar(200)=null ,
+  @contacto varchar(200) = null,
   @idPais int= null ,
   @operationFlag int  -- Insert 0, update 1, select 2, select-ALL 3, delete 4
   with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
   if @operationFlag = 0 BEGIN
 
@@ -563,6 +585,8 @@ GO
 --====================================================
 --					  Lote
 --===================================================
+GO 
+
 CREATE or ALTER PROCEDURE dbo.spCrudLote
 	@idLote int,
 	@fechaProduccion date,
@@ -576,7 +600,7 @@ CREATE or ALTER PROCEDURE dbo.spCrudLote
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -589,28 +613,29 @@ declare @identityValue int = -1
 
 						INSERT INTO MYSQLSERVER...Lote (fechaProduccion, fechaExpiracion, idProducto, idProveedor, cantidadExistencias, costoUnidad, porcentajeVenta)
 						values (@fechaProduccion, @fechaExpiracion, @idProducto, @idProveedor, @cantidadExistencias, @costoUnidad, @porcentajeVenta);
-								
+							set @errorInt=0
+							set @errorMsg = 'The lote has inserted'
 						END TRY
 						BEGIN CATCH
-							set @errorInt=1
+							set @errorInt=-1
 							set @errorMsg = 'Error al agregar a la base de datos'
 						END CATCH	
 
 					END ELSE BEGIN 				
-					set @errorInt =1
+					set @errorInt =-1
 					set @errorMsg = 'No existe un proveedor v�lido'
 					END	
 						
 				END ELSE BEGIN 				
-					set @errorInt =1
+					set @errorInt =-1
 					set @errorMsg = 'No existe un producto v�lido'
 					END				
 			END ELSE BEGIN 			
-				set @errorInt=1
+				set @errorInt=-1
 				set @errorMsg = 'Ya existe un lote con este ID'
 				END
 		END ELSE BEGIN 			
-			set @errorInt=1
+			set @errorInt=-1
 			set @errorMsg = 'Hay alg�n valor nulo'
 			END  ---Final if validaci?n nulos
 
@@ -624,28 +649,31 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Producto where idproducto = @idproducto) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...Proveedor where idproveedor = @idproveedor) = 1 BEGIN
 					BEGIN TRY
-						BEGIN TRANSACTION
+
 						update MYSQLSERVER...Lote
 						set fechaProduccion = ISNULL(@fechaProduccion, fechaProduccion), fechaExpiracion = ISNULL(@fechaExpiracion, fechaExpiracion),
 						idProducto = ISNULL(@idProducto, idProducto), idProveedor = ISNULL(@idProveedor, idProveedor),  cantidadExistencias = ISNULL(@cantidadExistencias, cantidadExistencias),
 						costoUnidad = ISNULL(@costoUnidad, costoUnidad), porcentajeVenta = ISNULL(@porcentajeVenta, porcentajeVenta) where idLote = @idLote
-						COMMIT TRANSACTION
+						
+						set @errorInt=1
+						set @errorMsg = 'Data update'
+
 					END TRY
 					BEGIN CATCH
-						set @errorInt=1
+						set @errorInt=-1
 						set @errorMsg = 'Error al actualizar a la base de datos'
 					END CATCH
 	
 				END ELSE BEGIN 				
-					set @errorInt =1
+					set @errorInt =-1
 					set @errorMsg = 'No existe un proveedor v�lido'
 					END
 			END ELSE BEGIN 				
-				set @errorInt =1
+				set @errorInt =-1
 				set @errorMsg = 'No existe un producto v�lido'
 				END	
 			END ELSE BEGIN 			
-				set @errorInt=1
+				set @errorInt=-1
 				set @errorMsg = 'NO existe un lote con este ID'
 				END
 	END
@@ -674,8 +702,35 @@ declare @identityValue int = -1
 		set estado = ISNULL(1, estado)
 		where idLote = @idLote
 	END
-	if @errorInt !=0
+	IF @operationFlag = 6	BEGIN
+		IF (select count(*) from MYSQLSERVER...Lote as Lote where idLote = @idLote ) = 1 BEGIN
+			IF( SELECT COUNT(*) from MYSQLSERVER...Lote as Lote
+				INNER JOIN Inventario ON Inventario.idLote = Lote.idLote
+				where Lote.idLote = @idProducto ) =1 BEGIN
+					
+							delete from MYSQLSERVER...Producto 	 
+							where idProducto = @idProducto
+							set @errorInt=6
+								set @errorMsg = 'Se ha eliminado permanentemente'
+					
+			END ELSE BEGIN 			
+				set @errorInt=1
+				set @errorMsg = 'The lote is related '
+				END			
+		END ELSE BEGIN 			
+			set @errorInt=1
+			set @errorMsg = 'NO existe un lote con este ID'
+			END
+	END
+
+	if @errorInt =-1
 		select @errorInt as Error, @ErrorMsg as MensajeError
+	if @errorInt =0
+		select 0 as result, @ErrorMsg as result 
+	if @errorInt =1
+		select 0 as result, @ErrorMsg as result 
+	if @errorInt =6
+		select 0 as result, @ErrorMsg as result 
 end
 
 
@@ -693,7 +748,7 @@ CREATE or ALTER PROCEDURE dbo.spCrudLimite
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -794,14 +849,47 @@ CREATE or ALTER PROCEDURE dbo.spSelectProductsToView
 	
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(60)
+declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
-	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion, Categoria.nombreCategoria as Categoria, imgPath, Producto.estado from MYSQLSERVER...Producto as Producto	
+	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion, Categoria.nombreCategoria as Categoria, imgPath,
+	Producto.estado, Limite.maxCant, Limite.minCant from MYSQLSERVER...Producto as Producto
 	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
+	INNER JOIN MYSQLSERVER...Limite as Limite ON Limite.idProducto = Producto.idProducto 
 	
 end
 GO
 
+CREATE or ALTER PROCEDURE dbo.spSelectLotetoView
+	
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(200)
+declare @identityValue int = -1
+	select idLote, CONVERT (VARCHAR(200), fechaProduccion,107) as fechaProduccion,CONVERT (VARCHAR(200), fechaExpiracion,107) as  fechaExpiracion, cantidadExistencias, costoUnidad, nombreProducto,
+	nombreProveedor, CONCAT ( CONVERT(varchar(100),(porcentajeVenta*100)), ' %') as porcentajeVenta from MYSQLSERVER...Lote as Lote	
+	INNER JOIN MYSQLSERVER...Producto as Producto ON  Producto.idProducto = Lote.idProducto
+	INNER JOIN MYSQLSERVER...Proveedor as Proveedor ON  Proveedor.idProveedor = Lote.idProveedor
+	
+end
+
+GO
+
+CREATE or ALTER PROCEDURE dbo.spSelectInventoryView
+	
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(200)
+declare @identityValue int = -1
+	select nombreProducto, Sucursal.nombreSucursal, sum(cantidadInventario) as cantidadInventario,
+	CONCAT ( '$ ',CONVERT(varchar(100),(precioVenta))) as precioVenta, Limite.maxCant, Limite.minCant  from Inventario
+	INNER JOIN Sucursal as Sucursal ON  Sucursal.idSucursal = Inventario.idSucursal
+	INNER JOIN MYSQLSERVER...Lote as Lote ON Inventario.idLote = Lote.idLote
+	INNER JOIN MYSQLSERVER...Producto as Producto ON  Producto.idProducto = Lote.idProducto
+	INNER JOIN MYSQLSERVER...Limite as Limite ON  Limite.idProducto = Producto.idProducto
+	where Lote.estado = 1 and Producto.estado = 1	
+	GROUP BY  nombreProducto,precioVenta, Limite.maxCant, Limite.minCant,Sucursal.nombreSucursal
+end
+GO
 
 -- @idCategoriaXImpuesto int null, 	@idCategoria int ,	@idImpuesto int ,	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 
