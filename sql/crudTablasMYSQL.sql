@@ -375,7 +375,7 @@ GO
 --====================================================
 --			Categoria CategoriaXImpuesto
 --===================================================
-CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto
+CREATE or ALTER PROCEDURE dbo.spCrudCategoriaImpuesto 
 	@idCategoriaXImpuesto int null, 
 	@idCategoria int ,
 	@idImpuesto int ,
@@ -386,7 +386,7 @@ begin
 declare @errorInt int = -1, @errorMsg varchar(200)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
-
+	
 	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 0 BEGIN
 			IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 1 BEGIN
@@ -396,6 +396,7 @@ declare @identityValue int = -1
 					values (@idCategoria,@idImpuesto);
 					set @errorMsg = 'The tax by category has inserted'
 					set @errorInt = 0
+
 					END TRY
 					BEGIN CATCH
 						set @errorInt=1
@@ -413,15 +414,16 @@ declare @identityValue int = -1
 				end
 
 	END
-	
+	 --- EXEC spCrudCategoriaImpuesto 2, 6, 2, 1
 	if @operationFlag = 1 BEGIN
 	IF (select count(*) from MYSQLSERVER...CategoriaXImpuesto where idCategoriaXImpuesto = @idCategoriaXImpuesto) = 1 BEGIN
 			if @idCategoria is not null and @idImpuesto is not null begin
 						BEGIN TRY
-						
+							
 							update MYSQLSERVER...CategoriaXImpuesto
-							set idCategoria = ISNULL(@idCategoria, idCategoria), idImpuesto = ISNULL(@idImpuesto, idImpuesto)
-							where idCategoriaXImpuesto = @idCategoriaXImpuesto;
+							set idCategoria = ISNULL(6, idCategoria),
+							idImpuesto = ISNULL(2, idImpuesto)
+							where idCategoriaXImpuesto = 2;
 							set @errorMsg = 'The tax by category has updated'
 							set @errorInt= 2
 						
@@ -748,21 +750,16 @@ CREATE or ALTER PROCEDURE dbo.spCrudLimite
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(200)
+declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
 		if @max is not null and @min is not null  BEGIN
 			IF (select count(*) from MYSQLSERVER...Limite where idLimite = @idLimite) = 0 BEGIN
 				IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
-					
 						BEGIN TRY
-	
-							--INSERT INTO MYSQLSERVER...Limtie (maxCant,minCant,idProducto)
-							--values (@max,@min,@idProducto);
-							select 0
-								
-	
+							INSERT INTO MYSQLSERVER...Limite (maxCant,minCant,idProducto)
+							values (@max,@min,@idProducto);
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
@@ -784,7 +781,6 @@ declare @identityValue int = -1
 
 		if @identityValue != -1
 			return @identityValue
-
 	end
 	
 	if @operationFlag = 1 BEGIN
@@ -794,8 +790,9 @@ declare @identityValue int = -1
 						BEGIN TRY
 							
 							update MYSQLSERVER...Limite 
-							--set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
-							set idProducto = ISNULL(@idProducto, idProducto) where idLimite = @idLimite;
+							set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
+							idProducto = ISNULL(@idProducto, idProducto) 
+							where idLimite = @idLimite;
 							
 						END TRY
 						BEGIN CATCH
@@ -840,10 +837,7 @@ declare @identityValue int = -1
 	if @errorInt !=0
 		select @errorInt as Error, @ErrorMsg as MensajeError
 end
-
---====================================================
---						productos para ver
---===================================================
+GO
 GO
 CREATE or ALTER PROCEDURE dbo.spSelectProductsToView
 	
@@ -855,6 +849,8 @@ declare @identityValue int = -1
 	Producto.estado, Limite.maxCant, Limite.minCant from MYSQLSERVER...Producto as Producto
 	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
 	INNER JOIN MYSQLSERVER...Limite as Limite ON Limite.idProducto = Producto.idProducto 
+
+	select * from MYSQLSERVER...Limite
 	
 end
 GO
@@ -896,3 +892,9 @@ GO
 -- EXEC spCrudCategoriaImpuesto null, null, null, 3
 
 -- EXEC spCrudImpuesto null, null, null, null, 3
+
+/*
+
+EXEC spSelectInventoryView
+
+*/

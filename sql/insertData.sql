@@ -1,12 +1,17 @@
 -- EXECUTE IN SERVER
 EXEC insertPais 'Costa Rica'
-EXEC insertPais'Panama'
-EXEC insertPais'Nicaragua'
+EXEC insertPais 'Panama'
+EXEC insertPais 'Nicaragua'
+EXEC insertPais 'Salvador'
+EXEC insertPais 'Honduras'
 
 EXEC spCrudCategoriaProducto null, 'Hortaliza', 'Productos del campo',0
+EXEC spCrudCategoriaProducto null, 'Frutas', 'Productos extraidos de la madre tierra',0
 EXEC spCrudCategoriaProducto null, 'Limpieza', 'Productos del P&G',0
 EXEC spCrudCategoriaProducto null, 'Comida', 'Productos del empacado',0
-EXEC spCrudCategoriaProducto null, 'LAtas', 'Productos en latados',0
+EXEC spCrudCategoriaProducto null, 'Latas', 'Productos en latados',0
+EXEC spCrudCategoriaProducto null, 'Licores', 'Productos con grados de alcohol',0
+
 
 EXEC spCrudProducto null, 'Yuca', 'yuca sembrada en tierras aledanas', 1, 'yuca.jpg','productImgs/yuca.jpg',15,30, 0
 EXEC spCrudProducto null, 'Zanahoria', 'naranja', 1, 'carrot.jpg','productImgs/carrot.jpg', 15,30, 0
@@ -16,9 +21,10 @@ EXEC spCrudProducto null, 'Papa', 'a potato', 1, 'potato.jpg','productImgs/potat
 -- EXEC spCrudProducto 15, 'FEkrs', 'a potato', 1, 'ferks.jpg','productImgs/ferks.jpg',15,30, 3
 
 
-EXEC spCrudImpuesto null, 'IVA', 0.13, 1,0
-EXEC spCrudImpuesto null, 'ImpuestoPanama',0.1,2,0
-EXEC spCrudImpuesto null, 'ImpuestoNicaragua',0.18,3,0
+EXEC spCrudImpuesto null, 'IVA CR', 0.13, 1,0
+EXEC spCrudImpuesto null, 'IVA PAN',0.1,2,0
+EXEC spCrudImpuesto null, 'IVA NIC',0.18,3,0
+
 EXEC spCrudCategoriaImpuesto null,1, 1,0
 EXEC spCrudCategoriaImpuesto null,2, 1,0
 EXEC spCrudCategoriaImpuesto null,3, 1,0
@@ -26,7 +32,7 @@ EXEC spCrudCategoriaImpuesto null,4, 1,0
 
 -- idproveedor, nombre, contacto, idPais, operation
 EXEC spCrudProveedor null, 'Coopeagri', 'ventas@coopeagri.com', 1,0
-EXEC spCrudProveedor null, 'tresjotas', 'ventas@tresjotas.com', 1,0
+EXEC spCrudProveedor null, 'Tres Jotas', 'ventas@tresjotas.com', 1,0
 
 -- EXEC spCrudLote 13, '2022-11-01','2022-11-15', 3,1, 50,634.5, 0.3,6
 -- EXEC spCrudLote 4, '2022-11-01','2022-11-15', 3,1, 50,634.5, 0.3,3
@@ -74,7 +80,7 @@ EXEC crudSucursal 1, null, 'El Dorado', 7, 1
 
 
 -- EXEC spGetCantNeed 6, 6
-
+/*
 -- idInventario, cantidad, @idSucursal, @idLote, @precioVenta, operation    el precio de venta nulo para que se autocalcule
 EXEC spInsertProductToInventory null, 20, 6, 1,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 2,null, 0
@@ -83,7 +89,10 @@ EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 --EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
 
 
-EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 10.021677,-83.984586
+EXEC spSelectProductsToView
+*/
+
+EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERKS MARTINEZ', 9.858211, -83.909768
 
 
 insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
@@ -92,7 +101,7 @@ insert into TipoBono (nombreTipoBono,descripcionTipoBono) values ('BonoXPerforma
 insert into TipoBono (nombreTipoBono,descripcionTipoBono) values ('BonoXVenta','Semanal')
 
 insert into MetodoPago (nombreMetodo, otrosDetalles)
-VALUES('Efecto', 'nominacion')
+VALUES('Efectivo', 'No se acepta monedas de baja denominacion')
 
 
 --insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);

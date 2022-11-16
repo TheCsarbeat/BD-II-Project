@@ -44,7 +44,8 @@
                             <asp:Button class="btn btn-success cart-button"
                             CommandName='<%# DataBinder.Eval(Container.DataItem, "nombreProducto") +","+ DataBinder.Eval(Container.DataItem, "precioVenta")+","+
                                     DataBinder.Eval(Container.DataItem, "imgPath")+","+DataBinder.Eval(Container.DataItem, "descripcionProducto") +","+
-                                DataBinder.Eval(Container.DataItem, "idSucursal" )+","+DataBinder.Eval(Container.DataItem, "idProducto") %>' 
+                                DataBinder.Eval(Container.DataItem, "idSucursal" )+","+DataBinder.Eval(Container.DataItem, "idProducto")+","+
+                                DataBinder.Eval(Container.DataItem, "idInventario") %>' 
                             CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idLote") %>  ' 
                             Text="Add to Cart" runat="server" />
                         </div>

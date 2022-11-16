@@ -10,15 +10,55 @@ using System.Configuration;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
+using System.Collections;
 
 namespace indioSupermercado
 {
     public partial class adminEmployee : System.Web.UI.Page
     {
         private string stringConnection = usefull.strCon;
+        private string sqlQuerryTry = "insert into Bono(idEmpleado,fecha,cantidadBono,idTipoBono,Performance) Values(@idEmp,GETDATE(),60,2,'Realizó 1000 ventas')";
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlDataSource1.ConnectionString = stringConnection;
+            loadBranches();
+        }
+        public void loadBranches()
+        {
+            try
+            {
+                var nombreCategoria = new ArrayList();
+                var idCategoria = new ArrayList();
+
+
+                SqlConnection con = new SqlConnection(stringConnection);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand("EXEC spGetSucursalDropList", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nombreCategoria.Add(reader[0].ToString());
+                    idCategoria.Add(reader[1].ToString());
+                }
+
+                con.Close();
+                if (!IsPostBack)
+                {
+                    for (int i = 0; i < nombreCategoria.Count; i++)
+                        branchesDropList.Items.Insert(0, new ListItem(idCategoria[i].ToString(), nombreCategoria[i].ToString()));
+                    branchesDropList.DataBind();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script.");
+            }
         }
 
         public void loadFileImg()
@@ -57,7 +97,7 @@ namespace indioSupermercado
             string lastName = TextBoxApellidoEmpleado.Text;
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
-            string office = TextBoxSucursal.Text;
+            string office = branchesDropList.SelectedValue;
             string pic = "profilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
@@ -67,7 +107,7 @@ namespace indioSupermercado
             string msgPS = "";
 
 
-            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(TextBoxSucursal.Text)) 
+            if (!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)) 
                 ||!string.IsNullOrEmpty(TextBoxNombreEmpleado.Text) || (!string.IsNullOrEmpty(TextBoxApellidoEmpleado.Text)) || (!string.IsNullOrEmpty(TextBoxFecha.Text))
                                     || (!string.IsNullOrEmpty(FileEmpleado.FileName)))
             {
@@ -162,7 +202,7 @@ namespace indioSupermercado
             string lastName = TextBoxApellidoEmpleado.Text;
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
-            string office = TextBoxSucursal.Text;
+            string office = branchesDropList.SelectedValue;
             string pic = "profilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
@@ -181,7 +221,7 @@ namespace indioSupermercado
                 try
                 {   
 
-                    if(!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(TextBoxSucursal.Text)))
+                    if(!string.IsNullOrEmpty(TextBoxPuesto.Text) || (!string.IsNullOrEmpty(branchesDropList.SelectedValue)))
                     {
                         SqlConnection conObj = new SqlConnection(stringConnection);
                         if (conObj.State == ConnectionState.Closed)
@@ -450,20 +490,32 @@ namespace indioSupermercado
                             SqlCommand cmdVerventas = new SqlCommand("viewBono", conObj);
                             cmdVerventas.CommandType = CommandType.StoredProcedure;
 
+
                             SqlCommand cmdBonoAutomatico = new SqlCommand("spBonoAutomatico", conObj);
+
                             cmdBonoAutomatico.CommandType = CommandType.StoredProcedure;
 
                             SqlDataReader readerventas = cmdVerventas.ExecuteReader();
 
-                            while (readerventas.Read())
+                            if (readerventas.HasRows)
                             {
-                                if (Convert.ToInt32(readerventas.GetString(0)) >= 1000)
+                                while (readerventas.Read())
                                 {
-                                    int idEmp = readerventas.GetInt32(0);
-                                    cmdBonoAutomatico.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idEmp;
-                                    SqlDataReader readerAuto = cmdBonoAutomatico.ExecuteReader();
-                                }
+
+                                    if (Convert.ToInt32(readerventas[1].ToString()) >= 1)
+                                    {
+
+                                        //cmdBonoAutomatico.Parameters.Add("@idEmp", SqlDbType.Int).Value = readerventas.GetValue(0);
+
+                                        //cmdBonoAutomatico.ExecuteNonQuery();
+
+                                    }
+                                }   
                             }
+
+
+                            readerventas.Close();
+
 
 
                             SqlCommand cmdBono = new SqlCommand("spBonoPerformance", conObj);

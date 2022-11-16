@@ -25,36 +25,61 @@ namespace indioSupermercado
             SqlDataSourceGanancias.ConnectionString = stringConnection;
             GridViewReporteBono.Visible = false;
             GridViewExpirados.Visible = false;
+            GridViewClientes.Visible = false;
+            GridViewGanancias.Visible = false;
+            GridViewVendidos.Visible = false;
 
         }
 
         protected void ButtonReporteBono(object sender, EventArgs e)
         {
+
             GridViewReporteBono.Visible = true;
+            GridViewExpirados.Visible = false;
+            GridViewClientes.Visible = false;
+            GridViewGanancias.Visible = false;
+            GridViewVendidos.Visible = false;
             UpdatePanelCliente.Update();
         }
 
         protected void Button4_Click(object sender, EventArgs e)
         {
+
+            GridViewReporteBono.Visible = false;
             GridViewExpirados.Visible = true;
+            GridViewClientes.Visible = false;
+            GridViewGanancias.Visible = false;
+            GridViewVendidos.Visible = false;
             UpdatePanelCliente.Update();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            GridViewReporteBono.Visible = false;
+            GridViewExpirados.Visible = false;
+            GridViewClientes.Visible = false;
+            GridViewGanancias.Visible = false;
             GridViewVendidos.Visible = true;
             UpdatePanelCliente.Update();
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            GridViewReporteBono.Visible = false;
+            GridViewExpirados.Visible = false;
             GridViewClientes.Visible = true;
+            GridViewGanancias.Visible = false;
+            GridViewVendidos.Visible = false;
             UpdatePanelCliente.Update();
         }
 
         protected void Button3_Click(object sender, EventArgs e)
         {
+            GridViewReporteBono.Visible = false;
+            GridViewExpirados.Visible = false;
+            GridViewClientes.Visible = false;
             GridViewGanancias.Visible = true;
+            GridViewVendidos.Visible = false;
             UpdatePanelCliente.Update();
         }
     }

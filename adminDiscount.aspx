@@ -1,5 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminDiscount.aspx.cs" Inherits="indioSupermercado.adminDiscount" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                //$(document).ready(function () {
+                //$('.table').DataTable();
+                // });
+                $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+                // Code that uses other library's $ can follow here.
+
+            });
+
+        </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">

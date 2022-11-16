@@ -1,21 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminOrderProducts.aspx.cs" Inherits="indioSupermercado.adminOrderProducts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-
-    
-     <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
+    <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
             //$(document).ready(function () {
             //$('.table').DataTable();
             // });
-            $.noConflict();
-            jQuery(document).ready(function ($) {
-                $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-                //$('.table1').DataTable();
-            });
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
             // Code that uses other library's $ can follow here.
 
         });

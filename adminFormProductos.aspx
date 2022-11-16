@@ -2,19 +2,19 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
- 
-        <script type="text/javascript">
-            $(document).ready(function () {
+    <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-                //$(document).ready(function () {
-                //$('.table').DataTable();
-                // });
-                $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-                // Code that uses other library's $ can follow here.
+            //$(document).ready(function () {
+            //$('.table').DataTable();
+            // });
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+            // Code that uses other library's $ can follow here.
 
-            });
+        });
 
-        </script>
+    </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

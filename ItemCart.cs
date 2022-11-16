@@ -17,8 +17,9 @@ namespace indioSupermercado
         public string description;
         public int idSucursal;
         public int idProducto;
+        public int idInventario;
 
-        public ItemCart(int id, string name, int cant, double precio, string picture, string description, int s, int p)
+        public ItemCart(int id, string name, int cant, double precio, string picture, string description, int s, int p, int inventario)
         {
             this.idLote = id;
             this.nameProduct = name;
@@ -29,6 +30,7 @@ namespace indioSupermercado
             this.description = description;
             this.idProducto = p;
             this.idSucursal = s;
+            this.idInventario = inventario;
         }
         public int getIdProducto()
         {

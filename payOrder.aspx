@@ -21,8 +21,10 @@
                                     <div class="col-lg-7">
 
 
-                                        <h5 class="mb-3"><a href="productList.aspx" class="text-body"><i
-                                            class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</h5>
+                                        <h5 class="mb-3">
+                                            <asp:LinkButton class="text-body" ID="LinkButton2" runat="server" OnClick="LinkButton2_Click"><i
+                                            class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping </asp:LinkButton>
+                                        </h5>
 
                                         <hr>
                                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -167,8 +169,6 @@
                                                     </div>
                                                 </div>
                                                 <%--finalcuadro azul--%>
-
-
                                             </div>
                                             <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                                                 <%--inciocuadro azul--%>

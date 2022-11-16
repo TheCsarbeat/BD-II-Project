@@ -18,6 +18,7 @@ namespace indioSupermercado
         string strcon = usefull.strCon;
 
         public static List<ItemCart> myList = new List<ItemCart>();
+        public static int idSucursal = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -25,6 +26,7 @@ namespace indioSupermercado
             try
             {
                 int id = Convert.ToInt32(Request.QueryString["id"].ToString());
+                idSucursal = id;
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -108,7 +110,7 @@ namespace indioSupermercado
             string picturePath = "";
             string description = "";
             int idSucursal = 0;
-
+            int idInventario = 0;
 
             string s = ((Button)e.CommandSource).CommandName.ToString();
 
@@ -120,10 +122,10 @@ namespace indioSupermercado
             description = subs[3];
             idSucursal = Convert.ToInt32(subs[4]);
             idProducto = Convert.ToInt32(subs[5]);
-
+            idInventario = Convert.ToInt32(subs[6]);
 
             //int id, string name, int cant, double precio, string picture, string description, idSucursal, idProducto
-            ItemCart item = new ItemCart(idLote, nameProduct, 1, precioVenta, picturePath, description, idSucursal, idProducto);
+            ItemCart item = new ItemCart(idLote, nameProduct, 1, precioVenta, picturePath, description, idSucursal, idProducto, idInventario);
             addToCart(item);
             precioVenta = getTotal();
             shoppingLb.Text = "A " + nameProduct + " was added " + " TOTAL: $ " + precioVenta.ToString(); ;
