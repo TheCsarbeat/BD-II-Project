@@ -1045,7 +1045,9 @@ as
 BEGIN
 	declare @errorInt int = 0, @errorMsg varchar(200)
 	BEGIN TRY
-		select * from Sucursal where idSucursal != @idSucursal
+		select Sucursal.idSucursal, Sucursal.nombreSucursal, Horario.dia, Horario.horarioInicial, horarioFinal
+		from Sucursal inner join Horario on Horario.idSucursal = Sucursal.idSucursal
+		where Sucursal.idSucursal != @idSucursal
 	END TRY
 	BEGIN CATCH
 		set @errorInt=1
@@ -1088,8 +1090,9 @@ declare @pointCliente geometry
 	BEGIN TRY
 		set @pointCliente = (select ubicacion from Cliente where idCliente = @idCliente);
 
-		SELECT TOP 1 Sucursal.idSucursal, Sucursal.nombreSucursal FROM Sucursal 
-		inner join Lugar on Lugar.idLugar = Sucursal.idLugar
+		SELECT TOP 1 Sucursal.idSucursal, Sucursal.nombreSucursal, Horario.dia, Horario.horarioInicial, horarioFinal FROM Sucursal 
+		inner join Lugar on Lugar.idLugar = Sucursal.idLugar inner join 
+		Horario on Horario.idSucursal = Sucursal.idSucursal
 		ORDER BY @pointCliente.STDistance(Lugar.ubicacion) ASC;
 	END TRY
 	BEGIN CATCH
@@ -1099,7 +1102,16 @@ declare @pointCliente geometry
 	if @errorInt != 0
 		select @errorInt as error, @errorMsg as mensaje
 end
+/*
+select * from Cliente
+declare @pointCliente geometry
+set @pointCliente = (select ubicacion from Cliente where idCliente = 2021052792);
 
+SELECT TOP 1 Sucursal.idSucursal, Sucursal.nombreSucursal, Horario.dia, Horario.horarioInicial, horarioFinal FROM Sucursal 
+		inner join Lugar on Lugar.idLugar = Sucursal.idLugar inner join 
+		Horario on Horario.idSucursal = Sucursal.idSucursal
+		ORDER BY @pointCliente.STDistance(Lugar.ubicacion) ASC;
+*/
 GO
 CREATE OR ALTER PROCEDURE dbo.spGetProductsByBranch
     @idSucursal int
@@ -2902,6 +2914,16 @@ declare @identityValue int = -1
     INNER JOIN Pais as Pais ON  Pais.idPais = MonedaXPais.idPais
     INNER JOIN Moneda as Moneda ON Moneda.idMoneda = MonedaXPais.idMoneda
     where MonedaXPais.estado = 1;
+end
+
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectCategoryToView
+
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+	select * from MYSQLSERVER...CategoriaProducto
 end
 
 /*

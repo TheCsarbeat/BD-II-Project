@@ -15,6 +15,9 @@ namespace indioSupermercado
         public string idCustomer = "";
         public int idSucursal = 0;
         public string nombreSucursal = "";
+        public string dia = "";
+        public string horaInicial = "";
+        public string horaFinal = "";
         string strcon = usefull.strCon;
         public string[] customerCoords = new string[2];
         protected void Page_Load(object sender, EventArgs e)
@@ -43,10 +46,15 @@ namespace indioSupermercado
                 cmd2.Parameters.Add("@idCliente", SqlDbType.VarChar).Value = idCustomer;
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 reader2.Read();
-                idSucursal = Convert.ToInt32(reader2[0].ToString());
-                nombreSucursal = reader2[1].ToString();
-                reader2.Close();
-
+                if (reader2.HasRows)
+                {
+                    idSucursal = Convert.ToInt32(reader2[0].ToString());
+                    nombreSucursal = reader2[1].ToString();
+                    dia = reader2[2].ToString();
+                    horaInicial = reader2[3].ToString();
+                    horaFinal = reader2[4].ToString();
+                    reader2.Close();
+                }
 
                 SqlCommand cmd3 = con.CreateCommand();
                 cmd3.CommandType = CommandType.Text;

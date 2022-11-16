@@ -145,7 +145,7 @@
                                                 <asp:BoundField DataField="horaInicial" HeaderText="Start time" ReadOnly="True" SortExpression="horaInicial"></asp:BoundField>
                                                 <asp:BoundField DataField="horaFinal" HeaderText="Finish time" ReadOnly="True" SortExpression="horaFinal"></asp:BoundField>
                                                 <asp:BoundField DataField="dia" HeaderText="Day" ReadOnly="True" SortExpression="dia"></asp:BoundField>
-                                                <asp:BoundField DataField="Sucursal" HeaderText="Branch" ReadOnly="True" SortExpression="Sucursal"></asp:BoundField>
+                                                <asp:BoundField DataField="nombreSucursal" HeaderText="Branch" ReadOnly="True" SortExpression="Sucursal"></asp:BoundField>
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>

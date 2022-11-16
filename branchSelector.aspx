@@ -19,6 +19,7 @@
                         <img class="card-img-top" src="img/supermarkets.png" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><%=nombreSucursal%></h5>
+                            <p class="card-text">Horario: <%=horaInicial%> - <%=horaFinal%></p>
                             <a href="productList.aspx?id=<%=idSucursal%>" class="btn btn-primary px-5">Ir</a>
                         </div>
                     </div>
@@ -39,6 +40,7 @@
                             <img class="card-img-top" src="img/supermarkets.png" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title "><%#Eval("nombreSucursal")%></h5>
+                                <p class="card-text">Horario: <%#Eval("horarioInicial")%> - <%#Eval("horarioFinal")%> </p>
                                 <a href="productList.aspx?id=<%#Eval("idSucursal")%>" class="btn btn-primary px-5">Ir</a>
                             </div>
                         </div>

@@ -2,25 +2,25 @@ GO
 --====================================================
 --						Categoria Producto
 --===================================================
+
+-- spCrudCategoriaProducto 7, 'Limpieza', 'para el servicio', 1
 CREATE or ALTER PROCEDURE dbo.spCrudCategoriaProducto
-	@idCategoriaProducto int null, 
-	@nombre varchar(200) ,
-	@descripcion varchar(100) ,
+	@idCategoriaProducto int = null, 
+	@nombre varchar(200) = null ,
+	@descripcion varchar(100) = null,
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 begin
 declare @errorInt int = 0, @errorMsg varchar(200)
 declare @identityValue int = -1
+
 	if @operationFlag = 0 BEGIN
 
 		if @nombre is not null and @descripcion is not null begin			
-			BEGIN TRY
-														
+			BEGIN TRY									
 					INSERT INTO MYSQLSERVER...CategoriaProducto (nombreCategoria,descripcionCategoria)
-                    values (@nombre,@descripcion);
-				
-		
+                    values (@nombre,@descripcion);	
 			END TRY
 			BEGIN CATCH
 				set @errorInt=1
@@ -39,11 +39,9 @@ declare @identityValue int = -1
 	if @operationFlag = 1 BEGIN
 		if @nombre is not null and @descripcion is not null  and @idCategoriaProducto is not null begin		
 					BEGIN TRY
-						BEGIN TRANSACTION
 						update MYSQLSERVER...CategoriaProducto 
 						set nombreCategoria = ISNULL(@nombre, nombreCategoria), descripcionCategoria = ISNULL(@descripcion, descripcionCategoria)
 						where idCategoria = @idCategoriaProducto;
-						COMMIT TRANSACTION
 					END TRY
 					BEGIN CATCH
 						set @errorInt=1

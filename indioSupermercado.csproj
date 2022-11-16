@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminCategoria.aspx" />
     <Content Include="adminClientes.aspx" />
     <Content Include="adminDiscount.aspx" />
     <Content Include="adminEmployee.aspx" />
@@ -2191,6 +2192,7 @@
     <Content Include="img\oficinas.jpg" />
     <Content Include="img\Panel.png" />
     <Content Include="img\payment-method.png" />
+    <Content Include="img\pCategory.png" />
     <Content Include="img\photo_appointment_setting_page_pharmassent_consulting.jpg" />
     <Content Include="img\position.png" />
     <Content Include="img\producto.png" />
@@ -2222,6 +2224,13 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminCategoria.aspx.cs">
+      <DependentUpon>adminCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminCategoria.aspx.designer.cs">
+      <DependentUpon>adminCategoria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminClientes.aspx.cs">
       <DependentUpon>adminClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
