@@ -18,8 +18,13 @@ namespace indioSupermercado
         private string stringConnection = usefull.strCon;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlDataSource1.ConnectionString = stringConnection;
+            SqlDataSourceBono.ConnectionString = stringConnection;
+            SqlDataSourceVendidos.ConnectionString = stringConnection;
+            SqlDataSourceFrecuentes.ConnectionString = stringConnection;
+            SqlDataSourceExpirados.ConnectionString = stringConnection;
+            SqlDataSourceGanancias.ConnectionString = stringConnection;
             GridViewReporteBono.Visible = false;
+            //GridViewExpirados.Visible = false
 
         }
 
