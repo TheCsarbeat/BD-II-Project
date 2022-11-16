@@ -68,14 +68,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminClientes.aspx" />
+    <Content Include="adminDiscount.aspx" />
     <Content Include="adminEmployee.aspx" />
+    <Content Include="adminExpired.aspx" />
     <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormHorario.aspx" />
     <Content Include="adminFormImpuesto.aspx" />
     <Content Include="adminFormLugar.aspx" />
     <Content Include="adminFormManager.aspx" />
+    <Content Include="adminFormPais.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormProvider.aspx" />
+    <Content Include="adminFormTaxByCategory.aspx" />
+    <Content Include="adminLote.aspx" />
+    <Content Include="adminOrderProducts.aspx" />
     <Content Include="adminFormPuesto.aspx" />
     <Content Include="adminFormTipoCambio.aspx" />
     <Content Include="adminFormTipoPago.aspx" />
@@ -84,6 +90,8 @@
     <Content Include="bootstrap\css\sweetalert2.min.css" />
     <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
+    <Content Include="bootstrap\js\jquery-3.6.1.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
     <Content Include="bootstrap\js\sweetalert2.all.min.js" />
     <Content Include="bootstrap\mdb\css\css.css" />
@@ -2146,6 +2154,7 @@
     <Content Include="fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome\svgs\solid\z.svg" />
     <Content Include="homePage.aspx" />
+    <Content Include="img\adminFondo.jpg" />
     <Content Include="img\adminuser.png" />
     <Content Include="img\book-online.png" />
     <Content Include="img\books.png" />
@@ -2162,6 +2171,8 @@
     <Content Include="img\defaulters-list.png" />
     <Content Include="img\digital-data.png" />
     <Content Include="img\digital-inventory.png" />
+    <Content Include="img\discount.png" />
+    <Content Include="img\expired.png" />
     <Content Include="img\exchange.png" />
     <Content Include="img\generaluser.png" />
     <Content Include="img\gestion1.png" />
@@ -2172,12 +2183,14 @@
     <Content Include="img\imagen.jpg" />
     <Content Include="img\impuestos.png" />
     <Content Include="img\in-homepage-banner.jpg" />
+    <Content Include="img\inventory.png" />
     <Content Include="img\library.png" />
     <Content Include="img\loginBackground.jpg" />
     <Content Include="img\Logo Ferks.png" />
     <Content Include="img\lugar.png" />
     <Content Include="img\manager.png" />
     <Content Include="img\oficinas.jpg" />
+    <Content Include="img\pais.png" />
     <Content Include="img\Panel.png" />
     <Content Include="img\payment-method.png" />
     <Content Include="img\photo_appointment_setting_page_pharmassent_consulting.jpg" />
@@ -2194,6 +2207,7 @@
     <Content Include="img\Transparent Panel 3.png" />
     <Content Include="img\usuario.jpg" />
     <Content Include="img\writer.png" />
+    <Content Include="js\JavaScript.js" />
     <Content Include="payOrder.aspx" />
     <Content Include="productImgs\carrot.jpg" />
     <Content Include="productImgs\onion.jpg" />
@@ -2217,12 +2231,26 @@
     <Compile Include="adminClientes.aspx.designer.cs">
       <DependentUpon>adminClientes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminDiscount.aspx.cs">
+      <DependentUpon>adminDiscount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminDiscount.aspx.designer.cs">
+      <DependentUpon>adminDiscount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminEmployee.aspx.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminEmployee.aspx.designer.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminExpired.aspx.cs">
+      <DependentUpon>adminExpired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminExpired.aspx.designer.cs">
+      <DependentUpon>adminExpired.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminFormBranch.aspx.cs">
       <DependentUpon>adminFormBranch.aspx</DependentUpon>
@@ -2259,6 +2287,13 @@
     <Compile Include="adminFormManager.aspx.designer.cs">
       <DependentUpon>adminFormManager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminFormPais.aspx.cs">
+      <DependentUpon>adminFormPais.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormPais.aspx.designer.cs">
+      <DependentUpon>adminFormPais.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminFormProductos.aspx.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2272,6 +2307,27 @@
     </Compile>
     <Compile Include="adminFormProvider.aspx.designer.cs">
       <DependentUpon>adminFormProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormTaxByCategory.aspx.cs">
+      <DependentUpon>adminFormTaxByCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormTaxByCategory.aspx.designer.cs">
+      <DependentUpon>adminFormTaxByCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminLote.aspx.cs">
+      <DependentUpon>adminLote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminLote.aspx.designer.cs">
+      <DependentUpon>adminLote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminOrderProducts.aspx.cs">
+      <DependentUpon>adminOrderProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminOrderProducts.aspx.designer.cs">
+      <DependentUpon>adminOrderProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminFormPuesto.aspx.cs">
       <DependentUpon>adminFormPuesto.aspx</DependentUpon>

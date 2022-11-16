@@ -37,13 +37,15 @@
                         <img src="<%#Eval("imgPath")%>" width="200" height="200">
                     </div>
                     <div class="product-details">
-                         <span class="font-weight-bold d-block">₡ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
+                         <span class="font-weight-bold d-block">$ <%# DataBinder.Eval(Container.DataItem, "precioVenta") %> </span>
                          <span><%#Eval("nombreProducto")%></span>
                          <div class="buttons d-flex flex-row">
                             <div class="cart"><i class="fa fa-shopping-cart"></i></div>  
                             <asp:Button class="btn btn-success cart-button"
                             CommandName='<%# DataBinder.Eval(Container.DataItem, "nombreProducto") +","+ DataBinder.Eval(Container.DataItem, "precioVenta")+","+
-                                    DataBinder.Eval(Container.DataItem, "imgPath")+","+DataBinder.Eval(Container.DataItem, "descripcionProducto")%>  ' 
+                                    DataBinder.Eval(Container.DataItem, "imgPath")+","+DataBinder.Eval(Container.DataItem, "descripcionProducto") +","+
+                                DataBinder.Eval(Container.DataItem, "idSucursal" )+","+DataBinder.Eval(Container.DataItem, "idProducto")+","+
+                                DataBinder.Eval(Container.DataItem, "idInventario") %>' 
                             CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idLote") %>  ' 
                             Text="Add to Cart" runat="server" />
                         </div>

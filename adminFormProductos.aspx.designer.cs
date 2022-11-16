@@ -15,15 +15,6 @@ namespace indioSupermercado
     {
 
         /// <summary>
-        /// lblUploadResult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUploadResult;
-
-        /// <summary>
         /// FileUpload1 control.
         /// </summary>
         /// <remarks>
@@ -78,6 +69,24 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.DropDownList categoriaDropDownList;
 
         /// <summary>
+        /// minTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox minTxt;
+
+        /// <summary>
+        /// maxTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox maxTxt;
+
+        /// <summary>
         /// descripcionProductotxt control.
         /// </summary>
         /// <remarks>
@@ -87,39 +96,84 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.TextBox descripcionProductotxt;
 
         /// <summary>
-        /// ButtonAgregarSucursal control.
+        /// insertProductBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregarSucursal;
+        protected global::System.Web.UI.WebControls.Button insertProductBtn;
 
         /// <summary>
-        /// ButtonActualizarSucursal control.
+        /// update control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonActualizarSucursal;
+        protected global::System.Web.UI.WebControls.Button update;
 
         /// <summary>
-        /// ButtonBorrarSucursal control.
+        /// delete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBorrarSucursal;
+        protected global::System.Web.UI.WebControls.Button delete;
 
         /// <summary>
-        /// productosGridView control.
+        /// deleteF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView productosGridView;
+        protected global::System.Web.UI.WebControls.Button deleteF;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// sqlDataSourceProductos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlDataSourceProductos;
+
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
+        /// updatePanelProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelProducts;
+
+        /// <summary>
+        /// productsGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView productsGridView;
     }
 }

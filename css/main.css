@@ -8,11 +8,11 @@
     }
 
 #footer1 {
-    background: #762b00;
+    background: rgb(41, 44, 49);
 }
 
 #footer2 {
-    background: #531f00;
+    background: rgb(41, 44, 49);
 }
 
 
@@ -311,3 +311,4 @@ body {
         height: 100vh !important;
     }
 }
+

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Security.Cryptography;
+using System.Drawing;
 
 namespace indioSupermercado
 {
@@ -116,15 +117,12 @@ namespace indioSupermercado
 
 
                     }
-                    SqlCommand cmd = new SqlCommand("crudSucursalManager", connection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@opcion", 1);
-                    cmd.Parameters.AddWithValue("@idSucursal", SqlDbType.Int).Value = Convert.ToInt32(idSucursal);
-                    cmd.Parameters.AddWithValue("@idEmpleado", SqlDbType.Int).Value = Convert.ToInt32(idEmpleado);
-
+                    SqlCommand cmd = new SqlCommand("crudSucursalManager 1, null, " +idSucursal+ ", "+idEmpleado, connection);
                     SqlDataReader reader = cmd.ExecuteReader();
 
+                    reader.Read();
+                    valueResult = Convert.ToInt32(reader[0].ToString());
+                    msgResult = (reader[1].ToString());
 
                     connection.Close();
                     reader.Close();
@@ -179,11 +177,11 @@ namespace indioSupermercado
                     {
                         connection.Open();
                     }
-                    SqlCommand cmd = new SqlCommand("crudHorario", connection);
+                    SqlCommand cmd = new SqlCommand("crudSucursalManager", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@opcion", 1);
-                    cmd.Parameters.AddWithValue("@@idSucursalManger", SqlDbType.Int).Value = Convert.ToInt32(idSucursal);
+                    cmd.Parameters.AddWithValue("@opcion", 2);
+                    cmd.Parameters.AddWithValue("@idSucursalManger", SqlDbType.Int).Value = Convert.ToInt32(idManager);
                     cmd.Parameters.AddWithValue("@idSucursal", SqlDbType.Int).Value = Convert.ToInt32(idSucursal);
                     cmd.Parameters.AddWithValue("@idEmpleado", SqlDbType.Int).Value = Convert.ToInt32(idEmpleado);
 

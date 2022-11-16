@@ -1,28 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminFormBranch.aspx.cs" Inherits="indioSupermercado.adminFormSucursal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="bootstrap/js/jquery-3.6.1.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-      
-          //$(document).ready(function () {
-              //$('.table').DataTable();
-         // });
-      
-          $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-          //$('.table1').DataTable();
-      });
+        $(document).ready(function () {
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            //$(document).ready(function () {
+            //$('.table').DataTable();
+            // });
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+            // Code that uses other library's $ can follow here.
 
-            reader.onload = function (e) {
-                $('#imgview').attr('src', e.target.result);
-            };
+        });
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">

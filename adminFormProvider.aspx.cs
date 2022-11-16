@@ -16,9 +16,11 @@ namespace indioSupermercado
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlDataSourceProvider.ConnectionString = usefull.strCon;
-            loadCateogory();
+            loadCountry();
         }
-        public void loadCateogory()
+        
+        
+        public void loadCountry()
         {
             try
             {
@@ -168,7 +170,7 @@ namespace indioSupermercado
                     if (valueResult == 0)
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
                         GridViewProvider.DataBind();
                         UpdatePanelProvider.Update();
                     }
@@ -230,7 +232,7 @@ namespace indioSupermercado
                     if (valueResult == 0)
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
                         GridViewProvider.DataBind();
                         UpdatePanelProvider.Update();
                     }

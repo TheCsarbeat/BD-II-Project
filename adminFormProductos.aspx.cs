@@ -25,35 +25,33 @@ namespace indioSupermercado
             descripcionProductotxt.Text = "";
 
         }
-        public void bindGridProducts()
+        public void loadFileImg()
         {
-            try
+            string strFileName;
+            string strFilePath = "";
+            string strFolder;
+            strFolder = Server.MapPath("./productImgs/");
+            // Retrieve the name of the file that is posted.
+            strFileName = FileUpload1.PostedFile.FileName;
+            strFileName = Path.GetFileName(strFileName);
+
+            if (FileUpload1.PostedFile.FileName != "")
             {
-                SqlConnection con = new SqlConnection(stringConnection);
-                if (con.State == ConnectionState.Closed)
+                // Create the folder if it does not exist.
+                if (!Directory.Exists(strFolder))
                 {
-                    con.Open();
+                    Directory.CreateDirectory(strFolder);
                 }
-                
-                SqlCommand cmd = new SqlCommand("spSelectProductsToView", con);
+                // Save the uploaded file to the server.
+                strFilePath = strFolder + strFileName;
+                if (!File.Exists(strFilePath))
+                {
+                    FileUpload1.PostedFile.SaveAs(strFilePath);
 
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                productosGridView.DataSource = dt;
-                productosGridView.DataBind();                
-
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script.");
+                }
             }
 
 
-            productosGridView.DataBind();
         }
 
         public void loadCateogory()
@@ -96,9 +94,10 @@ namespace indioSupermercado
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            bindGridProducts();
+ 
             loadCateogory();
-            //clearForm();
+            sqlDataSourceProductos.ConnectionString = stringConnection;
+            //sqlDataSourceTaxxCategory.ConnectionString = stringConnection;
         }
 
         protected void botonIDP_Click(object sender, EventArgs e)
@@ -106,53 +105,205 @@ namespace indioSupermercado
             
         }
 
-        public void loadPostedImg()
-        {
-            
-        }
 
         protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
         {
             string nombreProducto = nombreProductotxt.Text;
             string descripcionProducto = descripcionProductotxt.Text;
             string categoria = categoriaDropDownList.SelectedValue.ToString();
+            string strFileName;
+            string strFilePath = "";
+            string ruta = "productImgs/";
+            string min = minTxt.Text;
+            string max = maxTxt.Text;
+
+            // Retrieve the name of the file that is posted.
+            strFileName = FileUpload1.PostedFile.FileName;
+            strFileName = Path.GetFileName(strFileName);
+            strFilePath = ruta + strFileName;
 
             string msgResult = "";
             int valueResult = -1;
-            
+
             if (nombreProducto != "" && descripcionProducto != "")
             {
-                string strFileName;
-                string strFilePath = "";
-                string strFolder;
-                strFolder = Server.MapPath("./productImgs/");
-                // Retrieve the name of the file that is posted.
-                strFileName = FileUpload1.PostedFile.FileName;
-                strFileName = Path.GetFileName(strFileName);
-
-                if (FileUpload1.PostedFile.FileName != "")
+                if (usefull.validateInt(min) && usefull.validateInt(max))
                 {
-                    // Create the folder if it does not exist.
-                    if (!Directory.Exists(strFolder))
+                    int min1 = Convert.ToInt32(min);
+                    int max2 = Convert.ToInt32(max);
+
+                    if (min1 <= max2)
                     {
-                        Directory.CreateDirectory(strFolder);
-                    }
-                    // Save the uploaded file to the server.
-                    strFilePath = strFolder + strFileName;
-                    if (File.Exists(strFilePath))
-                    {
-                        lblUploadResult.Text = strFileName + " already exists on the server!";
+
+                        try
+                        {
+                            loadFileImg();
+
+                            SqlConnection con = new SqlConnection(stringConnection);
+                            if (con.State == ConnectionState.Closed)
+                            {
+                                con.Open();
+                            }
+
+                            SqlCommand cmd = new SqlCommand("EXEC spCrudProducto null, '" + nombreProducto + "', '" + descripcionProducto + "'," + " " + categoria + ", '" + strFileName + "','" + strFilePath + "'," + min + "," + max + ", 0", con);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            reader.Read();
+                            valueResult = Convert.ToInt32(reader[0].ToString());
+                            msgResult = (reader[1].ToString());
+
+                            reader.Close();
+                            con.Close();
+                            if (valueResult == 0)
+                            {
+                                productsGridView.DataBind();
+                                updatePanelProducts.Update();
+                                clearForm();
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                            }
+                            else
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + ex.Message + "','error')", true);
+
+                        }
+
+
                     }
                     else
                     {
-                        FileUpload1.PostedFile.SaveAs(strFilePath);
-                        lblUploadResult.Text = strFileName + " has been successfully uploaded.";
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                   "Swal.fire('Error','The min and max are wrong','errerroror')", true);
                     }
                 }
                 else
                 {
-                    lblUploadResult.Text = "Click 'Browse' to select the file to upload.";
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','The are empty values','error')", true);
+                }             
+
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                "Swal.fire('Error','The are empty values','error')", true);
+            }
+        }
+        protected void update_Click(object sender, EventArgs e)
+        {
+            string nombreProducto = nombreProductotxt.Text;
+            string descripcionProducto = descripcionProductotxt.Text;
+            string categoria = categoriaDropDownList.SelectedValue.ToString();
+            string strFileName;
+            string strFilePath = "";
+            string ruta = "productImgs/";
+            string id = idProductotxt.Text;
+
+            string min = minTxt.Text;
+            string max = maxTxt.Text;
+
+            // Retrieve the name of the file that is posted.
+            strFileName = FileUpload1.PostedFile.FileName;
+            strFileName = Path.GetFileName(strFileName);
+            strFilePath = ruta + strFileName;
+
+            string msgResult = "";
+            int valueResult = -1;
+
+            if (id != "" && nombreProducto != "" && descripcionProducto != "")
+            {
+                if (usefull.validateInt(min) && usefull.validateInt(max))
+                {
+
+                    int min1 = Convert.ToInt32(min);
+                    int max2 = Convert.ToInt32(max);
+
+                    if (min1 <= max2)
+                    {
+                        
+                        try
+                        {
+                            loadFileImg();
+
+                            SqlConnection con = new SqlConnection(stringConnection);
+                            if (con.State == ConnectionState.Closed)
+                            {
+                                con.Open();
+                            }
+
+                            SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", '" + nombreProducto + "', '" + descripcionProducto + "'," + " " + categoria + ", '" + strFileName + "','" + strFilePath + "', " + min +max+","+ min + ",1", con);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            reader.Read();
+                            valueResult = Convert.ToInt32(reader[0].ToString());
+                            msgResult = (reader[1].ToString());
+
+                            reader.Close();
+                            con.Close();
+                            if (valueResult == 0)
+                            {
+                                productsGridView.DataBind();
+                                updatePanelProducts.Update();
+                                //clearForm();
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                            }
+                            else
+                            {
+                                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + msgResult + "','error')", true);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                    "Swal.fire('Error','" + ex.Message + "','error')", true);
+
+                        }
+
+                        
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                   "Swal.fire('Error','Dates are wrong','error')", true);
+                    }
                 }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                                   "Swal.fire('Error','The are empty values','error')", true);
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                               "Swal.fire('Error','The are empty values','error')", true);
+            }
+        }
+
+        protected void delete_Click(object sender, EventArgs e)
+        {
+
+            string id = idProductotxt.Text;
+
+
+
+            string msgResult = "";
+            int valueResult = -1;
+
+            if (id != "")
+            {
+
 
                 SqlConnection con = new SqlConnection(stringConnection);
                 if (con.State == ConnectionState.Closed)
@@ -160,8 +311,7 @@ namespace indioSupermercado
                     con.Open();
                 }
 
-                SqlCommand cmd = new SqlCommand("spCrudProducto null, '" + nombreProducto + "', '" + descripcionProducto + "'," +
-                    " " + categoria + ", '" + strFileName + "','" + strFilePath + "', 0", con);
+                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null, 4", con);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 reader.Read();
@@ -172,9 +322,11 @@ namespace indioSupermercado
                 con.Close();
                 if (valueResult == 0)
                 {
-                    bindGridProducts();
-                    loadCateogory();
+                    productsGridView.DataBind();
+                    updatePanelProducts.Update();
                     clearForm();
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
 
                 }
                 else
@@ -188,10 +340,106 @@ namespace indioSupermercado
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                                "Swal.fire('Error','The are empty values','error')", true);
             }
-            
-
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string id = idProductotxt.Text;
 
+
+
+            string msgResult = "";
+            int valueResult = -1;
+
+            if (id != "")
+            {
+
+
+                SqlConnection con = new SqlConnection(stringConnection);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null, 5", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Read();
+                valueResult = Convert.ToInt32(reader[0].ToString());
+                msgResult = (reader[1].ToString());
+
+                reader.Close();
+                con.Close();
+                if (valueResult == 0)
+                {
+                    productsGridView.DataBind();
+                    updatePanelProducts.Update();
+                    clearForm();
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Error','" + msgResult + "','error')", true);
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                               "Swal.fire('Error','The are empty values','error')", true);
+            }
+        }
+
+        protected void deleteF_Click(object sender, EventArgs e)
+        {
+            string id = idProductotxt.Text;
+
+
+
+            string msgResult = "";
+            int valueResult = -1;
+
+            if (id != "")
+            {
+
+
+                SqlConnection con = new SqlConnection(stringConnection);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null, 6", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Read();
+                valueResult = Convert.ToInt32(reader[0].ToString());
+                msgResult = (reader[1].ToString());
+
+                reader.Close();
+                con.Close();
+                if (valueResult == 0)
+                {
+                    productsGridView.DataBind();
+                    updatePanelProducts.Update();
+                    clearForm();
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                }
+                else
+                {
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                        "Swal.fire('Error','" + msgResult + "','error')", true);
+                }
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                               "Swal.fire('Error','The are empty values','error')", true);
+            }
+        }
     }
 }
