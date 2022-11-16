@@ -11,35 +11,53 @@ namespace indioSupermercado
 {
 
 
-    public partial class adminFormProvider
+    public partial class adminFormLugar
     {
 
         /// <summary>
-        /// Control TextBoxIDProvider.
+        /// Control TextBoxIDLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDProvider;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIDLugar;
 
         /// <summary>
-        /// Control TextBoxNombreProvider.
+        /// Control TextBoxNombreLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreProvider;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreLugar;
 
         /// <summary>
-        /// Control TextBoxContactProvider.
+        /// Control TextBoxLongitud.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxContactProvider;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxLongitud;
+
+        /// <summary>
+        /// Control txtLatitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLatitud;
+
+        /// <summary>
+        /// Control DropDownListStatusLugar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListStatusLugar;
 
         /// <summary>
         /// Control paisDropList.
@@ -51,49 +69,40 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.DropDownList paisDropList;
 
         /// <summary>
-        /// Control DropDownListStatusProvider.
+        /// Control ButtonAgregarLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListStatusProvider;
+        protected global::System.Web.UI.WebControls.Button ButtonAgregarLugar;
 
         /// <summary>
-        /// Control ButtonAgregarProvider.
+        /// Control ButtonActualizarLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregarProvider;
+        protected global::System.Web.UI.WebControls.Button ButtonActualizarLugar;
 
         /// <summary>
-        /// Control ButtonActualizarProvider.
+        /// Control ButtonBorrarLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonActualizarProvider;
+        protected global::System.Web.UI.WebControls.Button ButtonBorrarLugar;
 
         /// <summary>
-        /// Control ButtonBorrarProvider.
+        /// Control SqlDataSourceLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBorrarProvider;
-
-        /// <summary>
-        /// Control SqlDataSourceProvider.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceProvider;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceLugar;
 
         /// <summary>
         /// Control ScriptManager1.
@@ -105,21 +114,21 @@ namespace indioSupermercado
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Control UpdatePanelProvider.
+        /// Control UpdatePanelLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelProvider;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelLugar;
 
         /// <summary>
-        /// Control GridViewProvider.
+        /// Control GridViewLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewProvider;
+        protected global::System.Web.UI.WebControls.GridView GridViewLugar;
     }
 }

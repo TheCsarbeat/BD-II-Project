@@ -11,35 +11,35 @@ namespace indioSupermercado
 {
 
 
-    public partial class adminFormProvider
+    public partial class adminFormImpuesto
     {
 
         /// <summary>
-        /// Control TextBoxIDProvider.
+        /// Control IDTaxTxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIDProvider;
+        protected global::System.Web.UI.WebControls.TextBox IDTaxTxt;
 
         /// <summary>
-        /// Control TextBoxNombreProvider.
+        /// Control nameTaxtxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNombreProvider;
+        protected global::System.Web.UI.WebControls.TextBox nameTaxtxt;
 
         /// <summary>
-        /// Control TextBoxContactProvider.
+        /// Control taxPorcentagetxt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxContactProvider;
+        protected global::System.Web.UI.WebControls.TextBox taxPorcentagetxt;
 
         /// <summary>
         /// Control paisDropList.
@@ -51,49 +51,49 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.DropDownList paisDropList;
 
         /// <summary>
-        /// Control DropDownListStatusProvider.
+        /// Control DropDownListEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListStatusProvider;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEstado;
 
         /// <summary>
-        /// Control ButtonAgregarProvider.
+        /// Control ButtonAgregarImpuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregarProvider;
+        protected global::System.Web.UI.WebControls.Button ButtonAgregarImpuesto;
 
         /// <summary>
-        /// Control ButtonActualizarProvider.
+        /// Control ButtonActualizarImpuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonActualizarProvider;
+        protected global::System.Web.UI.WebControls.Button ButtonActualizarImpuesto;
 
         /// <summary>
-        /// Control ButtonBorrarProvider.
+        /// Control ButtonBorrarImpuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBorrarProvider;
+        protected global::System.Web.UI.WebControls.Button ButtonBorrarImpuesto;
 
         /// <summary>
-        /// Control SqlDataSourceProvider.
+        /// Control SqlDataSourceImpuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceProvider;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceImpuesto;
 
         /// <summary>
         /// Control ScriptManager1.
@@ -105,21 +105,21 @@ namespace indioSupermercado
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Control UpdatePanelProvider.
+        /// Control UpdatePanelImpuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelProvider;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelImpuesto;
 
         /// <summary>
-        /// Control GridViewProvider.
+        /// Control GridViewImpuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewProvider;
+        protected global::System.Web.UI.WebControls.GridView GridViewImpuesto;
     }
 }

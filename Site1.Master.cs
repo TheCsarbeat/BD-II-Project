@@ -33,7 +33,12 @@ namespace indioSupermercado
                     reportesLinkButton.Visible = false; // publisher management link button
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false; //admin clients
-
+                    SucursalAdmin.Visible = false; // admin sucursales
+                    ProveedorAdmin.Visible = false; // admin proveedor
+                    TipoCambioAdmin.Visible = false; // admin tipo cambio
+                    ImpuestoAdmin.Visible = false; // admin impuesto
+                    TipoPagoAdmin.Visible = false; // admin tipoPago
+                    PuestoTrabajo.Visible = false; // admin puesto
 
                 }
                 else if (Session["role"].Equals("user"))
@@ -52,6 +57,12 @@ namespace indioSupermercado
                     reportesLinkButton.Visible = false; // publisher management link button
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false;//admin clients
+                    SucursalAdmin.Visible = false; // admin sucursales
+                    ProveedorAdmin.Visible = false; // admin proveedor
+                    TipoCambioAdmin.Visible = false; // admin tipo cambio
+                    ImpuestoAdmin.Visible = false; // admin impuesto
+                    TipoPagoAdmin.Visible = false; // admin tipoPago
+                    PuestoTrabajo.Visible = false; // admin puesto
 
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
@@ -70,6 +81,12 @@ namespace indioSupermercado
                     reportesLinkButton.Visible = true;
                     empleadosLinkButton.Visible = true;  // admin employees
                     clientesAdmin.Visible = true; //admin clients
+                    SucursalAdmin.Visible = true; // admin sucursales
+                    ProveedorAdmin.Visible = true; // admin proveedor
+                    TipoCambioAdmin.Visible = true; // admin tipo cambio
+                    ImpuestoAdmin.Visible = true; // admin impuesto
+                    TipoPagoAdmin.Visible = true; // admin tipoPago
+                    PuestoTrabajo.Visible = true; // admin puesto
 
                 }
                 
@@ -121,6 +138,36 @@ namespace indioSupermercado
         protected void reportesLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminReportes.aspx");
+        }
+
+        protected void sucursalLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormBranch.aspx");
+        }
+
+        protected void proveedorLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormProvider.aspx");
+        }
+
+        protected void tipoCambioLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormTipoCambio.aspx");
+        }
+
+        protected void impuestoLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormImpuesto.aspx");
+        }
+
+        protected void tipoPagoLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormTipoPago.aspx");
+        }
+
+        protected void puestoLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormPuesto.aspx");
         }
     }
 }

@@ -70,8 +70,13 @@
     <Content Include="adminClientes.aspx" />
     <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormBranch.aspx" />
+    <Content Include="adminFormImpuesto.aspx" />
+    <Content Include="adminFormLugar.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormProvider.aspx" />
+    <Content Include="adminFormPuesto.aspx" />
+    <Content Include="adminFormTipoCambio.aspx" />
+    <Content Include="adminFormTipoPago.aspx" />
     <Content Include="adminReportes.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\css\sweetalert2.min.css" />
@@ -2154,6 +2159,7 @@
     <Content Include="img\defaulters-list.png" />
     <Content Include="img\digital-data.png" />
     <Content Include="img\digital-inventory.png" />
+    <Content Include="img\exchange.png" />
     <Content Include="img\generaluser.png" />
     <Content Include="img\gestion1.png" />
     <Content Include="img\grocery-cart.png" />
@@ -2161,13 +2167,17 @@
     <Content Include="img\icon.png" />
     <Content Include="img\Icono_logo.png" />
     <Content Include="img\imagen.jpg" />
+    <Content Include="img\impuestos.png" />
     <Content Include="img\in-homepage-banner.jpg" />
     <Content Include="img\library.png" />
     <Content Include="img\loginBackground.jpg" />
     <Content Include="img\Logo Ferks.png" />
+    <Content Include="img\lugar.png" />
     <Content Include="img\oficinas.jpg" />
     <Content Include="img\Panel.png" />
+    <Content Include="img\payment-method.png" />
     <Content Include="img\photo_appointment_setting_page_pharmassent_consulting.jpg" />
+    <Content Include="img\position.png" />
     <Content Include="img\producto.png" />
     <Content Include="img\proveedor.png" />
     <Content Include="img\publisher.png" />
@@ -2217,6 +2227,20 @@
     <Compile Include="adminFormBranch.aspx.designer.cs">
       <DependentUpon>adminFormBranch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminFormImpuesto.aspx.cs">
+      <DependentUpon>adminFormImpuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormImpuesto.aspx.designer.cs">
+      <DependentUpon>adminFormImpuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormLugar.aspx.cs">
+      <DependentUpon>adminFormLugar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormLugar.aspx.designer.cs">
+      <DependentUpon>adminFormLugar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminFormProductos.aspx.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2230,6 +2254,27 @@
     </Compile>
     <Compile Include="adminFormProvider.aspx.designer.cs">
       <DependentUpon>adminFormProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormPuesto.aspx.cs">
+      <DependentUpon>adminFormPuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormPuesto.aspx.designer.cs">
+      <DependentUpon>adminFormPuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormTipoCambio.aspx.cs">
+      <DependentUpon>adminFormTipoCambio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormTipoCambio.aspx.designer.cs">
+      <DependentUpon>adminFormTipoCambio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormTipoPago.aspx.cs">
+      <DependentUpon>adminFormTipoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormTipoPago.aspx.designer.cs">
+      <DependentUpon>adminFormTipoPago.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminReportes.aspx.cs">
       <DependentUpon>adminReportes.aspx</DependentUpon>

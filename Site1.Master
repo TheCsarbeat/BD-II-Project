@@ -128,6 +128,19 @@
                             <asp:LinkButton class="footerlinks" ID="empleadosLinkButton" runat="server" OnClick="empleadosLinkButton_Click">Empleados</asp:LinkButton>
                              &nbsp;
                             <asp:LinkButton class="footerlinks" ID="clientesAdmin" runat="server" OnClick="clientesAdmin_Click">Clientes</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="SucursalAdmin" runat="server" OnClick="sucursalLinkButton_Click">Sucursal</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="ProveedorAdmin" runat="server" OnClick="proveedorLinkButton_Click">Proveedor</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="TipoCambioAdmin" runat="server" OnClick="tipoCambioLinkButton_Click">TipoCambio</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="ImpuestoAdmin" runat="server" OnClick="impuestoLinkButton_Click">Impuesto</asp:LinkButton>
+                             &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="TipoPagoAdmin" runat="server" OnClick="tipoPagoLinkButton_Click">TipoPago</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="PuestoTrabajo" runat="server" OnClick="puestoLinkButton_Click">PuestoTrabajo</asp:LinkButton>
+
                         </p>
 
                     </div>

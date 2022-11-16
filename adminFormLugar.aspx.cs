@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -6,27 +7,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-using System.Collections;
 
 namespace indioSupermercado
 {
-    public partial class adminFormSucursal : System.Web.UI.Page
+    public partial class adminFormLugar : System.Web.UI.Page
     {
         private string stringConnection = usefull.strCon;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlDataSource1.ConnectionString = stringConnection;
-            loadPlace();
-            loadCoinPorcentage();
-        }
+            SqlDataSourceLugar.ConnectionString = usefull.strCon;
+            loadCountry();
 
-        public void loadPlace()
+        }
+        public void loadCountry()
         {
             try
             {
-                var nombreLugar = new ArrayList();
-                var idLugar = new ArrayList();
+                var nombrePais = new ArrayList();
+                var idPais = new ArrayList();
 
 
                 SqlConnection con = new SqlConnection(stringConnection);
@@ -35,21 +33,21 @@ namespace indioSupermercado
                     con.Open();
                 }
 
-                SqlCommand cmd = new SqlCommand("spGetLugares", con);
+                SqlCommand cmd = new SqlCommand("spGetCountries", con);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    nombreLugar.Add(reader[1].ToString());
-                    idLugar.Add(reader[0].ToString());
+                    nombrePais.Add(reader[1].ToString());
+                    idPais.Add(reader[0].ToString());
                 }
 
                 con.Close();
                 if (!IsPostBack)
                 {
-                    for (int i = 0; i < nombreLugar.Count; i++)
-                        lugarDropList.Items.Insert(0, new ListItem(nombreLugar[i].ToString(), idLugar[i].ToString()));
-                    lugarDropList.DataBind();
+                    for (int i = 0; i < nombrePais.Count; i++)
+                        paisDropList.Items.Insert(0, new ListItem(nombrePais[i].ToString(), idPais[i].ToString()));
+                    paisDropList.DataBind();
                 }
 
             }
@@ -59,74 +57,35 @@ namespace indioSupermercado
             }
         }
 
-        public void loadCoinPorcentage()
+        protected void ButtonAgregarLugar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var cambioPorcentage = new ArrayList();
-                var idMonedaXPais = new ArrayList();
-
-
-                SqlConnection con = new SqlConnection(stringConnection);
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
-
-                SqlCommand cmd = new SqlCommand("spGetMonedaXPais", con);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    cambioPorcentage.Add(reader[2].ToString());
-                    idMonedaXPais.Add(reader[0].ToString());
-                }
-
-                con.Close();
-                if (!IsPostBack)
-                {
-                    for (int i = 0; i < cambioPorcentage.Count; i++)
-                        monedaXPaisDropList.Items.Insert(0, new ListItem(cambioPorcentage[i].ToString(), idMonedaXPais[i].ToString()));
-                    monedaXPaisDropList.DataBind();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script.");
-            }
-        }
-        // Insertar en la sucursal
-        protected void ButtonAgregarSucursal_Click(object sender, EventArgs e)
-        {
-
-            string idSucursal = TextBoxIDSucursal.Text;
-            string nombreSucursal = TextBoxNombreSucursal.Text;
-            string idLugar = lugarDropList.SelectedValue;
-            string idMonedaXPais = monedaXPaisDropList.SelectedValue;
-            string estado = DropDownListEstado.SelectedValue;
+            string idUbication = TextBoxIDLugar.Text;
+            string nameUbication = TextBoxNombreLugar.Text;
+            string longitude = TextBoxLongitud.Text;
+            string latitude = txtLatitud.Text;
+            string idCountry = paisDropList.SelectedValue;
+            string status = DropDownListStatusLugar.SelectedValue;
             int valueResult = 0;
             string msgResult = "";
 
-            if (nombreSucursal != "" && idLugar != "" && idMonedaXPais != "")
+            if (nameUbication != "" && nameUbication != "" && longitude != "" && latitude != "" && idCountry != "")
             {
                 try
                 {
-                    SqlConnection connection= new SqlConnection(stringConnection);
+                    SqlConnection connection = new SqlConnection(stringConnection);
                     if (connection.State == ConnectionState.Closed)
                     {
                         connection.Open();
 
-
                     }
-                    SqlCommand cmd = new SqlCommand("crudSucursal", connection);
+                    SqlCommand cmd = new SqlCommand("crudLugar", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@opcion", 1);
-                    cmd.Parameters.AddWithValue("@nombre", SqlDbType.Int).Value = nombreSucursal;
-                    cmd.Parameters.AddWithValue("@idLugar", SqlDbType.Int).Value = Convert.ToInt32(idLugar);
-                    cmd.Parameters.AddWithValue("@idMonedaxPais", SqlDbType.Int).Value = Convert.ToInt32(idMonedaXPais);
-
+                    cmd.Parameters.AddWithValue("@nombre", SqlDbType.Int).Value = nameUbication;
+                    cmd.Parameters.AddWithValue("@idPais", SqlDbType.Int).Value = Convert.ToInt32(idCountry);
+                    cmd.Parameters.AddWithValue("@longitud", SqlDbType.Float).Value = longitude;
+                    cmd.Parameters.AddWithValue("@latitud", SqlDbType.Float).Value = latitude;
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -138,8 +97,8 @@ namespace indioSupermercado
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                             "Swal.fire('Perfect','" + msgResult + "','success')", true);
-                        GridViewSucursal.DataBind();
-                        UpdatePanelSucursal.Update();
+                        GridViewLugar.DataBind();
+                        UpdatePanelLugar.Update();
 
                     }
                     else
@@ -165,23 +124,20 @@ namespace indioSupermercado
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                            "Swal.fire('Error','Some files are empty','error')", true);
             }
-
-        
         }
-        // Actualizar en la sucursal
-        protected void ButtonActualizarSucursal_Click(object sender, EventArgs e)
+
+        protected void ButtonActualizarLugar_Click(object sender, EventArgs e)
         {
-            string idSucursal = TextBoxIDSucursal.Text;
-            string nombreSucursal = TextBoxNombreSucursal.Text;
-            string idLugar = lugarDropList.SelectedValue;
-            string idMonedaXPais = monedaXPaisDropList.SelectedValue;
-            string estado = DropDownListEstado.SelectedValue;
+            string idUbication = TextBoxIDLugar.Text;
+            string nameUbication = TextBoxNombreLugar.Text;
+            string longitude = TextBoxLongitud.Text;
+            string latitude = txtLatitud.Text;
+            string idCountry = paisDropList.SelectedValue;
+            string status = DropDownListStatusLugar.SelectedValue;
             int valueResult = 0;
             string msgResult = "";
 
-
-
-            if (idSucursal != "") 
+            if (idUbication != "")
             {
                 try
                 {
@@ -190,14 +146,15 @@ namespace indioSupermercado
                     {
                         connection.Open();
                     }
-                    SqlCommand cmd = new SqlCommand("crudSucursal", connection);
+                    SqlCommand cmd = new SqlCommand("crudLugar", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    
+
                     cmd.Parameters.AddWithValue("@opcion", 2);
-                    cmd.Parameters.AddWithValue("@idSucursal", SqlDbType.Int).Value = Convert.ToInt32(idSucursal);
-                    cmd.Parameters.AddWithValue("@nombre", SqlDbType.Int).Value = nombreSucursal;
-                    cmd.Parameters.AddWithValue("@idLugar", SqlDbType.Int).Value = idLugar;
-                    cmd.Parameters.AddWithValue("@idMonedaxPais", SqlDbType.Int).Value = idMonedaXPais;
+                    cmd.Parameters.AddWithValue("@idLugar", SqlDbType.Int).Value = Convert.ToInt32(idUbication);
+                    cmd.Parameters.AddWithValue("@nombre", SqlDbType.Int).Value = nameUbication;
+                    cmd.Parameters.AddWithValue("@idPais", SqlDbType.Int).Value = Convert.ToInt32(idCountry);
+                    cmd.Parameters.AddWithValue("@longitud", SqlDbType.Float).Value = longitude;
+                    cmd.Parameters.AddWithValue("@latitud", SqlDbType.Float).Value = latitude;
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -213,79 +170,8 @@ namespace indioSupermercado
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                             "Swal.fire('Perfect','" + msgResult + "','s')", true);
-                        GridViewSucursal.DataBind();
-                        UpdatePanelSucursal.Update();
-                    }
-                    else
-                    {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Error','" + msgResult + "','error')", true);
-                    }
-                }
-
-                
-                catch (Exception ex)
-                {
-                    Response.Write("<script>alert('"+ex.Message+"');</script>");
-                    
-                }
-
-            }
-            else
-            {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                           "Swal.fire('Error','ID sucursal can not be null','error')", true);
-            }
-
-
-        }
-
-        // Borrar en la sucursal
-        protected void ButtonBorrarSucursal_Click(object sender, EventArgs e)
-        {
-            string idSucursal = TextBoxIDSucursal.Text;
-            string nombreSucursal = TextBoxNombreSucursal.Text;
-            string idLugar = lugarDropList.SelectedValue;
-            string idMonedaXPais = monedaXPaisDropList.SelectedValue;
-            string estado = DropDownListEstado.SelectedValue;
-            int valueResult = 0;
-            string msgResult = "";
-
-
-
-            if (idSucursal != "")
-            {
-                try
-                {
-                    SqlConnection connection = new SqlConnection(stringConnection);
-                    if (connection.State == ConnectionState.Closed)
-                    {
-                        connection.Open();
-
-
-                    }
-                    SqlCommand cmd = new SqlCommand("crudSucursal", connection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@opcion", 4);
-                    cmd.Parameters.AddWithValue("@idSucursal", SqlDbType.Int).Value = Convert.ToInt32(idSucursal);
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        valueResult = Convert.ToInt32(reader[0].ToString());
-                        msgResult = reader[1].ToString();
-                    }
-
-                    connection.Close();
-                    reader.Close();
-
-                    if (valueResult == 0)
-                    {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
-                        GridViewSucursal.DataBind();
-                        UpdatePanelSucursal.Update();
+                        GridViewLugar.DataBind();
+                        UpdatePanelLugar.Update();
                     }
                     else
                     {
@@ -305,11 +191,70 @@ namespace indioSupermercado
             else
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                           "Swal.fire('Error','ID sucursal can not be null','error')", true);
+                           "Swal.fire('Error','ID lugar can not be null','error')", true);
             }
-
         }
 
-        
+        protected void ButtonBorrarLugar_Click(object sender, EventArgs e)
+        {
+            string idUbication = TextBoxIDLugar.Text;
+            int valueResult = 0;
+            string msgResult = "";
+
+            if (idUbication != "")
+            {
+                try
+                {
+                    SqlConnection connection = new SqlConnection(stringConnection);
+                    if (connection.State == ConnectionState.Closed)
+                    {
+                        connection.Open();
+
+
+                    }
+                    SqlCommand cmd = new SqlCommand("crudLugar", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@opcion", 4);
+                    cmd.Parameters.AddWithValue("@idLugar", SqlDbType.Int).Value = Convert.ToInt32(idUbication);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        valueResult = Convert.ToInt32(reader[0].ToString());
+                        msgResult = reader[1].ToString();
+                    }
+
+                    connection.Close();
+                    reader.Close();
+
+                    if (valueResult == 0)
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
+                        GridViewLugar.DataBind();
+                        UpdatePanelLugar.Update();
+                    }
+                    else
+                    {
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Error','" + msgResult + "','error')", true);
+                    }
+                }
+
+
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script>");
+
+                }
+
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                           "Swal.fire('Error','ID impuesto can not be null','error')", true);
+            }
+        }
     }
 }
