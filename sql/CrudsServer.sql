@@ -2884,3 +2884,11 @@ BEGIN
 END
 GO
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'
+
+
+
+select * from FacturaXEmpleado
+
+insert into FacturaXEmpleado(idFactura,idEmpleado) values(1,1)
+
+exec viewBono

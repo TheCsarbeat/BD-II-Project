@@ -74,9 +74,9 @@
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
                                                     <asp:BoundField DataField="NombreBono" HeaderText="NombreBono" ReadOnly="True" SortExpression="NombreBono"></asp:BoundField>
-                                                    <asp:BoundField DataField="TipoBono" HeaderText="NombreBono" ReadOnly="True" SortExpression="TipoBono"></asp:BoundField>
-                                                    <asp:BoundField DataField="Monto" HeaderText="NombreBono" ReadOnly="True" SortExpression="Monto"></asp:BoundField>
-                                                    <asp:BoundField DataField="Descripcion" HeaderText="NombreBono" ReadOnly="True" SortExpression="Descripcion"></asp:BoundField>
+                                                    <asp:BoundField DataField="TipoBono" HeaderText="TipoBono" ReadOnly="True" SortExpression="TipoBono"></asp:BoundField>
+                                                    <asp:BoundField DataField="Monto" HeaderText="Monto" ReadOnly="True" SortExpression="Monto"></asp:BoundField>
+                                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" ReadOnly="True" SortExpression="Descripcion"></asp:BoundField>
 
                                                 </Columns>
                                             </asp:GridView>
@@ -103,9 +103,9 @@
                                                 </Columns>
                                             </asp:GridView>
                                             <asp:GridView class="table table-striped table-bordered" ID="GridViewClientes" runat="server"
-                                                AutoGenerateColumns="False" DataKeyNames="idCliente" DataSourceID="SqlDataSourceFrecuentes">
+                                                AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSourceFrecuentes">
                                                 <Columns>
-                                                    <asp:BoundField DataField="idCliente" HeaderText="ID" ReadOnly="True" SortExpression="id">
+                                                    <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="id">
                                                         <ControlStyle Font-Bold="True" />
                                                         <ItemStyle Font-Bold="True" />
                                                     </asp:BoundField>

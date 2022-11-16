@@ -17,6 +17,7 @@ namespace indioSupermercado
     public partial class adminEmployee : System.Web.UI.Page
     {
         private string stringConnection = usefull.strCon;
+        private string sqlQuerryTry = "insert into Bono(idEmpleado,fecha,cantidadBono,idTipoBono,Performance) Values(@idEmp,GETDATE(),60,2,'Realizó 1000 ventas')";
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlDataSource1.ConnectionString = stringConnection;
@@ -489,20 +490,32 @@ namespace indioSupermercado
                             SqlCommand cmdVerventas = new SqlCommand("viewBono", conObj);
                             cmdVerventas.CommandType = CommandType.StoredProcedure;
 
+
                             SqlCommand cmdBonoAutomatico = new SqlCommand("spBonoAutomatico", conObj);
+
                             cmdBonoAutomatico.CommandType = CommandType.StoredProcedure;
 
                             SqlDataReader readerventas = cmdVerventas.ExecuteReader();
 
-                            while (readerventas.Read())
+                            if (readerventas.HasRows)
                             {
-                                if (Convert.ToInt32(readerventas.GetString(0)) >= 1000)
+                                while (readerventas.Read())
                                 {
-                                    int idEmp = readerventas.GetInt32(0);
-                                    cmdBonoAutomatico.Parameters.Add("@idEmpleado", SqlDbType.Int).Value = idEmp;
-                                    SqlDataReader readerAuto = cmdBonoAutomatico.ExecuteReader();
-                                }
+
+                                    if (Convert.ToInt32(readerventas[1].ToString()) >= 1)
+                                    {
+
+                                        //cmdBonoAutomatico.Parameters.Add("@idEmp", SqlDbType.Int).Value = readerventas.GetValue(0);
+
+                                        //cmdBonoAutomatico.ExecuteNonQuery();
+
+                                    }
+                                }   
                             }
+
+
+                            readerventas.Close();
+
 
 
                             SqlCommand cmdBono = new SqlCommand("spBonoPerformance", conObj);
