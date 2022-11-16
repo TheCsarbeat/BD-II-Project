@@ -67,7 +67,7 @@ namespace indioSupermercado
             int valueResult = 0;
             string msgResult = "";
 
-            if (nameTax != "" && porcentage != "" && idCountry != "")
+            if (nameTax != "" && porcentage != "" && idCountry != "" && float.Parse(porcentage) < 1)
             {
                 try
                 {
@@ -95,10 +95,11 @@ namespace indioSupermercado
 
                     if (valueResult == 0)
                     {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
                         GridViewImpuesto.DataBind();
                         UpdatePanelImpuesto.Update();
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                        
 
                     }
                     else
@@ -136,7 +137,7 @@ namespace indioSupermercado
             int valueResult = 0;
             string msgResult = "";
 
-            if(idTax != "")
+            if(idTax != "" && float.Parse(porcentage) < 1)
             {
                 try
                 {
@@ -166,10 +167,11 @@ namespace indioSupermercado
 
                     if (valueResult == 0)
                     {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
                         GridViewImpuesto.DataBind();
                         UpdatePanelImpuesto.Update();
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                        
                     }
                     else
                     {
@@ -189,7 +191,7 @@ namespace indioSupermercado
             else
             {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                           "Swal.fire('Error','ID impuesto can not be null','error')", true);
+                           "Swal.fire('Error','Datos invalidos','error')", true);
             }
         }
 
@@ -228,10 +230,11 @@ namespace indioSupermercado
 
                     if (valueResult == 0)
                     {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
-                            "Swal.fire('Perfect','" + msgResult + "','s')", true);
                         GridViewImpuesto.DataBind();
                         UpdatePanelImpuesto.Update();
+                        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Perfect','" + msgResult + "','success')", true);
+                        
                     }
                     else
                     {

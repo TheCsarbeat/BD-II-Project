@@ -1961,6 +1961,514 @@ BEGIN
 		select @errorInt as Error, @ErrorMsg as MensajeError
 END
 
+-- para ver impuestos:
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectTaxToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select Impuesto.idImpuesto, nombreImpuesto as Nombre, Impuesto.porcentajeImpuesto as Porcentaje, Pais.nombrePais as Pais from MYSQLSERVER...Impuesto  as Impuesto    
+    INNER JOIN Pais as Pais ON  Pais.idPais = Impuesto.idPais
+    where Impuesto.estado = 1;
+end
+
+-- para ver lugares
+GO
+CREATE Or ALTER PROCEDURE spGetLugares
+AS
+BEGIN
+    Select * from Lugar
+End
+GO
+
+-- para ver monedaXPais
+GO
+CREATE Or ALTER PROCEDURE spGetMonedaXPais
+AS
+BEGIN
+    Select * from MonedaXPais
+End
+GO
+
+-- cambio crud Impuesto
+GO
+--====================================================
+--						Impuesto
+--===================================================
+CREATE or ALTER PROCEDURE dbo.spCrudImpuesto
+	@idImpuesto int = null,
+	@nombre varchar(20) = null ,
+	@porcentaje float = null ,
+	@idPais int = null,
+	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
+	with encryption
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+	if @operationFlag = 0 BEGIN
+
+		if @nombre is not null and @porcentaje is not null  BEGIN
+			IF (select count(*) from MYSQLSERVER...Impuesto where idImpuesto = @idImpuesto) = 0 BEGIN
+				IF (select count(*) from pais where idPais = @idPais) = 1 BEGIN
+					
+						BEGIN TRY
+	
+								INSERT INTO MYSQLSERVER...Impuesto (nombreImpuesto,porcentajeImpuesto,idPais)
+								values (@nombre,@porcentaje,@idPais);
+								
+						END TRY
+						BEGIN CATCH
+							set @errorInt=1
+							set @errorMsg = 'Error al agregar a la base de datos'
+						END CATCH									
+						
+				END ELSE BEGIN 				
+					set @errorInt =1
+					set @errorMsg = 'No existe un pais v�lida'
+					END				
+			END ELSE BEGIN 			
+				set @errorInt=1
+				set @errorMsg = 'Ya existe un producto con este ID'
+				END
+		END ELSE BEGIN 			
+			set @errorInt=1
+			set @errorMsg = 'Hay alg�n valor nulo'
+			END  ---Final if validaci?n nulos
+
+		if @identityValue != -1
+			return @identityValue
+
+	end
+	
+	if @operationFlag = 1 BEGIN
+		BEGIN TRY
+			update MYSQLSERVER...Impuesto 
+			set nombreImpuesto= ISNULL(@nombre, nombreImpuesto), porcentajeImpuesto = ISNULL(@porcentaje, porcentajeImpuesto),
+			idPais = ISNULL(@idPais, idPais) where idImpuesto = @idImpuesto
+		END TRY
+		BEGIN CATCH
+			set @errorInt=1
+			set @errorMsg = 'Error al actualizar a la base de datos'
+		END CATCH
+		
+	END
+
+	if @operationFlag = 2
+	begin
+		select * from MYSQLSERVER...Impuesto
+		where idImpuesto= @idImpuesto and estado =1;
+	end
+
+	IF @operationFlag = 3
+	BEGIN
+		select * from MYSQLSERVER...Impuesto	
+		where estado = 1;
+	END
+
+	IF @operationFlag = 4
+	BEGIN
+		update MYSQLSERVER...Impuesto  
+		set estado = ISNULL(0, estado)
+		where idImpuesto = @idImpuesto
+	END
+	IF @operationFlag = 5
+	BEGIN
+		update MYSQLSERVER...Impuesto	 
+		set estado = ISNULL(1, estado)
+		where idImpuesto= @idImpuesto
+	END
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+			select 0 as correct, 'Action completed correctly!' as Result
+
+end
+
+-- CRUD LUGAR
+
+-- Lugar
+-- opcion 1: insertar, opcion 2: actualizar, opcion 3: consultar, opcion 4: borrar
+go
+create or alter procedure crudLugar @opcion int, @idLugar int =NULL, @nombre varchar(20) = null, @idPais int = null, @longitud float = null, @latitud float = null
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+	
+
+	if @opcion = 1
+		BEGIN
+		if (select count(*) from Lugar where idLugar = @idLugar)=0	BEGIN
+			if @nombre is not null and @longitud is not null and @latitud is not null	begin
+				if (select count(*) from Pais where idPais = @idPais)!=0	BEGIN
+					BEGIN TRY
+						insert into Lugar( nombreLugar, idPais, ubicacion) 
+						values(@nombre, @idPais,geometry::Point(@longitud, @latitud, 0))
+					END TRY
+					BEGIN CATCH
+						set @error=1
+						set @errorMsg = 'Error al actualizar a la base de datos'
+					END CATCH
+				END ELSE BEGIN
+					set @error = 1
+					set @errorMsg = 'El idPais no existe'
+				end
+			END ELSE BEGIN
+				set @error = 1
+				set @errorMsg = 'Valores nulos'
+			END
+		END ELSE BEGIN
+			set @error = 1
+			set @errorMsg = 'idLugar ya existe'
+		END
+	end
+
+
+	if @opcion = 2
+		BEGIN
+		if (select count(*) from Lugar where idLugar = @idLugar)!=0 BEGIN
+			declare @ubication geometry
+			if @longitud = null or @latitud = null
+				set @ubication = null
+			else
+				set @ubication = geometry::Point(@longitud, @latitud, 0)
+					
+			update Lugar
+				set nombreLugar = ISNULL(@nombre, nombreLugar), idPais = ISNULL(@idPais, idPais), ubicacion = ISNULL(@ubication, ubicacion )
+				where idLugar = @idLugar
+			END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'El idLugar no existe'
+			END
+		
+		end
+
+	if @opcion = 3
+		BEGIN
+		if (select count(*) from Lugar where idLugar = @idLugar)!=0	BEGIN
+			BEGIN transaction
+
+			select * from Lugar where idLugar = @idLugar
+
+			commit transaction
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idLugar no existe'
+		END
+		
+		END
+
+	if @opcion = 4
+		BEGIN
+		if (select count(*) from Lugar where idLugar = @idLugar)!=0 BEGIN
+			BEGIN transaction
+
+			update Lugar
+			set estado = 0 where idLugar = @idLugar
+
+			commit transaction
+
+			END
+			else
+		BEGIN
+			set @error = 1
+			set @errorMsg = 'El idLugar no existe'
+		
+		END
+	end
+
+	if @error !=0
+		select @error as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Action completed correctly!' as Result
+	
+END
+
+GO
+-- para ver lugares
+CREATE or ALTER PROCEDURE dbo.spSelectLugarToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select Lugar.idLugar, nombreLugar as Nombre, Pais.nombrePais as Pais  from Lugar  as Lugar    
+    INNER JOIN Pais as Pais ON  Pais.idPais = Lugar.idPais
+    where Lugar.estado = 1;
+end
+
+-- para ver moneda
+GO
+CREATE Or ALTER PROCEDURE spGetCoin
+AS
+BEGIN
+    Select * from Moneda
+End
+GO
+
+-- cambio crud MONEDAXPAIS
+
+go
+create or alter procedure crudMonedaXPais @opcion int,@idMonedaXPais int = null, @idPais int = null, @cambioPorcentaje float = null,  @idMoneda int = null
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+
+	if @opcion = 1		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)= 0 BEGIN
+			if (select count(*) from Pais where idPais = @idPais)!=0 BEGIN
+				if @cambioPorcentaje is not null BEGIN
+					if (select count(*) from Moneda where idMoneda = @idMoneda)!=0 BEGIN
+						BEGIN transaction
+							insert into MonedaXPais( idPais,cambioPorcentaje,idMoneda) 
+							values(@idPais,@cambioPorcentaje,@idMoneda)
+						commit transaction
+
+					END ELSE BEGIN 
+						set @error = 1
+						set @errorMsg = 'idMoneda no existe'
+					END
+				END ELSE BEGIN 
+					set @error = 1
+					set @errorMsg = 'No pueden ir valores nulos' 
+				END
+
+			END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'idPais no existe' 
+			END
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'idMonedaXPais ya existe'
+		END
+
+		END
+
+	if @opcion = 2
+		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 			BEGIN
+			BEGIN transaction
+				update MonedaXPais
+				set idPais = ISNULL(@idPais, idPais), cambioPorcentaje = ISNULL(@cambioPorcentaje, cambioPorcentaje), idMoneda = ISNULL(@idMoneda, idMoneda)
+				where idMonedaXPais = @idMonedaXPais
+			commit transaction 
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMonedaXPais no existe'
+		END
+		END
+
+if @opcion = 3
+		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!= 0 BEGIN
+			BEGIN transaction
+				select * from MonedaXPais where idMonedaXPais = @idMonedaXPais
+			commit transaction
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMonedaXPais no existe'
+		END
+		END
+
+	if @opcion = 4
+		BEGIN
+		if (select count(*) from MonedaXPais where idMonedaXPais = @idMonedaXPais)!=0 
+			BEGIN
+			BEGIN transaction
+				delete from MonedaXPais where idMonedaXPais = @idMonedaXPais
+			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMonedaXPais no existe'
+		END
+	END
+	if @error !=0
+		select @error as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Action completed correctly!' as Result
+		
+END
+
+GO
+-- ver metodosPago
+CREATE or ALTER PROCEDURE dbo.spSelectMetodoToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select MetodoPago.idMetodoPago, MetodoPago.nombreMetodo as Nombre, MetodoPago.otrosDetalles as OtrosDetalles  from MetodoPago  as MetodoPago    
+    
+    where MetodoPago.estado = 1;
+end
+
+-- ver metodosPago
+GO
+CREATE Or ALTER PROCEDURE spGetPaymentType
+AS
+BEGIN
+    Select * from MetodoPago
+End
+GO
+
+-- ver puestos
+CREATE or ALTER PROCEDURE dbo.spSelectPuestoToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select Puesto.idPuesto, Puesto.nombrePuesto as Nombre, Puesto.salario as Salario  from Puesto  as Puesto    
+    
+    where Puesto.estado = 1;
+end
+
+-- crud metodoPago
+go
+create or alter procedure crudMetodoPago @opcion int,@idMetodoPago int = null, @nombre varchar(20) = null, @otrosDetalles varchar(50) = null
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+
+	if @opcion = 1		BEGIN
+		if (select count(*) from MetodoPago where idMetodoPago = @idMetodoPago)= 0 BEGIN
+			if @nombre is not null and @otrosDetalles is not null BEGIN
+					insert into MetodoPago(nombreMetodo,otrosDetalles) 
+					values(@nombre,@otrosDetalles)
+			END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'No pueden ir valores nulos' 
+			END
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'idMetodoPago ya existe'
+		END
+
+	end
+
+	if @opcion = 2
+		BEGIN
+		if (select count(*) from MetodoPago where idMetodoPago = @idMetodoPago)!=0 			BEGIN
+			BEGIN transaction
+				update MetodoPago
+				set nombreMetodo = ISNULL(@nombre, nombreMetodo), otrosDetalles = ISNULL(@otrosDetalles, otrosDetalles)
+				where idMetodoPago = @idMetodoPago
+			commit transaction 
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMetodoPago no existe'
+		END
+		END
+
+if @opcion = 3
+		BEGIN
+		if (select count(*) from MetodoPago where idMetodoPago = @idMetodoPago)!= 0 BEGIN
+			BEGIN transaction
+				select * from MetodoPago where idMetodoPago = @idMetodoPago
+			commit transaction
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMetodoPago no existe'
+		END
+		END
+
+	if @opcion = 4
+		BEGIN
+		if (select count(*) from MetodoPago where idMetodoPago = @idMetodoPago)!=0 
+			BEGIN
+			BEGIN transaction
+				delete from MetodoPago where idMetodoPago = @idMetodoPago
+			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idMetodoPago no existe'
+		END
+	END
+	if @error !=0
+		select @error as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Action completed correctly!' as Result
+		
+END
+
+-- crud puesto
+go
+create or alter procedure crudPuesto @opcion int,@idPuesto int = null, @nombre varchar(20) = null, @salario money = null
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+
+	if @opcion = 1		BEGIN
+		if (select count(*) from Puesto where idPuesto = @idPuesto)= 0 BEGIN
+			if @nombre is not null and @salario is not null BEGIN
+					insert into Puesto(nombrePuesto,salario) 
+					values(@nombre,@salario)
+			END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'No pueden ir valores nulos' 
+			END
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'idPuesto ya existe'
+		END
+
+	end
+
+	if @opcion = 2
+		BEGIN
+		if (select count(*) from Puesto where idPuesto = @idPuesto)!=0 			BEGIN
+			BEGIN transaction
+				update Puesto
+				set nombrePuesto = ISNULL(@nombre, nombrePuesto), salario = ISNULL(@salario, salario)
+				where idPuesto = @idPuesto
+			commit transaction 
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPuesto no existe'
+		END
+		END
+
+if @opcion = 3
+		BEGIN
+		if (select count(*) from Puesto where idPuesto = @idPuesto)!= 0 BEGIN
+			BEGIN transaction
+				select * from Puesto where idPuesto = @idPuesto
+			commit transaction
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPuesto no existe'
+		END
+		END
+
+	if @opcion = 4
+		BEGIN
+		if (select count(*) from  Puesto where idPuesto = @idPuesto)!=0 
+			BEGIN
+			BEGIN transaction
+				delete from  Puesto where idPuesto = @idPuesto
+			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPuesto no existe'
+		END
+	END
+	if @error !=0
+		select @error as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Action completed correctly!' as Result
+		
+END
+
+
 
 
 

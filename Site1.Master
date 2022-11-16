@@ -141,6 +141,8 @@
                             <asp:LinkButton class="footerlinks" ID="TipoPagoAdmin" runat="server" OnClick="tipoPagoLinkButton_Click">TipoPago</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="PuestoTrabajo" runat="server" OnClick="puestoLinkButton_Click">PuestoTrabajo</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="Lugar" runat="server" OnClick="Lugar_Click">Lugar</asp:LinkButton>
 
                         </p>
 

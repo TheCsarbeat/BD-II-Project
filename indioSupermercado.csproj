@@ -2292,6 +2292,7 @@
     </Compile>
     <Compile Include="adminOrderProducts.aspx.designer.cs">
       <DependentUpon>adminOrderProducts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminFormPuesto.aspx.cs">
       <DependentUpon>adminFormPuesto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

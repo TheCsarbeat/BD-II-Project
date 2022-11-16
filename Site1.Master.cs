@@ -45,6 +45,7 @@ namespace indioSupermercado
                     ImpuestoAdmin.Visible = false; // admin impuesto
                     TipoPagoAdmin.Visible = false; // admin tipoPago
                     PuestoTrabajo.Visible = false; // admin puesto
+                    Lugar.Visible = false;
 
                 }
                 else if (Session["role"].Equals("user"))
@@ -75,6 +76,7 @@ namespace indioSupermercado
                     ImpuestoAdmin.Visible = false; // admin impuesto
                     TipoPagoAdmin.Visible = false; // admin tipoPago
                     PuestoTrabajo.Visible = false; // admin puesto
+                    Lugar.Visible = false;
 
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
@@ -105,6 +107,7 @@ namespace indioSupermercado
                     ImpuestoAdmin.Visible = true; // admin impuesto
                     TipoPagoAdmin.Visible = true; // admin tipoPago
                     PuestoTrabajo.Visible = true; // admin puesto
+                    Lugar.Visible = true;
 
                 }
                 
@@ -219,6 +222,11 @@ namespace indioSupermercado
         protected void puestoLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminFormPuesto.aspx");
+        }
+
+        protected void Lugar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminFormLugar.aspx");
         }
     }
 }
