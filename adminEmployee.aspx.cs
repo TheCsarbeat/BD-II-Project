@@ -163,7 +163,7 @@ namespace indioSupermercado
             string inputDate = TextBoxFecha.Text;
             string position = TextBoxPuesto.Text;
             string office = TextBoxSucursal.Text;
-            string pic = "ProfilePictures/" + FileEmpleado.FileName;
+            string pic = "profilePictures/" + FileEmpleado.FileName;
 
             int valueResult = -1;
             string msgResult = "";

@@ -58,15 +58,24 @@
                       </div>
                       <div class="row">
 
-                          <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                          <asp:SqlDataSource ID="SqlDataSourceBono" runat="server" 
                               ConnectionString="" SelectCommand="exec reporteBonos"></asp:SqlDataSource>
+                          <asp:SqlDataSource ID="SqlDataSourceVendidos" runat="server" 
+                              ConnectionString="" SelectCommand="exec reporteBonos"></asp:SqlDataSource>
+                          <asp:SqlDataSource ID="SqlDataSourceFrecuentes" runat="server" 
+                              ConnectionString="" SelectCommand="exec reporteBonos"></asp:SqlDataSource>
+                          <asp:SqlDataSource ID="SqlDataSourceExpirados" runat="server" 
+                              ConnectionString="" SelectCommand="exec reporteBonos"></asp:SqlDataSource>
+                          <asp:SqlDataSource ID="SqlDataSourceGanancias" runat="server" 
+                              ConnectionString="" SelectCommand="exec reporteBonos"></asp:SqlDataSource>
+
                          <div class="col">
                               <asp:ScriptManager ID="ScriptManagerCliente" runat="server">
                                 </asp:ScriptManager>
                              <asp:UpdatePanel ID="UpdatePanelCliente" runat="server" UpdateMode="Conditional">
                                  <ContentTemplate>
                                     <asp:GridView class="table table-striped table-bordered" ID="GridViewReporteBono" runat="server"
-                                        AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" >
+                                        AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSourceBono" >
                                             <Columns>
                                                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="id">
                                                     <ControlStyle Font-Bold="True" />
@@ -80,6 +89,21 @@
                                                
                                             </Columns>
                                     </asp:GridView>
+                                     <%--<asp:GridView class="table table-striped table-bordered" ID="GridViewExpirados" runat="server"
+                                        AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSourceBono" >
+                                            <Columns>
+                                                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="id">
+                                                    <ControlStyle Font-Bold="True" />
+                                                    <ItemStyle Font-Bold="True" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
+                                                <asp:BoundField DataField="Vencimiento" HeaderText="Vencimiento" ReadOnly="True" SortExpression="Vencimiento"></asp:BoundField>
+                                                <asp:BoundField DataField="Lote" HeaderText="Lote" ReadOnly="True" SortExpression="Lote"></asp:BoundField>
+                                                <asp:BoundField DataField="Precio" HeaderText="Precio" ReadOnly="True" SortExpression="Precio   "></asp:BoundField>
+                                                <asp:BoundField DataField="Categoria" HeaderText="Categoria" ReadOnly="True" SortExpression="Categoria"></asp:BoundField>
+                                               
+                                            </Columns>
+                                    </asp:GridView>--%>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                          </div>

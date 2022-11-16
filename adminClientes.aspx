@@ -1,27 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminClientes.aspx.cs" Inherits="indioSupermercado.adminClientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-      $(document).ready(function () {
-      
-          //$(document).ready(function () {
-              //$('.table').DataTable();
-         // });
-      
-          $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-          //$('.table1').DataTable();
-      });
+        $(document).ready(function () {
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            //$(document).ready(function () {
+            //$('.table').DataTable();
+            // });
 
-            reader.onload = function (e) {
-                $('#imgview').attr('src', e.target.result);
-            };
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+            //$('.table1').DataTable();
+        });
 
-            reader.readAsDataURL(input.files[1]);
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-    }
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
