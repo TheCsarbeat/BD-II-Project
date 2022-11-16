@@ -53,8 +53,9 @@ namespace indioSupermercado
                     dia = reader2[2].ToString();
                     horaInicial = reader2[3].ToString();
                     horaFinal = reader2[4].ToString();
-                    reader2.Close();
                 }
+                reader2.Close();
+
 
                 SqlCommand cmd3 = con.CreateCommand();
                 cmd3.CommandType = CommandType.Text;

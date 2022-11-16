@@ -58,7 +58,7 @@
                                 <asp:SqlDataSource ID="SqlDataSourceExpirados" runat="server"
                                     ConnectionString="" SelectCommand="exec spReporteExpirados"></asp:SqlDataSource>
                                 <asp:SqlDataSource ID="SqlDataSourceGanancias" runat="server"
-                                    ConnectionString="" SelectCommand="exec reporteBonos"></asp:SqlDataSource>
+                                    ConnectionString="" SelectCommand="exec spReportesGanancias"></asp:SqlDataSource>
 
                                 <div class="col">
                                     <asp:ScriptManager ID="ScriptManagerCliente" runat="server">
@@ -115,17 +115,12 @@
                                                 </Columns>
                                             </asp:GridView>
                                             <asp:GridView class="table table-striped table-bordered" ID="GridViewGanancias" runat="server"
-                                                AutoGenerateColumns="False" DataKeyNames="Nombre" DataSourceID="SqlDataSourceBono">
+                                                AutoGenerateColumns="False" DataKeyNames="fechaFactura" DataSourceID="SqlDataSourceGanancias">
                                                 <Columns>
-                                                    <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="id">
-                                                        <ControlStyle Font-Bold="True" />
-                                                        <ItemStyle Font-Bold="True" />
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="Nombre"></asp:BoundField>
-                                                    <asp:BoundField DataField="NombreBono" HeaderText="NombreBono" ReadOnly="True" SortExpression="NombreBono"></asp:BoundField>
-                                                    <asp:BoundField DataField="TipoBono" HeaderText="NombreBono" ReadOnly="True" SortExpression="TipoBono"></asp:BoundField>
-                                                    <asp:BoundField DataField="Monto" HeaderText="NombreBono" ReadOnly="True" SortExpression="Monto"></asp:BoundField>
-                                                    <asp:BoundField DataField="Descripcion" HeaderText="NombreBono" ReadOnly="True" SortExpression="Descripcion"></asp:BoundField>
+                                                    <asp:BoundField DataField="fechaFactura" HeaderText="Fecha" ReadOnly="True" SortExpression="fechaFactura">                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="nombreSucursal" HeaderText="Sucursal" ReadOnly="True" SortExpression="Sucursal"></asp:BoundField>
+                                                    <asp:BoundField DataField="nombreProducto" HeaderText="Producto" ReadOnly="True" SortExpression="Producto"></asp:BoundField>
+                                                    <asp:BoundField DataField="MontoTotal" HeaderText="MontoTotal" ReadOnly="True" SortExpression="MontoTotal"></asp:BoundField>
                                                 </Columns>
                                             </asp:GridView>
                                         </ContentTemplate>

@@ -2879,3 +2879,19 @@ declare @identityValue int = -1
 end
 
 GO
+
+GO
+CREATE or ALTER PROCEDURE dbo.spReportesGanancias
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select Factura.fechaFactura, Sucursal.nombreSucursal, Producto.nombreProducto, sum(montoTotal) as MontoTotal  from Factura
+    INNER JOIN DetalleFactura ON DetalleFactura.idFactura = Factura.idFactura
+    INNER JOIN MYSQLSERVER...Producto as Producto ON Producto.idProducto = DetalleFactura.idProducto
+    INNER JOIN Sucursal as Sucursal ON Sucursal.idSucursal = Factura.idFactura
+    GROUP BY Factura.fechaFactura, Sucursal.nombreSucursal, Producto.nombreProducto
+end
+
+GO

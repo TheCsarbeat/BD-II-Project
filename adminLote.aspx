@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <h4>Invenotory Branch</h4>
+                                    <h4>Provider batchs</h4>
                                 </center>
                             </div>
                         </div>

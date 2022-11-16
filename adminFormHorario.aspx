@@ -54,7 +54,7 @@
                             <div class="col-md-8">
                                 <label>Starting hour</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="TextBoxSTime" runat="server" placeholder="Starting time"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="TextBoxSTime" runat="server" placeholder="Starting time" TextMode="Time"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@
                             <div class="col-md-6">
                                 <label>Finishing hour</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="TextBoxFTime" runat="server" placeholder="Finishing time"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="TextBoxFTime" runat="server" placeholder="Finishing time" TextMode="Time"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-md-6">
