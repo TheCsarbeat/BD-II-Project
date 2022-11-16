@@ -973,7 +973,6 @@ declare @identityValue int = -1, @aux int
 						--idLote, idproducto, idPais
 						EXEC spGetPriceOfProduct @idLote,@idProducto,@idPais, @precioVenta OUTPUT
 
-						select @precioVenta
 						INSERT INTO Inventario (cantidadInventario, idLote, idSucursal, precioVenta)
 						VALUES (@cantidad, @idLote,@idSucursal,@precioVenta)
 						
