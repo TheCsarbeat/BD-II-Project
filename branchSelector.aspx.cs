@@ -73,7 +73,8 @@ namespace indioSupermercado
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('" + ex.Message + "');</script.");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                            "Swal.fire('Error','" + ex.Message + "','error')", true);
             }
             
         }

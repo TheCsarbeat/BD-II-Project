@@ -67,8 +67,9 @@ EXEC spCrudProveedor null, 'tresjotas', 'ventas@tresjotas.com', 1,0
 --fechaProduccion, fechaExpiracion, idProducto, idProveedor, cantidadExistencias,costoUnidad,porcentajeVenta, operation
 EXEC spCrudLote null, '2022-08-31','2022-12-31', 1,1, 30, 500,0.05,0
 EXEC spCrudLote null, '2022-08-31','2022-12-31', 2,1, 50, 320,0.02,0
-EXEC spCrudLote null, '2022-08-31','2022-12-31', 3,1, 10, 850,0.02,0
-EXEC spCrudLote null, '2022-08-31','2022-12-31', 4,1, 15, 360,0.1,0
+EXEC spCrudLote null, '2022-08-31','2022-10-27', 3,1, 10, 850,0.02,0
+EXEC spCrudLote null, '2022-08-31','2022-11-16', 4,1, 15, 360,0.1,0
+EXEC spCrudLote null, '2022-08-31','2022-11-17', 5,1, 8, 200,0.1,0
 
 
 -- idInventario, cantidad, @idSucursal, @idLote, @precioVenta, operation    el precio de venta nulo para que se autocalcule
@@ -77,9 +78,10 @@ EXEC spInsertProductToInventory null, 25, 6, 2,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 3,null, 0
 EXEC spInsertProductToInventory null, 25, 6, 4,null, 0
 EXEC spInsertProductToInventory null, 16, 6, 2,null, 0
+EXEC spInsertProductToInventory null, 8, 6, 5,null, 0
 
 
-EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 94.565,-83.264
+EXEC spSignUpCostumer 'asdf','asdfasdf','2021052792', 'Maynor', 'ERks', 10.021677,-83.984586
 
 
 insert into Puesto (nombrePuesto,salario) Values ('Gerente',1500000);
@@ -90,15 +92,34 @@ insert into TipoBono (nombreTipoBono,descripcionTipoBono) values ('BonoXVenta','
 insert into MetodoPago (nombreMetodo, otrosDetalles)
 VALUES('Efecto', 'nominacion')
 
-select * from MetodoPago
+
 --insert into Sucursal (nombreSucursal,idLugar,idMonedaXPais) Values ('4-2',1,1);
 
 --insert into Empleado(nombreEmpleado,apellidoEmpleado,fechaContratacion,fotoEmpleado,idPuesto,idSucursal) Values('Sebas','Chaves','2003-07-04','Tryout.png',1,1);
 
 
 /*
+
+select * from MYSQLSERVER...Producto
+select * from Inventario
+select * from MetodoPago
 select * from  Usuario
+select * from Sucursal
+select * from MYSQLSERVER...Lote
+select * from Descuento
+select * from DescuentoXInventario
+select descuentoPorcent from Descuento
+
 
 declare @punto4 geometry
 set @punto4 = geometry::Point(200, 450, 0)
+
+--	@descuentoPorcent float
+exec spChangeDiscount 0.50
+
+exec spApplyDiscount 4
+
+exec spGetProductsForDiscount
+
+
 */

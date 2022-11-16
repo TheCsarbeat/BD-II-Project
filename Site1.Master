@@ -64,13 +64,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="homepage.aspx">Homee</a>
+                            <a class="nav-link" href="homepage.aspx">Home</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Terms</a>
                         </li>
 
                     </ul>
@@ -113,7 +110,6 @@
 
                         <asp:LinkButton class="footerlinks" ID="adminloginLink" runat="server" OnClick="LinkButton6_Click">Admin Login</asp:LinkButton>
                         &nbsp;
-                            
                             <asp:LinkButton class="footerlinks" ID="inventarioLinkButton" runat="server">Inventario</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server" OnClick="reportesLinkButton_Click">Reportes</asp:LinkButton>
@@ -129,6 +125,10 @@
                             <asp:LinkButton class="footerlinks" ID="providers" runat="server" OnClick="providers_Click1">Proveedores</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server">Inventario</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="discount" runat="server" OnClick="discount_Click">Descuentos</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="expired" runat="server" OnClick="expired_Click">Expirados</asp:LinkButton>
                      
 
                     </div>
@@ -139,7 +139,7 @@
             <div id="footer2" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <p style="color: whitesmoke">&copy All right Reversed.   <a class="footerlinks" href="#" target="_blank">Ferks</a></p>
+                        <p class="text-center" style="color: whitesmoke">&copy All right Reversed.   <a class="footerlinks" href="#" target="_blank">Ferks</a></p>
                     </div>
                 </div>
             </div>

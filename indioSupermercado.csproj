@@ -68,7 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminClientes.aspx" />
+    <Content Include="adminDiscount.aspx" />
     <Content Include="adminEmployee.aspx" />
+    <Content Include="adminExpired.aspx" />
     <Content Include="adminFormBranch.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormProvider.aspx" />
@@ -2143,6 +2145,7 @@
     <Content Include="fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome\svgs\solid\z.svg" />
     <Content Include="homePage.aspx" />
+    <Content Include="img\adminFondo.jpg" />
     <Content Include="img\adminuser.png" />
     <Content Include="img\book-online.png" />
     <Content Include="img\books.png" />
@@ -2158,6 +2161,8 @@
     <Content Include="img\defaulters-list.png" />
     <Content Include="img\digital-data.png" />
     <Content Include="img\digital-inventory.png" />
+    <Content Include="img\discount.png" />
+    <Content Include="img\expired.png" />
     <Content Include="img\generaluser.png" />
     <Content Include="img\gestion1.png" />
     <Content Include="img\grocery-cart.png" />
@@ -2208,12 +2213,26 @@
     <Compile Include="adminClientes.aspx.designer.cs">
       <DependentUpon>adminClientes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminDiscount.aspx.cs">
+      <DependentUpon>adminDiscount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminDiscount.aspx.designer.cs">
+      <DependentUpon>adminDiscount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminEmployee.aspx.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminEmployee.aspx.designer.cs">
       <DependentUpon>adminEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminExpired.aspx.cs">
+      <DependentUpon>adminExpired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminExpired.aspx.designer.cs">
+      <DependentUpon>adminExpired.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminFormBranch.aspx.cs">
       <DependentUpon>adminFormBranch.aspx</DependentUpon>

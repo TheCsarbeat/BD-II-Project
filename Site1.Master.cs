@@ -37,7 +37,8 @@ namespace indioSupermercado
                     orderProducts.Visible = false;
                     taxCategoria.Visible = false;
                     providers.Visible = false;
-
+                    discount.Visible = false;
+                    expired.Visible = false;
 
                 }
                 else if (Session["role"].Equals("user"))
@@ -57,10 +58,11 @@ namespace indioSupermercado
                     empleadosLinkButton.Visible = false;  // admin employees
                     clientesAdmin.Visible = false;//admin clients
                     productsLinkButton.Visible = false;
-
                     orderProducts.Visible = false;
                     taxCategoria.Visible = false;
                     providers.Visible = false;
+                    discount.Visible = false;
+                    expired.Visible = false;
                 }
                 else if (Session["role"].Equals("ActiveAdmin"))
                 {
@@ -82,6 +84,8 @@ namespace indioSupermercado
                     orderProducts.Visible = true;
                     taxCategoria.Visible = true;
                     providers.Visible = true;
+                    discount.Visible = true;
+                    expired.Visible = true;
                 }
                 
             }
@@ -162,6 +166,16 @@ namespace indioSupermercado
         protected void providers_Click1(object sender, EventArgs e)
         {
             Response.Redirect("adminFormProvider.aspx");
+        }
+
+        protected void discount_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminDiscount.aspx");
+        }
+
+        protected void expired_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminExpired.aspx");
         }
     }
 }

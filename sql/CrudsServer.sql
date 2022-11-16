@@ -903,7 +903,7 @@ select @Test
 GO
 
 create or alter procedure spGetPriceOfProduct 
-@idLote int,	
+	@idLote int,	
 	@idProducto int,	
 	@idPaisImpuesto int,
 	@precioVentaTotal money OUTPUT
@@ -927,10 +927,6 @@ declare @errorInt int = 0, @errorMsg varchar(60)
 		set @precioVentaTotal = CONVERT(money, (CAST(@costoUnidad AS float) *@porcentajeVenta) + CAST(@costoUnidad AS float))
 		set @precioVentaTotal = CONVERT(money, (CAST(@precioVentaTotal AS float) * @porcentajeImpuesto) +CAST(@precioVentaTotal AS float))
 		
-		print @costoUnidad 
-		print @porcentajeVenta
-		print @porcentajeImpuesto
-		print @precioVentaTotal
 		select @precioVentaTotal
 	END ELSE BEGIN 			
 		set @errorInt=1
@@ -951,7 +947,7 @@ CREATE OR ALTER PROCEDURE dbo.spInsertProductToInventory
 as
 BEGIN
 declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
+declare @identityValue int = -1, @aux int
 
 --INSERT OPERATION
 	IF @cantidad is not null  and @idSucursal is not null and @idLote is not null BEGIN
@@ -968,10 +964,12 @@ declare @identityValue int = -1
 						set @idProducto = (select idProducto FROM MYSQLSERVER...Lote where idLote = @idLote)
 						
 						--idLote, idproducto, idPais
-						EXEC @precioVenta = spGetPriceOfProduct @idLote,@idProducto,@idPais
-					
+						EXEC @aux = spGetPriceOfProduct @idLote,@idProducto,@idPais, @precioVenta OUTPUT
+
+						
 						INSERT INTO Inventario (cantidadInventario, idLote, idSucursal, precioVenta)
 						VALUES (@cantidad, @idLote,@idSucursal,@precioVenta)
+						
 					
 				END TRY
 				BEGIN CATCH
@@ -1093,10 +1091,11 @@ begin
 declare @errorInt int = 0, @errorMsg varchar(20)
 
     BEGIN TRY
-        select Producto.nombreProducto, Producto.imgPath, Lote.idLote, Inventario.idInventario, Inventario.precioVenta, Producto.descripcionProducto from Sucursal 
+        select Sucursal.idSucursal, Producto.idProducto, Producto.nombreProducto, Producto.imgPath, Lote.idLote, 
+		Inventario.idInventario, Inventario.precioVenta, Producto.descripcionProducto from Sucursal 
         inner join Inventario on Sucursal.idSucursal = Inventario.idSucursal inner join MYSQLSERVER...Lote on
         Lote.idLote = Inventario.idLote inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
-        where Sucursal.idSucursal = @idSucursal and Inventario.cantidad > 0 and Producto.estado != 0
+        where Sucursal.idSucursal = @idSucursal and Inventario.cantidadInventario > 0 and Producto.estado != 0
     END TRY
     BEGIN CATCH
         set @errorInt=1
@@ -1822,6 +1821,140 @@ BEGIN
 	END TRY
 	BEGIN CATCH
 		set @errorInt=1
+		set @errorMsg = 'There is an error in the database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+	begin
+		set @errorInt=0
+		set @errorMsg = 'The expired products were removed'
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	end
+END
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spShowExpiredProducts
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @today date
+	set @today = GETDATE()
+	BEGIN TRY
+		select Producto.idProducto, Inventario.idInventario, Producto.nombreProducto, Inventario.cantidadInventario, 
+		Lote.fechaExpiracion, Producto.imgPath from Inventario inner join MYSQLSERVER...Lote on Inventario.idLote = Lote.idLote
+		inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
+		where Lote.fechaExpiracion < @today
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+END
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spChangeDiscount
+	@descuentoPorcent float
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	BEGIN TRY
+		IF (select count(*) from Descuento) != 0 BEGIN
+			update Descuento
+			set descuentoPorcent = @descuentoPorcent
+			where idDescuento = 1
+		END
+		ELSE BEGIN
+			insert into Descuento(descuentoPorcent,nombre)
+			values(@descuentoPorcent,'Descuento por expirar')
+		END
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	else
+	begin
+		set @errorInt=0
+		set @errorMsg = 'The discount was updated'
+		select @errorInt as Error, @ErrorMsg as MensajeError
+	end
+END
+
+--primero se obtienen los inventarios que estan para descuento
+GO
+CREATE OR ALTER PROCEDURE dbo.spGetProductsForDiscount
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @today date
+	set @today = GETDATE()
+	BEGIN TRY
+		select Inventario.idInventario from Inventario 
+		inner join MYSQLSERVER...Lote on Inventario.idLote = Lote.idLote 
+		where Lote.fechaExpiracion > @today and DATEDIFF(DAY,@today,Lote.fechaExpiracion) < 7
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+END
+/*
+exec spGetProductsForDiscount
+*/
+
+
+--
+GO
+CREATE OR ALTER PROCEDURE dbo.spApplyDiscount
+	@idInventario int
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @descuentoPorcent float
+	BEGIN TRY
+		IF (select count(*) from DescuentoXInventario where idInventario = @idInventario) = 0 BEGIN
+			set @descuentoPorcent = (select descuentoPorcent from Descuento where idDescuento = 1)
+			insert into DescuentoXInventario
+			values(@idInventario,1)
+			update Inventario
+			set precioVenta = precioVenta - (precioVenta*@descuentoPorcent)
+			where idInventario = @idInventario
+		end
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
+		set @errorMsg = 'There is an error in de database'
+	END CATCH
+	if @errorInt !=0
+		select @errorInt as Error, @ErrorMsg as MensajeError
+END
+
+
+GO
+CREATE OR ALTER PROCEDURE dbo.spShowProductsDiscount
+	with encryption
+as
+BEGIN
+	declare @errorInt int = 0, @errorMsg varchar(60)
+	declare @descuentoPorcent float
+	BEGIN TRY
+		select Producto.idProducto, Inventario.idInventario, Producto.nombreProducto, Inventario.precioVenta, Inventario.cantidadInventario, Producto.imgPath
+		from DescuentoXInventario inner join Inventario on Inventario.idInventario = DescuentoXInventario.idInventario inner join
+		MYSQLSERVER...Lote on Lote.idLote = Inventario.idLote inner join MYSQLSERVER...Producto on Producto.idProducto = Lote.idProducto
+	END TRY
+	BEGIN CATCH
+		set @errorInt=1
 		set @errorMsg = 'There is an error in de database'
 	END CATCH
 	if @errorInt !=0
@@ -1830,6 +1963,5 @@ END
 
 
 
+
 --    EXEC spBonoPerformance 1, '2022-11-13', 5000, 'Buen trabajo'
-
-

@@ -183,7 +183,7 @@ CREATE TABLE Bono(
 
 CREATE TABLE Descuento(
     idDescuento INT PRIMARY Key not null IDENTITY(1,1),
-    nombre nvarchar(20),
+    nombre nvarchar(100),
 	descuentoPorcent float,
     estado int DEFAULT 1
 );

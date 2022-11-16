@@ -24,8 +24,6 @@ namespace indioSupermercado
             categoriaDropDownList.SelectedIndex = -1;
             descripcionProductotxt.Text = "";
 
-
-
         }
         public void loadFileImg()
         {
