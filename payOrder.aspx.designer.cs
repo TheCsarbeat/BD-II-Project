@@ -33,49 +33,49 @@ namespace indioSupermercado
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
 
         /// <summary>
-        /// DropDownList1 control.
+        /// paymentDrop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList paymentDrop;
 
         /// <summary>
-        /// Label2 control.
+        /// subtotallb1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label subtotallb1;
 
         /// <summary>
-        /// Label3 control.
+        /// othercostlb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label othercostlb;
 
         /// <summary>
-        /// Label4 control.
+        /// totallb1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label totallb1;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// paymentOrderToDomiciolio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton paymentOrderToDomiciolio;
 
         /// <summary>
         /// Label5 control.

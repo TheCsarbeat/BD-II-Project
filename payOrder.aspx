@@ -30,12 +30,12 @@
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <div>
                                                 <p class="mb-1">Shopping cart</p>
-                                                <p class="mb-0">You have 4 items in your cart</p>
+                                                <p class="mb-0">The items will be apear here</p>
                                             </div>
                                             <div>
                                                 <p class="mb-0">
-                                                    <span class="text-muted">Sort by:</span> <a href="#!"
-                                                        class="text-body">price <i class="fas fa-angle-down mt-1"></i></a>
+                                                    <span class="text-muted">Items:</span> <a href="#!"
+                                                        class="text-body"><i class="fas fa-angle-down mt-1"></i></a>
                                                 </p>
                                             </div>
                                         </div>
@@ -124,20 +124,24 @@
                                                         </div>
 
 
+                                                        <hr class="my-4">
+
+
                                                         <%--Metodopago--%>
                                                         <div class="row ">
                                                             <div class="col">
                                                                 <label>Choose a payment Method</label>
                                                                 <div class="form-group">
-                                                                    <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
+                                                                    <asp:DropDownList class="form-control" ID="paymentDrop" runat="server">
                                                                     </asp:DropDownList>
                                                                 </div>
 
                                                             </div>
                                                         </div>
 
-
                                                         <hr class="my-4">
+
+
 
                                                         <%--footer blue chart--%>
                                                         <div class="d-flex justify-content-between">
@@ -145,20 +149,20 @@
                                                                 Subtotal
                                                             </p>
 
-                                                            <asp:Label class="mb-2" ID="Label2" runat="server" Text="0.00"></asp:Label>
+                                                            <asp:Label class="mb-2" ID="subtotallb1" runat="server" Text="0.00"></asp:Label>
                                                         </div>
 
                                                         <div class="d-flex justify-content-between">
                                                             <p class="mb-2">Other</p>
-                                                            <asp:Label class="mb-2" ID="Label3" runat="server" Text="$0.00"></asp:Label>
+                                                            <asp:Label class="mb-2" ID="othercostlb" runat="server" Text="$0.00"></asp:Label>
                                                         </div>
 
                                                         <div class="d-flex justify-content-between mb-4">
                                                             <p class="mb-2">Total:</p>
-                                                            <asp:Label class="mb-2" ID="Label4" runat="server" Text="$4798.00"></asp:Label>
+                                                            <asp:Label class="mb-2" ID="totallb1" runat="server" Text="$0.00"></asp:Label>
                                                         </div>
 
-                                                        <asp:LinkButton CssClass="btn btn-info btn-block btn-lg" ID="LinkButton1" runat="server" Text="Button" OnClick="payButton_Click">
+                                                        <asp:LinkButton CssClass="btn btn-info btn-block btn-lg" ID="paymentOrderToDomiciolio" runat="server" Text="Button" OnClick="paymentOrderToDomiciolio_Click" >
                                                             <div class="d-flex justify-content-between">
                                                                 <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
                                                                 <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
@@ -215,7 +219,7 @@
 
                                                         <div class="d-flex justify-content-between mb-4">
                                                             <p class="mb-2">Total:</p>
-                                                            <asp:Label class="mb-2" ID="totalLb" runat="server" Text="$4798.00"></asp:Label>
+                                                            <asp:Label class="mb-2" ID="totalLb" runat="server" Text="$0.00"></asp:Label>
                                                         </div>
 
                                                         <asp:LinkButton CssClass="btn btn-info btn-block btn-lg" ID="payButton" runat="server" Text="Button" OnClick="payButton_Click">
