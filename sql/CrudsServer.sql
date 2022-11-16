@@ -2896,4 +2896,15 @@ end
 
 GO
 
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectCategoryToView
+
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+	select * from MYSQLSERVER...CategoriaProducto
+end
+
 --EXEC spCrudProducto 6, 'Rambutan', 'RICO Y SABROSO', 2, 'rambutan.jpg','productImgs/rambutan.jpg',10,100, 1
+--select * from MYSQLSERVER...Producto

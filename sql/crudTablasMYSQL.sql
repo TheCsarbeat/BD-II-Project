@@ -75,18 +75,18 @@ GO
 GO
 CREATE or ALTER PROCEDURE dbo.spCrudProducto
 	@idProducto int,
-	@nombreProducto varchar(200) ,
-	@descripcionProducto varchar(200) ,
+	@nombreProducto varchar(30) ,
+	@descripcionProducto varchar(40) ,
 	@idCategoria int ,
 	@nombreImg varchar(250),
-	@imgPath varchar(200),
+	@imgPath varchar(2000),
 	@cantMin int, 
 	@cantMax int,
 	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
 	with encryption
 as
 begin
-declare @errorInt int = 0, @errorMsg varchar(200)
+declare @errorInt int = 0, @errorMsg varchar(60)
 declare @identityValue int = -1
 	if @operationFlag = 0 BEGIN
 
@@ -102,9 +102,13 @@ declare @identityValue int = -1
 
 								
 								set @idProducto = (SELECT TOP 1 idProducto FROM MYSQLSERVER...Producto ORDER BY idProducto DESC)
-
+								
+								INSERT INTO MYSQLSERVER...Limite (maxCant,minCant,idProducto)
+								values (@cantMax,@cantMin,@idProducto);
+								
+								set @errorInt=0
 								set @errorMsg = 'Se ha insertado correctamente'
-								EXEC spCrudLimite null, @cantMax, @cantMin, @idProducto, 0 
+								
 						END TRY
 						BEGIN CATCH
 							set @errorInt=1
@@ -135,25 +139,29 @@ declare @identityValue int = -1
 			IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
 				IF (select count(*) from MYSQLSERVER...CategoriaProducto where idCategoria = @idCategoria) = 1 BEGIN
 							BEGIN TRY
-								
-								update OPENQUERY ( MYSQLSERVER ,'select * from Producto')  
-								set nombreProducto = @nombreProducto, descripcionProducto = @descripcionProducto,
-								idCategoria = @idCategoria, nombreImg = @nombreImg, imgPath = @imgPath
-								where idProducto = @idProducto
+								update MYSQLSERVER...Producto 
+								set nombreProducto = ISNULL(@nombreProducto, nombreProducto), descripcionProducto = ISNULL(@descripcionProducto, descripcionProducto),
+								idCategoria = ISNULL(@idCategoria, idCategoria), nombreImg = ISNULL(@nombreImg, nombreImg), imgPath = ISNULL(@imgPath, imgPath)
 
+								where idProducto = @idProducto
 								declare @idLimite int
 
-								set @idLimite = (select idLimite from MYSQLSERVER...Limite  where idProducto = 1)  
+								set @idLimite = (select idLimite from MYSQLSERVER...Limite  where idProducto = @idProducto)  
 								
-														
-								EXEC spCrudLimite @idLimite, @cantMax, @cantMin, @idProducto, 1 
+								update MYSQLSERVER...Limite 
+								set maxCant= ISNULL(@cantMax, maxCant), minCant = ISNULL(@cantMin, minCant),
+								idProducto = ISNULL(@idProducto, idProducto) 
+								where idLimite = @idLimite;
+								
 								
 								set @errorMsg = 'The product has update'
 								set @errorInt = 2
+
+
 							END TRY
 							BEGIN CATCH
 								set @errorInt=1
-								set @errorMsg = 'An error hasve ocurre a la base de datos'
+								set @errorMsg = 'Error al actualizar a la base de datos'
 							END CATCH
 	
 				END ELSE BEGIN 				
@@ -737,92 +745,6 @@ GO
 --====================================================
 --						Limite
 --===================================================
-CREATE or ALTER PROCEDURE dbo.spCrudLimite
-	@idLimite int,
-	@max int,
-	@min int ,
-	@idProducto int ,
-	@operationFlag int	-- Insert 0, update 1, select 2, select-ALL 3, delete 4
-	with encryption
-as
-begin
-declare @errorInt int = 0, @errorMsg varchar(60)
-declare @identityValue int = -1
-	if @operationFlag = 0 BEGIN
-
-		if @max is not null and @min is not null  BEGIN
-			IF (select count(*) from MYSQLSERVER...Limite where idLimite = @idLimite) = 0 BEGIN
-				IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
-						BEGIN TRY
-							INSERT INTO MYSQLSERVER...Limite (maxCant,minCant,idProducto)
-							values (@max,@min,@idProducto);
-						END TRY
-						BEGIN CATCH
-							set @errorInt=1
-							set @errorMsg = 'Error al agregar a la base de datos'
-						END CATCH									
-						
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un producto v�lida'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'Ya existe un limite con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
-
-		if @identityValue != -1
-			return @identityValue
-	end
-	
-	if @operationFlag = 1 BEGIN
-		if  @max is not null and @min is not null and  @idProducto is not null BEGIN
-			IF (select count(*) from MYSQLSERVER...Limite where idLimite = @idLimite) = 1 BEGIN
-				IF (select count(*) from MYSQLSERVER...Producto where idProducto = @idProducto) = 1 BEGIN
-						BEGIN TRY
-							update OPENQUERY ( MYSQLSERVER ,'select * from Limite')   
-							set maxCant= ISNULL(@max, maxCant), minCant = ISNULL(@min, minCant),
-							idProducto = ISNULL(@idProducto, idProducto) 
-							where idLimite = @idLimite;
-							
-						END TRY
-						BEGIN CATCH
-							set @errorInt=1
-							set @errorMsg = 'Error al actualizar a la base de datos'
-						END CATCH
-	
-				END ELSE BEGIN 				
-					set @errorInt =1
-					set @errorMsg = 'No existe un producto v�lido'
-					END				
-			END ELSE BEGIN 			
-				set @errorInt=1
-				set @errorMsg = 'NO existe un limite con este ID'
-				END
-		END ELSE BEGIN 			
-			set @errorInt=1
-			set @errorMsg = 'Hay alg�n valor nulo'
-			END  ---Final if validaci?n nulos
-	END
-
-	if @operationFlag = 2	begin
-		select * from MYSQLSERVER...Limite
-		where idLimite= @idLimite and estado =1;
-	end
-
-	IF @operationFlag = 3	BEGIN
-		select * from MYSQLSERVER...Limite	
-		where estado = 1;
-	END
-
-	if @errorInt !=0
-		select @errorInt as Error, @ErrorMsg as MensajeError
-end
-GO
 GO
 CREATE or ALTER PROCEDURE dbo.spSelectProductsToView
 	
@@ -833,12 +755,17 @@ declare @identityValue int = -1
 	select Producto.idProducto, nombreProducto as Nombre, Producto.descripcionProducto as Descripcion, Categoria.nombreCategoria as Categoria, imgPath,
 	Producto.estado, Limite.maxCant, Limite.minCant from MYSQLSERVER...Producto as Producto
 	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria
-	INNER JOIN MYSQLSERVER...Limite as Limite ON Limite.idProducto = Producto.idProducto 
-
-	select * from MYSQLSERVER...Limite
+	INNER JOIN MYSQLSERVER...Limite as Limite ON Limite.idProducto = Producto.idProducto
 	
 end
 GO
+/*
+select * from MYSQLSERVER...Producto as Producto
+	INNER JOIN MYSQLSERVER...CategoriaProducto as Categoria ON  Categoria.idCategoria = Producto.idCategoria 
+select * from MYSQLSERVER...Producto
+select * from MYSQLSERVER...Limite
+select * from MYSQLSERVER...CategoriaProducto
+*/
 
 CREATE or ALTER PROCEDURE dbo.spSelectLotetoView
 	

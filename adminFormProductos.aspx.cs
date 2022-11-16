@@ -311,7 +311,7 @@ namespace indioSupermercado
                     con.Open();
                 }
 
-                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null, 4", con);
+                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null,null,null, 4", con);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 reader.Read();
@@ -361,7 +361,7 @@ namespace indioSupermercado
                     con.Open();
                 }
 
-                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null, 5", con);
+                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null,null,null, 5", con);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 reader.Read();
@@ -411,7 +411,7 @@ namespace indioSupermercado
                     con.Open();
                 }
 
-                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null, 6", con);
+                SqlCommand cmd = new SqlCommand("EXEC spCrudProducto " + id + ", null, null,null,null,null,null,null, 6", con);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 reader.Read();
