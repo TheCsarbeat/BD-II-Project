@@ -67,6 +67,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aboutUs.aspx" />
+    <Content Include="aboutUsTemplate\aboutUsImg\cesar.jpg" />
+    <Content Include="aboutUsTemplate\aboutUsImg\database.jpg" />
+    <Content Include="aboutUsTemplate\aboutUsImg\Fernanda.jpg" />
+    <Content Include="aboutUsTemplate\aboutUsImg\marketMain.jpg" />
+    <Content Include="aboutUsTemplate\aboutUsImg\fondoMain.jpg" />
+    <Content Include="aboutUsTemplate\aboutUsImg\Maynor.jpeg" />
+    <Content Include="aboutUsTemplate\aboutUsImg\sebas.jpg" />
+    <Content Include="aboutUsTemplate\css\styles.css" />
     <Content Include="adminClientes.aspx" />
     <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormBranch.aspx" />
@@ -2196,6 +2205,13 @@
     <Content Include="productList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aboutUs.aspx.cs">
+      <DependentUpon>aboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aboutUs.aspx.designer.cs">
+      <DependentUpon>aboutUs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminClientes.aspx.cs">
       <DependentUpon>adminClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
