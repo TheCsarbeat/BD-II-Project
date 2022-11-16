@@ -250,6 +250,7 @@ namespace indioSupermercado
 
         /// <summary>
         /// adminCategoria control.
+        /// adminPais control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

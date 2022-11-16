@@ -137,15 +137,17 @@
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="Lugar" runat="server" OnClick="Lugar_Click">Lugar</asp:LinkButton>
                         &nbsp;       
-                        <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="loteLinkButton" runat="server" OnClick="loteLinkButton_Click">Lote</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server" OnClick="orderProducts_Click2">Inventario</asp:LinkButton>
                         &nbsp;
                             <asp:LinkButton class="footerlinks" ID="adminCategoria" runat="server" OnClick="adminCategoria_Click">CategoriaProducto</asp:LinkButton>
-                         &nbsp;
+                        &nbsp;
                             <asp:LinkButton class="footerlinks" ID="adminFormHorario" runat="server" OnClick="adminFormHorario_Click">Horario</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="adminPais" runat="server" OnClick="pais_Click">Pais</asp:LinkButton>
                             
 
                     </div>
