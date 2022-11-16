@@ -70,8 +70,10 @@
     <Content Include="adminClientes.aspx" />
     <Content Include="adminEmployee.aspx" />
     <Content Include="adminFormBranch.aspx" />
+    <Content Include="adminFormHorario.aspx" />
     <Content Include="adminFormImpuesto.aspx" />
     <Content Include="adminFormLugar.aspx" />
+    <Content Include="adminFormManager.aspx" />
     <Content Include="adminFormProductos.aspx" />
     <Content Include="adminFormProvider.aspx" />
     <Content Include="adminFormPuesto.aspx" />
@@ -2154,6 +2156,7 @@
     <Content Include="books\b4.jpg" />
     <Content Include="books\b5.jpg" />
     <Content Include="img\branchBackground.jpg" />
+    <Content Include="img\calendario.png" />
     <Content Include="img\cropped-1366-768-320144.jpg" />
     <Content Include="img\cropped-1366-768-329050.jpg" />
     <Content Include="img\defaulters-list.png" />
@@ -2173,6 +2176,7 @@
     <Content Include="img\loginBackground.jpg" />
     <Content Include="img\Logo Ferks.png" />
     <Content Include="img\lugar.png" />
+    <Content Include="img\manager.png" />
     <Content Include="img\oficinas.jpg" />
     <Content Include="img\Panel.png" />
     <Content Include="img\payment-method.png" />
@@ -2227,6 +2231,13 @@
     <Compile Include="adminFormBranch.aspx.designer.cs">
       <DependentUpon>adminFormBranch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminFormHorario.aspx.cs">
+      <DependentUpon>adminFormHorario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormHorario.aspx.designer.cs">
+      <DependentUpon>adminFormHorario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminFormImpuesto.aspx.cs">
       <DependentUpon>adminFormImpuesto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2240,6 +2251,13 @@
     </Compile>
     <Compile Include="adminFormLugar.aspx.designer.cs">
       <DependentUpon>adminFormLugar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminFormManager.aspx.cs">
+      <DependentUpon>adminFormManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminFormManager.aspx.designer.cs">
+      <DependentUpon>adminFormManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminFormProductos.aspx.cs">
       <DependentUpon>adminFormProductos.aspx</DependentUpon>
