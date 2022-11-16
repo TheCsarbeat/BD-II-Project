@@ -2926,6 +2926,87 @@ declare @identityValue int = -1
 	select * from MYSQLSERVER...CategoriaProducto
 end
 
+go
+create or alter procedure crudPais @opcion int,@idPais int = null, @nombre varchar(20) = null
+as
+BEGIN
+	declare @error int, @errorMsg varchar(20)
+	
+	if @opcion = 1		begin
+		if (select count(*) from Pais where idPais = @idPais)= 0 BEGIN
+			if @nombre is not null begin
+
+				insert into Pais(nombrePais) 
+				values(@nombre)
+				
+			 END ELSE BEGIN 
+				set @error = 1
+				set @errorMsg = 'No pueden ir valores nulos' 
+				END
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'idPais ya existe'
+		END
+		END
+		
+	if @opcion = 2
+		BEGIN
+		if (select count(*) from Pais where idPais = @idPais)!=0 			BEGIN
+			BEGIN transaction
+				update Pais
+				set nombrePais = ISNULL(@nombre, nombrePais) where idPais = @idPais
+			commit transaction 
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPais no existe'
+		END
+		END
+
+if @opcion = 3
+		BEGIN
+		if (select count(*) from Pais where idPais = @idPais)!= 0 BEGIN
+			BEGIN transaction
+				select * from Pais where idPais = @idPais
+			commit transaction
+
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPais no existe'
+		END
+		END
+
+	if @opcion = 4
+		BEGIN
+		if (select count(*) from Pais where idPais = @idPais)!=0 
+			BEGIN
+			BEGIN transaction
+				delete from Pais where idPais = @idPais
+			commit transaction
+		END ELSE BEGIN 
+			set @error = 1
+			set @errorMsg = 'El idPais no existe'
+		END
+	END
+	if @error !=0
+		select @error as Error, @ErrorMsg as MensajeError
+	else
+		select 0 as correct, 'Action completed correctly!' as Result
+		
+END
+
+GO
+CREATE or ALTER PROCEDURE dbo.spSelectPaisToView
+    
+as
+begin
+declare @errorInt int = 0, @errorMsg varchar(60)
+declare @identityValue int = -1
+    select Pais.idPais, Pais.nombrePais as Nombre  from Pais as Pais   
+    where Pais.estado = 1;
+end
+
 /*
 select * from MonedaXPais
 */
