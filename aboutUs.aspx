@@ -64,7 +64,7 @@
         <div class="row text-center">
           <!-- Team item-->
           <div class="col-xl-3 col-sm-6 mb-5">
-            <div class="bg-white rounded shadow-sm py-5 px-4"> <img src="aboutUsTemplate/aboutUsImg/Maynor.jpeg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+            <div class="bg-white rounded shadow-sm py-5 px-4"> <img src="aboutUsTemplate/aboutUsImg/Maynor.jpg" alt="" width="100" height="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
               <h5 class="mb-0">Maynor Martinez</h5>
                 <span class="small text-uppercase text-muted">2021052792</span>
               <ul class="social mb-0 list-inline mt-3">
