@@ -2,8 +2,6 @@ GO
 --====================================================
 --						Categoria Producto
 --===================================================
-
--- spCrudCategoriaProducto 7, 'Limpieza', 'para el servicio', 1
 CREATE or ALTER PROCEDURE dbo.spCrudCategoriaProducto
 	@idCategoriaProducto int = null, 
 	@nombre varchar(200) = null ,
