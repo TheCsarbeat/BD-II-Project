@@ -194,6 +194,9 @@ namespace indioSupermercado
                     {
                         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
                         "Swal.fire('Perfect','" + msgResult + "','success')", true);
+
+                        productsGridView.DataBind();
+                        updatePanelProducts.Update();
                     }
                     else
                     {
