@@ -84,7 +84,7 @@ namespace indioSupermercado
 
         protected void payButton_Click(object sender, EventArgs e)
         {
-            string idCostumer = Session["idCliente"].ToString();
+            string idCostumer = "2021052792";//Session["idCliente"].ToString();
             string idPaymentMethod = paymentMethodDrop.SelectedValue.ToString();
 
             string msgResult = "";
@@ -98,7 +98,7 @@ namespace indioSupermercado
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "EXEC spCostumerPurcharse null, " + productList.myList[0].getIdSucursal().ToString()+","+ productList.getTotal().ToString()+",'"+
                 idCostumer+"',"+ idPaymentMethod+", 0";
-            cmd.ExecuteNonQuery();
+            
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             idFactura = Convert.ToInt32(reader[0].ToString());
