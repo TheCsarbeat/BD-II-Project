@@ -1,0 +1,295 @@
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\indioSupermercado.dll.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\indioSupermercado.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\indioSupermercado.pdb
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\csc.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\csc.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\csc.rsp
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\csi.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\csi.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\csi.rsp
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.Managed.Core.targets
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.AppContext.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Collections.Immutable.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Console.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Globalization.Calendars.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.IO.Compression.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.IO.FileSystem.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Net.Http.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Net.Sockets.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Reflection.Metadata.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.ValueTuple.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Xml.XmlDocument.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Xml.XPath.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\vbc.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\vbc.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\vbc.rsp
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\VBCSCompiler.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\roslyn\VBCSCompiler.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\obj\Debug\indioSupermercado.csproj.CopyComplete
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\obj\Debug\indioSupermercado.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\obj\Debug\indioSupermercado.pdb
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\indioSupermercado.dll.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\indioSupermercado.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\indioSupermercado.pdb
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\csc.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\csc.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\csc.rsp
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\csi.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\csi.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\csi.rsp
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.Managed.Core.targets
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.AppContext.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Collections.Immutable.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Console.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Globalization.Calendars.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.IO.Compression.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.IO.FileSystem.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Net.Http.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Net.Sockets.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Reflection.Metadata.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.ValueTuple.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Xml.XmlDocument.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Xml.XPath.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\vbc.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\vbc.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\vbc.rsp
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\VBCSCompiler.exe
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\roslyn\VBCSCompiler.exe.config
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\obj\Debug\indioSupermercado.csproj.CopyComplete
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\obj\Debug\indioSupermercado.dll
+D:\TEC\IV SEMESTRE\BD II\TAREAS\PROYECTO\indioSupermercado\BD-II-Project\obj\Debug\indioSupermercado.pdb
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\indioSupermercado.dll.config
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\indioSupermercado.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\indioSupermercado.pdb
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\csc.exe
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\csc.exe.config
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\csc.rsp
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\csi.exe
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\csi.exe.config
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\csi.rsp
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.AppContext.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Collections.Immutable.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Console.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Globalization.Calendars.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.IO.Compression.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.IO.FileSystem.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Net.Http.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Net.Sockets.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Reflection.Metadata.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.ValueTuple.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Xml.XPath.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\vbc.exe
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\vbc.exe.config
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\vbc.rsp
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\VBCSCompiler.exe
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\roslyn\VBCSCompiler.exe.config
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\obj\Debug\indioSupermercado.csproj.CopyComplete
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\obj\Debug\indioSupermercado.dll
+D:\Universidad\4 - Cuarto semestre\Bases de datos 2\Proyecto\pro\BD-II-Project\obj\Debug\indioSupermercado.pdb
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\indioSupermercado.dll.config
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\indioSupermercado.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\indioSupermercado.pdb
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\csc.exe
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\csc.exe.config
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\csc.rsp
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\csi.exe
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\csi.exe.config
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\csi.rsp
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.AppContext.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Console.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.IO.Compression.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Net.Http.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.ValueTuple.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\vbc.exe
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\vbc.exe.config
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\vbc.rsp
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\VBCSCompiler.exe
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.csproj.CopyComplete
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.dll
+C:\Users\Sebastian\OneDrive - Estudiantes ITCR\Documentos\TEC\IV Semestre\BasesII\ProyectoFinal\BD-II-Project\obj\Debug\indioSupermercado.pdb
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\indioSupermercado.dll.config
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\indioSupermercado.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\indioSupermercado.pdb
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\csc.exe
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\csc.exe.config
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\csc.rsp
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\csi.exe
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\csi.exe.config
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\csi.rsp
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.Managed.Core.targets
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.AppContext.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Collections.Immutable.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Console.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Globalization.Calendars.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.IO.Compression.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.IO.FileSystem.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Net.Http.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Net.Sockets.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Reflection.Metadata.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.ValueTuple.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Xml.XmlDocument.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Xml.XPath.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\vbc.exe
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\vbc.exe.config
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\vbc.rsp
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\VBCSCompiler.exe
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\roslyn\VBCSCompiler.exe.config
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.AssemblyReference.cache
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.CoreCompileInputs.cache
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.csproj.CopyComplete
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.dll
+D:\TEC\II anno\II Semestre\BD II\proyecto\BD-II-Project\obj\Debug\indioSupermercado.pdb

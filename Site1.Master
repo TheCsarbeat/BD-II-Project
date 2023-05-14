@@ -1,0 +1,171 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="indioSupermercado.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+
+    <%--fontawesome css--%>
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+
+    <%--dataTables Sweealert--%>
+    <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="bootstrap/css/sweetalert2.min.css" rel="stylesheet" />
+
+    <%--bootstrap css--%>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+
+
+    <link href="bootstrap/mdb/css/css.css" rel="stylesheet" />
+    <link href="bootstrap/mdb/css/mdb.min.css" rel="stylesheet" />
+    <%--our custom css--%>
+    <link href="css/main.css" rel="stylesheet" />
+
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <%--bootstrap js--%>      <%--popper js--%>
+
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="datatables/js/jquery.dataTables.min.js"></script>
+    <script src="bootstrap/js/sweetalert2.all.min.js"></script>
+
+    <script src="js/scripts.js"></script>
+
+
+
+
+
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="homePage.aspx">
+                    <img src="img/grocery-cart.png" width="30" height="30" />
+                    Super-market
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="homepage.aspx">Home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="aboutUs.aspx">About Us</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav d-flex">
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="userLoginLink" runat="server" OnClick="userLoginLink_Click">User Login</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="userSignupLink" runat="server" OnClick="userSignupLink_Click">Sign Up</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="helloUser" runat="server"></asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="loginOut" runat="server" OnClick="LinkButton3_Click" Visible="False">Logout</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="Comprar" runat="server" Visible="False" OnClick="Comprar_Click">Comprar</asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </nav>
+        </div>
+        <hr>
+
+
+        <!-- Main Content Placeholder -->
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- Main Content Placeholder -->
+
+        <!-- Footer -->
+        <footer>
+            <div id="footer1" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+
+                        <asp:LinkButton class="footerlinks" ID="adminloginLink" runat="server" OnClick="LinkButton6_Click">Admin Login</asp:LinkButton>
+                        &nbsp;
+
+                            <asp:LinkButton class="footerlinks" ID="reportesLinkButton" runat="server" OnClick="reportesLinkButton_Click">Reportes</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="empleadosLinkButton" runat="server" OnClick="empleadosLinkButton_Click">Empleados</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="PuestoTrabajo" runat="server" OnClick="puestoLinkButton_Click">PuestoTrabajo</asp:LinkButton>
+                        &nbsp;                            
+                            <asp:LinkButton class="footerlinks" ID="clientesAdmin" runat="server" OnClick="clientesAdmin_Click">Clientes</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="discount" runat="server" OnClick="discount_Click">Descuentos</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="expired" runat="server" OnClick="expired_Click">Expirados</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="SucursalAdmin" runat="server" OnClick="sucursalLinkButton_Click">Sucursal</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="Manager" runat="server" OnClick="Manager_Click">Manager</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="ProveedorAdmin" runat="server" OnClick="proveedorLinkButton_Click">Proveedor</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="TipoCambioAdmin" runat="server" OnClick="tipoCambioLinkButton_Click">TipoCambio</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="ImpuestoAdmin" runat="server" OnClick="impuestoLinkButton_Click">Impuesto</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="taxCategoria" runat="server" OnClick="taxCategoria_Click">ImpuestosxCategoria</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="TipoPagoAdmin" runat="server" OnClick="tipoPagoLinkButton_Click">TipoPago</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="Lugar" runat="server" OnClick="Lugar_Click">Lugar</asp:LinkButton>
+                        &nbsp;       
+                            <asp:LinkButton class="footerlinks" ID="productsLinkButton" runat="server" OnClick="productsLinkButton_Click">Productos</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="loteLinkButton" runat="server" OnClick="loteLinkButton_Click">Lote</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="orderProducts" runat="server" OnClick="orderProducts_Click2">Inventario</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="adminCategoria" runat="server" OnClick="adminCategoria_Click">CategoriaProducto</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="adminFormHorario" runat="server" OnClick="adminFormHorario_Click">Horario</asp:LinkButton>
+                        &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="adminPais" runat="server" OnClick="adminPais_Click">Pais</asp:LinkButton>
+                            
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="footer2" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <p class="text-center" style="color: whitesmoke">&copy All right Reversed.   <a class="footerlinks" href="#" target="_blank">Ferks</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- ./Footer -->
+
+    </form>
+</body>
+</html>
